@@ -13,8 +13,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [2.8. Notas de atenção e Avisos (Notice and information)](#28-notas-de-atenção-e-avisos-notice-and-information)
   * [2.9. Glossário de Termos (Glossary)](#29-glossário-de-termos-glossary)
 - [3. Projeto / Laboratório](#3-projeto--laboratório)
-  * [3.1. LAB-01](#31-lab-01)
-  * [3.2. LAB-02](#31-lab-02)
+  * [LAB-01](#lab-01)
+  * [LAB-02](#lab-02)
 - [I - Referências](#i---referências)
 
 
