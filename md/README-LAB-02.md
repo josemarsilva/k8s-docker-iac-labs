@@ -21,13 +21,6 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Basic Commands usi
   * [3.1. Pré-Requisitos, Pré-Condições e Premissas](#31-pré-requisitos-pré-condições-e-premissas)
     + [a. Tecnologias e ferramentas](#a-tecnologias-e-ferramentas)
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
-  * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
-  * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
-    + [a. Instalando/Clonando este repositório no ambiente](#a-instalando-clonando-este-repositório-no-ambiente)
-    + [b. Instalando NodeJS (em Linux Ubuntu)](#b-instalando-nodejs--em-linux-ubuntu-)
-    + [c. Instalando Docker e Docker Composer (em Linux Ubuntu)](#c-instalando-docker-e-docker-composer--em-linux-ubuntu-)
-    + [d. Instalando JMeter](#d-instalando-jmeter)
-  * [3.4. Guia de Demonstração e Teste](#34-guia-de-demonstração-e-teste)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [3.5.1. Patterns, Standard, Conventions and Best Practices](#351-patterns-standard-conventions-and-best-practices)
 - [I - Referências](#i---referências)
@@ -38,42 +31,17 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Basic Commands usi
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](./doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](./doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
-
-
-### 2.3. Diagrama de BPMN (Business Process Modeling Notation)
-
-*  n/a
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop.png) 
-
-
-### 2.5. Estratégia de Branches (Branch Strategy Workflow)
-
-*  n/a
-
-
-### 2.6. Diagrama de Pacotes Classes (Packages and Class Class Diagram)
-
-*  n/a
-
-
-### 2.7. Diagrama de Sequencia (Sequence Diagram)
-
-*  n/a
-
-
-### 2.8. Notas de atenção e Avisos (Notice and information)
-
-*  n/a
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-docker-commands.png) 
 
 
 ### 2.9. Glossário de Termos (Glossary)
@@ -100,14 +68,6 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 * Ferramenta: [Draw.IO](https://app.diagrams.net/) (only for diagrams design and documentation)
 * Ferramenta: [FreeMind for Windows](https://freemind.br.uptodown.com/windows)
-
-### 3.2. Guia do Desenvolvedor e Administrador
-
-* n/a
-
-### 3.3. Guia de Implantação, Configuração e Instalação
-
-* n/a
 
 ### 3.5. Guia de Estudo
 
