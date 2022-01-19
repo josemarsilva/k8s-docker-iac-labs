@@ -10,12 +10,7 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Basic Commands usi
 - [2. Documentação](#2-documentação)
   * [2.1. Diagrama de Caso de Uso (Use Case Diagram)](#21-diagrama-de-caso-de-uso-use-case-diagram)
   * [2.2. Diagrama de Implantação (Deploy Diagram)](#22-diagrama-de-implantação-deploy-diagram)
-  * [2.3. Diagrama de BPMN (Business Process Modeling Notation)](#23-diagrama-de-bpmn-business-process-modeling-notation)
   * [2.4. Diagrama de Mapa Mental (Mind Map Diagram)](#24-diagrama-de-mapa-mental-mind-map-diagram)
-  * [2.5. Estratégia de Branches (Branch Strategy Workflow)](#25-estratégia-de-branches-branch-strategy-workflow)
-  * [2.6. Diagrama de Pacotes Classes (Packages and Class Class Diagram)](#26-diagrama-de-pacotes-classes-packages-and-class-class-diagram)
-  * [2.7. Diagrama de Sequencia (Sequence Diagram)](#27-diagrama-de-sequencia-sequence-diagram)
-  * [2.8. Notas de atenção e Avisos (Notice and information)](#28-notas-de-atenção-e-avisos-notice-and-information)
   * [2.9. Glossário de Termos (Glossary)](#29-glossário-de-termos-glossary)
 - [3. Projeto](#3-projeto)
   * [3.1. Pré-Requisitos, Pré-Condições e Premissas](#31-pré-requisitos-pré-condições-e-premissas)
@@ -37,6 +32,7 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Basic Commands usi
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
 ![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
+
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
