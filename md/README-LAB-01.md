@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-Este documento contém os artefatos dolaboratório **LAB-01: Instalação da infraestrutura _OnPremisse_ do RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-01: Instalação da infraestrutura _OnPremisse_ do RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Obter os binários e instalar o Rancher Desktop em ambiente Windows
 * Explorar os recursos e funcionalidades básicas do Rancher Desktop
 
