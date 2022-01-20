@@ -57,7 +57,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Windows OnPrimasse
 * WSL - Windows Subsystem for Linux
 * Rancher Desktop for Windows
-* [LAB-01](README-LAB-01.md)
+* [LAB-02 Install WSL Rancher Desktop on Windows](README-install-wsl-rancherdesktop-windows.md) instalado, concluído e disponível
 
 #### b. Ferramental de apoio
 

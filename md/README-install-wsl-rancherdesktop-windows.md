@@ -28,8 +28,6 @@ Este documento contém os artefatos do laboratório **LAB-01: Instalação da in
 ![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
 
 
-
-
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
 ![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-wsl-rancherdesktop-windows.png) 
