@@ -158,7 +158,7 @@ root@e050dbf808fa:/# exit
 exit
 ```
 
-#### e. Executar um container em modo deamon (background ou segundo plano)
+#### f. Executar um container em modo deamon (background ou segundo plano)
 
 * Execute o nginx em modo deamon
 
