@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-LAB-install-wsl-rancherdesktop-windows.md` - Kubernetes, Docker e Rancher Desktop - LAB-01 - Instalação da infraestrutura _OnPremisse_ do RanckerDesktop
+`kubernetes-docker-rancherdesktop-labs/md/README-install-wsl-rancherdesktop-windows.md` - Kubernetes, Docker e Rancher Desktop - LAB-01 - Instalação da infraestrutura _OnPremisse_ do RanckerDesktop
 
 ## 1. Introdução
 

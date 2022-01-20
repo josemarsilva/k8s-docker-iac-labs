@@ -52,10 +52,10 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ## 3. Projeto / Laboratório
 
-### [LAB-01](./md/README-LAB-01.md)
+### [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)
 Install WSL, Rancher Desktop and command line with nerdctl
 
-### [LAB-02](./md/README-LAB-02.md)
+### [LAB-02](./md/README-basic-docker-commands.md)
 Basic Docker Commands
 
 ## I - Referências

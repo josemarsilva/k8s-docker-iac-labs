@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-LAB-basic-docker-commands.md` - Kubernetes, Docker e Rancher Desktop - LAB-02 - Basic Commands using Docker on RanckerDesktop
+`kubernetes-docker-rancherdesktop-labs/md/README-basic-docker-commands.md` - Kubernetes, Docker e Rancher Desktop - LAB-02 - Basic Commands using Docker on RanckerDesktop
 
 ## 1. Introdução
 
