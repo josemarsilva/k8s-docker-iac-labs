@@ -18,9 +18,10 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceito de Imagens vs Container Docker](#a-conceito-de-imagens-vs-container-docker)
-    + [b. Docker Commit](b.docker-commit)
-    + [c. Dockerfile](c-dockerfile)
-    + [d. Docker Image History](d-docker-image-history)
+    + [b. Docker Commit](#b-docker-commit)
+    + [c. Dockerfile](#c-dockerfile)
+    + [d. Docker Image History](#d-docker-image-history)
+    + [e. Principais elementos da sintaxe do Dockerfile](#e-principais-elementos-da-sintaxe-do-dockerfile)
 
 
 - [I - Referências](#i---referências)
