@@ -16,6 +16,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [LAB-01](#lab-01)
   * [LAB-02](#lab-02)
   * [LAB-03](#lab-03)
+  * [LAB-04](#lab-04)
 - [I - Referências](#i---referências)
 
 
@@ -62,6 +63,10 @@ Basic Docker Commands
 
 ### [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)
 Windows Client MongoDB Studio 3T connect database
+
+### [LAB-04](./md/README-docker-images-containers.md)
+Docker Images vs Containers
+
 
 ## I - Referências
 
