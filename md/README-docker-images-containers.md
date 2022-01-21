@@ -32,11 +32,24 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
+* Caso de Uso - Infraestrutura Kubernetes/Docker
+
 ![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+
+* Caso de Uso - Aplicações NodeJs de Conversão de Temperatura e API Cadastro de Produto
+
+![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-node-web-api-app.png) 
+
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
+* Implantação container aplicação NodeJS - Conversão Temperatura
+
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs.png) 
+
+* Implantação container aplicação NodeJS e MongoDB - API Produtos
+
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-mongo.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
@@ -63,6 +76,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * WSL - Windows Subsystem for Linux
 * Rancher Desktop for Windows
 * [LAB-01 Install WSL Rancher Desktop on Windows](README-install-wsl-rancherdesktop-windows.md) instalado, concluído e disponível
+* NodeJS (Development, Build and Deploy)
 
 
 #### b. Ferramental de apoio
@@ -136,16 +150,16 @@ C:\> nerdctl container run ubuntu-curl-docker-commit curl http://www.google.com
 #### c. Dockerfile
 
 * Utilizando um editor de texto de sua preferência, lembrando que VSCode ajuda com sintaxe crie um arquivo com a "receita de bolo" equivalente ao que foi feito com Docker Commit, isto é uma imagem baseada no Ubuntu com o sistema operacional atualizado e com a ferramenta curl instalada
-* Agora para organizar o repositório do projeto/laboratório, vamos assumir como padrão que os códigos ficarão abaixo de `./src/<nome-do-projeto-laboratório>`. Ex: `./src/lab-dockerfile`
+* Agora para organizar o repositório do projeto/laboratório, vamos assumir como padrão que os códigos ficarão abaixo de `./src/<nome-do-projeto-laboratório>`. Ex: `./src/dockerfile-ubuntu-curl`
 
 ```cmd
 C:\> cd src
-C:\src> md lab-dockerfile
-C:\src> cd lab-dockerfile
-C:\src\lab-dockerfile> 
+C:\src> md dockerfile-ubuntu-curl
+C:\src> cd dockerfile-ubuntu-curl
+C:\src\dockerfile-ubuntu-curl> 
 ```
 
-* Utilizando o editor de texto (VSCode) crie o arquivo `.\src\lab-dockerfile\Dockerfile` com o seguinte conteúdo
+* Utilizando o editor de texto (VSCode) crie o arquivo `.\src\dockerfile-ubuntu-curl\Dockerfile` com o seguinte conteúdo
 
 ```txt
 FROM ubuntu
@@ -156,7 +170,7 @@ RUN apt-get install curl -y
 * Execute a sua receita
 
 ```cmd
-C:\src\lab-dockerfile> nerdctl image build -t ubuntu-curl-dockerfile . 
+C:\src\dockerfile-ubuntu-curl> nerdctl image build -t ubuntu-curl-dockerfile . 
 [+] Building 43.2s (7/7) FINISHED
       :
 cc2326d9fa)...done
@@ -165,7 +179,7 @@ cc2326d9fa)...done
 * Liste as imagens disponíveis
 
 ```cmd
-C:\src\lab-dockerfile> nerdctl image ls
+C:\src\dockerfile-ubuntu-curl> nerdctl image ls
 REPOSITORY                   TAG       IMAGE ID        CREATED           PLATFORM       SIZE
      :                         :            :               :                :
 ubuntu-curl-docker-commit    latest    fec2e2c8d528    33 minutes ago    linux/amd64    126.8 MiB
@@ -177,7 +191,7 @@ ubuntu                       latest    b5a61709a9a4    2 days ago        linux/a
 * A partir da nova imagem criada `ubuntu-curl-dockerfile` pode-se executar um container baseado nesta imagem que virá alem do SO Ubuntu atualizado com o Curl instalado e passando como parâmetro de execução buscar a página do Google
 
 ```cmd
-C:\src\lab-dockerfile>  nerdctl container run ubuntu-curl-dockerfile curl http://www.google.com 
+C:\src\dockerfile-ubuntu-curl>  nerdctl container run ubuntu-curl-dockerfile curl http://www.google.com 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="pt-BR"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
@@ -190,13 +204,13 @@ C:\src\lab-dockerfile>  nerdctl container run ubuntu-curl-dockerfile curl http:/
 * **NÃO É** possível detalhar o histórico das camadas sobre uma imagem no `nerdctl`. Este comando ainda não foi implementado!
 
 ```cmd
-C:\src\lab-dockerfile> nerdctl image history ubuntu-curl-dockerfile
+C:\src\dockerfile-ubuntu-curl> nerdctl image history ubuntu-curl-dockerfile
 ```
 
 * Para reconstruir a imagem
 
 ```cmd
-C:\src\lab-dockerfile> nerdctl image build -t ubuntu-curl-dockerfile . 
+C:\src\dockerfile-ubuntu-curl> nerdctl image build -t ubuntu-curl-dockerfile . 
 [+] Building 43.2s (7/7) FINISHED
       :
 cc2326d9fa)...done
@@ -220,6 +234,134 @@ WORKDIR     <diretorio-corrente>
 ```
 
 
+#### f. Dockerfile aplicação exemplo NodeJS Web
+
+* Explorar a aplicação NodeJS Web Conversão Temperatura
+  * Instalar pacote de dependências
+  * Executar a aplicação manualmente
+  * Explorar a aplicação
+
+```cmd
+C:\src> cd node-conversao-temperatura
+C:\src\node-conversao-temperatura> npm install
+C:\src\node-conversao-temperatura> node server.js
+  Servidor rodando na porta 8080
+     :
+```
+
+![screenshot-nodejs-conversao-temperatura.png](../doc/screenshots/screenshot-nodejs-conversao-temperatura.png) 
+
+* Configurar e executar uma imagem montada pelo Dockerfile para esta aplicacao
+  * Consultar no Docker Hub o registry oficial do fabricante a imagem base: https://hub.docker.com/_/node
+  * Editar/Configurar arquivo Dockerfile
+  * Construir imagem com Dockerfile
+  * Executar imagem
+
+```cmd
+C:\src> cd node-conversao-temperatura
+C:\src\node-conversao-temperatura> Code.exe Dockerfile
+C:\src\node-conversao-temperatura> nerdctl image build -t conversao-temperatura .
+    :
+unpacking docker.io/library/conversao-temperatura:latest (sha256:9088f8968bcbdc1288e5245b48a172f523cf310db4602185f7f685e33421b023)...done
+
+C:\src\node-conversao-temperatura> nerdctl image ls
+REPOSITORY                   TAG       IMAGE ID        CREATED          PLATFORM       SIZE
+    :                           :          :                :               :            :
+conversao-temperatura        latest    9088f8968bcb    7 minutes ago    linux/amd64    1.1 GiB
+    :                           :          :                :               :            :
+
+C:\src\node-conversao-temperatura> nerdctl container run -d -p 8080:8080 conversao-temperatura
+
+C:\src\node-conversao-temperatura> nerdctl container ls
+```
+
+* Explorar a aplicação `http://localhost:8080/api-docs/`
+
+#### g. Dockerfile aplicação exemplo NodeJS Web e MongoDB
+
+* Explorar a aplicação NodeJS Web API Produto
+  * Instalar pacote de dependências
+  * Executar a aplicação manualmente container do MongoDB
+  * Executar a aplicação manualmente container da API produto
+  * Explorar a aplicação
+  * Construir imagem com Dockerfile
+  * Executar imagem
+
+
+* Executando container MongoDB
+
+```cmd
+C:\src> cd node-mongo-api-produto
+C:\src\node-mongo-api-produto> nerdctl container run -d -p "27017:27017" -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd mongo
+
+C:\src\node-mongo-api-produto> nerdctl container ls
+CONTAINER ID    IMAGE                             COMMAND                   CREATED           STATUS    PORTS                       NAMES
+8ff9a3d7f985    docker.io/library/mongo:latest    "docker-entrypoint.s…"    15 seconds ago    Up        0.0.0.0:27017->27017/tcp
+
+```
+
+* Executando container API Produto
+
+```cmd
+C:\src\node-mongo-api-produto> npm install
+C:\src\node-mongo-api-produto> node server.js
+  Servidor rodando na porta 8080
+     :
+```
+
+* Explorar a aplicação `http://localhost:8080/api-docs/`
+
+![screenshot-nodejs-conversao-temperatura.png](../doc/screenshots/screenshot-nodejs-conversao-api-produto.png) 
+
+* Construindo imagem Dockerfile
+
+```cmd
+C:\src\node-mongo-api-produto> nerdctl image build -t api-produto:v1 .
+unpacking docker.io/library/api-produto:latest (sha256:9979811d23a917b7467161341b28a7ea12f8d679907e61ae5449a7464f5205f7)...done
+
+C:\src\node-mongo-api-produto> nerdctl image ls
+REPOSITORY                   TAG       IMAGE ID        CREATED           PLATFORM       SIZE
+    :                         :           :                :                 :           :
+api-produto                  v1        9979811d23a9    9 seconds ago     linux/amd64    278.6 MiB
+mongo                        latest    0305e68a63b6    28 minutes ago    linux/amd64    678.7 MiB
+    :                         :           :                :                 :           :
+
+C:\src\node-mongo-api-produto> nerdctl run -d -p 8080:8080 api-produto:v1
+
+C:\src\node-mongo-api-produto> nerdctl container ls
+CONTAINER ID    IMAGE                                             COMMAND                   CREATED           STATUS    PORTS                       NAMES
+     :           :                                                   :                          :             :           :
+8ff9a3d7f985    docker.io/library/mongo:latest                    "docker-entrypoint.s…"    30 minutes ago    Up        0.0.0.0:27017->27017/tcp
+d40118e55f45    docker.io/library/api-produto:v1                  "docker-entrypoint.s…"    25 seconds ago    Up        0.0.0.0:8080->8080/tcp
+     :           :                                                   :                          :             :           :
+```
+
+* Explorar a aplicação `http://localhost:8080/api-docs/`
+
+
+#### h. Boas práticas construção de imagens Docker
+
+* Nomeando sua imagem Docker
+  * Exemplos:
+    * `<namespace>/<repository>:<tags>
+    * `fabricioveronez/api-conversao:v1`
+  * Exceção:
+    * `ubuntu:20.10` quando proprietário oficial é o próprio Docker não tem namespace
+* Dar preferência a usar imagens oficiais
+* Sempre especifique tags na imagem
+  * Tageamento das imagens: `latest` é a imagem mais atual
+* Cada container conter apenas um processo
+  * Evitar perder escalabilidade e granularidade
+  * Ex: não montar um container com NodeJS + MongoDB + MySQL + RabbitMQ + Kafka
+* Aproveitamento das camadas
+  * Evitar `COPY . .`
+  * Utilizar mais de um passo de `COPY` para aproveitar o cache
+  * Use o dockerignore.
+* COPY vs ADD
+  * Melhor prática: utilize de preferência o `COPY`
+* ENTRYPOINT vs CMD
+  * ENTRYPOINT é imutável, não é possível sobrescrever
+  * O uso combinado de ENTRYPOINT e CMD é interessante
 
 
 ## I - Referências
