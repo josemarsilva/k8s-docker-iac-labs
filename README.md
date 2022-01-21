@@ -15,6 +15,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 - [3. Projeto / Laboratório](#3-projeto--laboratório)
   * [LAB-01](#lab-01)
   * [LAB-02](#lab-02)
+  * [LAB-03](#lab-03)
 - [I - Referências](#i---referências)
 
 
@@ -57,6 +58,10 @@ Install WSL, Rancher Desktop and command line with nerdctl
 
 ### [LAB-02](./md/README-basic-docker-commands.md)
 Basic Docker Commands
+
+
+### [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)
+Windows Client MongoDB Studio 3T connect database
 
 ## I - Referências
 

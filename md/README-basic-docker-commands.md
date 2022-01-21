@@ -17,6 +17,13 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Basic Commands usi
     + [a. Tecnologias e ferramentas](#a-tecnologias-e-ferramentas)
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
+    + [a. Download do binário de uma imagem](#a-download-do-binário-de-uma-imagem)
+    + [b. Executar um container baseado em uma imagem](#b-executar-um-container-baseado-em-uma-imagem)
+    + [c. Listar os container](#c-listar-os-container)
+    + [d. Remover um container](#d-remover-um-container)
+    + [e. Executar um container em modo interativo](#e-executar-um-container-em-modo-interativo)
+    + [f. Executar um container em modo deamon (background ou segundo plano)](#f-executar-um-container-em-modo-deamon-background-ou-segundo-plano)
+    + [g. Executar um container passando variáveis de parâmetros](#g-executar-um-container-passando-variáveis-de-parâmetros)
 - [I - Referências](#i---referências)
 
 
@@ -183,6 +190,27 @@ CONTAINER ID    IMAGE                             COMMAND                   CREA
 5553e4c31a53    docker.io/library/nginx:latest    "/docker-entrypoint.…"    15 minutes ago        Up
 ```
 
+
+#### g. Executar um container passando variáveis de parâmetros
+
+* Pergunta: Como saber quais as variáveis de ambientes são requeridas ou opcionais na execução de uma imagem?
+  * _Resposta_: Consultando a página do fornecedor (fabricante) no repositório de imagens, por exemplo no **Docker Hub**
+    * Supondo a imagem do banco de dados NoSQL **MongoDB**
+    * Página do fornecedor (fabricante) do produto **MongoDB** no **Docker Hub**:  `https://hub.docker.com/_/mongo`
+    * Na seção `Environment Variables` serão listadas as variáveis de ambientes: `MONGO_INITDB_ROOT_USERNAME` e `MONGO_INITDB_ROOT_PASSWORD`
+
+* Executar um container baseada na imagem do **MongoDB**, fazendo o bind da porta 27017:27017
+
+```cmd
+C:\> nerdctl container ls
+CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
+
+C:\> nerdctl container run -d -p "27017:27017" -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd mongo
+
+C:\> nerdctl container ls
+CONTAINER ID    IMAGE                             COMMAND                   CREATED           STATUS    PORTS                       NAMES
+33014e5f7186    docker.io/library/mongo:latest    "docker-entrypoint.s…"    51 seconds ago    Up        0.0.0.0:27017->27017/tcp
+```
 
 
 
