@@ -29,7 +29,7 @@ Este documento contém os artefatos do laboratório **LAB-03: Windows Client Mon
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-Context.png) 
+![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
