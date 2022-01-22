@@ -421,12 +421,10 @@ C:\src\dockerfile-ubuntu-curl-args> nerdctl image build -t josemarsilva/ubuntu-a
   * Just in Time: linguagem intermediária + interpretador
 
 * Explorar a aplicação Hello Wold em GoLang
-* Configurar Dockerfile para imagem GoLang de Hello World
 
 ```cmd
 C:\src> cd dockerfile-golang-helloworld
 C:\src\dockerfile-golang-helloworld> Code main.go
-C:\src\dockerfile-golang-helloworld> Code Dockerfile
 ```
 
 * Executar HelloWorld pela linha de comando
@@ -436,27 +434,50 @@ C:\src\dockerfile-golang-helloworld> go run main.go
 Hello World !!!
 ```
 
-* Criar uma imagem baseada na GoLang e aplicação HelloWold
+* Configurar Dockerfile para imagem GoLang de Hello World
 
 ```cmd
-C:\src\dockerfile-golang-helloworld> nerdctl build -t josemarsilva/golang-helloworld .
-unpacking docker.io/josemarsilva/golang-helloworld:latest (sha256:4a6d47c218b194d6fb88e6065bf2380265ccc3e45ed674d987c3244907c029f0)...done
+C:\src\dockerfile-golang-helloworld> COPY /Y Dockerfile-full-sdk-image Dockerfile
+        1 arquivo(s) copiado(s).
+C:\src\dockerfile-golang-helloworld> TYPE Dockerfile
+C:\src\dockerfile-golang-helloworld> nerdctl build -t josemarsilva/golang-helloworld:v1 .
+unpacking docker.io/josemarsilva/golang-helloworld:v1 (sha256:4a6d47c218b194d6fb88e6065bf2380265ccc3e45ed674d987c3244907c029f0)...done
 
 C:\src\dockerfile-golang-helloworld> nerdctl image ls
-REPOSITORY                            TAG       IMAGE ID        CREATED               PLATFORM       SIZE
-     :                                  :          :              :                     :
-josemarsilva/golang-helloworld        latest    4a6d47c218b1    About a minute ago    linux/amd64    702.1 MiB
-     :                                  :          :              :                     :
+REPOSITORY                       TAG       IMAGE ID        CREATED               PLATFORM       SIZE
+     :                            :          :              :                     :
+josemarsilva/golang-helloworld    v1     4a6d47c218b1    15 seconds ago    linux/amd64    702.1 MiB
+     :                            :          :              :                     :
+
 ```
 
-* Porem a imagem contém todo o SDK para compilar o GoLang, agora vamos usar uma imagem alpine que é mais leve e tem somente o _run-time_
+* Porem a imagem de 702 MB contém todo o SDK para compilar o GoLang, agora vamos usar uma imagem alpine que é mais leve e tem somente o _run-time_
+* Multi stage permite compilar a imagem com um pacote de build e no momento do deploy final usar uma imagem reduzida como base somente com o Run-time
 
 ```cmd
 C:\src\dockerfile-golang-helloworld> COPY /Y Dockerfile-alpine Dockerfile
         1 arquivo(s) copiado(s).
+C:\src\dockerfile-golang-helloworld> TYPE Dockerfile
+C:\src\dockerfile-golang-helloworld> nerdctl build -t josemarsilva/golang-helloworld:alpine .
+unpacking docker.io/josemarsilva/golang-helloworld:alpine (sha256:12a2e06a9bc43fde273bf8a386595d1b6daaba7c5f164529ca0f5dd037c930c8)...done
 
-C:\src\dockerfile-golang-helloworld> nerdctl build -t josemarsilva/golang-helloworld .
-unpacking docker.io/josemarsilva/golang-helloworld:latest (sha256:4a6d47c218b194d6fb88e6065bf2380265ccc3e45ed674d987c3244907c029f0)...done
+C:\src\dockerfile-golang-helloworld> nerdctl image ls
+REPOSITORY                       TAG       IMAGE ID        CREATED               PLATFORM       SIZE
+     :                            :          :              :                     :
+josemarsilva/golang-helloworld    alpine    12a2e06a9bc4    26 seconds ago    linux/amd64    7.5 MiB
+josemarsilva/golang-helloworld    v1        4a6d47c218b1    11 minutes ago    linux/amd64    702.1 MiB
+     :                            :          :              :                     :
+```
+
+* Agora é possível observar que a imagem ficou com 7.5 MB
+
+```cmd
+C:\src\dockerfile-golang-helloworld> nerdctl container run josemarsilva/golang-helloworld:v1
+Hello World !!!
+
+C:\src\dockerfile-golang-helloworld> nerdctl container run josemarsilva/golang-helloworld:alpine
+Hello World !!!
+
 ```
 
 ## I - Referências
