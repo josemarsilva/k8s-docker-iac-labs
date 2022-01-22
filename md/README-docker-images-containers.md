@@ -28,6 +28,7 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
     + [i. Boas práticas construção de imagens Docker](#i-boas-práticas-construção-de-imagens-docker)
     + [j. Container com argumentos em linha de comando](#j-container-com-argumentos-em-linha-de-comando)
     + [k. Multi stage build](#k-multi-stage-build)
+    + [l. Docker Registry](#l-docker-registry)
 
 
 - [I - Referências](#i---referências)
@@ -272,25 +273,30 @@ C:\src\node-conversao-temperatura> node server.js
 
 ```cmd
 C:\src> cd node-conversao-temperatura
-C:\src\node-conversao-temperatura> Code.exe Dockerfile
-C:\src\node-conversao-temperatura> nerdctl image build -t josemarsilva/conversao-temperatura .
+C:\src\node-conversao-temperatura> TYPE Dockerfile
+C:\src\node-conversao-temperatura> nerdctl image build -t josemarsilva/conversao-temperatura:v1 .
     :
-unpacking docker.io/josemarsilva/conversao-temperatura:latest (sha256:e25deb92730e119366cd2753934681ca2c05a4ddfb429ed5b5e002630bf938a6)...done
+unpacking docker.io/josemarsilva/conversao-temperatura:v1 (sha256:)...done
 
 C:\src\node-conversao-temperatura> nerdctl image ls
 REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
     :                                  :          :                :               :            :
-josemarsilva/conversao-temperatura    latest    e25deb92730e    6 seconds ago    linux/amd64    1.1 GiB
+josemarsilva/conversao-temperatura    v1        c56df81725c0    50 seconds ago    linux/amd64    1.1 GiB
     :                                  :          :                :               :            :
 
-C:\src\node-conversao-temperatura> nerdctl container run -d -p 8080:8080 josemarsilva/conversao-temperatura
+C:\src\node-conversao-temperatura> nerdctl container run -d -p 8080:8080 josemarsilva/conversao-temperatura:v1
 
 C:\src\node-conversao-temperatura> nerdctl container ls
+CONTAINER ID    IMAGE                                              COMMAND                   CREATED          STATUS    PORTS                     NAMES
+    :             :                                                    :                         :
+2d9854f79941    docker.io/josemarsilva/conversao-temperatura:v1    "docker-entrypoint.s…"    9 seconds ago    Up        0.0.0.0:8080->8080/tcp
+    :             :                                                    :                         :
 ```
 
 * Explorar a aplicação `http://localhost:8080/api-docs/`
 
 #### g. Dockerfile aplicação exemplo NodeJS Web e MongoDB
+
 
 * Explorar a aplicação NodeJS Web API Produto
   * Instalar pacote de dependências
@@ -362,8 +368,6 @@ josemarsilva/api-produto              v1        9979811d23a9    3 minutes ago   
 josemarsilva/conversao-temperatura    latest    e25deb92730e    5 minutes ago    linux/amd64    1.1 GiB
     :                                  :           :                :                 :           :
 
-C:\src\node-mongo-api-produto> nerdctl push josemarsilva/api-produto:v1
-C:\src\node-mongo-api-produto> nerdctl push josemarsilva/conversao-temperatura
 ```
 
 #### i. Boas práticas construção de imagens Docker
@@ -479,6 +483,17 @@ C:\src\dockerfile-golang-helloworld> nerdctl container run josemarsilva/golang-h
 Hello World !!!
 
 ```
+
+#### l. Docker Registry
+
+* O serviço de registry mais utilizado e conhecido é o [Docker Hub](https://hub.docker.com/)
+* Há outros serviços de registry disponíveis:
+  * Docker Hub
+  * Elastic Container Registry - AWS
+  * Azure Container Registry - Azure
+  * Google Container - Google
+  * Harbor - User Custom
+* No Docker Hub o identificador de seu login é o seu namespace para nomenlatura de repoistorios
 
 ## I - Referências
 
