@@ -22,6 +22,12 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
     + [c. Dockerfile](#c-dockerfile)
     + [d. Docker Image History](#d-docker-image-history)
     + [e. Principais elementos da sintaxe do Dockerfile](#e-principais-elementos-da-sintaxe-do-dockerfile)
+    + [g. Dockerfile aplicação exemplo NodeJS Web e MongoDB](#g-dockerfile-aplicação-exemplo-nodejs-web-e-mongodB)
+    + [f. Dockerfile aplicação exemplo NodeJS Web](#f-dockerfile-aplicação-exemplo-nodejs-web)
+    + [h. Registrar (upload) imagem no repositório Docker Hub](#h-registrar-(upload)-imagem-no-repositório-docker-hub)
+    + [i. Boas práticas construção de imagens Docker](#i-boas-práticas-construção-de-imagens-docker)
+    + [j. Container com argumentos em linha de comando](#j-container-com-argumentos-em-linha-de-comando)
+    + [k. Multi stage build](#k-multi-stage-build)
 
 
 - [I - Referências](#i---referências)
@@ -40,6 +46,9 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 
 ![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-node-web-api-app.png) 
 
+* Caso de Uso - Aplicações GoLang Hello Wold
+![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-golang-helloworld.png) 
+
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
@@ -51,6 +60,9 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 
 ![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-mongo.png) 
 
+* Implantação container aplicação GoLang - Hello World
+
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-golang.png) 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
@@ -77,6 +89,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Rancher Desktop for Windows
 * [LAB-01 Install WSL Rancher Desktop on Windows](README-install-wsl-rancherdesktop-windows.md) instalado, concluído e disponível
 * NodeJS (Development, Build and Deploy)
+* GoLang
 
 
 #### b. Ferramental de apoio
@@ -260,17 +273,17 @@ C:\src\node-conversao-temperatura> node server.js
 ```cmd
 C:\src> cd node-conversao-temperatura
 C:\src\node-conversao-temperatura> Code.exe Dockerfile
-C:\src\node-conversao-temperatura> nerdctl image build -t conversao-temperatura .
+C:\src\node-conversao-temperatura> nerdctl image build -t josemarsilva/conversao-temperatura .
     :
-unpacking docker.io/library/conversao-temperatura:latest (sha256:9088f8968bcbdc1288e5245b48a172f523cf310db4602185f7f685e33421b023)...done
+unpacking docker.io/josemarsilva/conversao-temperatura:latest (sha256:e25deb92730e119366cd2753934681ca2c05a4ddfb429ed5b5e002630bf938a6)...done
 
 C:\src\node-conversao-temperatura> nerdctl image ls
-REPOSITORY                   TAG       IMAGE ID        CREATED          PLATFORM       SIZE
-    :                           :          :                :               :            :
-conversao-temperatura        latest    9088f8968bcb    7 minutes ago    linux/amd64    1.1 GiB
-    :                           :          :                :               :            :
+REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
+    :                                  :          :                :               :            :
+josemarsilva/conversao-temperatura    latest    e25deb92730e    6 seconds ago    linux/amd64    1.1 GiB
+    :                                  :          :                :               :            :
 
-C:\src\node-conversao-temperatura> nerdctl container run -d -p 8080:8080 conversao-temperatura
+C:\src\node-conversao-temperatura> nerdctl container run -d -p 8080:8080 josemarsilva/conversao-temperatura
 
 C:\src\node-conversao-temperatura> nerdctl container ls
 ```
@@ -316,34 +329,48 @@ C:\src\node-mongo-api-produto> node server.js
 * Construindo imagem Dockerfile
 
 ```cmd
-C:\src\node-mongo-api-produto> nerdctl image build -t api-produto:v1 .
-unpacking docker.io/library/api-produto:latest (sha256:9979811d23a917b7467161341b28a7ea12f8d679907e61ae5449a7464f5205f7)...done
+C:\src\node-mongo-api-produto> nerdctl image build -t josemarsilva/api-produto:v1 .
+unpacking docker.io/josemarsilva/api-produto:v1 (sha256:9979811d23a917b7467161341b28a7ea12f8d679907e61ae5449a7464f5205f7)...done
 
 C:\src\node-mongo-api-produto> nerdctl image ls
-REPOSITORY                   TAG       IMAGE ID        CREATED           PLATFORM       SIZE
+REPOSITORY                            TAG       IMAGE ID        CREATED               PLATFORM       SIZE
     :                         :           :                :                 :           :
-api-produto                  v1        9979811d23a9    9 seconds ago     linux/amd64    278.6 MiB
-mongo                        latest    0305e68a63b6    28 minutes ago    linux/amd64    678.7 MiB
+josemarsilva/api-produto              v1        9979811d23a9    About a minute ago    linux/amd64    278.6 MiB
+josemarsilva/conversao-temperatura    latest    e25deb92730e    3 minutes ago         linux/amd64    1.1 GiB
     :                         :           :                :                 :           :
 
-C:\src\node-mongo-api-produto> nerdctl run -d -p 8080:8080 api-produto:v1
+C:\src\node-mongo-api-produto> nerdctl run -d -p 8080:8080 josemarsilva/api-produto:v1
 
 C:\src\node-mongo-api-produto> nerdctl container ls
 CONTAINER ID    IMAGE                                             COMMAND                   CREATED           STATUS    PORTS                       NAMES
      :           :                                                   :                          :             :           :
-8ff9a3d7f985    docker.io/library/mongo:latest                    "docker-entrypoint.s…"    30 minutes ago    Up        0.0.0.0:27017->27017/tcp
-d40118e55f45    docker.io/library/api-produto:v1                  "docker-entrypoint.s…"    25 seconds ago    Up        0.0.0.0:8080->8080/tcp
+21e4fcca022a    docker.io/josemarsilva/api-produto:v1             "docker-entrypoint.s…"    10 seconds ago    Up        0.0.0.0:8080->8080/tcp
+8ff9a3d7f985    docker.io/library/mongo:latest                    "docker-entrypoint.s…"    55 minutes ago    Up        0.0.0.0:27017->27017/tcp
+a925aa680032    docker.io/library/conversao-temperatura:latest    "docker-entrypoint.s…"    42 minutes ago    Up        0.0.0.0:8080->8080/tcp
      :           :                                                   :                          :             :           :
 ```
 
 * Explorar a aplicação `http://localhost:8080/api-docs/`
 
 
-#### h. Boas práticas construção de imagens Docker
+#### h. Registrar (upload) imagem no repositório Docker Hub
+
+```cmd
+REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
+    :                                  :           :                :                 :           :
+josemarsilva/api-produto              v1        9979811d23a9    3 minutes ago    linux/amd64    278.6 MiB
+josemarsilva/conversao-temperatura    latest    e25deb92730e    5 minutes ago    linux/amd64    1.1 GiB
+    :                                  :           :                :                 :           :
+
+C:\src\node-mongo-api-produto> nerdctl push josemarsilva/api-produto:v1
+C:\src\node-mongo-api-produto> nerdctl push josemarsilva/conversao-temperatura
+```
+
+#### i. Boas práticas construção de imagens Docker
 
 * Nomeando sua imagem Docker
   * Exemplos:
-    * `<namespace>/<repository>:<tags>
+    * `<namespace>/<repository>:<tags>`
     * `fabricioveronez/api-conversao:v1`
   * Exceção:
     * `ubuntu:20.10` quando proprietário oficial é o próprio Docker não tem namespace
@@ -363,6 +390,74 @@ d40118e55f45    docker.io/library/api-produto:v1                  "docker-entryp
   * ENTRYPOINT é imutável, não é possível sobrescrever
   * O uso combinado de ENTRYPOINT e CMD é interessante
 
+
+#### j. Container com argumentos em linha de comando
+
+* Configurar Dockerfile para imagem ubuntu onde a versão do SO é passada como parâmetro
+
+```cmd
+C:\src> cd dockerfile-ubuntu-curl-args
+C:\src\dockerfile-ubuntu-curl-args> Code Dockerfile
+```
+
+* Criar a imagem especificando a versão do ubuntu
+
+```cmd
+C:\src\dockerfile-ubuntu-curl-args> nerdctl image build -t josemarsilva/ubuntu-arg:v1 --build-arg TAG="18.04" .
+```
+
+* Criar a imagem usando a ultima versao `latest`
+
+```cmd
+C:\src\dockerfile-ubuntu-curl-args> nerdctl image build -t josemarsilva/ubuntu-arg:v1 .
+```
+
+
+#### k. Multi stage build
+
+* Tipos de lingaugens de programação:
+  * Compiladas
+  * Interpretadas
+  * Just in Time: linguagem intermediária + interpretador
+
+* Explorar a aplicação Hello Wold em GoLang
+* Configurar Dockerfile para imagem GoLang de Hello World
+
+```cmd
+C:\src> cd dockerfile-golang-helloworld
+C:\src\dockerfile-golang-helloworld> Code main.go
+C:\src\dockerfile-golang-helloworld> Code Dockerfile
+```
+
+* Executar HelloWorld pela linha de comando
+
+```cmd
+C:\src\dockerfile-golang-helloworld> go run main.go
+Hello World !!!
+```
+
+* Criar uma imagem baseada na GoLang e aplicação HelloWold
+
+```cmd
+C:\src\dockerfile-golang-helloworld> nerdctl build -t josemarsilva/golang-helloworld .
+unpacking docker.io/josemarsilva/golang-helloworld:latest (sha256:4a6d47c218b194d6fb88e6065bf2380265ccc3e45ed674d987c3244907c029f0)...done
+
+C:\src\dockerfile-golang-helloworld> nerdctl image ls
+REPOSITORY                            TAG       IMAGE ID        CREATED               PLATFORM       SIZE
+     :                                  :          :              :                     :
+josemarsilva/golang-helloworld        latest    4a6d47c218b1    About a minute ago    linux/amd64    702.1 MiB
+     :                                  :          :              :                     :
+```
+
+* Porem a imagem contém todo o SDK para compilar o GoLang, agora vamos usar uma imagem alpine que é mais leve e tem somente o _run-time_
+
+```cmd
+C:\src\dockerfile-golang-helloworld> COPY /Y Dockerfile-alpine Dockerfile
+        1 arquivo(s) copiado(s).
+
+C:\src\dockerfile-golang-helloworld> nerdctl build -t josemarsilva/golang-helloworld .
+unpacking docker.io/josemarsilva/golang-helloworld:latest (sha256:4a6d47c218b194d6fb88e6065bf2380265ccc3e45ed674d987c3244907c029f0)...done
+```
 
 ## I - Referências
 
