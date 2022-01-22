@@ -495,6 +495,51 @@ Hello World !!!
   * Harbor - User Custom
 * No Docker Hub o identificador de seu login é o seu namespace para nomenlatura de repoistorios
 
+
+* Efetue o login no servico do Docher Hub
+
+```cmd
+C:\src> nerdctl login -u josemarsilva
+Enter Password:
+Login Succeeded
+```
+
+* Localize a imagem armazenada localmente: josemarsilva/conversao-temperatura:v1
+
+```cmd
+C:\src> nerdctl image ls
+REPOSITORY                            TAG       IMAGE ID        CREATED              PLATFORM       SIZE
+     :                                 :           :                :                   :
+josemarsilva/conversao-temperatura    v1        c56df81725c0    13 minutes ago       linux/amd64    1.1 GiB
+```
+
+* Fazer upload da imagem local para o Registry Repository do Docker Hub `josemarsilva/conversao-temperatura:v1`
+
+```cmd
+C:\src> nerdctl push josemarsilva/conversao-temperatura:v1
+```
+
+* É uma boa prática marcar a tag `latest` com a última versão do aplicativo. Isto pode ser feito sem necessidade de ser reconstruir _build_ o aplicativo.
+
+```cmd
+C:\src> nerdctl tag josemarsilva/conversao-temperatura:v1 josemarsilva/conversao-temperatura:latest
+C:\src> nerdctl image ls
+REPOSITORY                            TAG       IMAGE ID        CREATED              PLATFORM       SIZE
+    :                                  :           :                 :                    :
+josemarsilva/conversao-temperatura    latest    c56df81725c0    21 seconds ago       linux/amd64    1.1 GiB
+josemarsilva/conversao-temperatura    v1        c56df81725c0    23 minutes ago       linux/amd64    1.1 GiB
+    :                                  :           :                 :                    :
+
+C:\src> nerdctl push josemarsilva/conversao-temperatura:latest
+```
+
+* Consulte o site [Docker Hub](https://hub.docker.com/) e localize a imagem que você acabou de enviar
+
+![screenshot-docker-hub-a.png](../doc/screenshots/screenshot-docker-hub-a.png) 
+
+![screenshot-docker-hub-b.png](../doc/screenshots/screenshot-docker-hub-b.png) 
+
+
 ## I - Referências
 
 * Github README.md writing sintax
