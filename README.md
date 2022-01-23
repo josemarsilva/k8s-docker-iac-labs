@@ -13,10 +13,11 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [2.8. Notas de atenção e Avisos (Notice and information)](#28-notas-de-atenção-e-avisos-notice-and-information)
   * [2.9. Glossário de Termos (Glossary)](#29-glossário-de-termos-glossary)
 - [3. Projeto / Laboratório](#3-projeto--laboratório)
-  * [LAB-01](#lab-01)
-  * [LAB-02](#lab-02)
-  * [LAB-03](#lab-03)
-  * [LAB-04](#lab-04)
+  * [LAB-01: Install WSL, Rancher Desktop and command line with nerdctl](#lab-01)
+  * [LAB-02: Basic Docker Commands](#lab-02)
+  * [LAB-03: Windows Client MongoDB Studio 3T connect database](#lab-03)
+  * [LAB-04: Docker Images vs Containers](#lab-04)
+  * [LAB-05: Basic Kubernetes Commands](#lab-05)
 - [I - Referências](#i---referências)
 
 
@@ -67,6 +68,9 @@ Windows Client MongoDB Studio 3T connect database
 ### [LAB-04](./md/README-docker-images-containers.md)
 Docker Images vs Containers
 
+### [LAB-05](./md/README-basic-kubernetes-commands.md)
+Basic Kubernetes Commands
+
 
 ## I - Referências
 
@@ -75,4 +79,4 @@ Docker Images vs Containers
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
-
+* [Canal do Fabrício Veronez KubeDev no Youtube](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
