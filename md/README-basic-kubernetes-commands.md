@@ -40,7 +40,7 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Basic Commands usi
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-docker-commands.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-kubernetes-commands.png) 
 
 
 ### 2.9. Glossário de Termos (Glossary)
@@ -401,11 +401,51 @@ web-page-deploy-86559fbcd7-ztdgs   1/1     Running   0          47s
 web-page-deploy-86559fbcd7-8vkss   1/1     Running   0          47s
 ```
 
-* Alterar por linha de comando a configuração de imagem de: green, para: blue
+* Alterar por linha de comando a configuração de imagem de: green, para: blue. O parametro "web-page" refere-se ao container do template
 
 ```cmd
-C:\src\kubernetes-basic> kubectl set image deployment web-page-deploy=kubedevio/web-page:blue
+C:\src\kubernetes-basic> kubectl set image deployment web-page-deploy web-page=kubedevio/web-page:blue
+deployment.apps/web-page-deploy image updated
 ```
+
+#### h. Rollout history of deployment
+
+* O [Rollout of Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#checking-rollout-history-of-a-deployment) consiste tem desfazer um deployment à posição anterior
+
+* Listar/visualizar o histórico de Deployment 
+
+```cmd
+C:\src\kubernetes-basic> kubectl rollout history deployment web-page-deploy
+deployment.apps/web-page-deploy
+REVISION  CHANGE-CAUSE
+2         <none>
+3         <none>
+
+C:\src\kubernetes-basic> kubectl get replicaset
+NAME                         DESIRED   CURRENT   READY   AGE
+web-page-deploy-86559fbcd7   0         0         0       6h37m
+web-page-deploy-8c44b6d5b    5         5         5       6h47m
+
+
+C:\src\kubernetes-basic> kubectl get pods
+NAME                              READY   STATUS    RESTARTS   AGE
+web-page-deploy-8c44b6d5b-422ch   1/1     Running   0          14m
+web-page-deploy-8c44b6d5b-n2s2l   1/1     Running   0          14m
+web-page-deploy-8c44b6d5b-q7x67   1/1     Running   0          14m
+web-page-deploy-8c44b6d5b-2c6rr   1/1     Running   0          14m
+web-page-deploy-8c44b6d5b-gxmkv   1/1     Running   0          14m
+
+C:\src\kubernetes-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-422ch 8080:80
+```
+
+
+#### i. Service: ClusterIP, NodePort and LoadBalancer
+
+* Os [Services](https://kubernetes.io/docs/concepts/services-networking/service/), podem ser dos tipos:
+  * ClusterIP
+  * NodePort
+  * LoadBalancer
+* Não é recomendável utilizar diretamente o IP interno atribuido pelo Kubernetes.
 
 
 
