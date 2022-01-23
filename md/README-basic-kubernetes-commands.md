@@ -19,7 +19,7 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Basic Commands usi
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. Arquivo Yaml com manifesto do Kubernetes](#b-arquivo-yaml-com-manifesto-do-kubernetes)
-    + [c. Deploy / Undeploy de aplicações e kubectl](#c-deploy-undeployde-aplicações-e-kubectl)
+    + [c. Pods, Deployment, Undeployment e kubectl](#c-pods-deployment-undeployment-e-kubectl)
     + [d. Label / Selector](#d-label-selector)
     + [e. Replica Set](#e-replica-set)
     + [f. Gerenciamento de versão](#f-gerenciamento-de-versão)
@@ -99,8 +99,9 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
         - `ports`: 
             - `containerPort`: 8080
 
-#### c. Deploy / Undeploy de aplicações e kubectl
+#### c. Pods, Deployment, Undeployment e kubectl
 
+* O [POD](https://kubernetes.io/docs/concepts/workloads/pods/) é a menor unidade computacional que pode ser gerenciada pelo cluster kubernetes 
 * Criar/configurar o arquivo (.yaml) com o manifesto de configuração de um POD de uma aplicação web que deverá responder na porta 8080
 
 ```cmd
@@ -354,9 +355,9 @@ No resources found in default namespace.
 * Criar/Configurar um Deployment que incorpore o cenário do ReplicaSet do passo anterior e que por consequencia passe a gerenciar as versões.
 
 ```cmd
-C:\src\kubernetes-basic> type deployment-selector-web-page-version-blue.yaml
+C:\src\kubernetes-basic> type service-nodeport-selector-label-app-web.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f deployment-selector-web-page-version-blue.yaml
+C:\src\kubernetes-basic> kubectl apply -f service-nodeport-selector-label-app-web.yaml
 deployment.apps/web-page-deploy created
 
 C:\src\kubernetes-basic> kubectl get deployments
@@ -447,11 +448,66 @@ C:\src\kubernetes-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-422c
 
 #### i. Service: ClusterIP, NodePort and LoadBalancer
 
-* Os [Services](https://kubernetes.io/docs/concepts/services-networking/service/), podem ser dos tipos:
-  * ClusterIP
-  * NodePort
-  * LoadBalancer
-* Não é recomendável utilizar diretamente o IP interno atribuido pelo Kubernetes.
+* Os [Services](https://kubernetes.io/docs/concepts/services-networking/service/), são responsáveis por expor (IP e PORT) dos serviços prestados pelo POD. O services podem ser dos tipos:
+  * **ClusterIP**: usado internamente no cluster Kubernetes. Sempre que é criado um serviço é gerado um IP de acesso e um nome de dns interno
+  * **NodePort**: acessível ao mundo externo do cluster Kubernetes. Sempre que é criado um service deste tipo é criado uma porta no range >= 30000. Muito usado em cenários _OnPremisse_
+  * **LoadBalancer**: Sempre que é criado um serviço, também é criado junto um Load Balance que vai dar o IP de acesso a este serviço
+* PS:
+  * Não é recomendável utilizar diretamente o IP interno atribuido pelo Kubernetes.
+
+* Remover o ultimo deployment criado no passo anterior para deixar o ambiente limpo
+* Criar/configurar novamente o deployment `service-nodeport-selector-label-app-web.yaml` com a página de fundo azul em 3 instâncias com o label "app: web"
+
+```cmd
+C:\src\kubernetes-basic> kubectl get deployments
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+web-page-deploy   5/5     5            5           17h
+
+C:\src\kubernetes-basic> kubectl delete deployments web-page-deploy
+deployment.apps "web-page-deploy" deleted
+
+C:\src\kubernetes-basic> kubectl get deployments
+No resources found in default namespace.
+
+C:\src\kubernetes-basic> TYPE service-nodeport-selector-label-app-web.yaml
+
+C:\src\kubernetes-basic> kubectl apply -f service-nodeport-selector-label-app-web.yaml
+deployment.apps/web-page-deploy created
+
+C:\src\kubernetes-basic> kubectl get deployments
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+web-page-deploy   3/3     3            3           15s
+
+C:\src\kubernetes-basic> TYPE service-selector-label-app-web.yaml
+
+C:\src\kubernetes-basic> kubectl apply -f service-selector-label-app-web.yaml
+C:\src\kubernetes-basic> 
+
+C:\src\kubernetes-basic> kubectl get services
+C:\GitHome\ws-github-01\kubernetes-docker-rancherdesktop-labs\src\kubernetes-basic>kubectl get services
+NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+kubernetes         ClusterIP   10.43.0.1      <none>        443/TCP        9d
+web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s
+```
+
+* Observe que o servico foi criado na porta `31725`. Este número de "porta alta" é aleatório. Lembre-se também de liberar a regra de entrada de firewall para TCP 30000-65535
+
+![screenshot-windows-firewall-INPUT-TCP-30000-65535.png](../doc/uml-diagrams/screenshot-windows-firewall-INPUT-TCP-30000-65535.png 
+
+* Abrir com o browser a url `http:localhost:31725` e observar a WebPage com fundo azul
+
+* Porém o endereço IP `10.43.11.172` é interno ao cluster e não é visível pelo SO da máquina Windows de fora, uma vez que esta sub-rede é interna do Cluster. 
+
+* Agora vamos fixar a "porta alta" para sempre ser a porta 30000. Estamos cientes da limitação de que poderemos ter apenas 1 (um) serviço nesta porta.
+
+```cmd
+C:\src\kubernetes-basic> kubectl apply -f service-nodeport-port-30000-selector-label-app-web.yaml
+deployment.apps/web-page-deploy created
+
+C:\src\kubernetes-basic> kubectl get service web-app-service
+```
+
+* Abrir com o browser a url `http:localhost:30000` e observar a WebPage com fundo azul. Se você tentar acessar a url anterior `http:localhost:31725` ela não mais estará disponível porque foi feito _apply_ no servico que foi atualizado.
 
 
 

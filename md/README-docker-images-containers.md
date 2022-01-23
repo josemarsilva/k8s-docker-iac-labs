@@ -55,15 +55,16 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 
 * Implantação container aplicação NodeJS - Conversão Temperatura
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs.png)
 
 * Implantação container aplicação NodeJS e MongoDB - API Produtos
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-mongo.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-mongo.png)
 
 * Implantação container aplicação GoLang - Hello World
 
 ![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-golang.png) 
+
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
