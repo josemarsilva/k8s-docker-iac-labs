@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-page
+spec:
+  containers:
+    - name: web-page
+      image: kubedevio/web-page:blue
+      ports:
+        - containerPort: 80
