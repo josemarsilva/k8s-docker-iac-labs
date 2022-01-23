@@ -17,9 +17,15 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Basic Commands usi
     + [a. Tecnologias e ferramentas](#a-tecnologias-e-ferramentas)
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
-    + [a. ](#a-)
-    + [b. ](#b-)
-    + [c. ](#c-)
+    + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
+    + [b. Arquivo Yaml com manifesto do Kubernetes](#b-arquivo-yaml-com-manifesto-do-kubernetes)
+    + [c. Deploy / Undeploy de aplicações e kubectl](#c-deploy-undeployde-aplicações-e-kubectl)
+    + [d. Label / Selector](#d-label-selector)
+    + [e. Replica Set](#e-replica-set)
+    + [f. Gerenciamento de versão](#f-gerenciamento-de-versão)
+    + [g. Deployment](#g-deployment)
+    + [h. Rollout history of deployment](#h-rollout-history-of-deployment)
+    + [i. Service: ClusterIP, NodePort and LoadBalancer](#i-service-clusterip-nodeport-and-loadbalancer)
 
 - [I - Referências](#i---referências)
 
@@ -150,7 +156,7 @@ No resources found in default namespace.
 ```
 
 
-#### d. Label e Selector
+#### d. Label / Selector
 
 * Recriar/aplicar os dois PODs web-page, sendo o primeiro naked e o segundo com label, em seguida liste os pods e descrevendo os detalhes observe as diferenças
 
