@@ -20,7 +20,7 @@ Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python
   * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
   * [3.4. Guia de Demonstração e Teste](#34-guia-de-demonstração-e-teste)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
-(#i-service-clusterip-nodeport-and-loadbalancer)
+
 
 - [I - Referências](#i---referências)
 
