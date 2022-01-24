@@ -18,6 +18,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [LAB-03: Windows Client MongoDB Studio 3T connect database](#lab-03)
   * [LAB-04: Docker Images vs Containers](#lab-04)
   * [LAB-05: Basic Kubernetes Commands](#lab-05)
+  * [LAB-06: Kubernetes, Python, Flask e MongoDB](#lab-06)
 - [I - Referências](#i---referências)
 
 
@@ -41,7 +42,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
 
-*  n/a
+*  Deixo aqui o registro e agradecimento de que este material foi inspirado e baseado na "Iniciativa Kubernetes" provida pelo canal do Youtube [Fabrício Veronez Kubedev](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
+* A idéia de construir um material documentado que eu pudesse usar como referência inicial sobre Kubernetes e Devops, seja para um projeto ou para outro laboratório, evoluindo ou especializando (abstração vs especialização) que permitisse evoluir constantemente o aprendizado
 
 
 ### 2.9. Glossário de Termos (Glossary)
@@ -70,6 +72,10 @@ Docker Images vs Containers
 
 ### [LAB-05](./md/README-basic-kubernetes-commands.md)
 Basic Kubernetes Commands
+
+
+### [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)
+Kubernetes, Python, Flask e MongoDB
 
 
 ## I - Referências
