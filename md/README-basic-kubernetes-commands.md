@@ -498,7 +498,7 @@ web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s
 
 * Observe que o servico foi criado na porta `31725`. Este número de "porta alta" é aleatório. Lembre-se também de liberar a regra de entrada de firewall para TCP 30000-65535
 
-![screenshot-windows-firewall-INPUT-TCP-30000-65535.png](../doc/uml-diagrams/screenshot-windows-firewall-INPUT-TCP-30000-65535.png 
+![screenshot-windows-firewall-INPUT-TCP-30000-65535.png](../doc/screenshots/screenshot-windows-firewall-INPUT-TCP-30000-65535.png)
 
 * Abrir com o browser a url `http:localhost:31725` e observar a WebPage com fundo azul
 
