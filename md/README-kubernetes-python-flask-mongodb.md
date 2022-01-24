@@ -153,20 +153,90 @@ replicaset.apps/web-app-py-flask-7478c6f8f7   1         1         1       6m49s
 
 ```
 
-#### b. Editar/alterar a aplicação Python e gerar uma nova versão
+* Acessar o endereço `http://localhost:30001` configurado em `deployment-service-python-flask-mongodb.yaml` e observe a aplicação
 
-* Criar/Configurar o arquivo `Dockerfile` com a especificação da imagem do container
-* Construir _Build_ a sua imagem com base na especificação da aplicação
-* Carregar _Push_ da imagem no Docker Hub container registry
-* Configurar/alterar _Tag_ da imagem no Docker Hub container registry: `latest`
+
+#### b. Editar/Alterar o código fonte da aplicação Python e gerar uma nova versão
+
+* Editar/Alterar o código fonte de `./src/kubernetes-python-flask-mongodb/templates/base.html` na linha 32 onde encontra-se o texto `<small class="site-description">Review de Vídeos</small>` substituir por `<small class="site-description">Review de Vídeos v2</small>`. Se já estiver com `v2` Então incremente para a próxima versão Ex: `v3`.
+* Reconstruir _Build_ a sua imagem com base na especificação da aplicação
+* Recarregar _Push_ da imagem no Docker Hub container registry
+* Reconfigurar/alterar _Tag_ da imagem no Docker Hub container registry: `latest`
 
 ```cmd
 C:\src\kubernetes-python-flask-mongodb> TYPE Dockerfile.
-C:\src\kubernetes-python-flask-mongodb> nerdctl image build -t josemarsilva/rotten-potatoes:v1 .
+C:\src\kubernetes-python-flask-mongodb> nerdctl image build -t josemarsilva/rotten-potatoes:v2 .
       :
-unpacking docker.io/josemarsilva/rotten-potatoes:v1 (sha256:)...done
+unpacking docker.io/josemarsilva/rotten-potatoes:v2 (sha256:)...done
+
+C:\src\kubernetes-python-flask-mongodb> nerdctl image ls
+REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
+    :                                 :             :              :                :
+josemarsilva/rotten-potatoes          latest    ff312c048d95    17 minutes ago        linux/amd64    217.1 MiB
+josemarsilva/rotten-potatoes          v1        ff312c048d95    19 minutes ago        linux/amd64    217.1 MiB
+josemarsilva/rotten-potatoes          v2        15b11d336179    About a minute ago    linux/amd64    217.1 MiB
+    :                                 :             :              :                :
+
+C:\src\kubernetes-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:v2
+
+C:\src\kubernetes-python-flask-mongodb> nerdctl tag josemarsilva/rotten-potatoes:v2 josemarsilva/rotten-potatoes:latest
+
+C:\src\kubernetes-python-flask-mongodb> nerdctl image ls
+REPOSITORY                            TAG       IMAGE ID        CREATED           PLATFORM       SIZE
+    :                                 :             :              :                :
+josemarsilva/rotten-potatoes          latest    15b11d336179    5 seconds ago     linux/amd64    217.1 MiB
+josemarsilva/rotten-potatoes          v1        ff312c048d95    21 minutes ago    linux/amd64    217.1 MiB
+josemarsilva/rotten-potatoes          v2        15b11d336179    3 minutes ago     linux/amd64    217.1 MiB
+    :                                 :             :              :                :
+
+C:\src\kubernetes-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:latest
+```
+
+* Criar/Configurar `deployment-service-python-flask-mongodb-version-v2.yaml`
+* Aplicar a configuração `deployment-service-python-flask-mongodb-version-v2.yaml`
+
+```cmd
+C:\src\kubernetes-basic> type deployment-service-python-flask-mongodb-version-v2.yaml
+   :
+        image: josemarsilva/rotten-potatoes:v2
+   :
+
+C:\src\kubernetes-basic> kubectl apply -f deployment-service-python-flask-mongodb-version-v2.yaml
+deployment.apps/mongodb unchanged
+service/mongodb unchanged
+deployment.apps/web-app-py-flask configured
+service/web-app-py-flask unchanged
+
+C:\src\kubernetes-basic> kubectl get all
+NAME                                  READY   STATUS              RESTARTS   AGE
+  :                                    :         :                :           :
+pod/mongodb-89dddc46-4vjps            0/1     ContainerCreating   0          39s
+pod/web-app-py-flask-7478c6f8f7-v6rpr   1/1     Running   0          6m49s
+  :                                    :         :                :           :
+
+NAME                       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+  :                          :              :             :              :            :
+service/mongodb            ClusterIP   10.43.118.10    <none>        27017/TCP        6m49s
+service/web-app-py-flask   NodePort    10.43.228.35    <none>        3000:30001/TCP   45s
+  :                          :              :             :              :            :
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+  :                                :       :            :           :
+deployment.apps/mongodb            1/1     1            1           6m49s
+deployment.apps/web-app-py-flask   1/1     1            1           6m49s
+  :                                :       :            :           :
 
 
+NAME                                          DESIRED   CURRENT   READY   AGE
+  :                                           :         :         :         :
+replicaset.apps/mongodb-89dddc46              1         1         1       6m49s
+replicaset.apps/web-app-py-flask-7478c6f8f7   1         1         1       6m49s
+  :                                           :         :         :         :
+
+```
+
+* Acessar o endereço `http://localhost:30001` configurado em `deployment-service-python-flask-mongodb.yaml` e observe que a aplicação mudou: agora apresenta a informação `v2`
+* A alteração foi executada sem a necessidade de _downtime_
 
 
 ### 3.3. Guia de Implantação, Configuração e Instalação
