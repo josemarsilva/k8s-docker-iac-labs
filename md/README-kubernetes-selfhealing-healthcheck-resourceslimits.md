@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-Este documento contém os artefatos dolaboratório **LAB-05 - Basic Commands using Kubernetes on RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self Healing, application health check and resources limits** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Kubernetes_ no Rancher Desktop
 
 ##### Table of Contents  
