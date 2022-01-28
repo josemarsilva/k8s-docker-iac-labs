@@ -73,9 +73,12 @@ Docker Images vs Containers
 ### [LAB-05](./md/README-basic-kubernetes-commands.md)
 Basic Kubernetes Commands
 
-
 ### [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)
 Kubernetes, Python, Flask e MongoDB
+
+### [LAB-07](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md)
+Kubernetes Self Healing, application health check and resources limits
+
 
 
 ## I - Referências
