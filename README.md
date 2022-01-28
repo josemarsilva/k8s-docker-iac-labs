@@ -19,6 +19,9 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [LAB-04: Docker Images vs Containers](#lab-04)
   * [LAB-05: Basic Kubernetes Commands](#lab-05)
   * [LAB-06: Kubernetes, Python, Flask e MongoDB](#lab-06)
+  * [LAB-07: Kubernetes Self Healing, application health check and resources limits](#lab-07)
+  * [LAB-08: Kubernetes IDE Lens](#lab-08)
+
 - [I - Referências](#i---referências)
 
 
@@ -79,6 +82,8 @@ Kubernetes, Python, Flask e MongoDB
 ### [LAB-07](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md)
 Kubernetes Self Healing, application health check and resources limits
 
+### [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)
+Kubernetes IDE Lens
 
 
 ## I - Referências

@@ -25,12 +25,5 @@
   "bugs": {
     "url": "https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs/issues"
   },
-  "homepage": "https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs#lab-07",
-  "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.2",
-    "nodehog": "^0.1.2",
-    "swagger-ui-express": "^4.1.4",
-    "yamljs": "^0.3.0"
-  }
+  "homepage": "https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs#readme"
 }

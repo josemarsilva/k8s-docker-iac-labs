@@ -108,12 +108,30 @@ Premissa: [NodeJS inicializado e instalado](#33-guia-deimplantação-configuraç
 #### b. Desenvolver entry-point da aplicação e view de apresentação básica
 
 * No entry-point `app.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação
-* Crie uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e crie um arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
+* Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e crie um arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE app.js
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
+```
+
+#### b. Documentar a API no Swagger
+
+* Criar/editar o arquivo `swagger.yaml` para documentar as API's que sua aplicação devera prover, você pode usar um editor comum ou [Editor Swagger Online](https://editor.swagger.io/)
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE app.js
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
+```
+
+#### c. Executar e testar aplicação
+
 * Execute sua aplicação e observe a homepage
 
 ```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> 
 ```
-
 
 
 ### 3.3. Guia de Implantação, Configuração e Instalação
@@ -129,6 +147,7 @@ version: 1.0.0
 description: Kubernetes - Node Express Swagger Liveness Readiness Startup Probes application
 entry point: app.js
 test command: 
+git repository: 
 keywords: node express swagger k8s liveness readiness startup probes
 author: Josemar Furegatti de Abreu Silva
 license: ISC
