@@ -1,60 +1,27 @@
 swagger: "2.0"
 info:
-  description: "API de conversão de temperatura - 1.0"
+  description: "Kubernetes Self Healing, application health check, ready to serve and resources limits"
   version: "1.0.0"
-  title: "Conversão de temperatura"
+  title: "kubernetes-selfhealing-healthcheck-resourceslimits"
   contact:
-    email: "fabricio@kubedev.io"
+    email: "josemarsilva@yahoo.com.br"
 paths:
-  /fahrenheit/{valor}/celsius:
+  /health-check:
     get:
-      description: "Converte de Fahrenheit para Celsius"
+      description: "health-check: Is application is running?"
       produces:
       - "application/json"
       parameters:
-      - name: "valor"
-        in: "path"
-        description: "Valor que será convertido"
-        required: true
-        type: "number"
       responses:
         "200":
-          description: "Resultado da conversão"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Temperatura"
-        "400":
-          description: "Bad Input Parameter"
-
-  /celsius/{valor}/fahrenheit:
+          description: "health-check: Yes, application is running"
+  /ready-to-serve:
     get:
-      description: "Converte de Celsius para Fahrenheit"
+      description: "ready-to-serve: Is application ready to serve?"
       produces:
       - "application/json"
       parameters:
-      - name: "valor"
-        in: "path"
-        description: "Valor que será convertido"
-        required: true
-        type: "number"
       responses:
         "200":
-          description: "Resultado da conversão"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Temperatura
-              "
-        "400":
-          description: "Bad Input Parameter"
+          description: "ready-to-serve: Yes, application ready to serve"
 
-definitions:
-  Temperatura:
-    type: "object"
-    required:
-    - "valor"
-    properties:
-      valor:
-        type: "number"
-        example: 500.0
