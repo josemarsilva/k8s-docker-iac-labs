@@ -33,10 +33,6 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-* Contexto do Kubernetes
-
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-mongodb-studio3t.png) 
-
 * Contexto da ferramenta Lens IDE para Kubernetes 
 
 ![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-lens-ide.png) 
@@ -51,7 +47,8 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
 
-* 
+* n/a
+
 
 ### 2.9. Glossário de Termos (Glossary)
 
@@ -98,8 +95,8 @@ C:\src> TYPE "%USERPROFILE%\.kube\config"
 #### c. Conectar Lens Kubernetes IDE no Windows com cluster Kubernetes
 
 * Connecte-se ao seu cluster Kubernetes favorito e observe a barra lateral esquerda com os menus de opções
-
-![MindMapDiagram-Context.png](../doc/screenshots/screenshot-kubernetes-ide-lens.png) 
+  * ![MindMapDiagram-Context.png](../doc/screenshots/screenshot-kubernetes-ide-lens-a.png) 
+  * ![MindMapDiagram-Context.png](../doc/screenshots/screenshot-kubernetes-ide-lens-a.png) 
 
 
 ## I - Referências
