@@ -19,7 +19,7 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Obter os binários e instalar o Lens Kubernetes IDE](#a-obter-os-binários-e-instalar-o-lens-kubernetes-no-windows)
-    + [b. Executar/Iniciar o cluster Kubernetes](#b-executar-iniciar-o-cluster-kubernetes)
+    + [b. Configurar o cluster Kubernetes no Lens](#b-configurar-o-cluster-kubernetes-no-lens)
     + [c. Conectar Lens Kubernetes IDE no Windows com cluster Kubernetes](#c-conectar-lens-kubernetes-ide-no-windows-com-cluster-kubernetes)
 - [I - Referências](#i---referências)
 

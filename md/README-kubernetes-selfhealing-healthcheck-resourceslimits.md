@@ -19,9 +19,18 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
     + [c. Instalando bibliotecas e configurando ambiente NodeJS](c-instalando-bibliotecas-e-configurando-ambiente-nodejs)
   * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
+    + [a. Premissas](#a-premissas)
+    + [b. Desenvolver entry-point da aplicação e view de apresentação básica](#b-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
+    + [c. Documentar a API no Swagger](#c-documentar-a-api-no-swagger)
+    + [d. Executar e testar aplicação](#d-executar-e-testar-aplicação)
   * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
+    + [a. Inicializando um projeto NodeJS](#a-inicializando-um-projeto-nodejs)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
+    + [b. LivenessProbe](#b-livenessprobe)
+    + [c. ReadnessProbe](#c-readnessprobe)
+    + [d. Resources limit (cpu, memory)](#d-resources-limit-cpu-memory)
+
 
 - [I - Referências](#i---referências)
 
@@ -31,22 +40,12 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-* Contexto do Kubernetes
-
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
-
-
 * Contexto do gerenciamento da aplicação NodeJS desenvolvida com biblioteca Express e Swagger para testes no Kubernetes
 
 ![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-ops.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
-
-* Contexto do Kubernetes
-
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
-
 
 * Contexto da aplicação NodeJS desenvolvida com biblioteca Express e Swagger para testes no Kubernetes
 
@@ -224,7 +223,9 @@ readynessProbe:
 	failureThreshould: 1
 ```
 
-#### c. Containers com limites gerenciados: resources limit (cpu, memory)
+#### c. ReadnessProbe
+
+#### d. Resources limit (cpu, memory)
 
 ```cmd
 C:\src\kubernetes-selfhealing> kubectl top pod
@@ -239,4 +240,3 @@ C:\src\kubernetes-selfhealing> kubectl top pod
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
 * [INICIATIVA KUBERNETES - Boas práticas de deploy + dúvidas sobre o KubeDev.io](https://www.youtube.com/watch?v=YFUrhekwH64)
-
