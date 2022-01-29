@@ -44,14 +44,14 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-windows-client-mongodb-studio3t.png) 
+* Contexto da ferramenta Lens IDE para Kubernetes
+
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-windows-client-kubernetes-ide-lens.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
 
-*  Deixo aqui o registro e agradecimento de que este material foi inspirado e baseado na "Iniciativa Kubernetes" provida pelo canal do Youtube [Fabrício Veronez Kubedev](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
-* A idéia de construir um material documentado que eu pudesse usar como referência inicial sobre Kubernetes e Devops, seja para um projeto ou para outro laboratório, evoluindo ou especializando (abstração vs especialização) que permitisse evoluir constantemente o aprendizado
-
+* 
 
 ### 2.9. Glossário de Termos (Glossary)
 
@@ -87,44 +87,19 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * [Download do binário e instalação de Lens Kubernetes IDE for Windows](https://k8slens.dev/)
 
 
-#### b. Executar/Iniciar o cluster Kubernetes
+#### b. Configurar o cluster Kubernetes no Lens
 
-* Executar ou iniciar o cluster Kubernetes, pelo nerdctl get status temos certeza de que o cluster está funcionando
-
-```cmd
-C:\src\kubernetes-ide-lens> nerdctl get all
-      :
-```
-
-#### c. Conectar Studio 3T no Windows com MongoDB
-
-* Criar/Configurar uma nova conexão a partir do Studio 3T com o MongoDB local na porta 27017
+* Obter o Kubeconfig `´/.kube/config` e adicionar seu conteudo ao `File >> Add cluster`
 
 ```cmd
-Studio 3T Ultimate for MongoDB :: (menu) File >> New
-    (button) New Connection
-        (field) Connection name: mongo-local-container
-        (aba) Server
-            (field) Server: localhost
-            (field) Port: 27017
-        (aba) Authentication
-            (field) User name: mongouser
-            (field) Password: mongopwd
-            (field) Authentication DB: admin
-        (button) Save
+C:\src> TYPE "%USERPROFILE%\.kube\config"
 ```
 
+#### c. Conectar Lens Kubernetes IDE no Windows com cluster Kubernetes
 
-* Testar a conexão e conectar
+* Connecte-se ao seu cluster Kubernetes favorito e observe a barra lateral esquerda com os menus de opções
 
-![Screenshot Studio 3T connectando no MongoDB](../doc/screenshots/screenshot-mongodb-studio3t.png) 
-
-
-* Explorar os _databases_ e _collections_ da base de dados **MongoDB**
-
-![Screenshot Dicionário de banco de dados e collections](../doc/screenshots/screenshot-mongodb-studio3t-databases-collections.png) 
-
-
+![MindMapDiagram-Context.png](../doc/screenshots/screenshot-kubernetes-ide-lens.png) 
 
 
 ## I - Referências
@@ -134,4 +109,6 @@ Studio 3T Ultimate for MongoDB :: (menu) File >> New
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
-
+* Kubernetes IDE
+  * [Lens](https://k8slens.dev/)
+  * [Introduction to Lens - The Kubernetes IDE](https://www.youtube.com/watch?v=eeDwdVXattc)
