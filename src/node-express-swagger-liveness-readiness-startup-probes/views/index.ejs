@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.87.0">
-    <title>Sticky Footer Navbar Template · Bootstrap v5.1</title>
+    <meta name="author" content="Josemar Furegatti de Abreu Silva, Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="JosemarSilva 1.0.0">
+    <title>node-express-swagger-liveness-readiness-startup-probes</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sticky-footer-navbar/">
 
@@ -71,24 +71,18 @@
     <main class="flex-shrink-0">
         <div class="container" style="padding: 60px 15px 0;">
             <form class="row g-3" action="/" method="post">
-                <h1>Conversor de Temperatura</h1>
+                <h1>node-express-swagger-liveness-readiness-startup-probes</h1>
                 <div class="mb-3 row">
-                    <select class="form-select" aria-label="Default select example" id="selectTemp" name="selectTemp">
-                        <option selected value="1">Celsius => Fahrenheit</option>
-                        <option value="2">Fahrenheit => Celsius</option>
-                    </select>
-                </div>
-                <div class="mb-3 row">
-                    <label for="valorRef" class="form-label">Valor:</label>
-                    <input type="number" class="form-control" id="valorRef" name="valorRef">
+                    <label for="inputMessage" class="form-label">Digite a sua mensagem:</label>
+                    <input type="text" class="form-control" id="inputMessage" name="inputMessage">
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary mb-3">Converter</button>
+                    <button type="submit" class="btn btn-primary mb-3">Mostrar mensagem</button>
                 </div>
             </form>
-            <% if(valorConvertido){ %>
-                <h3>Valor Convertido</h3>
-                <%= valorConvertido %>
+            <% if(resultValue){ %>
+                <h3>Mensagem</h3>
+                <%= resultValue %>
              <% } %>            
         </div>
     </main>
