@@ -1,3 +1,5 @@
+// Original source code developer: https://github.com/bettiolo/node-echo
+
 var util = require('util');
 var http = require('http');
 var url = require('url');

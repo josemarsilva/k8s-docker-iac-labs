@@ -178,7 +178,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
 * Execute sua aplicação e observe a homepage
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> 
+C:\src\node-express-swagger-liveness-readiness-startup-probes> node server 
 ```
 
 ---
