@@ -19,13 +19,15 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
     + [c. Instalando bibliotecas e configurando ambiente NodeJS](c-instalando-bibliotecas-e-configurando-ambiente-nodejs)
   * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
-    + [3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32a-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
-      - [3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32a01-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
+    + [3.2.a. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32a-construir-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
+      - [3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32a01-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
       - [3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32a02-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
-      - [3.2.a.03. Documentar a API no Swagger](32a03-documentar-a-api-no-swagger)
-      - [3.2.a.04. Executar e testar aplicação](32a04-executar-e-testar-aplicação)
-
-
+      - [3.2.a.03. Documentar a API no Swagger](#32a03-documentar-a-api-no-swagger)
+      - [3.2.a.04. Executar e testar aplicação](#32a04-executar-e-testar-aplicação)
+    + [3.2.b. Construir projeto NodeJS HTTP echo](32b-construir-projeto-nodejs-http-echo)
+      - [3.2.b.01. Inicializar projeto NodeJS http echo](#32b01-inicializar-projeto-nodejs-http-echo)
+      - [3.2.b.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32b02-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
+      - [3.2.b.03. Executar e testar aplicação](#32b03-executar-e-testar-aplicação)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. LivenessProbe](#b-livenessprobe)
@@ -99,7 +101,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ### 3.2. Guia do Desenvolvedor e Administrador
 
-#### 3.2.a. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes 
+#### 3.2.a. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
 
 ##### 3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
 
@@ -107,15 +109,17 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> npm init
+  :
 package name: node-express-swagger-k8s-liveness-readiness-startup-probes
 version: 1.0.0
 description: Kubernetes - Node Express Swagger Liveness Readiness Startup Probes application
 entry point: server.js
 test command: 
-git repository: 
+git repository: https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs.git
 keywords: node express swagger k8s liveness readiness startup probes
 author: Josemar Furegatti de Abreu Silva
 license: ISC
+  :
 ```
 
 * Instalar as dependências por linha de comando ...
@@ -177,8 +181,61 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
 C:\src\node-express-swagger-liveness-readiness-startup-probes> 
 ```
 
+---
 
-### 3.3. Guia de Implantação, Configuração e Instalação
+#### 3.2.b. Construir projeto NodeJS HTTP echo
+
+##### 3.2.b.01. Inicializar projeto NodeJS http echo
+
+* Inicializando um projeto NodeJS (em ambientes Windows)
+
+```cmd
+C:\src\node-http-echo> npm init
+  :
+package name: (http-echo) node-http-echo
+version: (1.0.0)
+description: Kubernetes - Node HTTP echo
+entry point: (index.js) server.js
+test command:
+git repository: https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs.git
+keywords: node http nodemon
+author: Josemar Furegatti de Abreu Silva
+license: (ISC)
+  :
+```
+
+* Instalar as dependências por linha de comando ou Editar `package.json` e adicionar e revisar as dependências requeridas em ` ... "dependencies": { ...`
+  * https://www.npmjs.com/package/nodemon
+
+```cmd
+C:\src\node-http-echo> npm install
+```
+
+##### 3.2.b.02. Desenvolver entry-point da aplicação e view de apresentação básica
+
+* No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
+* Criar/editar o arquivo `web.config`
+
+```cmd
+C:\src\node-http-echo> TYPE server.js
+C:\src\node-http-echo> TYPE web.config
+```
+
+#### 3.2.b.03. Executar e testar aplicação
+
+* Execute sua aplicação e acesse pelo browser. Observe que a aplicação retornará diversas informações da requisição HTTP feita.
+
+```cmd
+C:\src\node> node server
+Initializing Server on 0.0.0.0:3000
+Server running on 0.0.0.0:3000
+```
+
+![screenshot-nodejs-http-echo.png](../doc/screenshots/screenshot-nodejs-http-echo.png) 
+
+
+
+---
 
 ### 3.5. Guia de Estudo
 
