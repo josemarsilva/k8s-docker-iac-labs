@@ -1,57 +1,68 @@
 var express = require('express');
 var router = express.Router();
 
-// Stress Test
+// Test stress - https://github.com/jaredgorski/nodehog/blob/master/README.md
 const NodeHog = require('nodehog');
 
-let isHealth = true;
-let readTime = new Date(Date.now());
-let isRead = () => { 
-    return readTime < new Date(Date.now());
+// Is `health-check` and `ready-to-serve` Probe controls
+let isHealthCheck = true;
+let readToServeTime = new Date(Date.now());
+let isReadyToServe = () => { 
+    return readToServeTime < new Date(Date.now());
 };
 
-router.put('/stress/tempo/:tempoStress/intervalo/:intervalo/ciclos/:ciclos', (req, res) => {
 
-    const elemento = 'cpu';
-    const tempoStress = req.params.tempoStress * 1000;
-    const tempoFolga = req.params.tempoFolga * 1000;
-    const ciclos = req.params.ciclos;
-    new NodeHog(elemento, tempoStress, tempoFolga, ciclos).start();
-    res.send("OK");
+// Implement route: PUT /stress
+router.put('/stress/lifespan/:lifespan/deathspan/:deathspan/iterations/:iterations', (req, res) => {
+    console.log('PUT /stress')
+    const type = 'cpu';
+    const lifespan = req.params.lifespan * 1000; // in milliseconds
+    const deathspan = req.params.deathspan * 1000;
+    const iterations = req.params.iterations;
+    new NodeHog(type, lifespan, deathspan, iterations).start();
+    res.send("OK - PUT /stress");
 });
 
-router.get('/ready', (req, res) => {
-   
-    if (isRead()) {
+// Implement route: GET /ready-to-serve
+router.get('/ready-to-serve', (req, res) => {
+    console.log('GET /ready-to-serve')
+  
+    if (isReadyToServe()) {
         res.statusCode = 200;
-        return res.send('Ok');
+        return res.send('OK - GET /ready-to-serve');
     } else {
         res.statusCode = 500;
         return res.send('');
     }   
 });
 
-router.get('/health', (req, res) => {
+// Implement route: GET /health-check
+router.get('/health-check', (req, res) => {
+    console.log('GET /health-check')
    
-    res.send("OK");
+    res.send("OK - GET /health-check");
 });
 
+// Implement route: PUT /unhealth
 router.put('/unhealth', (req, res) => {
+    console.log('PUT /unhealth')
 
-    isHealth = false;
-    res.send("OK");
+    isHealthCheck = false;
+    res.send("OK - PUT /unhealth");
 });
 
-router.put('/unreadyfor/:seconds', (req, res) => {
+// Implement route: PUT /unready-for
+router.put('/unready-for/:seconds', (req, res) => {
     
     const dado = new Date(new Date(Date.now()).getTime() + (1000 * req.params.seconds));
-    readTime = dado;    
-    res.send("OK");
+    readToServeTime = dado;    
+    res.send("OK - PUT /unready-for");
 });
 
+// Implement route: PUT /unready-for
 var healthMiddlewares = function (req, res, next) {
     
-    if (isHealth) {
+    if (isHealthCheck) {
         next();
     } else {
         res.statusCode = 500;
@@ -59,5 +70,6 @@ var healthMiddlewares = function (req, res, next) {
     }   
 };
 
+// Configure routes
 exports.routers = router;
 exports.middlewares = { healthMiddleware: healthMiddlewares};

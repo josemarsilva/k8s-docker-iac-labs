@@ -21,11 +21,13 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Implement route: GET /
 app.get('/', (req, res) => {
+    console.log('GET /')
     res.render('index',{resultValue: ''});
 });
 
 // Implement route: POST /
 app.post('/', (req, res) => {
+    console.log('POST /')
     let resultValue = '';
 
     if (req.body.inputMessage) {

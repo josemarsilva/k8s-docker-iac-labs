@@ -154,7 +154,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
 * No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
 * Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
 * Criar/editar uma sub-pasta `config` para organizar os códigos
-referente ao `health-check`, `ready-to-serve` e ao `stress-test`
+referente ao `health-check`, `ready-to-serve` e ao `stress`
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js
