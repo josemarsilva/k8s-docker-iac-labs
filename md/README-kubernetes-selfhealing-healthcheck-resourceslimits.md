@@ -19,12 +19,13 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
     + [c. Instalando bibliotecas e configurando ambiente NodeJS](c-instalando-bibliotecas-e-configurando-ambiente-nodejs)
   * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
-    + [a. Premissas](#a-premissas)
-    + [b. Desenvolver entry-point da aplicação e view de apresentação básica](#b-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
-    + [c. Documentar a API no Swagger](#c-documentar-a-api-no-swagger)
-    + [d. Executar e testar aplicação](#d-executar-e-testar-aplicação)
-  * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
-    + [a. Inicializando um projeto NodeJS](#a-inicializando-um-projeto-nodejs)
+    + [3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32a-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
+      - [3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32a01-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
+      - [3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32a02-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
+      - [3.2.a.03. Documentar a API no Swagger](32a03-documentar-a-api-no-swagger)
+      - [3.2.a.04. Executar e testar aplicação](32a04-executar-e-testar-aplicação)
+
+
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. LivenessProbe](#b-livenessprobe)
@@ -98,42 +99,9 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ### 3.2. Guia do Desenvolvedor e Administrador
 
-#### a. Premissas
+#### 3.2.a. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes 
 
-Premissa: [NodeJS inicializado e instalado](#33-guia-deimplantação-configuração-einstalação)
-
-#### b. Desenvolver entry-point da aplicação e view de apresentação básica
-
-* No entry-point `app.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação
-* Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e crie um arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
-
-```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE app.js
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
-```
-
-#### b. Documentar a API no Swagger
-
-* Criar/editar o arquivo `swagger.yaml` para documentar as API's que sua aplicação devera prover, você pode usar um editor comum ou [Editor Swagger Online](https://editor.swagger.io/)
-
-```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE app.js
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
-```
-
-#### c. Executar e testar aplicação
-
-* Execute sua aplicação e observe a homepage
-
-```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> 
-```
-
-
-### 3.3. Guia de Implantação, Configuração e Instalação
-
-#### a. Inicializando um projeto NodeJS
+##### 3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
 
 * Inicializando um projeto NodeJS (em ambientes Windows)
 
@@ -142,7 +110,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> npm init
 package name: node-express-swagger-k8s-liveness-readiness-startup-probes
 version: 1.0.0
 description: Kubernetes - Node Express Swagger Liveness Readiness Startup Probes application
-entry point: app.js
+entry point: server.js
 test command: 
 git repository: 
 keywords: node express swagger k8s liveness readiness startup probes
@@ -165,31 +133,58 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install swagg
 C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install yamljs --save
 ```
 
-* ... ou Editar `package.json` e adicionar as dependências na última linha antes do `}`, não se esquecendo de adicionar a vírgula `,` na linha anterior:
+* ... ou Editar `package.json` e adicionar e revisar as dependências requeridas em ` ... "dependencies": { ...`
 
-```json
-    :,
-  "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "nodehog": "^0.1.2",
-    "swagger-ui-express": "^4.1.4",
-    "yamljs": "^0.3.0"
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE package.json
 ```
 
-* Instalar e configurar o ambiente NodeJS (em ambientes Windows)
+* Instalar e configurar o ambiente NodeJS com os pacotes requeridos 
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
 ```
 
+##### 3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica
 
+* No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
+* Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
+* Criar/editar uma sub-pasta `config` para organizar os códigos
+referente ao `health-check`, `ready-to-serve` e ao `stress-test`
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\config\system-lifecycle.js
+```
+
+
+##### 3.2.a.03. Documentar a API no Swagger
+
+* Criar/editar o arquivo `swagger.yaml` para documentar as API's que sua aplicação devera prover, você pode usar um editor comum ou [Editor Swagger Online](https://editor.swagger.io/)
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
+```
+
+#### 3.2.a.04. Executar e testar aplicação
+
+* Execute sua aplicação e observe a homepage
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> 
+```
+
+
+### 3.3. Guia de Implantação, Configuração e Instalação
 
 ### 3.5. Guia de Estudo
 
 #### a. Conceitos, definições e visão geral
 
-* [Selfie-Healing](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) e  [Liveness, readiness and start probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) são configurações que o Kubernetes usa para controlar, parar, reiniciar o _containers_ se ele falhar, substitui ou reagenda os containers quando um _node_ para de funcionar, mata os _containers_ que não estão funcionando bem ou seja não estejam respondendo a uma interface de _helth-check_, _threshold_ de uso de CPU ou MEMORIA e aguarda uma interface de _ready-to-serve_ antes de considerar falha.
+* [Selfie-Healing](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) e  [Liveness, readiness and start probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) são configurações que o Kubernetes usa para controlar o [Lifecycle(ciclo de vida)](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/), isto é, parar, reiniciar o _containers_ se ele falhar, substitui ou reagenda os containers quando um _node_ para de funcionar, mata os _containers_ que não estão funcionando bem ou seja não estejam respondendo a uma interface de _helth-check_, _threshold_ de uso de CPU ou MEMORIA e aguarda uma interface de _ready-to-serve_ antes de considerar falha.
 * De forma simplificada, sua aplicação fica respondendo periodicamente a uma interface _health-check_ para sinalizar o kubernetes que está tudo bem. O Kubernetes pode ser configurado para a frequencia de tempo em que ele vai avaliar sua aplicação. Enquanto o Kubernetes receber HTTP code 200 da requisição no path configurado, ele considera que a aplicação está funcionado.
 * De forma simplificada, sua aplicação pode informar para o Kubernetes quando ela estiver pronta para responder, também através de uma interface _ready-to-serve_ 
 
