@@ -166,6 +166,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\config\sys
 ##### 3.2.a.03. Documentar a API no Swagger
 
 * Criar/editar o arquivo `swagger.yaml` para documentar as API's que sua aplicação devera prover, você pode usar um editor comum ou [Editor Swagger Online](https://editor.swagger.io/)
+* Configure o path `swagger-ui` no arquivo `server.js`
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js

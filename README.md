@@ -45,8 +45,11 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
 
-*  Deixo aqui o registro e agradecimento de que este material foi inspirado e baseado na "Iniciativa Kubernetes" provida pelo canal do Youtube [Fabrício Veronez Kubedev](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
-* A idéia de construir um material documentado que eu pudesse usar como referência inicial sobre Kubernetes e Devops, seja para um projeto ou para outro laboratório, evoluindo ou especializando (abstração vs especialização) que permitisse evoluir constantemente o aprendizado
+* A idéia deste repositório é elaborar, construir e revisar um material documentado que possa usar como referência inicial sobre Kubernetes e Devops, seja para um projeto ou para um novo laboratório, evoluindo ou especializando (abstração vs especialização) e facilitando o aprendizado constante
+* Deixo aqui o registro e agradecimento aos produtores de conteúdos que me inspiraram e  material foi inspirado e baseado na 
+  * [Playlist da Iniciativa Kubernetes - Semana Kubedev](https://www.youtube.com/watch?v=0V_zGIEqIBc&list=PLZfrXScDmaiPwFQvY4JnPZkgC3NmqxFLX) produzido pelo canal do Youtube [Kubedev - Fabrício Veronez](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
+  * [Playlist de Apache Kafka](https://www.youtube.com/watch?v=o5yviW6QSrE&list=PL5aY_NrL1rjt_AZxj11kQjiTNLGg4ZaZA) produzido pelo canal do Youtube [FullCycle - Wesley Willians](https://www.youtube.com/channel/UCMUoZehUZBhLb8XaTc8TQrA)
+  * [Kafka (Plataforma de Mensageria e Streaming) // Dicionário do Programador](https://www.youtube.com/watch?v=qOqXz5Qv_-8&list=PLORrDfZD1hkGVBK4byiS82zaAutzuhsRz) produzido pelo canal do Youtube [Código Fonte TV - Gabriel Fróes e Vanessa Weber](https://www.youtube.com/watch?v=qOqXz5Qv_-8&t=74s)
 
 
 ### 2.9. Glossário de Termos (Glossary)
@@ -55,7 +58,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 | Termo       | Significado                     |
 | :---------- | :------------------------------ |
-| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `kubectl` ou `docker`. |
+| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `docker xxxx` no Docker. |
 
 
 ## 3. Projeto / Laboratório
@@ -65,7 +68,6 @@ Install WSL, Rancher Desktop and command line with nerdctl
 
 ### [LAB-02](./md/README-basic-docker-commands.md)
 Basic Docker Commands
-
 
 ### [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)
 Windows Client MongoDB Studio 3T connect database

@@ -1,60 +1,49 @@
 swagger: "2.0"
 info:
-  description: "API de conversão de temperatura - 1.0"
+  description: "Kubernetes Self Healing, application health check, ready to serve and resources limits"
   version: "1.0.0"
-  title: "Conversão de temperatura"
+  title: "kubernetes-selfhealing-healthcheck-resourceslimits"
   contact:
-    email: "fabricio@kubedev.io"
+    email: "josemarsilva@yahoo.com.br"
 paths:
-  /fahrenheit/{valor}/celsius:
+  /health-check:
     get:
-      description: "Converte de Fahrenheit para Celsius"
+      description: "health-check: Is application is running?"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "health-check: Yes, application is running"
+  /ready-to-serve:
+    get:
+      description: "ready-to-serve: Is application ready to serve?"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "ready-to-serve: Yes, application ready to serve"
+  /stress/lifespan/{lifespan}/deathspan/{deathspan}/iterations/{iterations}:
+    get:
+      description: "stress: start working stressing CPU"
       produces:
       - "application/json"
       parameters:
-      - name: "valor"
+      - name: "lifespan"
         in: "path"
-        description: "Valor que será convertido"
+        description: "lifespan amount of time in milliseconds"
+        required: true
+        type: "number"
+      - name: "deathspan"
+        in: "path"
+        description: "deathspan amount of time in milliseconds"
+        required: true
+        type: "number"
+      - name: "iterations"
+        in: "path"
+        description: "iterations amount of interations integer number"
         required: true
         type: "number"
       responses:
         "200":
-          description: "Resultado da conversão"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Temperatura"
-        "400":
-          description: "Bad Input Parameter"
+          description: "health-check: Yes, application is running"
 
-  /celsius/{valor}/fahrenheit:
-    get:
-      description: "Converte de Celsius para Fahrenheit"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "valor"
-        in: "path"
-        description: "Valor que será convertido"
-        required: true
-        type: "number"
-      responses:
-        "200":
-          description: "Resultado da conversão"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Temperatura
-              "
-        "400":
-          description: "Bad Input Parameter"
-
-definitions:
-  Temperatura:
-    type: "object"
-    required:
-    - "valor"
-    properties:
-      valor:
-        type: "number"
-        example: 500.0

@@ -8,20 +8,64 @@ info:
 paths:
   /health-check:
     get:
-      description: "health-check: Is application is running?"
+      description: "Is application is running?"
       produces:
       - "application/json"
-      parameters:
       responses:
         "200":
           description: "health-check: Yes, application is running"
   /ready-to-serve:
     get:
-      description: "ready-to-serve: Is application ready to serve?"
+      description: "Is application ready to serve?"
       produces:
       - "application/json"
-      parameters:
       responses:
         "200":
           description: "ready-to-serve: Yes, application ready to serve"
+  /stress/lifespan/{lifespan}/deathspan/{deathspan}/iterations/{iterations}:
+    put:
+      description: "Use Nodehog stress tools used to stress CPU"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lifespan"
+        in: "path"
+        description: "lifespan amount of time in milliseconds"
+        required: true
+        type: "number"
+      - name: "deathspan"
+        in: "path"
+        description: "deathspan amount of time in milliseconds"
+        required: true
+        type: "number"
+      - name: "iterations"
+        in: "path"
+        description: "iterations amount of interations integer number"
+        required: true
+        type: "number"
+      responses:
+        "200":
+          description: "health-check: Yes, application is running"
+  /unhealth:
+    put:
+      description: "unhealth: Put application in a **NOT running** mode"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "unhealth: Put application in a **NOT running** mode"
+  /unready-for/{seconds}:
+    put:
+      description: "unready-for: Put application in a **NOT ready-to-serve** mode for a time in seconds"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "seconds"
+        in: "path"
+        description: "seconds amount of time in seconds"
+        required: true
+        type: "number"
+      responses:
+        "200":
+          description: "unready-for: Put application in a **NOT ready-to-serve** mode for a time in seconds"
 

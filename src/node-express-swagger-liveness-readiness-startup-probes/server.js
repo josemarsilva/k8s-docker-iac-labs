@@ -9,7 +9,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
 const bodyParser = require('body-parser');
 // Kubernetes lifecycle: liveness, readiness and startup probes - https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-const config = require('./config/k8s-lifecycle');
+const config = require('./config/system-lifecycle');
 const { Console } = require('console');
 
 // Configure routes
