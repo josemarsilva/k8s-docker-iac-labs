@@ -29,11 +29,9 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     console.log('POST /')
     let resultValue = '';
-
     if (req.body.inputMessage) {
         resultValue = req.body.inputMessage
     }
-
     res.render('index', {resultValue: resultValue});
  });
 

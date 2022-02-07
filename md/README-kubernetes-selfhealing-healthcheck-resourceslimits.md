@@ -153,14 +153,18 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
 
 * No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
 * Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
-* Criar/editar uma sub-pasta `config` para organizar os códigos
-referente ao `health-check`, `ready-to-serve` e ao `stress`
+* Criar/editar o programa `config\system-life.js` para organizar os códigos de Liveness Probles nos end-points `health-check` and `ready-to-serve`
+* Criar/editar o programa `config\system-life.js` para organizar os códigos do controle, manipulação e simulação do Liveness Probles nos end-points `set-unhealth`, `set-health`, `set-unready-for`, `stress`  and `when-will-you-be-ready`
+
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js
 C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
 C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\config\system-lifecycle.js
 ```
+
+* Criar/editar uma sub-pasta `config` para organizar os códigos
+referente ao `health-check`, `ready-to-serve` e ao `stress`
 
 
 ##### 3.2.a.03. Documentar a API no Swagger
@@ -176,10 +180,61 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
 
 #### 3.2.a.04. Executar e testar aplicação
 
-* Execute sua aplicação e observe a homepage
+* Execute sua aplicação e teste sua aplicação
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> node server 
+```
+
+* Screenshot: Homepage
+
+![screenshot-node-express-swagger-liveness-readiness-startup-probes-homepage.png](../doc/screenshots/screenshot-node-express-swagger-liveness-readiness-startup-probes-homepage.png) 
+
+* Screenshot: Show Message
+
+![screenshot-node-express-swagger-liveness-readiness-startup-probes-show-message.png](../doc/screenshots/screenshot-node-express-swagger-liveness-readiness-startup-probes-show-message.png) 
+
+* Screenshot: Swagger
+
+![screenshot-node-express-swagger-liveness-readiness-startup-probes-swagger.png](../doc/screenshots/screenshot-node-express-swagger-liveness-readiness-startup-probes-swagger.png) 
+
+* Test /health-check
+
+```cmd
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
+OK - GET /health-check
+```
+
+* Test /ready-to-serve
+
+```cmd
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/ready-to-serve"
+OK - GET /ready-to-serve
+```
+
+* Test /when-will-you-be-ready
+
+```cmd
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be-ready"
+OK - GET /when-will-you-be-ready - "isHealthCheck": True - "is_ready_to_serve": True - "current_timestamp": "Sun Feb 06 2022 23:25:08 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 06 2022 23:19:03 GMT-0300 (GMT-03:00)"
+```
+
+* Set /set-unhealth and test /health-check. Application will not respond.
+
+```cmd
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-unhealth"
+OK - PUT /set-unhealth
+
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
+```
+
+* Set /set-health and test /health-check. Application is responding again.
+
+```cmd
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-health"
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
 ```
 
 ---

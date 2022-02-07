@@ -6,27 +6,72 @@ info:
   contact:
     email: "josemarsilva@yahoo.com.br"
 paths:
+
   /health-check:
     get:
-      description: "Is application is running?"
+      description: "Probe if application is running?"
       produces:
-      - "application/json"
+      - "text/plain"
       responses:
         "200":
-          description: "health-check: Yes, application is running"
+          description: "_health-check_ responds: Yes, application is running\nExample#1: OK - GET /health-check"
+
   /ready-to-serve:
     get:
-      description: "Is application ready to serve?"
+      description: "Probe if application is ready to serve?"
       produces:
-      - "application/json"
+      - "text/plain"
       responses:
         "200":
-          description: "ready-to-serve: Yes, application ready to serve"
+          description: "_ready-to-serve_ responds: Yes, application ready to serve\nExample#1: OK - GET /ready-to-serve"
+
+  /when-will-you-be-ready:
+    get:
+      description: "When will application be ready to serve?"
+      produces:
+      - "text/plain"
+      responses:
+        "200":
+          description: "_when-will-you-be-ready_ responds: current datetime and readiness datetime. \nExample#1:  OK - {\"isHealthCheck\": True, \"is_ready_to_serve\": True}"
+
+  /set-unhealth:
+    put:
+      description: "Set application in a **NOT running** mode"
+      produces:
+      - "text/plain"
+      responses:
+        "200":
+          description: "_set-unhealth_ set application in a **NOT running** mode"
+
+  /set-health:
+    put:
+      description: "Set application in a **running** mode"
+      produces:
+      - "text/plain"
+      responses:
+        "200":
+          description: "_set-health_ set application in a **running** mode"
+
+  /set-unready-for/{seconds}:
+    put:
+      description: "Set application in a **NOT ready-to-serve** mode for a time in seconds"
+      produces:
+      - "text/plain"
+      parameters:
+      - name: "seconds"
+        in: "path"
+        description: "seconds amount of time in seconds"
+        required: false
+        type: "number"
+      responses:
+        "200":
+          description: "_set-unready-for_ set application in a **NOT ready-to-serve** mode for a time in seconds"
+
   /stress/lifespan/{lifespan}/deathspan/{deathspan}/iterations/{iterations}:
     put:
       description: "Use Nodehog stress tools used to stress CPU"
       produces:
-      - "application/json"
+      - "text/plain"
       parameters:
       - name: "lifespan"
         in: "path"
@@ -45,27 +90,4 @@ paths:
         type: "number"
       responses:
         "200":
-          description: "health-check: Yes, application is running"
-  /unhealth:
-    put:
-      description: "unhealth: Put application in a **NOT running** mode"
-      produces:
-      - "application/json"
-      responses:
-        "200":
-          description: "unhealth: Put application in a **NOT running** mode"
-  /unready-for/{seconds}:
-    put:
-      description: "unready-for: Put application in a **NOT ready-to-serve** mode for a time in seconds"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "seconds"
-        in: "path"
-        description: "seconds amount of time in seconds"
-        required: true
-        type: "number"
-      responses:
-        "200":
-          description: "unready-for: Put application in a **NOT ready-to-serve** mode for a time in seconds"
-
+          description: "_stress_ stress CPU using Nodehog tools"
