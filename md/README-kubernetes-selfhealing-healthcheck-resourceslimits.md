@@ -24,10 +24,10 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
       - [3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32a02-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
       - [3.2.a.03. Documentar a API no Swagger](#32a03-documentar-a-api-no-swagger)
       - [3.2.a.04. Executar e testar aplicação](#32a04-executar-e-testar-aplicação)
-    + [3.2.b. Construir projeto NodeJS HTTP echo](32b-construir-projeto-nodejs-http-echo)
+    + [3.2.b. Construir projeto NodeJS HTTP echo](#32b-construir-projeto-nodejs-http-echo)
       - [3.2.b.01. Inicializar projeto NodeJS http echo](#32b01-inicializar-projeto-nodejs-http-echo)
-      - [3.2.b.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32b02-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
-      - [3.2.b.03. Executar e testar aplicação](#32b03-executar-e-testar-aplicação)
+      - [3.2.b.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32b02-desenvolver-entry-point-da-aplica%C3%A7%C3%A3o-e-view-de-apresenta%C3%A7%C3%A3o-b%C3%A1sica)
+      - [3.2.b.03. Executar e testar aplicação](#32b03-executar-e-testar-aplica%C3%A7%C3%A3o)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. LivenessProbe](#b-livenessprobe)
@@ -59,12 +59,12 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
 
 * Contexto da aplicação NodeJS desenvolvida com biblioteca Express e Swagger para testes no Kubernetes
 
-![BpmnDiagram-Context.png](../doc/bpmn-diagrams/BpmnDiagram-kubernetes-self-healing.png) 
+![BpmnDiagram-kubernetes-self-healing.png](../doc/bpmn-diagrams/BpmnDiagram-kubernetes-self-healing.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-kubernetes-commands.png) 
+![MindMapDiagram-kubernetes-docker-rancherdesktop-selfhealing-healthcheck-resourceslimits.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-selfhealing-healthcheck-resourceslimits.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
@@ -152,7 +152,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
 ##### 3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica
 
 * No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
-* Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação
+* Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação. Supondo uma aplicação que permite o input de uma mensagem que quando você clica em um botão a página é reapresentada com a mensagem no corpo
 * Criar/editar o programa `config\system-life.js` para organizar os códigos de Liveness Probles nos end-points `health-check` and `ready-to-serve`
 * Criar/editar o programa `config\system-life.js` para organizar os códigos do controle, manipulação e simulação do Liveness Probles nos end-points `set-unhealth`, `set-health`, `set-unready-for`, `stress`  and `when-will-you-be-ready`
 
@@ -192,7 +192,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> node server
 
 * Screenshot: Show Message
 
-![screenshot-node-express-swagger-liveness-readiness-startup-probes-show-message.png](../doc/screenshots/screenshot-node-express-swagger-liveness-readiness-startup-probes-show-message.png) 
+![screenshot-node-express-swagger-liveness-readiness-startup-probes-showmessage.png](../doc/screenshots/screenshot-node-express-swagger-liveness-readiness-startup-probes-showmessage.png) 
 
 * Screenshot: Swagger
 
