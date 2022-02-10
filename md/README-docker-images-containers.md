@@ -335,7 +335,7 @@ C:\src\node-mongo-api-produto> node server.js
 
 * Explorar a aplicação `http://localhost:8080/api-docs/`
 
-![screenshot-nodejs-conversao-temperatura.png](../doc/screenshots/screenshot-nodejs-conversao-api-produto.png) 
+![screenshot-nodejs-api-produto.png](../doc/screenshots/screenshot-nodejs-api-produto.png) 
 
 * Construindo imagem Dockerfile
 

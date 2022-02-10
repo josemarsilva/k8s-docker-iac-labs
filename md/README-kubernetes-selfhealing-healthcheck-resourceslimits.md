@@ -19,15 +19,16 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
     + [c. Instalando bibliotecas e configurando ambiente NodeJS](c-instalando-bibliotecas-e-configurando-ambiente-nodejs)
   * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
-    + [3.2.a. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32a-construir-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
-      - [3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32a01-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
-      - [3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32a02-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
-      - [3.2.a.03. Documentar a API no Swagger](#32a03-documentar-a-api-no-swagger)
-      - [3.2.a.04. Executar e testar aplicação](#32a04-executar-e-testar-aplicação)
-    + [3.2.b. Construir projeto NodeJS HTTP echo](#32b-construir-projeto-nodejs-http-echo)
-      - [3.2.b.01. Inicializar projeto NodeJS http echo](#32b01-inicializar-projeto-nodejs-http-echo)
-      - [3.2.b.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32b02-desenvolver-entry-point-da-aplica%C3%A7%C3%A3o-e-view-de-apresenta%C3%A7%C3%A3o-b%C3%A1sica)
-      - [3.2.b.03. Executar e testar aplicação](#32b03-executar-e-testar-aplica%C3%A7%C3%A3o)
+    + [3.2.1. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#321-construir-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
+      - [3.2.1.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes](#32101-inicializar-projeto-nodejs-express-swagger-kubernetes-liveness-readiness-e-startup-probes)
+      - [3.2.1.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32102-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
+      - [3.2.1.03. Documentar a API no Swagger](#32103-documentar-a-api-no-swagger)
+      - [3.2.1.04. Executar e testar aplicação](#32104-executar-e-testar-aplicação)
+    + [3.2.2. Construir imagem Docker da aplicação](#32b-construir-imagem-docker-da-aplica%C3%A7%C3%A3o)
+    + [3.2.9. Construir projeto NodeJS HTTP echo](#329-construir-projeto-nodejs-http-echo)
+      - [3.2.9.01. Inicializar projeto NodeJS http echo](#32901-inicializar-projeto-nodejs-http-echo)
+      - [3.2.9.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32902-desenvolver-entry-point-da-aplica%C3%A7%C3%A3o-e-view-de-apresenta%C3%A7%C3%A3o-b%C3%A1sica)
+      - [3.2.9.03. Executar e testar aplicação](#3zb03-executar-e-testar-aplica%C3%A7%C3%A3o)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. LivenessProbe](#b-livenessprobe)
@@ -101,9 +102,9 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ### 3.2. Guia do Desenvolvedor e Administrador
 
-#### 3.2.a. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
+#### 3.2.1. Construir projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
 
-##### 3.2.a.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
+##### 3.2.1.01. Inicializar projeto NodeJS, Express, Swagger, Kubernetes Liveness, Readiness e Startup Probes
 
 * Inicializando um projeto NodeJS (em ambientes Windows)
 
@@ -149,7 +150,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE package.json
 C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
 ```
 
-##### 3.2.a.02. Desenvolver entry-point da aplicação e view de apresentação básica
+##### 3.2.1.02. Desenvolver entry-point da aplicação e view de apresentação básica
 
 * No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
 * Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação. Supondo uma aplicação que permite o input de uma mensagem que quando você clica em um botão a página é reapresentada com a mensagem no corpo
@@ -167,7 +168,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\config\sys
 referente ao `health-check`, `ready-to-serve` e ao `stress`
 
 
-##### 3.2.a.03. Documentar a API no Swagger
+##### 3.2.1.03. Documentar a API no Swagger
 
 * Criar/editar o arquivo `swagger.yaml` para documentar as API's que sua aplicação devera prover, você pode usar um editor comum ou [Editor Swagger Online](https://editor.swagger.io/)
 * Configure o path `swagger-ui` no arquivo `server.js`
@@ -178,7 +179,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\inde
 C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
 ```
 
-#### 3.2.a.04. Executar e testar aplicação
+#### 3.2.1.04. Executar e testar aplicação
 
 * Execute sua aplicação e teste sua aplicação
 
@@ -225,8 +226,15 @@ OK - GET /when-will-you-be-ready - "isHealthCheck": True - "is_ready_to_serve": 
 C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-unhealth"
 OK - PUT /set-unhealth
 
-
-C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check" -I
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 0
+ETag: W/"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk"
+Date: Wed, 09 Feb 2022 19:24:17 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 * Set /set-health and test /health-check. Application is responding again.
@@ -239,9 +247,91 @@ C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
 
 ---
 
-#### 3.2.b. Construir projeto NodeJS HTTP echo
+#### 3.2.2. Construir imagem Docker da aplicação
 
-##### 3.2.b.01. Inicializar projeto NodeJS http echo
+* Criar/editar arquivo `Dockerfile` para configurar a imagem de sua aplicação
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE Dockerfile
+>TYPE Dockerfile
+FROM node
+WORKDIR /app
+COPY package*.json .
+RUN npm install
+COPY . .
+EXPOSE 8080
+CMD ["node", "server.js"]
+```
+
+* Construir a imagem docker a partir de uma imagem base de NodeJS, aplicando o `Dockerfile`
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl image build -t josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 .
+  :
+unpacking docker.io/josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 (sha256:)...done
+```
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl image ls
+REPOSITORY                                                             TAG       IMAGE ID        CREATED               PLATFORM       SIZE
+        :                                                              :            :              :
+josemarsilva/node-express-swagger-liveness-readiness-startup-probes    v1        207f4f921410    About a minute ago    linux/amd64    1.1 GiB
+        :                                                              :            :              :
+```
+
+* Executar e testar a aplicação rodando na imagem docker. Teste Homepae, Helth-Check, Swagger, etc
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl run -d -p 8080:8080 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
+```
+
+* Tagear a imagem `v1` com `latest`
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl tag josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest
+
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl image ls
+REPOSITORY                                                             TAG       IMAGE ID        CREATED           PLATFORM       SIZE
+         :                                                             :            :
+josemarsilva/node-express-swagger-liveness-readiness-startup-probes    latest    207f4f921410    15 minutes ago    linux/amd64    1.1 GiB
+josemarsilva/node-express-swagger-liveness-readiness-startup-probes    v1        207f4f921410    39 minutes ago    linux/amd64    1.1 GiB
+         :                                                             :            :
+```
+
+* Efetuar login no DockerHub e registrar a imagem da aplicação
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl login -u josemarsilva
+```
+
+* Fazer upload da imagem local para o Registry Repository do Docker Hub da aplicação `josemarsilva/node-express-swagger-liveness-readiness-startup-probes` nas versões `v1` e `latest`
+
+```cmd
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
+  :
+C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest
+  :
+```
+
+![screenshot-docker-hub-c.png](../doc/screenshots/screenshot-docker-hub-c.png) 
+
+![screenshot-docker-hub-d.png](../doc/screenshots/screenshot-docker-hub-d.png) 
+
+---
+
+#### 3.2.3. Construir o(s) arquivos (.yaml) de configuração do deployment da aplicação
+
+* Criar/editar uma configuração de deployment no arquivo `deployment-1.yaml` contemplando o cenário detalhadao abaixo:
+  * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest`
+  * Replicaset: `1` instância(s)
+  * Service - Port: `30000`
+
+
+---
+
+#### 3.2.9. Construir projeto NodeJS HTTP echo
+
+##### 3.2.9.01. Inicializar projeto NodeJS http echo
 
 * Inicializando um projeto NodeJS (em ambientes Windows)
 
@@ -267,7 +357,7 @@ license: (ISC)
 C:\src\node-http-echo> npm install
 ```
 
-##### 3.2.b.02. Desenvolver entry-point da aplicação e view de apresentação básica
+##### 3.2.9.02. Desenvolver entry-point da aplicação e view de apresentação básica
 
 * No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
 * Criar/editar o arquivo `web.config`
@@ -277,7 +367,7 @@ C:\src\node-http-echo> TYPE server.js
 C:\src\node-http-echo> TYPE web.config
 ```
 
-#### 3.2.b.03. Executar e testar aplicação
+#### 3.2.9.03. Executar e testar aplicação
 
 * Execute sua aplicação e acesse pelo browser. Observe que a aplicação retornará diversas informações da requisição HTTP feita.
 
@@ -288,7 +378,6 @@ Server running on 0.0.0.0:3000
 ```
 
 ![screenshot-nodejs-http-echo.png](../doc/screenshots/screenshot-nodejs-http-echo.png) 
-
 
 
 ---

@@ -16,6 +16,7 @@ let isReadyToServe = () => {
 // Implement route: GET /health-check
 router.get('/health-check', (req, res) => {
     console.log('GET /health-check')
+    res.statusCode = 200;
     res.send("OK - GET /health-check");
 });
 
@@ -27,7 +28,7 @@ router.get('/ready-to-serve', (req, res) => {
         return res.send('OK - GET /ready-to-serve');
     } else {
         res.statusCode = 500;
-        return res.send('');
+        return res.send('ERROR - statusCode 500');
     }   
 });
 
@@ -43,6 +44,7 @@ router.get('/when-will-you-be-ready', (req, res) => {
             '"current_timestamp": "<current_timestamp>" - ' +
             '"readness_timestamp": "<readness_timestamp>"'
     ).replace('<isReadyToServeTxt>',isReadyToServeTxt).replace('<isHealthCheckTxt>', isHealthCheckTxt).replace('<current_timestamp>',new Date()).replace('<readness_timestamp>',readyToServeTime)
+    res.statusCode = 200;
     return res.send(responseTxt);
 });
 
@@ -50,6 +52,7 @@ router.get('/when-will-you-be-ready', (req, res) => {
 router.put('/set-unhealth', (req, res) => {
     console.log('PUT /set-unhealth')
     isHealthCheck = false;
+    res.statusCode = 200;
     res.send("OK - PUT /set-unhealth");
 });
 
@@ -57,6 +60,7 @@ router.put('/set-unhealth', (req, res) => {
 router.put('/set-health', (req, res) => {
     console.log('PUT /set-health')
     isHealthCheck = true;
+    res.statusCode = 200;
     res.send("OK - PUT /set-health");
 });
 
