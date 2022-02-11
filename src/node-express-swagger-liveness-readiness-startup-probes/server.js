@@ -1,5 +1,6 @@
 // minimalist web framework - https://www.npmjs.com/package/express
 const express = require('express');
+// OS - hostname()
 const os = require('os')
 // API docs from express - https://www.npmjs.com/package/swagger-ui-express
 const app = express();

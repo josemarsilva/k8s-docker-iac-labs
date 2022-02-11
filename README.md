@@ -81,11 +81,14 @@ Basic Kubernetes Commands
 ### [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)
 Kubernetes, Python, Flask e MongoDB
 
-### [LAB-07](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md)
-Kubernetes Self Healing, application health check and resources limits
+### [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)
+NodeJS http echo and health check
 
 ### [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)
 Kubernetes IDE Lens
+
+### [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md)
+Kubernetes Self Healing, application health check and resources limits
 
 
 ## I - Referências

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const os = require('os')
 
 // Stress Test - https://github.com/jaredgorski/nodehog/blob/master/README.md
 const NodeHog = require('nodehog');
@@ -16,16 +17,14 @@ let isReadyToServe = () => {
 // Implement route: GET /health-check
 router.get('/health-check', (req, res) => {
     console.log('GET /health-check')
-    res.statusCode = 200;
-    res.send("OK - GET /health-check");
+    res.send("OK - GET /health-check - " + os.hostname);
 });
 
 // Implement route: GET /ready-to-serve
 router.get('/ready-to-serve', (req, res) => {
     console.log('GET /ready-to-serve')  
     if (isReadyToServe()) {
-        res.statusCode = 200;
-        return res.send('OK - GET /ready-to-serve');
+        return res.send('OK - GET /ready-to-serve - ' + os.hostname);
     } else {
         res.statusCode = 500;
         return res.send('ERROR - statusCode 500');
@@ -44,24 +43,27 @@ router.get('/when-will-you-be-ready', (req, res) => {
             '"current_timestamp": "<current_timestamp>" - ' +
             '"readness_timestamp": "<readness_timestamp>"'
     ).replace('<isReadyToServeTxt>',isReadyToServeTxt).replace('<isHealthCheckTxt>', isHealthCheckTxt).replace('<current_timestamp>',new Date()).replace('<readness_timestamp>',readyToServeTime)
-    res.statusCode = 200;
-    return res.send(responseTxt);
+    return res.send(responseTxt + ' - ' + os.hostname);
+});
+
+// Implement route: GET /get-delayed
+router.get('/get-delayed', (req, res) => {
+    console.log('GET /get-delayed')
+    res.send("OK - GET /get-delayed - " + os.hostname);
 });
 
 // Implement route: PUT /set-unhealth
 router.put('/set-unhealth', (req, res) => {
     console.log('PUT /set-unhealth')
     isHealthCheck = false;
-    res.statusCode = 200;
-    res.send("OK - PUT /set-unhealth");
+    res.send("OK - PUT /set-unhealth - " + os.hostname);
 });
 
 // Implement route: PUT /set-health
 router.put('/set-health', (req, res) => {
     console.log('PUT /set-health')
     isHealthCheck = true;
-    res.statusCode = 200;
-    res.send("OK - PUT /set-health");
+    res.send("OK - PUT /set-health - " + os.hostname);
 });
 
 // Implement route: PUT /set-unready
@@ -69,7 +71,7 @@ router.put('/set-unready/seconds:seconds', (req, res) => {
     console.log('PUT /set-unready/:seconds')
     const newDateTimeReadiness = new Date(new Date(Date.now()).getTime() + (1000 * req.params.seconds));
     readyToServeTime = newDateTimeReadiness;    
-    res.send("OK - PUT /set-unready");
+    res.send("OK - PUT /set-unready - " + os.hostname);
 });
 
 // Implement route: PUT /stress
@@ -80,12 +82,12 @@ router.put('/stress/lifespan/:lifespan/deathspan/:deathspan/iterations/:iteratio
     const deathspan = req.params.deathspan * 1000;
     const iterations = req.params.iterations;
     new NodeHog(type, lifespan, deathspan, iterations).start();
-    res.send("OK - PUT /stress");
+    res.send("OK - PUT /stress - " + os.hostname);
 });
 
 // Implement route: healthMiddlewares
 var healthMiddlewares = function (req, res, next) {
-    
+    console.log('healthMiddlewares()')
     if (isHealthCheck) {
         next();
     } else {

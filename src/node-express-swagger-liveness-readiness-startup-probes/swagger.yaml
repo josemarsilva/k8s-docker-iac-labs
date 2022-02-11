@@ -7,6 +7,15 @@ info:
     email: "josemarsilva@yahoo.com.br"
 paths:
 
+  /:
+    get:
+      description: "Home page"
+      produces:
+      - "text/plain"
+      responses:
+        "200":
+          description: "Home Page - node-express-swagger-liveness-readiness-startup-probes"
+
   /health-check:
     get:
       description: "Probe if application is running?"
@@ -24,6 +33,21 @@ paths:
       responses:
         "200":
           description: "_ready-to-serve_ responds: Yes, application ready to serve\nExample#1: OK - GET /ready-to-serve"
+
+  /get-delayed/{seconds}:
+    get:
+      description: "Delay an amount of time and respond request"
+      produces:
+      - "text/plain"
+      parameters:
+      - name: "seconds"
+        in: "path"
+        description: "seconds amount of time in seconds"
+        required: false
+        type: "number"
+      responses:
+        "200":
+          description: "_get-delayed_ delay an amount of time and respond request"
 
   /when-will-you-be-ready:
     get:

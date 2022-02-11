@@ -24,11 +24,13 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
       - [3.2.1.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32102-desenvolver-entry-point-da-aplicação-e-view-de-apresentação-básica)
       - [3.2.1.03. Documentar a API no Swagger](#32103-documentar-a-api-no-swagger)
       - [3.2.1.04. Executar e testar aplicação](#32104-executar-e-testar-aplicação)
-    + [3.2.2. Construir imagem Docker da aplicação](#32b-construir-imagem-docker-da-aplica%C3%A7%C3%A3o)
-    + [3.2.9. Construir projeto NodeJS HTTP echo](#329-construir-projeto-nodejs-http-echo)
-      - [3.2.9.01. Inicializar projeto NodeJS http echo](#32901-inicializar-projeto-nodejs-http-echo)
-      - [3.2.9.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32902-desenvolver-entry-point-da-aplica%C3%A7%C3%A3o-e-view-de-apresenta%C3%A7%C3%A3o-b%C3%A1sica)
-      - [3.2.9.03. Executar e testar aplicação](#3zb03-executar-e-testar-aplica%C3%A7%C3%A3o)
+    + [3.2.2. Construir imagem Docker da aplicação](#322-construir-imagem-docker-da-aplicação)
+      - [3.2.2.1. Criar/Editar/Configurar Dockerfile](#3221-criareditarconfigurar-dockerfile)
+      - [3.2.2.2. Construir (Build) imagem](#3222-construir-build-imagem)
+      - [3.2.2.3. Executar (run) e Testar as funcionalidades](#3223-executar-run-e-testar-as-funcionalidades)
+      - [3.2.2.4. Tagear (tag) as imagens construídas e Salvar/Publicar (push) no DockerHub Registry](#3224-tagear-tag-as-imagens-constru%C3%ADdas-e-salvarpublicar-push-no-dockerhub-registry)
+
+
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. LivenessProbe](#b-livenessprobe)
@@ -203,28 +205,28 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> node server
 
 ```cmd
 C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
-OK - GET /health-check
+OK - GET /health-check - hostname
 ```
 
 * Test /ready-to-serve
 
 ```cmd
 C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/ready-to-serve"
-OK - GET /ready-to-serve
+OK - GET /ready-to-serve - hostname
 ```
 
 * Test /when-will-you-be-ready
 
 ```cmd
 C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be-ready"
-OK - GET /when-will-you-be-ready - "isHealthCheck": True - "is_ready_to_serve": True - "current_timestamp": "Sun Feb 06 2022 23:25:08 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 06 2022 23:19:03 GMT-0300 (GMT-03:00)"
+OK - GET /when-will-you-be-ready - "isHealthCheck": True - "is_ready_to_serve": True - "current_timestamp": "Sun Feb 06 2022 23:25:08 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 06 2022 23:19:03 GMT-0300 (GMT-03:00)" - hostname
 ```
 
 * Set /set-unhealth and test /health-check. Application will not respond.
 
 ```cmd
 C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-unhealth"
-OK - PUT /set-unhealth
+OK - PUT /set-unhealth - hostname
 
 C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check" -I
 HTTP/1.1 500 Internal Server Error
@@ -249,6 +251,8 @@ C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
 
 #### 3.2.2. Construir imagem Docker da aplicação
 
+#### 3.2.2.1. Criar/Editar/Configurar Dockerfile
+
 * Criar/editar arquivo `Dockerfile` para configurar a imagem de sua aplicação
 
 ```cmd
@@ -262,6 +266,8 @@ COPY . .
 EXPOSE 8080
 CMD ["node", "server.js"]
 ```
+
+#### 3.2.2.2. Construir (Build) imagem
 
 * Construir a imagem docker a partir de uma imagem base de NodeJS, aplicando o `Dockerfile`
 
@@ -279,11 +285,15 @@ josemarsilva/node-express-swagger-liveness-readiness-startup-probes    v1       
         :                                                              :            :              :
 ```
 
+#### 3.2.2.3. Executar (run) e Testar as funcionalidades
+
 * Executar e testar a aplicação rodando na imagem docker. Teste Homepae, Helth-Check, Swagger, etc
 
 ```cmd
 C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl run -d -p 8080:8080 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
 ```
+
+#### 3.2.2.4. Tagear (tag) as imagens construídas e Salvar/Publicar (push) no DockerHub Registry
 
 * Tagear a imagem `v1` com `latest`
 
@@ -325,59 +335,6 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl push jose
   * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest`
   * Replicaset: `1` instância(s)
   * Service - Port: `30000`
-
-
----
-
-#### 3.2.9. Construir projeto NodeJS HTTP echo
-
-##### 3.2.9.01. Inicializar projeto NodeJS http echo
-
-* Inicializando um projeto NodeJS (em ambientes Windows)
-
-```cmd
-C:\src\node-http-echo> npm init
-  :
-package name: (http-echo) node-http-echo
-version: (1.0.0)
-description: Kubernetes - Node HTTP echo
-entry point: (index.js) server.js
-test command:
-git repository: https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs.git
-keywords: node http nodemon
-author: Josemar Furegatti de Abreu Silva
-license: (ISC)
-  :
-```
-
-* Instalar as dependências por linha de comando ou Editar `package.json` e adicionar e revisar as dependências requeridas em ` ... "dependencies": { ...`
-  * https://www.npmjs.com/package/nodemon
-
-```cmd
-C:\src\node-http-echo> npm install
-```
-
-##### 3.2.9.02. Desenvolver entry-point da aplicação e view de apresentação básica
-
-* No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
-* Criar/editar o arquivo `web.config`
-
-```cmd
-C:\src\node-http-echo> TYPE server.js
-C:\src\node-http-echo> TYPE web.config
-```
-
-#### 3.2.9.03. Executar e testar aplicação
-
-* Execute sua aplicação e acesse pelo browser. Observe que a aplicação retornará diversas informações da requisição HTTP feita.
-
-```cmd
-C:\src\node> node server
-Initializing Server on 0.0.0.0:3000
-Server running on 0.0.0.0:3000
-```
-
-![screenshot-nodejs-http-echo.png](../doc/screenshots/screenshot-nodejs-http-echo.png) 
 
 
 ---
