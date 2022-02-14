@@ -14,7 +14,7 @@ const config = require('./config/system-lifecycle');
 const { Console } = require('console');
 
 // Configure routes
-app.use(config.middlewares.healthMiddleware);
+//app.use(config.middlewares.healthMiddleware);
 app.use('/', config.routers);
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine', 'ejs');

@@ -208,20 +208,6 @@ C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
 OK - GET /health-check - hostname
 ```
 
-* Test /ready-to-serve
-
-```cmd
-C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/ready-to-serve"
-OK - GET /ready-to-serve - hostname
-```
-
-* Test /when-will-you-be-ready
-
-```cmd
-C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be-ready"
-OK - GET /when-will-you-be-ready - "isHealthCheck": True - "is_ready_to_serve": True - "current_timestamp": "Sun Feb 06 2022 23:25:08 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 06 2022 23:19:03 GMT-0300 (GMT-03:00)" - hostname
-```
-
 * Set /set-unhealth and test /health-check. Application will not respond.
 
 ```cmd
@@ -243,9 +229,45 @@ Keep-Alive: timeout=5
 
 ```cmd
 C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-health"
+OK - PUT /set-health - hostname
 
 C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/health-check"
+OK - GET /health-check - hostname
 ```
+
+* Test /ready-to-serve
+
+```cmd
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/ready-to-serve"
+OK - GET /ready-to-serve - hostname
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be-ready"
+OK - GET /when-will-you-be-ready - "is_ready_to_serve": True - "wait_amount": 0 - "is_health_check": True - "current_timestamp": "Sun Feb 13 2022 20:11:28 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 13 2022 20:07:44 GMT-0300 (GMT-03:00)" - hostname
+```
+
+* Set /set-unready-for 60 seconds and test /ready-to-serve before and after waiting 60 seconds
+
+```cmd
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-unready/seconds:60"
+OK - PUT /set-unready - hostname
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/ready-to-serve" -I
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+Content-Length: 0
+ETag: W/"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk"
+Date: Mon, 14 Feb 2022 01:52:14 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be-ready"
+OK - GET /when-will-you-be-ready - "is_ready_to_serve": False - "wait_amount": 48 secs - "is_health_check": True - "current_timestamp": "Sun Feb 13 2022 22:52:20 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 13 2022 22:53:09 GMT-0300 (GMT-03:00)" - hostname
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be-ready"
+OK - GET /when-will-you-be-ready - "is_ready_to_serve": True - "wait_amount": null - "is_health_check": True - "current_timestamp": "Sun Feb 13 2022 22:53:12 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 13 2022 22:53:09 GMT-0300 (GMT-03:00)" - hostname
+```
+
 
 ---
 

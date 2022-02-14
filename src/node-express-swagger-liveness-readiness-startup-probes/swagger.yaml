@@ -23,7 +23,7 @@ paths:
       - "text/plain"
       responses:
         "200":
-          description: "_health-check_ responds: Yes, application is running\nExample#1: OK - GET /health-check"
+          description: "_health-check_ responds: Yes, application is running\nExample: OK - GET /health-check - <hostname>"
 
   /ready-to-serve:
     get:
@@ -32,7 +32,7 @@ paths:
       - "text/plain"
       responses:
         "200":
-          description: "_ready-to-serve_ responds: Yes, application ready to serve\nExample#1: OK - GET /ready-to-serve"
+          description: "_ready-to-serve_ responds: Yes, application ready to serve\nExample: OK - GET /ready-to-serve - <hostname>"
 
   /get-delayed/{seconds}:
     get:
@@ -47,7 +47,7 @@ paths:
         type: "number"
       responses:
         "200":
-          description: "_get-delayed_ delay an amount of time and respond request"
+          description: "_get-delayed_ delay an amount of time and respond request\nExample: OK - GET /get-delayed - <hostname>"
 
   /when-will-you-be-ready:
     get:
@@ -56,7 +56,7 @@ paths:
       - "text/plain"
       responses:
         "200":
-          description: "_when-will-you-be-ready_ responds: current datetime and readiness datetime. \nExample#1:  OK - {\"isHealthCheck\": True, \"is_ready_to_serve\": True}"
+          description: "_when-will-you-be-ready_ responds: current datetime and readiness datetime. \nExample:  OK - {\"isHealthCheck\": True, \"is_ready_to_serve\": True}"
 
   /set-unhealth:
     put:
@@ -89,7 +89,7 @@ paths:
         type: "number"
       responses:
         "200":
-          description: "_set-unready-for_ set application in a **NOT ready-to-serve** mode for a time in seconds"
+          description: "_set-unready-for_ set application in a **NOT ready-to-serve** mode for a time in seconds. \nExample: OK - PUT /set-unhealth - <hostname>"
 
   /stress/lifespan/{lifespan}/deathspan/{deathspan}/iterations/{iterations}:
     put:
@@ -114,4 +114,4 @@ paths:
         type: "number"
       responses:
         "200":
-          description: "_stress_ stress CPU using Nodehog tools"
+          description: "_stress_ stress CPU using Nodehog tools. \nExample: OK - PUT /stress - <hostname>"

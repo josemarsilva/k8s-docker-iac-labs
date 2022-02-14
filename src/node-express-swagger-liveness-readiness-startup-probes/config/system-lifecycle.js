@@ -16,8 +16,13 @@ let isReadyToServe = () => {
 
 // Implement route: GET /health-check
 router.get('/health-check', (req, res) => {
-    console.log('GET /health-check')
-    res.send("OK - GET /health-check - " + os.hostname);
+    console.log('GET /health-check - ' + isHealthCheck)
+    if (isHealthCheck) {
+        res.send("OK - GET /health-check - " + os.hostname);
+    } else {
+        res.statusCode = 500;
+        return res.send('');
+    }
 });
 
 // Implement route: GET /ready-to-serve
@@ -27,7 +32,7 @@ router.get('/ready-to-serve', (req, res) => {
         return res.send('OK - GET /ready-to-serve - ' + os.hostname);
     } else {
         res.statusCode = 500;
-        return res.send('ERROR - statusCode 500');
+        return res.send('');
     }   
 });
 
@@ -36,13 +41,26 @@ router.get('/when-will-you-be-ready', (req, res) => {
     console.log('GET /when-will-you-be-ready')
     isHealthCheckTxt = isHealthCheck ? 'True' : 'False'
     isReadyToServeTxt = isReadyToServe() ? 'True' : 'False'
+    let currentTimestamp = new Date(Date.now())
+    let differenceTimestamp = readyToServeTime - currentTimestamp
+    let waitAmount = 'null'
+    if (differenceTimestamp > 0) {
+        waitAmount = Math.trunc(differenceTimestamp / 1000) + ' secs'
+        if (differenceTimestamp > 1000 * 60) {
+            waitAmount = Math.trunc(differenceTimestamp / 1000 / 60) + ' mins'
+            if (differenceTimestamp > 1000 * 60 * 60) {
+                waitAmount = Math.trunc(differenceTimestamp / 1000 / 60) + ' hours'
+            }    
+        }
+    }
     responseTxt = ( 
         'OK - GET /when-will-you-be-ready - ' +
-            '"isHealthCheck": <isHealthCheckTxt> - ' +
             '"is_ready_to_serve": <isReadyToServeTxt> - ' +
+            '"wait_amount": <waitAmount> - ' +
+            '"is_health_check": <isHealthCheckTxt> - ' +
             '"current_timestamp": "<current_timestamp>" - ' +
             '"readness_timestamp": "<readness_timestamp>"'
-    ).replace('<isReadyToServeTxt>',isReadyToServeTxt).replace('<isHealthCheckTxt>', isHealthCheckTxt).replace('<current_timestamp>',new Date()).replace('<readness_timestamp>',readyToServeTime)
+    ).replace('<isReadyToServeTxt>',isReadyToServeTxt).replace('<isHealthCheckTxt>', isHealthCheckTxt).replace('<current_timestamp>',currentTimestamp).replace('<readness_timestamp>',readyToServeTime).replace('<waitAmount>', waitAmount)
     return res.send(responseTxt + ' - ' + os.hostname);
 });
 
@@ -67,11 +85,16 @@ router.put('/set-health', (req, res) => {
 });
 
 // Implement route: PUT /set-unready
-router.put('/set-unready/seconds:seconds', (req, res) => {
+router.put('/set-unready/:seconds', (req, res) => {
     console.log('PUT /set-unready/:seconds')
-    const newDateTimeReadiness = new Date(new Date(Date.now()).getTime() + (1000 * req.params.seconds));
-    readyToServeTime = newDateTimeReadiness;    
-    res.send("OK - PUT /set-unready - " + os.hostname);
+    let reqParamSeconds = req.params.seconds.replace('seconds:','')
+    let seconds = 0
+    if(!isNaN(reqParamSeconds)) {
+        seconds = Number(reqParamSeconds)
+    }
+    let newDateTimeReadiness = new Date(new Date(Date.now()).getTime() + (1000 * seconds));
+    readyToServeTime = newDateTimeReadiness; 
+    res.send("OK - PUT /set-unready/:seconds - ".replace(":seconds",seconds) + os.hostname);
 });
 
 // Implement route: PUT /stress
@@ -85,17 +108,5 @@ router.put('/stress/lifespan/:lifespan/deathspan/:deathspan/iterations/:iteratio
     res.send("OK - PUT /stress - " + os.hostname);
 });
 
-// Implement route: healthMiddlewares
-var healthMiddlewares = function (req, res, next) {
-    console.log('healthMiddlewares()')
-    if (isHealthCheck) {
-        next();
-    } else {
-        res.statusCode = 500;
-        return res.send('');
-    }   
-};
-
 // Configure routes
 exports.routers = router;
-exports.middlewares = { healthMiddleware: healthMiddlewares};
