@@ -13,14 +13,14 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [2.8. Notas de atenção e Avisos (Notice and information)](#28-notas-de-atenção-e-avisos-notice-and-information)
   * [2.9. Glossário de Termos (Glossary)](#29-glossário-de-termos-glossary)
 - [3. Projeto / Laboratório](#3-projeto--laboratório)
-  * [LAB-01: Install WSL, Rancher Desktop and command line with nerdctl](#lab-01)
-  * [LAB-02: Basic Docker Commands](#lab-02)
-  * [LAB-03: Windows Client MongoDB Studio 3T connect database](#lab-03)
-  * [LAB-04: Docker Images vs Containers](#lab-04)
-  * [LAB-05: Basic Kubernetes Commands](#lab-05)
-  * [LAB-06: Kubernetes, Python, Flask e MongoDB](#lab-06)
-  * [LAB-07: Kubernetes Self Healing, application health check and resources limits](#lab-07)
-  * [LAB-08: Kubernetes IDE Lens](#lab-08)
+  * LAB-01: Install WSL, Rancher Desktop and command line with nerdctl
+  * LAB-02: Basic Docker Commands
+  * LAB-03: Windows Client MongoDB Studio 3T connect database
+  * LAB-04: Docker Images vs Containers
+  * LAB-05: Basic Kubernetes Commands
+  * LAB-06: Kubernetes, Python, Flask e MongoDB
+  * LAB-07: Kubernetes Self Healing, application health check and resources limits
+  * LAB-08: Kubernetes IDE Lens
 
 - [I - Referências](#i---referências)
 
@@ -63,32 +63,17 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ## 3. Projeto / Laboratório
 
-### [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)
-Install WSL, Rancher Desktop and command line with nerdctl
-
-### [LAB-02](./md/README-basic-docker-commands.md)
-Basic Docker Commands
-
-### [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)
-Windows Client MongoDB Studio 3T connect database
-
-### [LAB-04](./md/README-docker-images-containers.md)
-Docker Images vs Containers
-
-### [LAB-05](./md/README-basic-kubernetes-commands.md)
-Basic Kubernetes Commands
-
-### [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)
-Kubernetes, Python, Flask e MongoDB
-
-### [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)
-NodeJS http echo and health check
-
-### [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)
-Kubernetes IDE Lens
-
-### [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md)
-Kubernetes Self Healing, application health check and resources limits
+| Laboratório | Descrição                       |
+| :---------- | :------------------------------ |
+| ### [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)                 | Install WSL, Rancher Desktop and command line with nerdctl |
+| ### [LAB-02](./md/README-basic-docker-commands.md)                              | Basic Docker Commands |
+| ### [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)            | Windows Client MongoDB Studio 3T connect database |
+| ### [LAB-04](./md/README-docker-images-containers.md)                           | Docker Images vs Containers |
+| ### [LAB-05](./md/README-basic-kubernetes-commands.md)                          |  Basic Kubernetes Commands |
+| ### [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)                    | Kubernetes, Python, Flask e MongoDB |
+| ### [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)                        | NodeJS http echo and health check |
+| ### [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)         | Kubernetes IDE Lens |
+| ### [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md) | Kubernetes Self Healing, application health check and resources limits |
 
 
 ## I - Referências
