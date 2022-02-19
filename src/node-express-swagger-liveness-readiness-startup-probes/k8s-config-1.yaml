@@ -1,0 +1,58 @@
+# #############################################################################
+# Deployment 
+# #############################################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-probes-deploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: web-app
+        image: josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
+        ports:
+          - containerPort: 8080
+        livenessProbe:
+          httpGet: 
+            path: /health-check
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 2
+          successThreshould: 1
+          failureThreshould: 1
+        readinessProbe:
+          httpGet:
+            path: /ready-to-serve
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          timeoutSeconds: 2
+          successThreshould: 1
+          failureThreshould: 1
+
+---
+
+# #############################################################################
+# Service 
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30000
+  type: NodePort
