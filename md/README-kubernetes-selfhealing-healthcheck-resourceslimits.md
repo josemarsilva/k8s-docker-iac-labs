@@ -29,7 +29,8 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
       - [3.2.2.2. Construir (Build) imagem](#3222-construir-build-imagem)
       - [3.2.2.3. Executar (run) e Testar as funcionalidades](#3223-executar-run-e-testar-as-funcionalidades)
       - [3.2.2.4. Tagear (tag) as imagens construídas e Salvar/Publicar (push) no DockerHub Registry](#3224-tagear-tag-as-imagens-constru%C3%ADdas-e-salvarpublicar-push-no-dockerhub-registry)
-
+    + [3.2.3. Construir, Implantar e Testar imagem do pod, deploy e service no Kubernetes](#323-construir-implantar-e-testar-imagem-do-pod-deploy-e-service-no-kubernetes)
+      - [3.2.3.1. Construir o(s) arquivos (.yaml) de configuração do deployment da aplicação](#3231-construir-os-arquivos-yaml-de-configura%C3%A7%C3%A3o-do-deployment-da-aplica%C3%A7%C3%A3o)
 
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
@@ -111,7 +112,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Inicializando um projeto NodeJS (em ambientes Windows)
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm init
+C:\...-probes> npm init
   :
 package name: node-express-swagger-k8s-liveness-readiness-startup-probes
 version: 1.0.0
@@ -133,23 +134,23 @@ license: ISC
   * https://www.npmjs.com/package/yamljs
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install express --save
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install ejs --save
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install nodehog --save
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install swagger-ui-express --save
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install yamljs --save
+C:\...-probes> npm install express --save
+C:\...-probes> npm install ejs --save
+C:\...-probes> npm install nodehog --save
+C:\...-probes> npm install swagger-ui-express --save
+C:\...-probes> npm install yamljs --save
 ```
 
 * ... ou Editar `package.json` e adicionar e revisar as dependências requeridas em ` ... "dependencies": { ...`
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE package.json
+C:\...-probes> TYPE package.json
 ```
 
 * Instalar e configurar o ambiente NodeJS com os pacotes requeridos 
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
+C:\...-probes> npm install
 ```
 
 ##### 3.2.1.02. Desenvolver entry-point da aplicação e view de apresentação básica
@@ -161,9 +162,9 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> npm install
 
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\config\system-lifecycle.js
+C:\...-probes> TYPE server.js
+C:\...-probes> TYPE .\views\index.ejs
+C:\...-probes> TYPE .\config\system-lifecycle.js
 ```
 
 * Criar/editar uma sub-pasta `config` para organizar os códigos
@@ -176,9 +177,9 @@ referente ao `health-check`, `ready-to-serve` e ao `stress`
 * Configure o path `swagger-ui` no arquivo `server.js`
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE server.js
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE .\views\index.ejs
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
+C:\...-probes> TYPE server.js
+C:\...-probes> TYPE .\views\index.ejs
+C:\...-probes> TYPE swagger.yaml
 ```
 
 #### 3.2.1.04. Executar e testar aplicação
@@ -186,7 +187,7 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE swagger.yaml
 * Execute sua aplicação e teste sua aplicação
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> node server 
+C:\...-probes> node server 
 ```
 
 * Screenshot: Homepage
@@ -268,6 +269,14 @@ C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be
 OK - GET /when-will-you-be-ready - "is_ready_to_serve": True - "wait_amount": null - "is_health_check": True - "current_timestamp": "Sun Feb 13 2022 22:53:12 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 13 2022 22:53:09 GMT-0300 (GMT-03:00)" - hostname
 ```
 
+* Stress resource 'cpu' during 60 seconds and restore normal  after another 30 seconds in a single iterations with no repetition
+
+```cmd
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/stress/cpu/60/30/0"
+OK - /stress/cpu/30/15/0 - hostname
+```
+
+![screenshot-node-express-swagger-liveness-readiness-startup-probes-stress.png](../doc/screenshots/screenshot-node-express-swagger-liveness-readiness-startup-probes-stress.png) 
 
 ---
 
@@ -278,7 +287,7 @@ OK - GET /when-will-you-be-ready - "is_ready_to_serve": True - "wait_amount": nu
 * Criar/editar arquivo `Dockerfile` para configurar a imagem de sua aplicação
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> TYPE Dockerfile
+C:\...-probes> TYPE Dockerfile
 >TYPE Dockerfile
 FROM node
 WORKDIR /app
@@ -294,13 +303,13 @@ CMD ["node", "server.js"]
 * Construir a imagem docker a partir de uma imagem base de NodeJS, aplicando o `Dockerfile`
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl image build -t josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 .
+C:\...-probes> nerdctl image build -t josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 .
   :
 unpacking docker.io/josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 (sha256:)...done
 ```
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl image ls
+C:\...-probes> nerdctl image ls
 REPOSITORY                                                             TAG       IMAGE ID        CREATED               PLATFORM       SIZE
         :                                                              :            :              :
 josemarsilva/node-express-swagger-liveness-readiness-startup-probes    v1        207f4f921410    About a minute ago    linux/amd64    1.1 GiB
@@ -312,7 +321,7 @@ josemarsilva/node-express-swagger-liveness-readiness-startup-probes    v1       
 * Executar e testar a aplicação rodando na imagem docker. Teste Homepae, Helth-Check, Swagger, etc
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl run -d -p 8080:8080 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
+C:\...-probes> nerdctl run -d -p 8080:8080 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
 ```
 
 #### 3.2.2.4. Tagear (tag) as imagens construídas e Salvar/Publicar (push) no DockerHub Registry
@@ -320,9 +329,9 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl run -d -p
 * Tagear a imagem `v1` com `latest`
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl tag josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest
+C:\...-probes> nerdctl tag josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1 josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest
 
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl image ls
+C:\...-probes> nerdctl image ls
 REPOSITORY                                                             TAG       IMAGE ID        CREATED           PLATFORM       SIZE
          :                                                             :            :
 josemarsilva/node-express-swagger-liveness-readiness-startup-probes    latest    207f4f921410    15 minutes ago    linux/amd64    1.1 GiB
@@ -333,15 +342,15 @@ josemarsilva/node-express-swagger-liveness-readiness-startup-probes    v1       
 * Efetuar login no DockerHub e registrar a imagem da aplicação
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl login -u josemarsilva
+C:\...-probes> nerdctl login -u josemarsilva
 ```
 
 * Fazer upload da imagem local para o Registry Repository do Docker Hub da aplicação `josemarsilva/node-express-swagger-liveness-readiness-startup-probes` nas versões `v1` e `latest`
 
 ```cmd
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
+C:\...-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1
   :
-C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest
+C:\...-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest
   :
 ```
 
@@ -351,7 +360,9 @@ C:\src\node-express-swagger-liveness-readiness-startup-probes> nerdctl push jose
 
 ---
 
-#### 3.2.3. Construir o(s) arquivos (.yaml) de configuração do deployment da aplicação
+#### 3.2.3. Construir, Implantar e Testar imagem do pod, deploy e service no Kubernetes
+
+#### 3.2.3.1. Construir o(s) arquivos (.yaml) de configuração do deployment da aplicação
 
 * Criar/editar uma configuração de deployment no arquivo `deployment-1.yaml` contemplando o cenário detalhadao abaixo:
   * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest`

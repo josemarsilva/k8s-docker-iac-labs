@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-nodejs-http-echo.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes http echo and health check
+`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-nodejs-http-echo.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes http echo
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes http echo and health check** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes http echo** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Kubernetes_ no Rancher Desktop
 
 ##### Table of Contents  
@@ -23,11 +23,6 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes http e
       - [3.2.1.01. Inicializar projeto NodeJS http echo](#32101-inicializar-projeto-nodejs-http-echo)
       - [3.2.1.02. Desenvolver entry-point da aplicação e view de apresentação básica](#32102-desenvolver-entry-point-da-aplica%C3%A7%C3%A3o-e-view-de-apresenta%C3%A7%C3%A3o-b%C3%A1sica)
       - [3.2.1.03. Executar e testar aplicação](#32103-executar-e-testar-aplica%C3%A7%C3%A3o)
-  * [3.5. Guia de Estudo](#35-guia-de-estudo)
-    + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
-    + [b. LivenessProbe](#b-livenessprobe)
-    + [c. ReadnessProbe](#c-readnessprobe)
-    + [d. Resources limit (cpu, memory)](#d-resources-limit-cpu-memory)
 
 
 - [I - Referências](#i---referências)
@@ -145,55 +140,6 @@ Server running on 0.0.0.0:3000
 ```
 
 ![screenshot-nodejs-http-echo.png](../doc/screenshots/screenshot-nodejs-http-echo.png) 
-
-
----
-
-### 3.5. Guia de Estudo
-
-#### a. Conceitos, definições e visão geral
-
-* [Selfie-Healing](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) e  [Liveness, readiness and start probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) são configurações que o Kubernetes usa para controlar o [Lifecycle(ciclo de vida)](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/), isto é, parar, reiniciar o _containers_ se ele falhar, substitui ou reagenda os containers quando um _node_ para de funcionar, mata os _containers_ que não estão funcionando bem ou seja não estejam respondendo a uma interface de _helth-check_, _threshold_ de uso de CPU ou MEMORIA e aguarda uma interface de _ready-to-serve_ antes de considerar falha.
-* De forma simplificada, sua aplicação fica respondendo periodicamente a uma interface _health-check_ para sinalizar o kubernetes que está tudo bem. O Kubernetes pode ser configurado para a frequencia de tempo em que ele vai avaliar sua aplicação. Enquanto o Kubernetes receber HTTP code 200 da requisição no path configurado, ele considera que a aplicação está funcionado.
-* De forma simplificada, sua aplicação pode informar para o Kubernetes quando ela estiver pronta para responder, também através de uma interface _ready-to-serve_ 
-
-```cmd
-C:\src\kubernetes-selfhealing> kubectl get all
-No resources found in default namespace.
-```
-
-#### b. Containers resilientes: livenessProbe and readnessProbe
-
-```cmd
-C:\src\kubernetes-selfhealing> 
-
-livenessProbe:
-	httpGet:
-		path: /health
-		port: 8080
-	initialDelaySeconds: 3
-	periodSeconds: 3
-	timeoutSeconds: 2
-	successThreshould: 1
-	failureThreshould: 1
-readynessProbe:
-	httpGet:
-		path: /ready
-		port: 8080
-	initialDelaySeconds: 3
-	periodSeconds: 3
-	timeoutSeconds: 2
-	successThreshould: 1
-	failureThreshould: 1
-```
-
-#### c. ReadnessProbe
-
-#### d. Resources limit (cpu, memory)
-
-```cmd
-C:\src\kubernetes-selfhealing> kubectl top pod
-```
 
 
 ## I - Referências

@@ -87,7 +87,7 @@ router.put('/set-health', (req, res) => {
 // Implement route: PUT /set-unready
 router.put('/set-unready/:seconds', (req, res) => {
     console.log('PUT /set-unready/:seconds')
-    let reqParamSeconds = req.params.seconds.replace('seconds:','')
+    const reqParamSeconds = req.params.seconds.replace('seconds:','')
     let seconds = 0
     if(!isNaN(reqParamSeconds)) {
         seconds = Number(reqParamSeconds)
@@ -98,14 +98,45 @@ router.put('/set-unready/:seconds', (req, res) => {
 });
 
 // Implement route: PUT /stress
-router.put('/stress/lifespan/:lifespan/deathspan/:deathspan/iterations/:iterations', (req, res) => {
+router.put('/stress/:type/:lifespan/:deathspan/:iterations', (req, res) => {
     console.log('PUT /stress')
-    const type = 'cpu';
-    const lifespan = req.params.lifespan * 1000; // in milliseconds
-    const deathspan = req.params.deathspan * 1000;
-    const iterations = req.params.iterations;
-    new NodeHog(type, lifespan, deathspan, iterations).start();
-    res.send("OK - PUT /stress - " + os.hostname);
+    const reqParamType = req.params.type
+    const reqParamLifespan = req.params.lifespan
+    const reqParamDeathspan = req.params.deathspan
+    const reqParamIterations = req.params.deathspan
+    if (reqParamType != 'cpu') {
+        res.statusCode = 500;
+        return res.send('ERROR - Invalid reqParamType value "$reqParamType". List of values allowed: ["cpu"].'.replace("$reqParamType",reqParamType));        
+    }
+    if (isNaN(reqParamLifespan)) {
+        res.statusCode = 500;
+        return res.send('ERROR - Invalid reqParamLifespan value "$reqParamLifespan". Not a numeric values.'.replace("$reqParamLifespan",reqParamLifespan));        
+    }
+    if (isNaN(reqParamDeathspan)) {
+        res.statusCode = 500;
+        return res.send('ERROR - Invalid reqParamDeathspan value "$reqParamDeathspan". Not a numeric values.'.replace("$reqParamDeathspan",reqParamDeathspan));        
+    }
+    if (isNaN(reqParamIterations)) {
+        res.statusCode = 500;
+        return res.send('ERROR - Invalid reqParamIterations value "$reqParamIterations". Not a numeric values.'.replace("$reqParamIterations",reqParamIterations));        
+    }
+    let type = 'cpu'
+    let lifespan = Number(reqParamLifespan)
+    let deathspan = Number(reqParamDeathspan)
+    let iterations = Number(reqParamIterations)
+    lifespan = req.params.lifespan;
+    deathspan = req.params.deathspan;
+    iterations = req.params.iterations;
+    console.log({
+        "NodeHog": {
+            "type": type,
+            "lifespan": lifespan,
+            "deathspam": deathspan,
+            "iterations": iterations
+        }
+    })
+    new NodeHog(type, lifespan * 1000, deathspan * 1000, iterations).start();
+    res.send("OK - /stress/:type/:lifespan/:deathspan/:iterations - ".replace(":type",type).replace(":lifespan",lifespan).replace(":deathspan",deathspan).replace(":iterations",iterations) + os.hostname);
 });
 
 // Configure routes

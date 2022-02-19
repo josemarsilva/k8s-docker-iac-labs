@@ -65,15 +65,15 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 | Laboratório | Descrição                       |
 | :---------- | :------------------------------ |
-| ### [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)                 | Install WSL, Rancher Desktop and command line with nerdctl |
-| ### [LAB-02](./md/README-basic-docker-commands.md)                              | Basic Docker Commands |
-| ### [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)            | Windows Client MongoDB Studio 3T connect database |
-| ### [LAB-04](./md/README-docker-images-containers.md)                           | Docker Images vs Containers |
-| ### [LAB-05](./md/README-basic-kubernetes-commands.md)                          |  Basic Kubernetes Commands |
-| ### [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)                    | Kubernetes, Python, Flask e MongoDB |
-| ### [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)                        | NodeJS http echo and health check |
-| ### [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)         | Kubernetes IDE Lens |
-| ### [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md) | Kubernetes Self Healing, application health check and resources limits |
+| [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)                 | Install WSL, Rancher Desktop and command line with nerdctl |
+| [LAB-02](./md/README-basic-docker-commands.md)                              | Basic Docker Commands |
+| [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)            | Windows Client MongoDB Studio 3T vs Docker Server MongoDB |
+| [LAB-04](./md/README-docker-images-containers.md)                           | Docker Images vs Containers vs DockerHub |
+| [LAB-05](./md/README-basic-kubernetes-commands.md)                          | Basic Kubernetes Commands |
+| [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)                    | Kubernetes, Python, Flask e MongoDB |
+| [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)                        | NodeJS http echo application |
+| [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)         | Kubernetes IDE Lens |
+| [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md) | Kubernetes Self Healing, application health check and resources limits with NodeJS, Express, Swagger-UI, NodeHog, YamlJS and Ejs |
 
 
 ## I - Referências
