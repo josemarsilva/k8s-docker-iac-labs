@@ -33,7 +33,7 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
       - [3.2.3.1. Cenário 1: Cenário BASE da aplicação rodando no cluster](#3231-cen%C3%A1rio-1-cen%C3%A1rio-base-da-aplica%C3%A7%C3%A3o-rodando-no-cluster)
       - [3.2.3.2. Cenário 2: Deletar alguns PODs e observar o comportamento](#3232-cen%C3%A1rio-2-deletar-alguns-pods-e-observar-o-comportamento)
       - [3.2.3.3. Cenário 3: Simular a indisponibilidade de alguns PODs e observar o comportamento](#3233-cen%C3%A1rio-3-simular-a-indisponibilidade-de-alguns-pods-e-observar-o-comportamento)
-      - [3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs no cenário configurado para _SelfHealing_ do _livenessProbe_ e _readynessProbe_ e observar o comportamento](#3234-cen%C3%A1rio-4-simular-a-indisponibilidade-de-alguns-pods-no-cen%C3%A1rio-configurado-para-selfhealing-do-livenessprobe-e-readynessprobe-e-observar-o-comportamento)
+      - [3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ e _readynessProbe_ configurados e observar o comportamento](#3234-cen%C3%A1rio-4-simular-a-indisponibilidade-de-alguns-pods-tendo-selfhealing-do-livenessprobe-e-readynessprobe-configurados-e-observar-o-comportamento)
 
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
@@ -576,7 +576,7 @@ deployment.apps/node-probes-deploy deleted
 service/webapp-service deleted
 ```
 
-#### 3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs no cenário configurado para _SelfHealing_ do _livenessProbe_ e _readynessProbe_ e observar o comportamento
+#### 3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ e _readynessProbe_ configurados e observar o comportamento
 
 * _passo-#1-CONFIG-YAML_: Criar/editar a configuração desejada do manifesto kubernetes em `k8s-config-1.yaml` contemplando o cenário abaixo:
   * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1`
@@ -619,35 +619,6 @@ C:\...-probes> kubectl get pods
 * [Selfie-Healing](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) e  [Liveness, readiness and start probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) são configurações que o Kubernetes usa para controlar o [Lifecycle(ciclo de vida)](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/), isto é, parar, reiniciar o _containers_ se ele falhar, substitui ou reagenda os containers quando um _node_ para de funcionar, mata os _containers_ que não estão funcionando bem ou seja não estejam respondendo a uma interface de _helth-check_, _threshold_ de uso de CPU ou MEMORIA e aguarda uma interface de _ready-to-serve_ antes de considerar falha.
 * De forma simplificada, sua aplicação fica respondendo periodicamente a uma interface _health-check_ para sinalizar o kubernetes que está tudo bem. O Kubernetes pode ser configurado para a frequencia de tempo em que ele vai avaliar sua aplicação. Enquanto o Kubernetes receber HTTP code 200 da requisição no path configurado, ele considera que a aplicação está funcionado.
 * De forma simplificada, sua aplicação pode informar para o Kubernetes quando ela estiver pronta para responder, também através de uma interface _ready-to-serve_ 
-
-#### b. Containers resilientes: livenessProbe and readnessProbe
-
-```cmd
-C:\src\kubernetes-selfhealing> 
-
-livenessProbe:
-	httpGet:
-		path: /health
-		port: 8080
-	initialDelaySeconds: 3
-	periodSeconds: 3
-	timeoutSeconds: 2
-	successThreshould: 1
-	failureThreshould: 1
-readynessProbe:
-	httpGet:
-		path: /ready
-		port: 8080
-	initialDelaySeconds: 3
-	periodSeconds: 3
-	timeoutSeconds: 2
-	successThreshould: 1
-	failureThreshould: 1
-```
-
-#### c. ReadnessProbe
-
-#### d. Resources limit (cpu, memory)
 
 ```cmd
 C:\src\kubernetes-selfhealing> kubectl top pod
