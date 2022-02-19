@@ -29,8 +29,8 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
       - [3.2.2.2. Construir (Build) imagem](#3222-construir-build-imagem)
       - [3.2.2.3. Executar (run) e Testar as funcionalidades](#3223-executar-run-e-testar-as-funcionalidades)
       - [3.2.2.4. Tagear (tag) as imagens construídas e Salvar/Publicar (push) no DockerHub Registry](#3224-tagear-tag-as-imagens-constru%C3%ADdas-e-salvarpublicar-push-no-dockerhub-registry)
-    + [3.2.3. Construir, Implantar e Testar imagem do pod, deploy e service no Kubernetes](#323-construir-implantar-e-testar-imagem-do-pod-deploy-e-service-no-kubernetes)
-      - [3.2.3.1. Construir o(s) arquivos (.yaml) de configuração do deployment da aplicação](#3231-construir-os-arquivos-yaml-de-configura%C3%A7%C3%A3o-do-deployment-da-aplica%C3%A7%C3%A3o)
+    + [3.2.3. Construir, Implantar e Testar cenários de self healing e livenes probe no cluster Kubernetes](#323-construir-implantar-e-testar-cen%C3%A1rios-de-self-healing-e-livenes-probe-no-cluster-kubernetes)
+      - [3.2.3.1. Cenário 0: Cenário base da aplicação rodando no cluster](#3231-cen%C3%A1rio-0-cen%C3%A1rio-base-da-aplica%C3%A7%C3%A3o-rodando-no-cluster)
 
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
@@ -81,7 +81,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 | Termo       | Significado                     |
 | :---------- | :------------------------------ |
-| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `kubectl` ou `docker`. |
+| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao comando `docker`. |
 
 
 ## 3. Projeto
@@ -360,15 +360,14 @@ C:\...-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness
 
 ---
 
-#### 3.2.3. Construir, Implantar e Testar imagem do pod, deploy e service no Kubernetes
+#### 3.2.3. Construir, Implantar e Testar cenários de self healing e livenes probe no cluster Kubernetes
 
-#### 3.2.3.1. Construir o(s) arquivos (.yaml) de configuração do deployment da aplicação
+#### 3.2.3.1. Cenário 0: Cenário base da aplicação rodando no cluster
 
-* Criar/editar uma configuração de deployment no arquivo `deployment-1.yaml` contemplando o cenário detalhadao abaixo:
+* Criar/editar uma configuração de deployment no arquivo `deploy-0.yaml` contemplando o cenário detalhadao abaixo:
   * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest`
   * Replicaset: `1` instância(s)
   * Service - Port: `30000`
-
 
 ---
 
