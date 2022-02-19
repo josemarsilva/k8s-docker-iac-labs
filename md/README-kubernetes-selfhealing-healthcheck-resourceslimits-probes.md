@@ -1,9 +1,9 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-selfhealing-healthcheck-resourceslimits.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes Self Healing, application health check, ready to serve and resources limits
+`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self Healing, application health check and resources limits** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
-* Explorar os comandos básicos do _Kubernetes_ no Rancher Desktop
+Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self Healing, application health check and resources limits probes** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+* Explorar os conceitos do _Kubernetes_ : Self healing, Liveness probe and Readiness probe
 
 ##### Table of Contents  
 - [1. Introdução](#1-introdução)
@@ -364,10 +364,14 @@ C:\...-probes> nerdctl push josemarsilva/node-express-swagger-liveness-readiness
 
 #### 3.2.3.1. Cenário 0: Cenário base da aplicação rodando no cluster
 
-* Criar/editar uma configuração de deployment no arquivo `deploy-0.yaml` contemplando o cenário detalhadao abaixo:
+* _passo#1_: Criar/editar a configuração do manifesto da aplicação no arquivo `deploy-0.yaml` contemplando o cenário abaixo:
   * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:latest`
   * Replicaset: `1` instância(s)
   * Service - Port: `30000`
+
+```cmd
+C:\...-probes> type deploy-0.yaml
+```
 
 ---
 
