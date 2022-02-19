@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
+`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-09 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self Healing, application health check and resources limits probes** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-09 - Kubernetes Self Healing, application health check and resources limits probes** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os conceitos do _Kubernetes_ : Self healing, Liveness probe and Readiness probe
 
 ##### Table of Contents  
@@ -33,8 +33,8 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes Self H
       - [3.2.3.1. Cenário 1: Cenário BASE da aplicação rodando no cluster](#3231-cen%C3%A1rio-1-cen%C3%A1rio-base-da-aplica%C3%A7%C3%A3o-rodando-no-cluster)
       - [3.2.3.2. Cenário 2: Deletar alguns PODs e observar o comportamento](#3232-cen%C3%A1rio-2-deletar-alguns-pods-e-observar-o-comportamento)
       - [3.2.3.3. Cenário 3: Simular a indisponibilidade de alguns PODs e observar o comportamento](#3233-cen%C3%A1rio-3-simular-a-indisponibilidade-de-alguns-pods-e-observar-o-comportamento)
-      - [3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ e _readynessProbe_ configurados e observar o comportamento](#3234-cen%C3%A1rio-4-simular-a-indisponibilidade-de-alguns-pods-tendo-selfhealing-do-livenessprobe-e-readynessprobe-configurados-e-observar-o-comportamento)
-
+      - [3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ configurado e observar o comportamento](#3234-cen%C3%A1rio-4-simular-a-indisponibilidade-de-alguns-pods-tendo-selfhealing-do-livenessprobe-configurados-e-observar-o-comportamento)
+      - [3.2.3.5. Cenário 5: Configurar o atraso na prontidão de início dos pods e simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ e _readynessProbe_ configurados e observar o comportamento](#3235-cen%C3%A1rio-5-configurar-o-atraso-na-prontid%C3%A3o-de-in%C3%ADcio-dos-pods-e-simular-a-indisponibilidade-de-alguns-pods-tendo-selfhealing-do-livenessprobe-e-readynessprobe-configurados-e-observar-o-comportamento)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Conceitos, definições e visão geral](#a-conceitos-definições-e-visão-geral)
     + [b. LivenessProbe](#b-livenessprobe)
@@ -165,7 +165,7 @@ C:\...-probes> npm install
 * _passo-#2-DEVELOP-ENTRYPOINT_: No entry-point `server.js` instanciar o servidor Express, criar e configurar as rotas de mapeamento da aplicação. Implementar as rotas mais simples
 * _passo-#3-DEVELOP-FEATURES_: Criar/editar uma sub-pasta `views` para organizar as páginas de visualização abaixo dela e criar/editar o arquivo `index.ejs` com o template do conteúdo da homepage de sua aplicação. Supondo uma aplicação que permite o input de uma mensagem que quando você clica em um botão a página é reapresentada com a mensagem no corpo
 * _passo-#4-DEVELOP-HEALTHCHECK_: Criar/editar o programa `config\system-life.js` para organizar os códigos de Liveness Probles nos end-points `health-check` and `ready-to-serve`
-* _passo-#5-DEVELOP-READYTOSERVE_: Criar/editar o programa `config\system-life.js` para organizar os códigos do controle, manipulação e simulação do Liveness Probles nos end-points `set-unhealth`, `set-health`, `set-unready-for`, `stress`  and `when-will-you-be-ready`
+* _passo-#5-DEVELOP-READYTOSERVE_: Criar/editar o programa `config\system-life.js` para organizar os códigos do controle, manipulação e simulação do Liveness Probles nos end-points `set-unhealth`, `set-health`, `set-unready`, `stress`  and `when-will-you-be-ready`
 
 
 ```cmd
@@ -253,7 +253,7 @@ C:\> curl -X GET -H "accept: text/plain" "http://localhost:8080/when-will-you-be
 OK - GET /when-will-you-be-ready - "is_ready_to_serve": True - "wait_amount": 0 - "is_health_check": True - "current_timestamp": "Sun Feb 13 2022 20:11:28 GMT-0300 (GMT-03:00)" - "readness_timestamp": "Sun Feb 13 2022 20:07:44 GMT-0300 (GMT-03:00)" - hostname
 ```
 
-* Set /set-unready-for 60 seconds and test /ready-to-serve before and after waiting 60 seconds
+* Set /set-unready 60 seconds and test /ready-to-serve before and after waiting 60 seconds
 
 ```cmd
 C:\> curl -X PUT -H "accept: text/plain" "http://localhost:8080/set-unready/seconds:60"
@@ -576,14 +576,15 @@ deployment.apps/node-probes-deploy deleted
 service/webapp-service deleted
 ```
 
-#### 3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ e _readynessProbe_ configurados e observar o comportamento
+#### 3.2.3.4. Cenário 4: Simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ configurados e observar o comportamento
 
 * _passo-#1-CONFIG-YAML_: Criar/editar a configuração desejada do manifesto kubernetes em `k8s-config-1.yaml` contemplando o cenário abaixo:
   * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1`
   * Replicaset: `5` instância(s)
   * Service - NodePort: `30000`
   * livenessProbe: `/health-check`
-  * readynessProbe: `/ready-to-serve`
+* [Kubernetes.io - Documentation - Define a liveness HTTP request ](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request)
+
 
 ```cmd
 C:\...-probes> type k8s-config-1.yaml
@@ -598,16 +599,207 @@ service/webapp-service created
 
 C:\...-probes> kubectl get deploy
 NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
-node-probes-deploy   5/5     5            5           6s
-
+node-probes-deploy   5/5     5            5           41s
 
 C:\...-probes> kubectl get pods
-
+node-probes-deploy-7fcb775-fqlbn   1/1     Running   0          58s
+node-probes-deploy-7fcb775-qtbwk   1/1     Running   0          58s
+node-probes-deploy-7fcb775-p6zfc   1/1     Running   0          58s
+node-probes-deploy-7fcb775-twtpx   1/1     Running   0          57s
+node-probes-deploy-7fcb775-dspr9   1/1     Running   0          57s
 ```
 
-* _passo-#2-API/APP-Features_: Usar a funcionalidade `set-unhealth` para simular que alguns dos POD's "quebraram" ou "pararam" de funcionar e observe o resultado
+* _passo-#2-API/APP-Features_: Usar a funcionalidade `set-unhealth` para simular que alguns dos POD's "quebraram" ou "pararam de responder" de funcionar e observe o resultado
+
+```cmd
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:30000/set-unhealth"
+OK - PUT /set-unhealth - node-probes-deploy-7fcb775-p6zfc
+
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:30000/set-unhealth"
+OK - PUT /set-unhealth - node-probes-deploy-7fcb775-fqlbn
+
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:30000/set-unhealth"
+OK - PUT /set-unhealth - node-probes-deploy-7fcb775-dspr9
+```
+
+* _passo-#3-GET-Status_: Obter repetidas vezes o status dos POD's. Observar que o Kubernetes irá fazer RESTART (reiniciar) os POD's que apresentaram comportamento de simulação de "quebra" ou "pararam de responder"
+  * Repita o comando `get pods` várias vezes, observe que os PODS's vão sendo reiniciados RESTART
+  * Logo este cenário está configurado para _SelfHealing_ ou seja auto-cura da degradação do pod
+  * Aos poucos os pods vão sendo reiniciados um a um
+
+```cmd
+C:\> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7fcb775-fqlbn   1/1     Running   0          3m19s
+node-probes-deploy-7fcb775-qtbwk   1/1     Running   0          3m19s
+node-probes-deploy-7fcb775-twtpx   1/1     Running   0          3m18s
+node-probes-deploy-7fcb775-dspr9   1/1     Running   0          3m18s
+node-probes-deploy-7fcb775-p6zfc   1/1     Running   1          3m19s
+
+C:\> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7fcb775-qtbwk   1/1     Running   0          3m22s
+node-probes-deploy-7fcb775-twtpx   1/1     Running   0          3m21s
+node-probes-deploy-7fcb775-dspr9   1/1     Running   0          3m21s
+node-probes-deploy-7fcb775-p6zfc   1/1     Running   1          3m22s
+node-probes-deploy-7fcb775-fqlbn   1/1     Running   1          3m22s
+
+C:\> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7fcb775-qtbwk   1/1     Running   0          9m3s
+node-probes-deploy-7fcb775-twtpx   1/1     Running   0          9m2s
+node-probes-deploy-7fcb775-p6zfc   1/1     Running   1          9m3s
+node-probes-deploy-7fcb775-fqlbn   1/1     Running   1          9m3s
+node-probes-deploy-7fcb775-dspr9   1/1     Running   1          9m2s
+``` 
+
+#### 3.2.3.5. Cenário 5: Configurar o atraso na prontidão de início dos pods e simular a indisponibilidade de alguns PODs tendo _SelfHealing_ do _livenessProbe_ e _readynessProbe_ configurados e observar o comportamento
+
+* _passo-#1-CONFIG-YAML_: Criar/editar a configuração desejada do manifesto kubernetes em `k8s-config-2.yaml` contemplando o cenário abaixo:
+  * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1`
+  * Replicaset: `2` instância(s)
+  * Service - NodePort: `30000`
+  * livenessProbe: `/health-check`
+  * readynessProbe: `/ready-to-serve`
+* [Kubernetes.io - Documentation - Define a liveness HTTP request ](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request)
 
 
+```cmd
+C:\...-probes> type k8s-config-2.yaml
+```
+
+* _passo-#2-APPLY_: Aplicar, criar, atualizar a configuração desejada do manifesto kubernetes em `k8s-config-2.yaml` 
+
+```cmd
+C:\...-probes> kubectl apply -f k8s-config-2.yaml
+deployment.apps/node-probes-deploy created
+service/webapp-service created
+
+C:\...-probes> kubectl get deploy
+NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+node-probes-deploy   2/2     2            2           8s
+
+C:\...-probes> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7fcb775-njrsd   1/1     Running   0          24s
+node-probes-deploy-7fcb775-lxfp5   1/1     Running   0          24s
+```
+
+
+* _passo-#2-1-API/APP-Features_: Usar a funcionalidade `/set-unready/{seconds}` para configurar *todos* (porque não temos controle de qual vamos tornar indisponível logo temos que configurar todos)  os pods para que fiquem disponíveis para serviço somente após aguardar um período de 60 sec
+
+```cmd
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:30000/when-will-you-be-ready"
+OK - GET /when-will-you-be-ready - "is_ready_to_serve": True - "wait_amount": null - "is_health_check": True - "current_timestamp": "Sat Feb 19 2022 22:14:44 GMT+0000 (Coordinated Universal Time)" - "readness_timestamp": "Sat Feb 19 2022 22:08:09 GMT+0000 (Coordinated Universal Time)" - node-probes-deploy-7fcb775-lxfp5
+
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:30000/set-unready/120"
+OK - PUT /set-unready/120 - node-probes-deploy-7fcb775-lxfp5
+
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:30000/set-unready/120"
+OK - PUT /set-unready/120 - node-probes-deploy-7fcb775-njrsd
+
+C:\> curl -X GET -H "accept: text/plain" "http://localhost:30000/when-will-you-be-ready" -I
+curl: (52) Empty reply from server
+
+C:\> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7fcb775-lxfp5   0/1     Running   0          15m
+node-probes-deploy-7fcb775-njrsd   0/1     Running   0          15m
+```
+
+* _passo-#3-GET-Status_: Obter repetidas vezes o status dos POD's. Observar que o Kubernetes irá fazer RESTART (reiniciar) os POD's que apresentaram comportamento de simulação de "quebra" ou "pararam de responder"
+  * Repita o comando `get pods` várias vezes, observe que os PODS's vão sendo reiniciados RESTART
+  * Apesar de iniciado, como atrasamos o estado de pronto os pods vão demorar um pouco mais para subir e começar a responder para o serviço
+  * Logo este cenário está configurado para _SelfHealing_ ou seja auto-cura da degradação do pod
+  * Aos poucos os pods vão sendo reiniciados um a um
+
+```cmd
+C:\> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7fcb775-njrsd   1/1     Running   0          25m
+node-probes-deploy-7fcb775-lxfp5   1/1     Running   0          25m
+``` 
+
+#### 3.2.3.6. Cenário 6: Provocar o stress do recurso CPU da aplicação e observar o comportamento
+
+* _passo-#1-CONFIG-YAML_: Criar/editar a configuração desejada do manifesto kubernetes em `k8s-config-2.yaml` contemplando o cenário abaixo:
+  * Pod: `josemarsilva/node-express-swagger-liveness-readiness-startup-probes:v1`
+  * Replicaset: `2` instância(s)
+  * Service - NodePort: `30000`
+  * livenessProbe: `/health-check`
+  * readynessProbe: `/ready-to-serve`
+* [Kubernetes.io - Documentation - Define a liveness HTTP request ](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request)
+
+
+```cmd
+C:\...-probes> type k8s-config-2.yaml
+```
+
+* _passo-#2-APPLY_: Aplicar, criar, atualizar a configuração desejada do manifesto kubernetes em `k8s-config-2.yaml` 
+
+```cmd
+C:\...-probes> kubectl apply -f k8s-config-2.yaml
+deployment.apps/node-probes-deploy created
+service/webapp-service created
+
+C:\...-probes> kubectl get deploy
+NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+node-probes-deploy   2/2     2            2           8s
+
+C:\...-probes> kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+node-probes-deploy-7cc8966c6f-mcdgq   1/1     Running   0          23s
+node-probes-deploy-7cc8966c6f-cbqt9   1/1     Running   0          23s
+
+
+C:\> kubectl top pod
+NAME                                  CPU(cores)   MEMORY(bytes)
+node-probes-deploy-7cc8966c6f-cbqt9   0m           7Mi
+node-probes-deploy-7cc8966c6f-mcdgq   0m           7Mi
+
+C:\> kubectl top pod
+NAME                                  CPU(cores)   MEMORY(bytes)
+node-probes-deploy-7cc8966c6f-cbqt9   2m           26Mi
+node-probes-deploy-7cc8966c6f-mcdgq   2m           27Mi
+```
+
+
+* _passo-#2-1-API/APP-Features_: Usar a funcionalidade `/stress` para stressar o recurso `cpu` por `90` segundos e restaurar a normalidade após `15` segundos em uma interação única.
+
+```cmd
+C:\> curl -X PUT -H "accept: text/plain" "http://localhost:30000/stress/cpu/60/30/0"
+```
+
+```cmd
+C:\> kubectl top pod
+NAME                                  CPU(cores)   MEMORY(bytes)
+node-probes-deploy-7cc8966c6f-cbqt9   1m           27Mi
+node-probes-deploy-7cc8966c6f-mcdgq   845m         28Mi
+```
+
+* _passo-#3-GET-Status_: Obter repetidas vezes o status dos POD's. Observar que o Kubernetes irá fazer RESTART (reiniciar) os POD's que apresentaram comportamento de simulação de "quebra" ou "pararam de responder"
+  * Repita o comando `get pods` várias vezes, observe que os PODS's vão sendo reiniciados RESTART
+  * Apesar de iniciado, como atrasamos o estado de pronto os pods vão demorar um pouco mais para subir e começar a responder para o serviço
+  * Logo este cenário está configurado para _SelfHealing_ ou seja auto-cura da degradação do pod
+  * Aos poucos os pods vão sendo reiniciados um a um
+
+```cmd
+C:\> kubectl top pod
+``` 
+
+---
+
+### 3.5. Guia de Estudo
+
+#### a. Conceitos, definições e visão geral
+
+* [Selfie-Healing](https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/) e  [Liveness, readiness and start probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) são configurações que o Kubernetes usa para controlar o [Lifecycle(ciclo de vida)](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/), isto é, parar, reiniciar o _containers_ se ele falhar, substitui ou reagenda os containers quando um _node_ para de funcionar, mata os _containers_ que não estão funcionando bem ou seja não estejam respondendo a uma interface de _helth-check_, _threshold_ de uso de CPU ou MEMORIA e aguarda uma interface de _ready-to-serve_ antes de considerar falha.
+* De forma simplificada, sua aplicação fica respondendo periodicamente a uma interface _health-check_ para sinalizar o kubernetes que está tudo bem. O Kubernetes pode ser configurado para a frequencia de tempo em que ele vai avaliar sua aplicação. Enquanto o Kubernetes receber HTTP code 200 da requisição no path configurado, ele considera que a aplicação está funcionado.
+* De forma simplificada, sua aplicação pode informar para o Kubernetes quando ela estiver pronta para responder, também através de uma interface _ready-to-serve_ 
+
+```cmd
+C:\src\kubernetes-selfhealing> kubectl top pod
+```
 
 
 ---

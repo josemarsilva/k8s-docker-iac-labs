@@ -78,7 +78,7 @@ paths:
 
   /set-unready-for/{seconds}:
     put:
-      description: "Set application in a **NOT ready-to-serve** mode for a time in seconds"
+      description: "Set application delay to be **NOT ready-to-serve** mode for a time in seconds"
       produces:
       - "text/plain"
       parameters:
@@ -89,7 +89,7 @@ paths:
         type: "number"
       responses:
         "200":
-          description: "_set-unready-for_ set application in a **NOT ready-to-serve** mode for a time in seconds. \nExample: OK - PUT /set-unhealth - <hostname>"
+          description: "_set-unready-for_ set application delay to be **NOT ready-to-serve** mode for a time in seconds. \nExample: OK - PUT /set-unhealth - <hostname>"
 
   /stress/{type}/{lifespan}/{deathspan}/{iterations}:
     put:

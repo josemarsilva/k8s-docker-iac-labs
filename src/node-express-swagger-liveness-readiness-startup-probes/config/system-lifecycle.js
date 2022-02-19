@@ -65,8 +65,8 @@ router.get('/when-will-you-be-ready', (req, res) => {
 });
 
 // Implement route: GET /get-delayed
-router.get('/get-delayed', (req, res) => {
-    console.log('GET /get-delayed')
+router.get('/get-delayed/:seconds', (req, res) => {
+    console.log('GET /get-delayed/:seconds')
     res.send("OK - GET /get-delayed - " + os.hostname);
 });
 
