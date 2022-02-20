@@ -4,30 +4,17 @@
 Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API - Response - Database - Middleware - Action** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os recursos e funcionalidades na construção de API - Application Proogramming Interface dentro da infraestrutura do Kubernetes:
   * **Response**: Tipo da resposta (na perspectiva de transação) que podem ser:
-    * `sync`: síncrona, a resposta imediata
-    * `async` assíncrona, o chamado irá invocar um novo processo que executará a ação desejada
+    * `sync`: síncrona, a resposta imediata; `async` assíncrona, o chamado irá invocar um novo processo que executará a ação desejada
   * **lang**: Linguagem de programação:
-    * `Node`
-    * `Python`
-    * `GoLang`
+    * `Node`; `Python`; `GoLang`;
   * **Database**: Persistência em banco de dados: 
-    * `MongoDB`
-    * `MySQL`
-    * `PostgreSQL`
-    * `MSSQL`
+    * `MongoDB`; `MySQL`; `PostgreSQL`;  `MSSQL`;
   * **Middleware**: Message Queue ou Data Streaming:
-    * `rabbitmq`
-    * `kafka`
+    *  `kafka`; `rabbitmq`;
   * **Action**: Action or distributed transaction:
-    * `get`
-    * `post`
-    * `put`
-    * `patch`
-    * `relay`
-    * `pool`
-    * `callback`
-    * `publish`
-    * `subscribe`
+    * `get`;  `post`;  `put`;  `patch`;
+    * `relay`; `pool`;  `callback`;
+    * `publish`;  `subscribe`;
 
 ##### Table of Contents  
 - [1. Introdução](#1-introdução)
@@ -57,7 +44,7 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-api-use.png) 
+![UseCaseDiagram-kubernetes-api.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-api.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
