@@ -64,7 +64,7 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.7. Diagrama de Sequencia (Sequence Diagram)
 
-* A seguir, as imagens em diagramas de sequencia do comportamento das API's no que diz respeito à resposta: a) Síncrona; b) Assíncrona. E no que diz respeito a ação: a) relay; b) poll; c) callback 
+* A seguir, as imagens em diagramas de sequencia do comportamento das API's no que diz respeito à resposta: a) `sync`: Síncrona; b) `async`: Assíncrona. E no que diz respeito a ação: a) `relay`; b) `poll`; c) `callback`
 
 ![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledge.png)
 
