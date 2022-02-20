@@ -59,7 +59,7 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.6. Diagrama de Pacotes Classes (Packages and Class Class Diagram)
 
-![ClassDiagram-Context.png](../doc/uml-diagrams/ClassDiagram-Context.png) 
+![ClassDiagram-PhysicalDataModel-api.png](../doc/uml-diagrams/ClassDiagram-PhysicalDataModel-api.png) 
 
 
 ### 2.7. Diagrama de Sequencia (Sequence Diagram)
