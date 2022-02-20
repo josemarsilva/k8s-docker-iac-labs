@@ -19,7 +19,6 @@ Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python
   * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
   * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
   * [3.4. Guia de Demonstração e Teste](#34-guia-de-demonstração-e-teste)
-  * [3.5. Guia de Estudo](#35-guia-de-estudo)
 
 
 - [I - Referências](#i---referências)
@@ -251,14 +250,6 @@ C:\src\kubernetes-python-flask-mongodb> python -m venv venv
 C:\src\kubernetes-python-flask-mongodb> .\venv\Scripts\activate.bat
 (venv) C:\src\kubernetes-python-flask-mongodb> 
 ```
-
-
-
-
-### 3.5. Guia de Estudo
-
-
-
 
 ## I - Referências
 
