@@ -52,7 +52,7 @@ Este documento contém os artefatos do laboratório **LAB-09 - Kubernetes Self H
 
 * Contexto do desenvolvimento da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev.png) 
+![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node.png) 
 
 * Contexto do gerenciamento da aplicação NodeJS para Kubernetes
 

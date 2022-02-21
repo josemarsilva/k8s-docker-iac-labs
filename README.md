@@ -13,14 +13,6 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [2.8. Notas de atenção e Avisos (Notice and information)](#28-notas-de-atenção-e-avisos-notice-and-information)
   * [2.9. Glossário de Termos (Glossary)](#29-glossário-de-termos-glossary)
 - [3. Projeto / Laboratório](#3-projeto--laboratório)
-  * LAB-01: Install WSL, Rancher Desktop and command line with nerdctl
-  * LAB-02: Basic Docker Commands
-  * LAB-03: Windows Client MongoDB Studio 3T connect database
-  * LAB-04: Docker Images vs Containers
-  * LAB-05: Basic Kubernetes Commands
-  * LAB-06: Kubernetes, Python, Flask e MongoDB
-  * LAB-07: Kubernetes Self Healing, application health check and resources limits
-  * LAB-08: Kubernetes IDE Lens
 
 - [I - Referências](#i---referências)
 
@@ -74,6 +66,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 | [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)                               | NodeJS http echo application |
 | [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)                | Kubernetes IDE Lens |
 | [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md) | Kubernetes Self Healing, application health check and resources limits probes with NodeJS, Express, Swagger-UI, NodeHog, YamlJS and Ejs |
+| [LAB-10](./md/README-kubernetes-api-lang-response-database-middleware-action.md)   | LAB-10: Kubernetes - API - Response - Database - Middleware - Action |
 
 
 ## I - Referências

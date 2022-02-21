@@ -44,17 +44,27 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
+* Contexto do desenvolvimento da aplicação NodeJS para Kubernetes
+
+![UseCaseDiagram-kubernetes-dev-node.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node.png) 
+
+* Contexto do desenvolvimento da aplicação NodeJS para Kubernetes
+
+![UseCaseDiagram-kubernetes-dev-node-api.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-api.png) 
+
+* Contexto do gerenciamento da aplicação NodeJS para Kubernetes
+
 ![UseCaseDiagram-kubernetes-api.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-api.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
+![DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-database-middleware.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-database-middleware.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-wsl-rancherdesktop-windows.png) 
+![MindMapDiagram-kubernetes-docker-rancherdesktop-api-lang-response-database-middleware-action.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-api-lang-response-database-middleware-action.png) 
 
 
 ### 2.6. Diagrama de Pacotes Classes (Packages and Class Class Diagram)
@@ -117,6 +127,20 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 
 ### 3.3. Guia de Implantação, Configuração e Instalação
+
+#### 3.2.1. Development a NodeJS application for Kubernetes
+
+#### 3.2.1.1. INIT ambiente NodeJS e INSTALL dependências
+
+#### 3.2.1.2. DEVELOP entry-point, health-check, ready-to-serve para k8s
+
+#### 3.2.1.3. DEVELOP applications features
+
+#### 3.2.1.4. BUILD and REGISTRY docker image
+
+#### 3.2.1.5. SWAGGER api-doc
+
+#### 3.2.1.6. TEST development
 
 
 ## I - Referências
