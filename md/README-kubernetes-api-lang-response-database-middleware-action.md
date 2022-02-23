@@ -74,15 +74,15 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.7. Diagrama de Sequencia (Sequence Diagram)
 
-* A seguir, as imagens em diagramas de sequencia do comportamento das API's no que diz respeito à resposta: a) `sync`: Síncrona; b) `async`: Assíncrona. E no que diz respeito a ação: a) `relay`; b) `poll`; c) `callback`
+* A seguir, as imagens em diagramas de sequencia do comportamento das API's no que diz respeito à resposta: a) `sync`: Síncrona; b) `async`: Assíncrona. E no que diz respeito a ação: a) `relay`; b) 'response/acknowledgement`; c) `poll`; d) `callback`
 
 ![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledge.png)
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledgeCallback.png)
+![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-AsynchronousRequestAcknowledgeCallback.png)
 
 ![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledgePoll.png)
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledgeRelayCallback.png)
+![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-AsynchronousRequestAcknowledgeRelayCallback.png)
 
 ![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestResponse.png)
 
@@ -112,10 +112,10 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
   * [LAB-02 Install WSL Rancher Desktop on Windows](README-install-wsl-rancherdesktop-windows.md) instalado, concluído e disponível
 * Docker or Kubernetes or VirtualBox or On-Premisse infrastructure (Deployment Infraestructure)
 * Cloud infrastructure: AWS or GPC or OracleCloud or Azure
-* Python 3.x (3.8 recommended)
-* venv
-* NodeJS (Development, Build and Deploy)
-* GoLang
+* Programming Language / Libraries:
+  * Python 3.x (3.8 recommended) / venv
+  * NodeJS (Development, Build and Deploy)
+  * GoLang
 * Databases: MongoDB, MySQL, PostgreSQL, MSSQL, Oracle
 * Middleware: Kafka, RabbitMQ
 * Tools: JMeter, Curl
@@ -137,6 +137,71 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 #### 3.2.1.3. DEVELOP applications features
 
 #### 3.2.1.4. BUILD and REGISTRY docker image
+
+#### 3.2.1.4.01. BUILD/REGISTRY Docker image MSSQL SQLServer initialized for api events application
+
+* _Passo-#01_: CONFIGURE (Criar/editar/configurar) o `Dockerfile` e demais arquivos de scripts de inicialização: `setup.sql`, `run-initialization.sh` e `setup.sql`
+
+```cmd
+C:\..\dockerfile-mssql-api-events> TYPE Dockerfile
+C:\..\dockerfile-mssql-api-events> TYPE run-initialization.sh
+C:\..\dockerfile-mssql-api-events> TYPE setup.sql
+```
+
+* _Passo-#02_: BUILD (construir) a imagem Docker inicializada para a aplicação com nome `josemarsilva/mssql-api-events:v1`
+
+```cmd
+C:\..\docker-mssql-api-events> nerdctl image build -t josemarsilva/mssql-api-events:v1 .
+```
+
+* _Passo-#03_: RUN (Rodar/Executar) um novo container manualmente com a imagem inicializada
+
+```cmd
+C:\..\docker-mssql-api-events> nerdctl container run --name mssql-api-events -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=StrongPassword@12345" -p 1433:1433 -d josemarsilva/mssql-api-events:v1
+
+C:\..\docker-mssql-api-events> nerdctl container ls
+CONTAINER ID    IMAGE                                         COMMAND                   CREATED           STATUS    PORTS                     NAMES
+dc80785f74ff    docker.io/josemarsilva/mssql-api-events:v1    "/opt/mssql/bin/perm…"    10 seconds ago    Up        0.0.0.0:1433->1433/tcp    mssql-api-events
+```
+
+* _Passo-#04_: TEST (Testar) o novo container criado
+
+```cmd
+C:\..\docker-mssql-api-events> nerdctl container exec -it mssql-api-events /bin/bash
+mssql@dc80785f74ff:/app$ ls -la
+total 16
+drwxr-xr-x 1 mssql root 4096 Feb 22 23:36 .
+drwxr-xr-x 1 root  root 4096 Feb 22 23:38 ..
+-rwxrwxrwx 1 root  root  196 Feb 22 22:31 run-initialization.sh
+-rwxrwxrwx 1 root  root  342 Feb 22 23:13 setup.sql
+mssql@dc80785f74ff:/app$ exit
+exit
+
+C:\..\docker-mssql-api-events> nerdctl container exec -it mssql-api-events /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P yourStrong(!)Password
+1> SELECT GETDATE()
+2> GO
+
+-----------------------
+2022-02-22 23:41:28.087
+
+(1 rows affected)
+```
+
+* _Passo-#05_: STOP/KILL/DELETAR (Parar/Matar/Remover) o novo container criado
+
+```cmd
+C:\..\docker-mssql-api-events> nerdctl container stop  mssql-api-events
+C:\..\docker-mssql-api-events> nerdctl container kill  mssql-api-events
+C:\..\docker-mssql-api-events> nerdctl container rm -f mssql-api-events
+```
+
+```cmd
+C:\..\docker-mssql-api> nerdctl image ls
+REPOSITORY                                                             TAG       IMAGE ID        CREATED               PLATFORM       SIZE
+        :                                                              :            :              :
+```
+
+
 
 #### 3.2.1.5. SWAGGER api-doc
 
