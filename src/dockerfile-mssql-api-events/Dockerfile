@@ -1,23 +1,34 @@
 # filename   : Dockerfile
 # Description: Dockerfile MSSQL initialized for api-events project
 # Remarks    :
-#               - https://stackoverflow.com/questions/58309452/docker-initialize-database-tables-and-records-in-sql-server
+#               - https://hub.docker.com/_/microsoft-mssql-server
+#               - https://github.com/twright-msft/mssql-node-docker-demo-app
 
 # Base Docker images
 FROM mcr.microsoft.com/mssql/server:2019-CU15-ubuntu-20.04
 
-# User
+# Switch to root user for access to apt-get install
 USER root
 
-# Work directory
-WORKDIR /app
+# Install packages
+RUN apt-get -y update  && \
+    apt-get install -y curl
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # Environment variables
 
 # Copy initialization scripts
-COPY setup.sql .
-COPY run-initialization.sh .
+COPY entrypoint.sh .
+COPY import-data.sh .
+COPY *.sql .
+COPY *.csv .
 
-# Run/Cmd initialization scripts
-RUN chmod +x run-initialization.sh
-CMD ["/bin/bash", "./run-initialization.sh"]
+# Grant permissions for the import-data script to be executable
+RUN chmod +x /usr/src/app/import-data.sh
+
+# Switch back to mssql user and run the entrypoint script
+USER mssql
+ENTRYPOINT /bin/bash ./entrypoint.sh

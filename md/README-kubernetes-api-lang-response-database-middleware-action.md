@@ -144,8 +144,10 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ```cmd
 C:\..\dockerfile-mssql-api-events> TYPE Dockerfile
-C:\..\dockerfile-mssql-api-events> TYPE run-initialization.sh
+C:\..\dockerfile-mssql-api-events> TYPE entrypoint.sh
+C:\..\dockerfile-mssql-api-events> TYPE import-data.sh
 C:\..\dockerfile-mssql-api-events> TYPE setup.sql
+C:\..\dockerfile-mssql-api-events> TYPE tbl_api_tags.csv
 ```
 
 * _Passo-#02_: BUILD (construir) a imagem Docker inicializada para a aplicação com nome `josemarsilva/mssql-api-events:v1`
