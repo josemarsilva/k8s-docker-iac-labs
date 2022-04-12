@@ -42,6 +42,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [Playlist da Iniciativa Kubernetes - Semana Kubedev](https://www.youtube.com/watch?v=0V_zGIEqIBc&list=PLZfrXScDmaiPwFQvY4JnPZkgC3NmqxFLX) produzido pelo canal do Youtube [Kubedev - Fabrício Veronez](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
   * [Playlist de Apache Kafka](https://www.youtube.com/watch?v=o5yviW6QSrE&list=PL5aY_NrL1rjt_AZxj11kQjiTNLGg4ZaZA) produzido pelo canal do Youtube [FullCycle - Wesley Willians](https://www.youtube.com/channel/UCMUoZehUZBhLb8XaTc8TQrA)
   * [Kafka (Plataforma de Mensageria e Streaming) // Dicionário do Programador](https://www.youtube.com/watch?v=qOqXz5Qv_-8&list=PLORrDfZD1hkGVBK4byiS82zaAutzuhsRz) produzido pelo canal do Youtube [Código Fonte TV - Gabriel Fróes e Vanessa Weber](https://www.youtube.com/watch?v=qOqXz5Qv_-8&t=74s)
+  * [Evento Imersão Full Stack & Full Cycle](https://www.youtube.com/watch?v=O0HqVNkzY1Q) produzido pelo canal do Youtube [FullCycle - Wesley Willians](https://www.youtube.com/channel/UCMUoZehUZBhLb8XaTc8TQrA)
 
 
 ### 2.9. Glossário de Termos (Glossary)
