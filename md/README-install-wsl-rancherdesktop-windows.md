@@ -116,4 +116,7 @@ nginx          latest    0d17b565c37b    5 days ago        linux/amd64    149.1 
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
+* WSL - Windows Subsystem for Linux
+  * [Sobre configuração WSL e modos de instalação de Docker no Windows](https://www.youtube.com/watch?v=O0HqVNkzY1Q)
+  * [Guia rápido do WSL2 + Docker](https://github.com/codeedu/wsl2-docker-quickstart)
 
