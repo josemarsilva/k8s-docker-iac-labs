@@ -1,6 +1,7 @@
 # User Custom
 tmp/
 volume/mysql/
+volume/rabbitmq/
 
 # Logs
 logs
