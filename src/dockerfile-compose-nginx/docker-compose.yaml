@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  web:
+    image: josemarsilva/nginx-josemarsilva
+    ports:
+      - "8080:80"
