@@ -7,7 +7,7 @@ README
 
 2. Connect Mysql database and test some commands (use password 'root')
 
-    C:> mysql -h 127.0.0.1 -u root -p
+    C:> mysql -h 127.0.0.1 -u root -proot
 
         mysql> show databases;
             +--------------------+
