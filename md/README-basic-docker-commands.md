@@ -324,9 +324,10 @@ C:\> nerdctl container logs -t -f 6cb3b8b2aa0f
 
 ## I - Referências
 
+* Docker
+  * [INICIATIVA KUBERNETES - Aula 1 - Containers e Docker Simplificados](https://www.youtube.com/watch?v=lKxuO--0ypM)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
-* [INICIATIVA KUBERNETES - Aula 1 - Containers e Docker Simplificados](https://www.youtube.com/watch?v=lKxuO--0ypM)

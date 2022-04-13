@@ -119,4 +119,5 @@ nginx          latest    0d17b565c37b    5 days ago        linux/amd64    149.1 
 * WSL - Windows Subsystem for Linux
   * [Sobre configuração WSL e modos de instalação de Docker no Windows](https://www.youtube.com/watch?v=O0HqVNkzY1Q)
   * [Guia rápido do WSL2 + Docker](https://github.com/codeedu/wsl2-docker-quickstart)
-
+* Ferramentas e acessórios:
+  * [Configurando o melhor ambiente de desenvolvimento](https://youtu.be/O0HqVNkzY1Q)
