@@ -26,6 +26,7 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Basic Commands usi
     + [g. Deployment](#g-deployment)
     + [h. Rollout history of deployment](#h-rollout-history-of-deployment)
     + [i. Service: ClusterIP, NodePort and LoadBalancer](#i-service-clusterip-nodeport-and-loadbalancer)
+    + [j. Exercício Portal de Noticias da Alura no Kubernetes](#j-exercício-portal-de-notícias)
 
 - [I - Referências](#i---referências)
 
@@ -513,6 +514,124 @@ C:\src\kubernetes-basic> kubectl get service web-app-service
 
 * Abrir com o browser a url `http:localhost:30000` e observar a WebPage com fundo azul. Se você tentar acessar a url anterior `http:localhost:31725` ela não mais estará disponível porque foi feito _apply_ no servico que foi atualizado.
 
+#### j. Exercício Portal de notícias
+
+O objetivo deste exercícioé  cria o portal de notícias da Alura: https://cursos.alura.com.br/course/kubernetes-pods-services-configmap/
+
+
+#### j.1. Criar POD Portal de Noticias
+
+* Criar um POD para o portal de notícias usuando a imagem disponibilizada no registry da AluraCursos no DockerHub
+* Criar um POD para o portal de notícias usuando a imagem disponibilizada no registry da AluraCursos no DockerHub
+
+```cmd
+C:\portal-noticias> type portal-noticias.yaml
+C:\portal-noticias> kubectl apply -f portal-noticias.yaml
+```
+
+* Acompanhar enquanto a imagem é baixada e o POD iniciado com `--watch`, quando o POD inciar a execução faça um describe
+
+```cmd
+C:\portal-noticias> kubectl get pods --watch
+NAME              READY   STATUS    RESTARTS   AGE
+portal-noticias   1/1     Running   0          4m50s
+C:\portal-noticias> kubectl describe pods portal-noticias
+```
+
+* Entrar no POD `portal-noticias` e executar o comando `bash` e obter a pagina princial
+
+```cmd
+C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+root@portal-noticias:/var/www/html# curl localhost
+<html>
+  :
+root@portal-noticias:/var/www/html# exit
+```
+
+#### j.2. Criar ClusterIP Service com 2 novos POD nginx acessados através pelo service
+
+* Documentação e registry do Nginx no Dockerhub: https://hub.docker.com/_/nginx
+* Criar dois PODs conforme especificação em `pod-1.yaml` e `pod-2.yaml`
+
+```cmd
+C:\portal-noticias> type pod-1.yaml
+C:\portal-noticias> type pod-2.yaml
+C:\portal-noticias> kubectl apply -f pod-1.yaml
+C:\portal-noticias> kubectl apply -f pod-2.yaml
+C:\portal-noticias> kubectl get pods
+NAME              READY   STATUS    RESTARTS   AGE
+portal-noticias   1/1     Running   0          21m
+pod-2             1/1     Running   0          21s
+pod-1             1/1     Running   0          28s
+```
+
+* Criar o Service do tipo ClusterIP para atender inicialmente apenas o `pod-2` configurando os arquivos (.yaml) com o *label:* `app: pod-2` na definição do POD e com o *selector:* `app: pod-2` na definição do service.
+
+```cmd
+C:\portal-noticias> type svc-pod-2.yaml
+C:\portal-noticias> kubectl apply -f svc-pod-2.yaml
+C:\portal-noticias> kubectl get services
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.43.0.1      <none>        443/TCP   83d
+svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    2m42s
+```
+
+* Entrar no POD `pod-1`, executar o comando `bash` e obter a homepage do `pod-2` através do IP optido pelo ClusterIP
+  * Observar que o IP é visível apenas dentro dos objetos do cluster
+
+```cmd
+C:\portal-noticias> kubectl exec -it pod-1 -- bash
+root@pod-1:/# curl 10.43.10.108
+<!DOCTYPE html>
+  :
+root@pod-1:/# exit
+```
+
+* Remover o POD `pod-2` e entrar no `pod-1` e tentar executar o comando `bash` e obter a homepage do `pod-2` através do IP optido pelo ClusterIP
+  * Observar que embora o POD `pod-2` tenha sido removido, o serviço ainda existe e aponta para o vazio
+
+```cmd
+C:\portal-noticias> kubectl delete pod pod-2
+C:\portal-noticias> kubectl get pods
+NAME              READY   STATUS    RESTARTS   AGE
+portal-noticias   1/1     Running   0          51m
+pod-1             1/1     Running   0          30m
+C:\portal-noticias> kubectl get services
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.43.0.1      <none>        443/TCP   83d
+svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    19m
+C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+root@portal-noticias:/var/www/html# curl 10.43.10.108
+curl: (7) Failed to connect to 10.43.10.108 port 80: Connection refused
+root@portal-noticias:/var/www/html# exit
+```
+
+* Se reaplicarmos (create) o POD `pod-2` removido no passo anterior, que tem o *label* `app: pod-2` que é selecionado pelo *selector* `app:pod-2` do servico criado então o IP do cluster voltará a responder
+
+```cmd
+C:\portal-noticias> kubectl apply -f pod-2.yaml
+C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+root@portal-noticias:/var/www/html# curl 10.43.10.108
+<!DOCTYPE html>
+  :
+root@portal-noticias:/var/www/html# exit
+```
+
+* Criar o Service do tipo ClusterIP para atender inicialmente apenas o `pod-1` na porta `81` configurando os arquivos (.yaml) com o *label:* `app: pod-1` na definição do POD e com o *selector:* `app: pod-2` na definição do service.
+  * Observar que a porta do POD independe da porta do service
+
+```cmd
+C:\portal-noticias> type pod-1.yaml
+C:\portal-noticias> type svc-pod-1.yaml
+C:\portal-noticias> kubectl apply -f svc-pod-1.yaml
+C:\portal-noticias> kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE    SELECTOR
+kubernetes   ClusterIP   10.43.0.1      <none>        443/TCP   83d    <none>
+svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    83m    app=pod-2
+svc-pod-1    ClusterIP   10.43.224.69   <none>        81/TCP    100s   app=pod-1
+```
+
+#### j.3. Criar NodePort Service
 
 
 ## I - Referências
