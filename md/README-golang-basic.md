@@ -3,8 +3,7 @@
 ## 1. Introdução
 
 Este documento contém os artefatos do laboratório **LAB-11: GoLang Basic** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
-* Obter os binários e instalar o Rancher Desktop em ambiente Windows
-* Explorar os recursos e funcionalidades básicas do Rancher Desktop
+* Explorar os recursos e funcionalidades básicas 
 
 ##### Table of Contents  
 - [1. Introdução](#1-introdução)
@@ -19,6 +18,8 @@ Este documento contém os artefatos do laboratório **LAB-11: GoLang Basic** aba
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [a. Fundamentos Importantes da lingaguem GoLang](#35a-fundamentos-importantes-da-linguagem-golang)
     + [b. Desenvolvimento Web Server GoLang](#35b-desenvolvimento-webserver-golang)
+    + [c. Conectar banco de dados com GoLang](#35c-conectar-banco-de-dados-golang)
+    + [d. Construir aplicação Web CRUD](#35d-construir-uma-aplicação-web-crud-com-database)
 - [I - Referências](#i---referências)
 
 
@@ -161,11 +162,31 @@ SELECT * FROM tabela
 
 * Observar o resultado esperado: deverão ser apresentadas tantas linhas quantas as vezes que foi executada a aplicação, pois ela faz insert na base de dados e não apaga. Porém, se o container do MSSQL for finalizado, a tabela e toda base de dados será descartada.
 
+#### 3.5.d. Construir uma aplicação web CRUD com database
+
+* Baseado em https://medium.com/baixada-nerd/criando-um-crud-simples-em-go-3640d3618a67 Construir uma aplicação web que responda na homepage `127.0.0.1:8081/`as opções: \[C\]reate, \[R\]etrieve all, \[U\]pdate e \[D\]elete com a base de dados MSSQL
+
+* Exercício no. 5: Construa uma aplicação que insere alguns registros na base de dados e em seguida consulte os registros para ter certeza que foram incluídos. Não se esqueça de importar os drivers de database se forem necessários. Consulte documentação https://go.dev/doc/database/querying
+
+```cmd
+C:\> type http-server-crud-json-database-mssql
+C:\> go run http-server-crud-json-database-mssql
+```
+
+* Abra a home page e navegue pelo criar, listar, alterar e remover
+```browser
+http://127.0.0.1:8081/
+```
+
+
 ## I - Referências
 
 * GoLang
   * [https://go.dev]
   * [O segredo da Go Lang: A linguagem que revolucionou o mercado](https://www.youtube.com/watch?v=gXb3Uwk-mEQ)
+  * https://tour.golang.org/welcome/1
+  * https://gobyexample.com/
+  * https://www.casadocodigo.com.br/products/livro-google-go
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)

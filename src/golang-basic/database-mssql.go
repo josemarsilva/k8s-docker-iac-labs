@@ -9,8 +9,6 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 )
 
-// declare collection (array) of Product struct
-
 // Type of Product struct
 type Product struct {
 	code        string

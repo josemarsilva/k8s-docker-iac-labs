@@ -1,0 +1,29 @@
+{{ define "index"}}
+    {{ template "header" }}
+        {{ template "menu" }}
+
+    <h2>Usuários cadastrados</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Code</td>
+                <td>Description</td>
+                <td>Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range . }}
+            <tr>
+                <td>{{ .Id }}</td>
+                <td>{{ .Code }}</td>
+                <td>{{ .Description }}</td>
+                <td>{{ .Price }}</td>
+                <td><a href="/show?id={{ .Id }}">Visualizar</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ template "footer" }}
+{{ end }}
