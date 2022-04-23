@@ -63,19 +63,19 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 #### a. Docker Compose MySql
 
-[dockerfile-compose-mysql](../src/dockerfile-compose-mysql)
+[docker-compose-mysql](../src/docker-compose-mysql)
 
 #### b. Docker Compose MySql e GoLang
 
-[dockerfile-compose-mysql](../src/dockerfile-compose-mysql-golang)
+[docker-compose-mysql](../src/docker-compose-mysql-golang)
 
 #### c. Docker Compose NGINX
 
-[dockerfile-compose-nginx](../src/dockerfile-compose-nginx)
+[docker-compose-nginx](../src/docker-compose-nginx)
 
 #### d. Docker Compose RabbitMq
 
-[dockerfile-compose-rabbitmq](../src/dockerfile-compose-rabbitmq)
+[docker-compose-rabbitmq](../src/docker-compose-rabbitmq)
 
 #### e. Dockerfile e GoLang Hello World
 
