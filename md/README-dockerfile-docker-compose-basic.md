@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-dockerfile-compose-basic.md` - Dockerfile e Compose file Basics
+`kubernetes-docker-rancherdesktop-labs/md/README-dockerfile-docker-compose-basic.md` - Dockerfile e Compose file Basics
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-10: Dockerfile e Compose file Basics** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-10: Dockerfile e Docker Compose file Basics** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os recursos e funcionalidades básicas
 
 ##### Table of Contents  
@@ -63,44 +63,44 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 #### a. Docker Compose MySql
 
-![dockerfile-compose-mysql](../src/dockerfile-compose-mysql)
+[dockerfile-compose-mysql](../src/dockerfile-compose-mysql)
 
 #### b. Docker Compose MySql e GoLang
 
-![dockerfile-compose-mysql](../src/dockerfile-compose-mysql-golang)
+[dockerfile-compose-mysql](../src/dockerfile-compose-mysql-golang)
 
 #### c. Docker Compose NGINX
 
-![dockerfile-compose-nginx](../src/dockerfile-compose-nginx)
+[dockerfile-compose-nginx](../src/dockerfile-compose-nginx)
 
 #### d. Docker Compose RabbitMq
 
-![dockerfile-compose-rabbitmq](../src/dockerfile-compose-rabbitmq)
+[dockerfile-compose-rabbitmq](../src/dockerfile-compose-rabbitmq)
 
 #### e. Dockerfile e GoLang Hello World
 
-![dockerfile-golang-helloworld](../src/dockerfile-golang-helloworld)
+[dockerfile-golang-helloworld](../src/dockerfile-golang-helloworld)
 
 #### f. Dockerfile Kafka API Events
-![dockerfile-kafka-api-events](../src/dockerfile-kafka-api-events)
+[dockerfile-kafka-api-events](../src/dockerfile-kafka-api-events)
 
 #### g. Dockerfile MSSQL API Events
-![dockerfile-mssql-api-events](../src/dockerfile-mssql-api-events)
+[dockerfile-mssql-api-events](../src/dockerfile-mssql-api-events)
 
 #### h. Dockerfile MySQL API Events
-![dockerfile-mysql-api-events](../src/dockerfile-mysql-api-events)
+[dockerfile-mysql-api-events](../src/dockerfile-mysql-api-events)
 
 #### i. Dockerfile Postgresql API Events
-![dockerfile-postgresql-api-events](../src/dockerfile-postgresql-api-events)
+[dockerfile-postgresql-api-events](../src/dockerfile-postgresql-api-events)
 
 #### j. Dockerfile RabbitMQ API Events
-![dockerfile-postgresql-api-events](../src/dockerfile-postgresql-api-events)
+[dockerfile-postgresql-api-events](../src/dockerfile-postgresql-api-events)
 
 #### k. Dockerfile Ubuntu Curl
-![dockerfile-ubuntu-curl](../src/dockerfile-ubuntu-curl)
+[dockerfile-ubuntu-curl](../src/dockerfile-ubuntu-curl)
 
 #### l. Dockerfile Ubuntu Curl args
-![dockerfile-ubuntu-curl-args](../src/dockerfile-ubuntu-curl-args)
+[dockerfile-ubuntu-curl-args](../src/dockerfile-ubuntu-curl-args)
 
 
 ## I - Referências

@@ -68,7 +68,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 | [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)                | Kubernetes IDE Lens |
 | [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md) | Kubernetes Self Healing, application health check and resources limits probes with NodeJS, Express, Swagger-UI, NodeHog, YamlJS and Ejs |
 | [LAB-10](./md/README-kubernetes-api-lang-response-database-middleware-action.md)   | Kubernetes - API - Response - Database - Middleware - Action |
-| [LAB-11](./md/README-dockerfile-compose-basic.md)   | Dockerfile e Docker Compose Basic |
+| [LAB-11](./md/README-dockerfile-docker-compose-basic.md)                           | Dockerfile e Docker Compose Basic |
 | [LAB-12](./md)   |  |
 
 
