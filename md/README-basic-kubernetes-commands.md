@@ -529,8 +529,8 @@ O objetivo deste exercícioé  cria o portal de notícias da Alura: https://curs
 * Criar um POD para o portal de notícias usuando a imagem disponibilizada no registry da AluraCursos no DockerHub
 
 ```cmd
-C:\portal-noticias> type portal-noticias.yaml
-C:\portal-noticias> kubectl apply -f portal-noticias.yaml
+C:\portal-noticias> type pod-portal-noticias.yaml
+C:\portal-noticias> kubectl apply -f pod-portal-noticias.yaml
 ```
 
 * Acompanhar enquanto a imagem é baixada e o POD iniciado com `--watch`, quando o POD inciar a execução faça um describe
@@ -570,7 +570,7 @@ pod-2             1/1     Running   0          21s
 pod-1             1/1     Running   0          28s
 ```
 
-* Criar o Service do tipo ClusterIP para atender inicialmente apenas o `pod-2` configurando os arquivos (.yaml) com o *label:* `app: pod-2` na definição do POD e com o *selector:* `app: pod-2` na definição do service.
+* Criar o Service do tipo `ClusterIP` para atender inicialmente apenas o `pod-2` configurando os arquivos (.yaml) com o *label:* `app: pod-2` na definição do POD e com o *selector:* `app: pod-2` na definição do service.
 
 ```cmd
 C:\portal-noticias> type svc-pod-2.yaml
@@ -625,7 +625,7 @@ root@portal-noticias:/var/www/html# curl 10.43.10.108
 root@portal-noticias:/var/www/html# exit
 ```
 
-* Criar o Service do tipo ClusterIP para atender inicialmente apenas o `pod-1` na porta `81` configurando os arquivos (.yaml) com o *label:* `app: pod-1` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
+* Criar o Service do tipo `ClusterIP` para atender inicialmente apenas o `pod-1` na porta `81` configurando os arquivos (.yaml) com o *label:* `app: pod-1` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
 ```cmd
@@ -642,7 +642,7 @@ svc-pod-1    ClusterIP   10.43.224.69   <none>        81/TCP    100s   app=pod-1
 #### j.3. Criar NodePort Service
 
 
-* Criar o Service do tipo NodePort para atender inicialmente apenas o `pod-3` na porta `8080` configurando os arquivos (.yaml) com o *label:* `app: pod-3` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
+* Criar o Service do tipo `NodePort` para atender inicialmente apenas o `pod-3` na porta `8080` configurando os arquivos (.yaml) com o *label:* `app: pod-3` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
 ```cmd
@@ -680,7 +680,7 @@ root@portal-noticias:/var/www/html# exit
 +-----------------------------------+
 ```
 
-* Agora tente acessar usando o IP localhost e a porta binded na coluna PORT(S) correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
+* Agora tente acessar usando o IP `localhost` e a porta binded na coluna PORT(S) correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
   * Observar que no Windows o Docker Desktop ou Rancher Desktop providenciam o bind em uma porta alta > 30000 para a máquina externa
   * Lembrar que no Linux este bind automático não funciona e deve ser usado o internal IP em substituição ao localhost
 
@@ -705,8 +705,86 @@ svc-pod-3    NodePort    10.43.217.169   <none>        8080:30702/TCP   29m    a
 
 #### j.4. Criar Load Balancer Service
 
+* Criar o Service do tipo `LoadBalancer` para atender todos os POD's (`pod-1`, `pod-2` e `pod-3`)  na porta `8000` configurando os arquivos (.yaml) com o *label:* `app: pod-1 pod-2 pod-3` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
+  * Observar que a porta do POD independe da porta do service
 
+```cmd
+C:\portal-noticias> type svc-pod-loadbalancer.yaml
+C:\portal-noticias> kubectl apply -f svc-pod-loadbalancer.yaml
+C:\portal-noticias> kubectl get services -o wide
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+kubernetes             ClusterIP   10.43.0.1       <none>        443/TCP          83d     <none>
+svc-pod-2              ClusterIP   10.43.10.108    <none>        80/TCP           6h14m   app=pod-2
+svc-pod-1              ClusterIP   10.43.224.69    <none>        81/TCP           4h53m   app=pod-1
+svc-pod-3              NodePort    10.43.217.169   <none>        8080:30702/TCP   4h14m   app=pod-3
+svc-pod-loadbalancer   NodePort    10.43.72.147    <none>        8000:31492/TCP   38s     app=pod-3
+```
 
+* Acessar usando o IP `localhost` e a porta binded na coluna PORT(S) correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
+  * Observar que no Windows o Docker Desktop ou Rancher Desktop providenciam o bind em uma porta alta > 30000 para a máquina externa
+  * Lembrar que no Linux este bind automático não funciona e deve ser usado o internal IP em substituição ao localhost
+
+```cmd
+C:\portal-noticias> curl localhost:31492
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+```
+
+* Para conseguirmos observar o **LoadBalancer** atuando dividindo a carga entre os diversos POD's ( `pod-1`, `pod-2` e `pod-3`), precisaremos editar a homepage de cada um dos POD's com uma informação diferente para conseguirmos observar esta dinâmica.
+  * Para cada um dos POD's ( `pod-1`, `pod-2` e `pod-3`) - onde `<?>` corresponde ao número do pod
+    * acessar o POD  executando o comando: `kubectl exec -it pod-<?> -- bash` 
+    * executar comandos para configurar o arquivos (.html) da homepage
+
+```bash
+root@portal-noticias:/var/www/html# sed -i 's/Welcome to /Welcome to pod-<?> /g' /usr/share/nginx/html/index.html
+```
+
+* Agora repetir diversas vezes o procedimento de acessar usando o IP `localhost` e a porta binded na coluna PORT(S) correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
+  * Observar que a cada execução o **LoadBalancer** irá dividir a carga entre `pod-1`, `pod-2` e `pod-3`
+
+```cmd
+C:\portal-noticias> curl localhost:31492
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to pod-<?> nginx!</title>
+```
+
+#### j.5. Criar Node Port Service para o portal-noticias
+
+* Remover para efeito de limpeza todos o(s) POD's e SERVICE's criados até então com os comandos abaixo:
+
+```cmd
+C:\portal-noticias> kubectl delete --all pods
+C:\portal-noticias> kubectl delete --all services
+```
+
+* Criar o Service do tipo `NodePort` para atender todos o(s) POD  `portal-noticias` na porta `30000` configurando os arquivos (.yaml) com o *label:* `app: portal-noticias` na definição do POD e com o *selector:* `app: portal-noticias` na definição do service.
+  * Observar que a porta do POD independe da porta do service
+
+```cmd
+C:\portal-noticias> type pod-portal-noticias.yaml
+C:\portal-noticias> type svc-portal-noticias.yaml
+C:\portal-noticias> kubectl apply -f pod-portal-noticias.yaml
+C:\portal-noticias> kubectl apply -f svc-portal-noticias.yaml
+C:\portal-noticias> kubectl get services -o wide
+NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+  :                      :             :              :            :               :          :
+svc-portal-noticias    NodePort    10.43.7.196     <none>        80:30000/TCP     3m35s   app=svc-portal-noticias
+```
+
+```browser
++---------------------------------------+
+| http://localhost:30000                |
++---------------------------------------+
+|+-------------------------------------+|
+||  Alura Noticias | [Search] | Painel ||
+|+-------------------------------------+|
+|                                       |
++---------------------------------------+
+```
 
 
 

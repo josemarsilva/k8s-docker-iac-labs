@@ -4,6 +4,7 @@ metadata:
   name: pod-1
   labels:
     app: pod-1
+    tier: pod
 spec:
   containers:
   - name: container-pod-1
