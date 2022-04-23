@@ -27,6 +27,10 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Basic Commands usi
     + [h. Rollout history of deployment](#h-rollout-history-of-deployment)
     + [i. Service: ClusterIP, NodePort and LoadBalancer](#i-service-clusterip-nodeport-and-loadbalancer)
     + [j. Exercício Portal de Noticias da Alura no Kubernetes](#j-exercício-portal-de-notícias)
+      - [1. Criar o(s) POD do Portal de Notícias](#j1-criar-pod-portal-de-noticias)
+      - [2. Criar o(s) SERVICE do tipo ClusterIP para acessar o(s) POD's](#j2-criar-clusterip-service-com-2-novos-pod-nginx-acessados-através-pelo-service)
+      - [3. Criar o SERVICE do tipo NodePort para acessar o(s) POD's](#j3-criar-nodeport-service)
+      - [4. ](#j)
 
 - [I - Referências](#i---referências)
 
@@ -538,7 +542,8 @@ portal-noticias   1/1     Running   0          4m50s
 C:\portal-noticias> kubectl describe pods portal-noticias
 ```
 
-* Entrar no POD `portal-noticias` e executar o comando `bash` e obter a pagina princial
+* Acessar através do POD `portal-noticias` e executar o comando `bash` para ter acesso ao terminal linux de linha de comandos de um POD dentro do cluster Kubernetes
+  * No `bash` executar o `curl` para obter a homepage de localhost
 
 ```cmd
 C:\portal-noticias> kubectl exec -it portal-noticias -- bash
@@ -576,7 +581,8 @@ kubernetes   ClusterIP   10.43.0.1      <none>        443/TCP   83d
 svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    2m42s
 ```
 
-* Entrar no POD `pod-1`, executar o comando `bash` e obter a homepage do `pod-2` através do IP optido pelo ClusterIP
+* Acessar através do POD `pod-1` e executar o comando `bash` para ter acesso ao terminal linux de linha de comandos de um POD dentro do cluster Kubernetes
+  * No `bash` executar o `curl` para obter homepage do `pod-2` através do IP optido pelo ClusterIP
   * Observar que o IP é visível apenas dentro dos objetos do cluster
 
 ```cmd
@@ -587,7 +593,9 @@ root@pod-1:/# curl 10.43.10.108
 root@pod-1:/# exit
 ```
 
-* Remover o POD `pod-2` e entrar no `pod-1` e tentar executar o comando `bash` e obter a homepage do `pod-2` através do IP optido pelo ClusterIP
+* Remover o POD `pod-2` 
+* Acessar através do POD `pod-1` e executar o comando `bash` para ter acesso ao terminal linux de linha de comandos de um POD dentro do cluster Kubernetes
+  * No `bash` executar o `curl` para obter a homepage do `pod-2` através do IP optido pelo ClusterIP
   * Observar que embora o POD `pod-2` tenha sido removido, o serviço ainda existe e aponta para o vazio
 
 ```cmd
@@ -617,7 +625,7 @@ root@portal-noticias:/var/www/html# curl 10.43.10.108
 root@portal-noticias:/var/www/html# exit
 ```
 
-* Criar o Service do tipo ClusterIP para atender inicialmente apenas o `pod-1` na porta `81` configurando os arquivos (.yaml) com o *label:* `app: pod-1` na definição do POD e com o *selector:* `app: pod-2` na definição do service.
+* Criar o Service do tipo ClusterIP para atender inicialmente apenas o `pod-1` na porta `81` configurando os arquivos (.yaml) com o *label:* `app: pod-1` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
 ```cmd
@@ -632,6 +640,74 @@ svc-pod-1    ClusterIP   10.43.224.69   <none>        81/TCP    100s   app=pod-1
 ```
 
 #### j.3. Criar NodePort Service
+
+
+* Criar o Service do tipo NodePort para atender inicialmente apenas o `pod-3` na porta `8080` configurando os arquivos (.yaml) com o *label:* `app: pod-3` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
+  * Observar que a porta do POD independe da porta do service
+
+```cmd
+C:\portal-noticias> type pod-3.yaml
+C:\portal-noticias> type svc-pod-3.yaml
+C:\portal-noticias> kubectl apply -f svc-pod-3.yaml
+C:\portal-noticias> kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE    SELECTOR
+kubernetes   ClusterIP   10.43.0.1       <none>        443/TCP          83d    <none>
+svc-pod-2    ClusterIP   10.43.10.108    <none>        80/TCP           149m   app=pod-2
+svc-pod-1    ClusterIP   10.43.224.69    <none>        81/TCP           68m    app=pod-1
+svc-pod-3    NodePort    10.43.217.169   <none>        8080:30702/TCP   29m    app=pod-3
+```
+
+* Acessar através do POD `portal-noticias` e executar o comando `bash` para ter acesso ao terminal linux de linha de comandos de um POD dentro do cluster Kubernetes
+  * No `bash` executar o `curl` para obter a homepage do IP na coluna CLUSTER-IP correspondente ao *NodePort* do `svc-pod-3`
+
+```cmd
+C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+root@portal-noticias:/var/www/html# curl 10.43.217.169:8080
+<html>
+  :
+root@portal-noticias:/var/www/html# exit
+```
+
+* Agora tente acessar o mesmo IP na coluna CLUSTER-IP correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
+  * Observar que não responde porque as portas da coluna CLUSTER-IP são internas do cluster
+
+```browser
++-----------------------------------+
+| http://10.43.217.169:8080         |
++-----------------------------------+
+|  Não é possível acessar esse site |
+|  ERR_CONNECTION_TIMED_OUT         |
++-----------------------------------+
+```
+
+* Agora tente acessar usando o IP localhost e a porta binded na coluna PORT(S) correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
+  * Observar que no Windows o Docker Desktop ou Rancher Desktop providenciam o bind em uma porta alta > 30000 para a máquina externa
+  * Lembrar que no Linux este bind automático não funciona e deve ser usado o internal IP em substituição ao localhost
+
+```cmd
+C:\portal-noticias> kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE    SELECTOR
+kubernetes   ClusterIP   10.43.0.1       <none>        443/TCP          83d    <none>
+svc-pod-2    ClusterIP   10.43.10.108    <none>        80/TCP           149m   app=pod-2
+svc-pod-1    ClusterIP   10.43.224.69    <none>        81/TCP           68m    app=pod-1
+svc-pod-3    NodePort    10.43.217.169   <none>        8080:30702/TCP   29m    app=pod-3
+```
+
+```browser
++-----------------------------------+
+| http://localhost:30702            |
++-----------------------------------+
+|  Welcome to nginx!                |
+|      :                            |
+|  Thank you for using nginx.       |
++-----------------------------------+
+```
+
+#### j.4. Criar Load Balancer Service
+
+
+
+
 
 
 ## I - Referências
