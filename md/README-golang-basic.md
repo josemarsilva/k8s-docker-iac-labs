@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-golang-basic.md` - Go Language Basic
+`kubernetes-docker-rancherdesktop-labs/md/README-golang-basic.md` - Go Language Basic Programming
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-11: GoLang Basic** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-12: GoLang Basic Programming** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os recursos e funcionalidades básicas 
 
 ##### Table of Contents  
