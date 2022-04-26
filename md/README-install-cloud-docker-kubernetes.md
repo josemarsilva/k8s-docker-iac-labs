@@ -29,7 +29,7 @@ Este documento contém os artefatos do laboratório **LAB-13 - Instalação em i
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-cloud-infrastructure.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
