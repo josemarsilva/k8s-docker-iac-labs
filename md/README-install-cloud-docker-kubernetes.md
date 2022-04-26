@@ -34,7 +34,7 @@ Este documento contém os artefatos do laboratório **LAB-13 - Instalação em i
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-infrastructure.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
