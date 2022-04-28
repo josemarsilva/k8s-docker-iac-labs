@@ -41,7 +41,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 | Termo       | Significado                     |
 | :---------- | :------------------------------ |
-| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `kubectl` ou `docker`. |
+| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `docker`. |
 
 
 ## 3. Projeto / Laboratório

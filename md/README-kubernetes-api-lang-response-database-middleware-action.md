@@ -74,7 +74,15 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.7. Diagrama de Sequencia (Sequence Diagram)
 
-* A seguir, as imagens em diagramas de sequencia do comportamento das API's no que diz respeito à resposta: a) `sync`: Síncrona; b) `async`: Assíncrona. E no que diz respeito a ação: a) `relay`; b) 'response/acknowledgement`; c) `poll`; d) `callback`
+* A seguir, as imagens em diagramas de sequencia do comportamento das API's ...
+  * ... no que diz respeito à resposta: 
+    * `sync`: Síncrona
+    * `async`: Assíncrona
+  * ... no que diz respeito a ação: 
+    * `relay`
+    * `response/acknowledgement`
+    * `poll`
+    * `callback`
 
 ![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledge.png)
 
@@ -97,7 +105,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 | Termo       | Significado                     |
 | :---------- | :------------------------------ |
-| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `kubectl` ou `docker`. |
+| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao `docker`. |
 
 
 ## 3. Projeto / Laboratório

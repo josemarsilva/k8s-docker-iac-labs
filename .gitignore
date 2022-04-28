@@ -3,6 +3,10 @@ tmp/
 volume/mysql/
 volume/rabbitmq/
 
+# Terraform
+.terraform
+.terraform.lock.hcl
+
 # Logs
 logs
 *.log

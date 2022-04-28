@@ -71,7 +71,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 | [LAB-11](./md/README-dockerfile-docker-compose-basic.md)                           | Dockerfile e Docker Compose Basic |
 | [LAB-12](./md/README-golang-basic.md)                                              | GoLang Basic Programming |
 | [LAB-13](./md/README-install-cloud-docker-kubernetes.md)                           | Install on Cloud Docker & Kubernetes |
-
+| [LAB-14](./md/README-terraform-basic.md)                                           | Basic Terraform |
 
 ## I - Referências
 
@@ -80,4 +80,3 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
-* [Canal do Fabrício Veronez KubeDev no Youtube](https://www.youtube.com/channel/UCUy0NlW6WlVFj8V3xhXegYQ)
