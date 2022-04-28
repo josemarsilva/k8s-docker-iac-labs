@@ -113,10 +113,13 @@ $ terraform -install-autocomplete
 
 * **Objetivo**: Download (pull) e instalação dos binários do Terraform em um container
 
+```sh
+$ docker pull hashicorp/terraform
+```
 
 #### 3.3.4. Create/configure AWS Credential Access Key on AWS CLI
 
-* **Objetivo**: Create/configure AWS Credential Access Key on AWS CLI - [Terraform Tutorial - AWS](https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started)
+* **Objetivo**: Create/configure AWS Credential Access Key on AWS CLI - [Terraform Tutorial - AWS](https://learn.hashicorp.com/tutorials/terraform/aws-build?in=terraform/aws-get-started) usando a [documentação de referência do provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)
 
 * **Passo 1**: Criar AWS Credential Access Key
   * Em `AWS :: Console Home` clique no menu de opção `AWS :: Security, Identity & Compliance >> IAM` para acessar _IAM Dashboard_
