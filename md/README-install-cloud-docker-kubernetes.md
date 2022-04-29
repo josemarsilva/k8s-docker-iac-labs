@@ -36,7 +36,6 @@ Este documento contém os artefatos do laboratório **LAB-13 - Instalação em i
 
 ![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-infrastructure.png) 
 
-
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
 ![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-docker-kubernetes-on-cloud-infrastructure.png) 
@@ -79,6 +78,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 * **Objetivo**: Criar uma máquina virtual no serviço EC2 com sistema operacional Linux Ubuntu 20.04, 
 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-aws-kubernetes.png) 
 
 * Em `AWS :: Console Homepage` escolher a opção de menu `Services >> Compute >> EC2`
 * Em `AWS :: Services >> Compute >> EC2` clicar no link `Instances` para mostrar a lista de instâncias executando

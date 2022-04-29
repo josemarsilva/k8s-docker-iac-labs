@@ -137,16 +137,6 @@ Default region name [None]:
 Default output format [None]: 
 ```
 
-* **Passo 2**: Configurar AWS CLI em Linux com a _access key_ obtida no passo anterior
-
-```sh
-$ aws configure
-AWS Access Key ID [None]: ABCDEFGHIJKLMNOPQRST
-AWS Secret Access Key [None]: ***************************
-Default region name [None]: 
-Default output format [None]: 
-```
-
 * **Passo 3**: Configurar AWS CLI em Windows com a _access key_ obtida no passo anterior
 
 ```cmd
