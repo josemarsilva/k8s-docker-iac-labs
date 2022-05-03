@@ -143,8 +143,9 @@ The available commands for execution are listed below.
 $ vi .gitignore
   :
 # Terraform
-infra/.terraform*
-infra/terraform*
+terraform.tfstate
+.terraform
+.terraform.lock.hcl
   :
 ```
 
@@ -253,9 +254,7 @@ Terraform will perform the following actions:
   + resource "aws_instance" "app_server" {
        :
 Plan: 1 to add, 0 to change, 0 to destroy.
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
+       :
   Enter a value: yes
       :
 aws_instance.app_server: Creating...
@@ -276,15 +275,18 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 * **Passo 1**: Criar infraestrutura do Terraform
 
 ```sh
-$ cd ./src/terraform-basic
-$ mkdir terraform-aws
-$ cd mkdir terraform-aws
+$ cd ./src/terraform-basic/terraform-aws
+$ terraform destroy
+  :
+Plan: 0 to add, 0 to change, 1 to destroy.
+  :
 ```
 
 
 ## I - Referências
 
 * Terraform
+  * [Terraform Best Practices](https://www.terraform-best-practices.com/v/ptbr/)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)

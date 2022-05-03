@@ -2,10 +2,13 @@
 tmp/
 volume/mysql/
 volume/rabbitmq/
+*.tmp
 
 # Terraform
+terraform.tfstate
 .terraform
 .terraform.lock.hcl
+terraform.tfstate.backup
 
 # Logs
 logs
