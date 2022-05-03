@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-basic-docker-commands.md` - Kubernetes, Docker e Rancher Desktop - LAB-02 - Basic Commands using Docker on RanckerDesktop
+`kubernetes-docker-rancherdesktop-labs/md/README-docker-commands-basic.md` - Kubernetes, Docker e Rancher Desktop - LAB-02 - Basic Commands using Docker on RanckerDesktop
 
 ## 1. Introdução
 
-Este documento contém os artefatos dolaboratório **LAB-02 - Basic Commands using Docker on RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos dolaboratório **LAB-02 - Docker Commands using Docker on RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Docker_ no Rancher Desktop
 
 ##### Table of Contents  

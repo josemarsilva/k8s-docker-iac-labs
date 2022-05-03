@@ -59,7 +59,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 | Laboratório | Descrição                       |
 | :---------- | :------------------------------ |
 | [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)                        | Install WSL, Rancher Desktop and command line with nerdctl |
-| [LAB-02](./md/README-basic-docker-commands.md)                                     | Basic Docker Commands |
+| [LAB-02](./md/README-docker-commands-basic.md)                                     | Docker Commands Basic |
 | [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)                   | Windows Client MongoDB Studio 3T vs Docker Server MongoDB |
 | [LAB-04](./md/README-docker-images-containers.md)                                  | Docker Images vs Containers vs DockerHub |
 | [LAB-05](./md/README-basic-kubernetes-commands.md)                                 | Basic Kubernetes Commands |
@@ -71,7 +71,8 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 | [LAB-11](./md/README-dockerfile-docker-compose-basic.md)                           | Dockerfile e Docker Compose Basic |
 | [LAB-12](./md/README-golang-basic.md)                                              | GoLang Basic Programming |
 | [LAB-13](./md/README-install-cloud-docker-kubernetes.md)                           | Install on Cloud Docker & Kubernetes |
-| [LAB-14](./md/README-terraform-basic.md)                                           | Basic Terraform |
+| [LAB-14](./md/README-terraform-basic.md)                                           | Terraform Basic |
+| [LAB-15](./md/README-kafka-basic.md)                                               | Kafka Basic |
 
 ## I - Referências
 
