@@ -20,7 +20,7 @@ Este documento contém os artefatos do laboratório **LAB-14: Terraform Basic** 
     + [3.3.1. Instalar Terraform para Windows](#331-instalar-terraform-para-windows)
     + [3.3.2. Instalar Terraform para Linux](#332-instalar-terraform-para-linux)
     + [3.3.3. Instalar Terraform em container Docker](#333-instalar-terraform-em-container-docker)
-    + []()
+    + [3.3.4. Configurar .gitignore](#334-configurar-gitignore)
     + [3.3.5. Create/Configure AWS credential access key on AWS CLI](#335-createconfigure-aws-credential-access-key-on-aws-cli)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [3.5.1. Provisionar AWS EC2 Instance](#351-provisionar-aws-ec2-instance)
@@ -137,7 +137,7 @@ The available commands for execution are listed below.
 
 #### 3.3.4. Configurar .gitignore
 
-* **Objetivo**: Configurar o arquivo .gitignore para ignorar os arquivos temprários do terraform
+* **Objetivo**: Configurar o arquivo `.gitignore` para ignorar os arquivos temprários do terraform
 
 ```sh
 $ vi .gitignore
@@ -145,8 +145,6 @@ $ vi .gitignore
 # Terraform
 infra/.terraform*
 infra/terraform*
-infra/*.pem
-infra/*.pub
   :
 ```
 
