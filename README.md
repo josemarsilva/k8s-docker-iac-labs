@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/README.md` - Template Git Project
+`kubernetes-docker-rancherdesktop-labs/README.md` - Laboratório Kuberntes, Docker, Rancherdesktop, Infra as Code, Monitoring and Observability
 
 ## 1. Introdução
 
@@ -11,7 +11,6 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [2.2. Diagrama de Implantação (Deploy Diagram)](#22-diagrama-de-implantação-deploy-diagram)
   * [2.4. Diagrama de Mapa Mental (Mind Map Diagram)](#24-diagrama-de-mapa-mental-mind-map-diagram)
   * [2.8. Notas de atenção e Avisos (Notice and information)](#28-notas-de-atenção-e-avisos-notice-and-information)
-  * [2.9. Glossário de Termos (Glossary)](#29-glossário-de-termos-glossary)
 - [3. Projeto / Laboratório](#3-projeto--laboratório)
 
 - [I - Referências](#i---referências)
@@ -34,6 +33,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 
 ![MindMapDiagram-Context.png](./doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop.png) 
 
+[`MindMapDiagram-Context-all-expanded.png`](./doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-all-expanded.png) 
+
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
 
@@ -43,15 +44,6 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
   * [Playlist de Apache Kafka](https://www.youtube.com/watch?v=o5yviW6QSrE&list=PL5aY_NrL1rjt_AZxj11kQjiTNLGg4ZaZA) produzido pelo canal do Youtube [FullCycle - Wesley Willians](https://www.youtube.com/channel/UCMUoZehUZBhLb8XaTc8TQrA)
   * [Kafka (Plataforma de Mensageria e Streaming) // Dicionário do Programador](https://www.youtube.com/watch?v=qOqXz5Qv_-8&list=PLORrDfZD1hkGVBK4byiS82zaAutzuhsRz) produzido pelo canal do Youtube [Código Fonte TV - Gabriel Fróes e Vanessa Weber](https://www.youtube.com/watch?v=qOqXz5Qv_-8&t=74s)
   * [Evento Imersão Full Stack & Full Cycle](https://www.youtube.com/watch?v=O0HqVNkzY1Q) produzido pelo canal do Youtube [FullCycle - Wesley Willians](https://www.youtube.com/channel/UCMUoZehUZBhLb8XaTc8TQrA)
-
-
-### 2.9. Glossário de Termos (Glossary)
-
-De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> alguns dos termos utilizados neste projeto para permitir uma melhor compreensão e entendimento:
-
-| Termo       | Significado                     |
-| :---------- | :------------------------------ |
-| `nerdctl`   | programa em linha de comando do Rancher Desktop que equivale ao comando `docker`. |
 
 
 ## 3. Projeto / Laboratório
