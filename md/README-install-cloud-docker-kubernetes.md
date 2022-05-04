@@ -18,10 +18,6 @@ Este documento contém os artefatos do laboratório **LAB-13 - Instalação em i
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
     + [3.3.1. Install and configure Docker and Kubernetes (Minikube) on Cloud AWS](#331-install-and-configure-docker-and-kubernetes-minikube-on-cloud-aws)
-    + [3.3.2. Install and configure Docker and Kubernetes (Minikube) on Cloud GCP](#332-install-and-configure-docker-and-kubernetes-minikube-on-cloud-gcp)
-    + [3.3.3. Install and configure Docker and Kubernetes (Minikube) on Cloud Azure](#333-install-and-configure-docker-and-kubernetes-minikube-on-cloud-azure)
-    + [3.3.4. Install and configure Docker and Kubernetes (Minikube) on Cloud Digital Ocean](#334-install-and-configure-docker-and-kubernetes-minikube-on-cloud-digital-ocean)
-    + [3.3.5. Install and configure Docker and Kubernetes (Minikube) on Cloud Oracle Cloud](#335-install-and-configure-docker-and-kubernetes-minikube-on-cloud-oracle-cloud)
 - [I - Referências](#i---referências)
 
 

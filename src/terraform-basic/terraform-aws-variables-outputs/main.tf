@@ -6,21 +6,19 @@ terraform {
     }
   }
 
-  required_version = ">= 0.14.9"
+  required_version = ">= 1.1.0"
 }
 
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = "us-west-2"
 }
 
 resource "aws_instance" "app_server" {
-  # ami           = "ami-0f9fc25dd2506cf6d"
-  ami           = "ami-0022f774911c1d690"
+  ami           = var.instance_ami
   instance_type = "t2.micro"
-  subnet_id     = "subnet-5058c96f"
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    Name = var.instance_name
   }
 }

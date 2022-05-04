@@ -24,6 +24,8 @@ Este documento contém os artefatos do laboratório **LAB-14: Terraform Basic** 
     + [3.3.5. Create/Configure AWS credential access key on AWS CLI](#335-createconfigure-aws-credential-access-key-on-aws-cli)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [3.5.1. Provisionar AWS EC2 Instance](#351-provisionar-aws-ec2-instance)
+    + [3.5.2. Alterar infraestrutura provisionada AWS EC2 Instance](#352-alterar-infraestrutura-provisionada-aws-ec2-instance)
+    + [3.5.3. Destruir infraestrutura provisionada AWS EC2 Instance](#353-destruir-infraestrutura-provisionada-aws-ec2-instance)
 - [I - Referências](#i---referências)
 
 
@@ -226,7 +228,7 @@ $ # pwd - current directory ./src/terraform-basic/terraform-aws
 $ cat main.tf
 ```
 
-* **Passo 4**: Initialize Terraform working configuration directory
+* **Passo 4**: Inicializar _Terraform working configuration directory_
 
 ```sh
 $ # pwd - current directory ./src/terraform-basic/terraform-aws
@@ -265,27 +267,254 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
       :
 ```
 
-#### 3.5.2. Destruir infraestrutura provisionada AWS EC2 Instance
+
+#### 3.5.2. Alterar infraestrutura provisionada AWS EC2 Instance
 
 * **Pré-requisitos**:
   * Terraform CLI installed no [Windows](#331-instalar-terraform-para-windows) e/ou no [Linux](#332-instalar-terraform-para-linux)
-  * AWS CLI installed
-  * [AWS Credential Access Key configured on AWS CLI](#334-createconfigure-aws-credential-access-key-on-aws-cli)
+  * Passo anterior [Provisionar AWS EC2 Instance](#351-provisionar-aws-ec2-instance)
+
+* **Passo 1**: Modificar/Editar arquivo `main.tf` com _Terraform configuration file_ da infraestrutura a ser disponibilizada na AWS. Substituir (comentar/descomentar) a informação da imagem aim do recurso de: `ami-0f9fc25dd2506cf6d` para `ami-0022f774911c1d690`
+
+```sh
+$ pwd # /src/terraform-basic/terraform-aws
+$ vim main.tf
+  :
+  # ami           = "ami-0f9fc25dd2506cf6d"
+  ami           = "ami-0022f774911c1d690"
+  :
+```
+
+* **Passo 2**: _Apply_ (aplicar) as mudanças da configuração contida no _Terraform configuration file_
+  * Observar que o Terraform pela ordem irá: a) fazer o refresh do status da infraestrutura; b)  destruir a infraestrutura anterior e recriá-la
+
+```sh
+$ terraform apply
+  :
+aws_instance.app_server: Refreshing state... [id=i-0612d15eea02d4cba]
+  :
+  # aws_instance.app_server must be replaced
+  -/+ resource "aws_instance" "app_server" {
+    ~ ami                                  = "ami-0f9fc25dd2506cf6d" -> "ami-0022f774911c1d690" # forces replacement
+  :
+Plan: 1 to add, 0 to change, 1 to destroy.
+  : 
+aws_instance.app_server: Destroying... [id=i-0612d15eea02d4cba]
+aws_instance.app_server: Destruction complete after 2m34s
+aws_instance.app_server: Creating...
+aws_instance.app_server: Creation complete after 52s [id=i-09a12205d2aba1159]
+  : 
+Apply complete! Resources: 1 added, 0 changed, 1 destroyed.
+  : 
+```
+
+#### 3.5.3. Destruir infraestrutura provisionada AWS EC2 Instance
+
+* **Pré-requisitos**:
+  * Terraform CLI installed no [Windows](#331-instalar-terraform-para-windows) e/ou no [Linux](#332-instalar-terraform-para-linux)
+  * Passo anterior [Provisionar AWS EC2 Instance](#351-provisionar-aws-ec2-instance)
 
 * **Passo 1**: Criar infraestrutura do Terraform
 
 ```sh
-$ cd ./src/terraform-basic/terraform-aws
+$ pwd # ./src/terraform-basic/terraform-aws
 $ terraform destroy
   :
 Plan: 0 to add, 0 to change, 1 to destroy.
   :
 ```
 
+#### 3.5.4. Definir Input Variables
+
+* **Pré-requisitos**:
+  * Terraform CLI installed no [Windows](#331-instalar-terraform-para-windows) e/ou no [Linux](#332-instalar-terraform-para-linux)
+
+* **Passo 1**: Criar/editar arquivo `main.tf` com _Terraform configuration file_ da infraestrutura a ser provisionada. Criar/editar arquivo `variables.tf` com as variáveis de referências a serem substituídas durante a execução. 
+
+```sh
+$ pwd # ./src/terraform-basic/terraform-aws-variables
+$ cat main.tf
+  :
+  resource "aws_instance" "app_server" {
+    ami           = var.instance_ami
+  :
+  tags = {
+    Name = var.instance_name
+  :
+
+$ cat variables.tf
+  :
+variable "instance_name" {
+  default     = "ExampleAppServerInstance"
+  :
+variable "instance_ami" {
+  :
+  default     = "ami-0f9fc25dd2506cf6d"
+  :
+```
+
+* **Passo 2**: Inicializar _Terraform working configuration directory_
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-aws-variables
+$ terraform init
+      :
+Terraform has been successfully initialized!
+```
+
+* **Passo 3**: _Apply_ (aplicar) a configuração contida no _Terraform configuration file_
+  * Observar que no plano de execução, alguns valores serão "(known after apply)"
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-aws-variables
+$ terraform apply
+```
+
+
+#### 3.5.4. Definir Input Variables
+
+* **Pré-requisitos**:
+  * Terraform CLI installed no [Windows](#331-instalar-terraform-para-windows) e/ou no [Linux](#332-instalar-terraform-para-linux)
+
+* **Passo 1**: Criar/editar arquivo `main.tf` com _Terraform configuration file_ da infraestrutura a ser provisionada. Criar/editar arquivo `variables.tf` com as variáveis de referências a serem substituídas durante a execução. 
+
+```sh
+$ pwd # ./src/terraform-basic/terraform-aws-variables
+$ cat main.tf
+  :
+  resource "aws_instance" "app_server" {
+    ami           = var.instance_ami
+  :
+  tags = {
+    Name = var.instance_name
+  :
+
+$ cat variables.tf
+  :
+variable "instance_name" {
+  default     = "ExampleAppServerInstance"
+  :
+variable "instance_ami" {
+  :
+  default     = "ami-0f9fc25dd2506cf6d"
+  :
+```
+
+* **Passo 2**: Inicializar _Terraform working configuration directory_
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-aws-variables
+$ terraform init
+      :
+Terraform has been successfully initialized!
+```
+
+* **Passo 3**: _Apply_ (aplicar) a configuração contida no _Terraform configuration file_
+  * Observar que no plano de execução, alguns valores serão "(known after apply)"
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-aws-variables
+$ terraform apply
+```
+
+#### 3.5.5. Query Data with Outputs
+
+* **Pré-requisitos**:
+  * Terraform CLI installed no [Windows](#331-instalar-terraform-para-windows) e/ou no [Linux](#332-instalar-terraform-para-linux)
+
+* **Passo 1**: Criar/editar arquivo `main.tf` com _Terraform configuration file_ da infraestrutura a ser provisionada. Criar/editar arquivo `variables.tf` com as variáveis de referências a serem substituídas durante a execução. Criar/editar arquivo `output.tf` com as variáveis de referências a serem extraídas. 
+
+```sh
+$ pwd # ./src/terraform-basic/terraform-aws-variables-outputs
+$ cat main.tf
+
+$ cat variables.tf
+
+$ cat outputs.tf
+  :
+output "instance_id" {
+  value       = aws_instance.app_server.id
+  :
+output "instance_public_ip" {
+  value       = aws_instance.app_server.public_ip
+  :
+```
+
+* **Passo 2**: Inicializar _Terraform working configuration directory_
+
+```sh
+$ pwd # ./src/terraform-basic/terraform-aws-variables-outputs
+$ terraform init
+      :
+Terraform has been successfully initialized!
+```
+
+* **Passo 3**: _Apply_ (aplicar) a configuração contida no _Terraform configuration file_
+  * Observar que no plano de execução, alguns valores serão "(known after apply)"
+  * Observar que ao final as variávies existentes no arquivo `outputs.tf` são apresentadas
+
+```sh
+$ pwd # ./src/terraform-basic/terraform-aws-variables-outputs
+$ terraform apply
+  :
+Plan: 1 to add, 0 to change, 0 to destroy.
+Changes to Outputs:
+  + instance_id        = (known after apply)
+  + instance_public_ip = (known after apply)
+  :
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+Outputs:
+instance_id = "i-05719e0c0b0aaf005"
+instance_public_ip = "34.217.0.246"
+ :
+```
+
+* **Passo 4**: Posterior a execução é possível usar o comando do Terraform para mostrar as variávies
+
+```sh
+$ pwd # ./src/terraform-basic/terraform-aws-variables-outputs
+$ terraform output
+instance_id = "i-05719e0c0b0aaf005"
+instance_public_ip = "34.217.0.246"
+```
+
+
+#### 3.5.99. Provisionar Docker container nginx
+
+* **Pré-requisitos**:
+  * Terraform CLI installed no [Windows](#331-instalar-terraform-para-windows) e/ou no [Linux](#332-instalar-terraform-para-linux)
+  * Docker installed
+
+* **Passo 1**: Criar/editar arquivo `main.tf` com _Terraform configuration file_ da infraestrutura a ser disponibilizada no Docker
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-docker
+$ cat main.tf
+```
+
+* **Passo 2**: Inicializar _Terraform working configuration directory_
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-aws-variables
+$ terraform init
+      :
+Terraform has been successfully initialized!
+```
+
+* **Passo 3**: _Plan_ (planejar) a configuração contida no _Terraform configuration file_
+
+```sh
+$ # pwd - current directory ./src/terraform-basic/terraform-docker
+$ terraform plan
+       :
+```
+
+
 
 ## I - Referências
 
 * Terraform
+  * [Terraform Turorial - Official HashiCorp](https://learn.hashicorp.com/terraform?utm_source=terraform_io)
   * [Terraform Best Practices](https://www.terraform-best-practices.com/v/ptbr/)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  

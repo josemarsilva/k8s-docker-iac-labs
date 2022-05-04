@@ -27,10 +27,11 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Command
     + [h. Rollout history of deployment](#h-rollout-history-of-deployment)
     + [i. Service: ClusterIP, NodePort and LoadBalancer](#i-service-clusterip-nodeport-and-loadbalancer)
     + [j. Exercício Portal de Noticias da Alura no Kubernetes](#j-exercício-portal-de-notícias)
-      - [1. Criar o(s) POD do Portal de Notícias](#j1-criar-pod-portal-de-noticias)
-      - [2. Criar o(s) SERVICE do tipo ClusterIP para acessar o(s) POD's](#j2-criar-clusterip-service-com-2-novos-pod-nginx-acessados-através-pelo-service)
-      - [3. Criar o SERVICE do tipo NodePort para acessar o(s) POD's](#j3-criar-nodeport-service)
-      - [4. ](#j)
+      - [j.1. Criar o(s) POD do Portal de Notícias](#j1-criar-pod-portal-de-noticias)
+      - [j.2. Criar o(s) SERVICE do tipo ClusterIP para acessar o(s) POD's](#j2-criar-clusterip-service-com-2-novos-pod-nginx-acessados-através-pelo-service)
+      - [j.3. Criar o SERVICE do tipo NodePort para acessar o(s) POD's](#j3-criar-nodeport-service)
+      - [j.4. Criar Load Balancer Service](#j4-criar-load-balancer-service)
+      - [j.5. Criar Node  Port Service ](#j5-criar-node-port-service-para-o-portal-noticias)
 
 - [I - Referências](#i---referências)
 
