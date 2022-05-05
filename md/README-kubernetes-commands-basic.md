@@ -524,7 +524,7 @@ C:\src\kubernetes-basic> kubectl get service web-app-service
 
 O objetivo deste exercícioé  cria o portal de notícias da Alura: https://cursos.alura.com.br/course/kubernetes-pods-services-configmap/
 
-![MindMapDiagram-Context.png](../doc/screenshots/screenshot-kubernetes-aluracursos-arquitetura-portal-noticias) 
+![screenshot-kubernetes-aluracursos-arquitetura-portal-noticias.png](../doc/screenshots/screenshot-kubernetes-aluracursos-arquitetura-portal-noticias.png) 
 
 
 #### j.1. Criar Portal de Noticias
