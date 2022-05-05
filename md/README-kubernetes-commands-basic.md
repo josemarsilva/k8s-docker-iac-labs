@@ -27,11 +27,12 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Command
     + [h. Rollout history of deployment](#h-rollout-history-of-deployment)
     + [i. Service: ClusterIP, NodePort and LoadBalancer](#i-service-clusterip-nodeport-and-loadbalancer)
     + [j. Exercício Portal de Noticias da Alura no Kubernetes](#j-exercício-portal-de-notícias)
-      - [j.1. Criar o(s) POD do Portal de Notícias](#j1-criar-pod-portal-de-noticias)
+      - [j.1. Criar o(s) POD do Portal de Notícias](#j1-criar-portal-de-noticias)
       - [j.2. Criar o(s) SERVICE do tipo ClusterIP para acessar o(s) POD's](#j2-criar-clusterip-service-com-2-novos-pod-nginx-acessados-através-pelo-service)
       - [j.3. Criar o SERVICE do tipo NodePort para acessar o(s) POD's](#j3-criar-nodeport-service)
       - [j.4. Criar Load Balancer Service](#j4-criar-load-balancer-service)
       - [j.5. Criar Node  Port Service ](#j5-criar-node-port-service-para-o-portal-noticias)
+      - [j.6. Configurar MySQL database para o portal noticias](#j6-configurar-mysql-database-para-o-portal-noticias-utilizando-configmaps-para-as-senhas)
 
 - [I - Referências](#i---referências)
 
@@ -523,31 +524,36 @@ C:\src\kubernetes-basic> kubectl get service web-app-service
 
 O objetivo deste exercícioé  cria o portal de notícias da Alura: https://cursos.alura.com.br/course/kubernetes-pods-services-configmap/
 
+![MindMapDiagram-Context.png](../doc/screenshots/screenshot-kubernetes-aluracursos-arquitetura-portal-noticias) 
 
-#### j.1. Criar POD Portal de Noticias
+
+#### j.1. Criar Portal de Noticias
 
 * Criar um POD para o portal de notícias usuando a imagem disponibilizada no registry da AluraCursos no DockerHub
 * Criar um POD para o portal de notícias usuando a imagem disponibilizada no registry da AluraCursos no DockerHub
 
-```cmd
-C:\portal-noticias> type pod-portal-noticias.yaml
-C:\portal-noticias> kubectl apply -f pod-portal-noticias.yaml
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ cat pod-portal-noticias.yaml
+$ kubectl apply -f pod-portal-noticias.yaml
 ```
 
 * Acompanhar enquanto a imagem é baixada e o POD iniciado com `--watch`, quando o POD inciar a execução faça um describe
 
-```cmd
-C:\portal-noticias> kubectl get pods --watch
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl get pods --watch
 NAME              READY   STATUS    RESTARTS   AGE
 portal-noticias   1/1     Running   0          4m50s
-C:\portal-noticias> kubectl describe pods portal-noticias
+$ kubectl describe pods portal-noticias
 ```
 
 * Acessar através do POD `portal-noticias` e executar o comando `bash` para ter acesso ao terminal linux de linha de comandos de um POD dentro do cluster Kubernetes
   * No `bash` executar o `curl` para obter a homepage de localhost
 
-```cmd
-C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl exec -it portal-noticias -- bash
 root@portal-noticias:/var/www/html# curl localhost
 <html>
   :
@@ -559,12 +565,13 @@ root@portal-noticias:/var/www/html# exit
 * Documentação e registry do Nginx no Dockerhub: https://hub.docker.com/_/nginx
 * Criar dois PODs conforme especificação em `pod-1.yaml` e `pod-2.yaml`
 
-```cmd
-C:\portal-noticias> type pod-1.yaml
-C:\portal-noticias> type pod-2.yaml
-C:\portal-noticias> kubectl apply -f pod-1.yaml
-C:\portal-noticias> kubectl apply -f pod-2.yaml
-C:\portal-noticias> kubectl get pods
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ cat pod-1.yaml
+$ cat pod-2.yaml
+$ kubectl apply -f pod-1.yaml
+$ kubectl apply -f pod-2.yaml
+$ kubectl get pods
 NAME              READY   STATUS    RESTARTS   AGE
 portal-noticias   1/1     Running   0          21m
 pod-2             1/1     Running   0          21s
@@ -586,8 +593,9 @@ svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    2m42s
   * No `bash` executar o `curl` para obter homepage do `pod-2` através do IP optido pelo ClusterIP
   * Observar que o IP é visível apenas dentro dos objetos do cluster
 
-```cmd
-C:\portal-noticias> kubectl exec -it pod-1 -- bash
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl exec -it pod-1 -- bash
 root@pod-1:/# curl 10.43.10.108
 <!DOCTYPE html>
   :
@@ -599,17 +607,20 @@ root@pod-1:/# exit
   * No `bash` executar o `curl` para obter a homepage do `pod-2` através do IP optido pelo ClusterIP
   * Observar que embora o POD `pod-2` tenha sido removido, o serviço ainda existe e aponta para o vazio
 
-```cmd
-C:\portal-noticias> kubectl delete pod pod-2
-C:\portal-noticias> kubectl get pods
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl delete pod pod-2
+$ kubectl get pods
 NAME              READY   STATUS    RESTARTS   AGE
 portal-noticias   1/1     Running   0          51m
 pod-1             1/1     Running   0          30m
-C:\portal-noticias> kubectl get services
+
+$ kubectl get services
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.43.0.1      <none>        443/TCP   83d
 svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    19m
-C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+
+$ kubectl exec -it portal-noticias -- bash
 root@portal-noticias:/var/www/html# curl 10.43.10.108
 curl: (7) Failed to connect to 10.43.10.108 port 80: Connection refused
 root@portal-noticias:/var/www/html# exit
@@ -617,9 +628,10 @@ root@portal-noticias:/var/www/html# exit
 
 * Se reaplicarmos (create) o POD `pod-2` removido no passo anterior, que tem o *label* `app: pod-2` que é selecionado pelo *selector* `app:pod-2` do servico criado então o IP do cluster voltará a responder
 
-```cmd
-C:\portal-noticias> kubectl apply -f pod-2.yaml
-C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl apply -f pod-2.yaml
+$ kubectl exec -it portal-noticias -- bash
 root@portal-noticias:/var/www/html# curl 10.43.10.108
 <!DOCTYPE html>
   :
@@ -629,11 +641,12 @@ root@portal-noticias:/var/www/html# exit
 * Criar o Service do tipo `ClusterIP` para atender inicialmente apenas o `pod-1` na porta `81` configurando os arquivos (.yaml) com o *label:* `app: pod-1` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
-```cmd
-C:\portal-noticias> type pod-1.yaml
-C:\portal-noticias> type svc-pod-1.yaml
-C:\portal-noticias> kubectl apply -f svc-pod-1.yaml
-C:\portal-noticias> kubectl get services -o wide
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ cat pod-1.yaml
+$ cat svc-pod-1.yaml
+$ kubectl apply -f svc-pod-1.yaml
+$ kubectl get services -o wide
 NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE    SELECTOR
 kubernetes   ClusterIP   10.43.0.1      <none>        443/TCP   83d    <none>
 svc-pod-2    ClusterIP   10.43.10.108   <none>        80/TCP    83m    app=pod-2
@@ -646,11 +659,12 @@ svc-pod-1    ClusterIP   10.43.224.69   <none>        81/TCP    100s   app=pod-1
 * Criar o Service do tipo `NodePort` para atender inicialmente apenas o `pod-3` na porta `8080` configurando os arquivos (.yaml) com o *label:* `app: pod-3` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
-```cmd
-C:\portal-noticias> type pod-3.yaml
-C:\portal-noticias> type svc-pod-3.yaml
-C:\portal-noticias> kubectl apply -f svc-pod-3.yaml
-C:\portal-noticias> kubectl get services -o wide
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ cat pod-3.yaml
+$ cat svc-pod-3.yaml
+$ kubectl apply -f svc-pod-3.yaml
+$ kubectl get services -o wide
 NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE    SELECTOR
 kubernetes   ClusterIP   10.43.0.1       <none>        443/TCP          83d    <none>
 svc-pod-2    ClusterIP   10.43.10.108    <none>        80/TCP           149m   app=pod-2
@@ -661,8 +675,9 @@ svc-pod-3    NodePort    10.43.217.169   <none>        8080:30702/TCP   29m    a
 * Acessar através do POD `portal-noticias` e executar o comando `bash` para ter acesso ao terminal linux de linha de comandos de um POD dentro do cluster Kubernetes
   * No `bash` executar o `curl` para obter a homepage do IP na coluna CLUSTER-IP correspondente ao *NodePort* do `svc-pod-3`
 
-```cmd
-C:\portal-noticias> kubectl exec -it portal-noticias -- bash
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl exec -it portal-noticias -- bash
 root@portal-noticias:/var/www/html# curl 10.43.217.169:8080
 <html>
   :
@@ -685,8 +700,9 @@ root@portal-noticias:/var/www/html# exit
   * Observar que no Windows o Docker Desktop ou Rancher Desktop providenciam o bind em uma porta alta > 30000 para a máquina externa
   * Lembrar que no Linux este bind automático não funciona e deve ser usado o internal IP em substituição ao localhost
 
-```cmd
-C:\portal-noticias> kubectl get services -o wide
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl get services -o wide
 NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE    SELECTOR
 kubernetes   ClusterIP   10.43.0.1       <none>        443/TCP          83d    <none>
 svc-pod-2    ClusterIP   10.43.10.108    <none>        80/TCP           149m   app=pod-2
@@ -709,10 +725,11 @@ svc-pod-3    NodePort    10.43.217.169   <none>        8080:30702/TCP   29m    a
 * Criar o Service do tipo `LoadBalancer` para atender todos os POD's (`pod-1`, `pod-2` e `pod-3`)  na porta `8000` configurando os arquivos (.yaml) com o *label:* `app: pod-1 pod-2 pod-3` na definição do POD e com o *selector:* `app: pod-3` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
-```cmd
-C:\portal-noticias> type svc-pod-loadbalancer.yaml
-C:\portal-noticias> kubectl apply -f svc-pod-loadbalancer.yaml
-C:\portal-noticias> kubectl get services -o wide
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ cat svc-pod-loadbalancer.yaml
+$ kubectl apply -f svc-pod-loadbalancer.yaml
+$ kubectl get services -o wide
 NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
 kubernetes             ClusterIP   10.43.0.1       <none>        443/TCP          83d     <none>
 svc-pod-2              ClusterIP   10.43.10.108    <none>        80/TCP           6h14m   app=pod-2
@@ -725,8 +742,9 @@ svc-pod-loadbalancer   NodePort    10.43.72.147    <none>        8000:31492/TCP 
   * Observar que no Windows o Docker Desktop ou Rancher Desktop providenciam o bind em uma porta alta > 30000 para a máquina externa
   * Lembrar que no Linux este bind automático não funciona e deve ser usado o internal IP em substituição ao localhost
 
-```cmd
-C:\portal-noticias> curl localhost:31492
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ curl localhost:31492
 <!DOCTYPE html>
 <html>
 <head>
@@ -745,8 +763,9 @@ root@portal-noticias:/var/www/html# sed -i 's/Welcome to /Welcome to pod-<?> /g'
 * Agora repetir diversas vezes o procedimento de acessar usando o IP `localhost` e a porta binded na coluna PORT(S) correspondente ao *NodePort* do `svc-pod-3` de uma máquina fora do cluster, ou seja na sua máquina externa
   * Observar que a cada execução o **LoadBalancer** irá dividir a carga entre `pod-1`, `pod-2` e `pod-3`
 
-```cmd
-C:\portal-noticias> curl localhost:31492
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ curl localhost:31492
 <!DOCTYPE html>
 <html>
 <head>
@@ -757,24 +776,186 @@ C:\portal-noticias> curl localhost:31492
 
 * Remover para efeito de limpeza todos o(s) POD's e SERVICE's criados até então com os comandos abaixo:
 
-```cmd
-C:\portal-noticias> kubectl delete --all pods
-C:\portal-noticias> kubectl delete --all services
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$ kubectl delete --all pods
+$ kubectl delete --all services
 ```
 
 * Criar o Service do tipo `NodePort` para atender todos o(s) POD  `portal-noticias` na porta `30000` configurando os arquivos (.yaml) com o *label:* `app: portal-noticias` na definição do POD e com o *selector:* `app: portal-noticias` na definição do service.
   * Observar que a porta do POD independe da porta do service
 
-```cmd
-C:\portal-noticias> type pod-portal-noticias.yaml
-C:\portal-noticias> type svc-portal-noticias.yaml
-C:\portal-noticias> kubectl apply -f pod-portal-noticias.yaml
-C:\portal-noticias> kubectl apply -f svc-portal-noticias.yaml
-C:\portal-noticias> kubectl get services -o wide
+```sh
+$ pwd # ./src/kubernetes-basic/portal-noticias
+$
+$ cat pod-portal-noticias.yaml
+$ kubectl apply -f pod-portal-noticias.yaml
+$
+$ cat svc-portal-noticias.yaml
+$ kubectl apply -f svc-portal-noticias.yaml
+$ kubectl get services -o wide
 NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
   :                      :             :              :            :               :          :
 svc-portal-noticias    NodePort    10.43.7.196     <none>        80:30000/TCP     3m35s   app=svc-portal-noticias
 ```
+
+```browser
++---------------------------------------+
+| http://localhost:30000                |
++---------------------------------------+
+|+-------------------------------------+|
+||  Alura Noticias | [Search] | Painel ||
+|+-------------------------------------+|
+|                                       |
++---------------------------------------+
+```
+
+#### j.6. Configurar MySQL database para o portal-noticias utilizando configmaps para as senhas
+
+* **Objetivo**: configurar as definições do  POD do banco de dados do portal-notícias a partir de uma imagem que já vem com as tabelas necessárias para o sistema criadas
+
+* Primeiramente vamos criar o POD com a base MySQL com a configuração de usuário e senha acoplada no próprio arquivo de definição do POD
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat db-noticias-sem-usar-configmap.yaml
+$ kubectl apply -f db-noticias-sem-usar-configmap.yaml
+$ kubectl get pods
+NAME              READY   STATUS    RESTARTS   AGE
+portal-noticias   1/1     Running   0          17m
+db-noticias       1/1     Running   0          37s
+$ kubectl exec -it db-noticias -- bash
+root@db-noticias:/# mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+  :
+mysql> show databases ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| empresa            |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> use empresa;
+
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_empresa |
++-------------------+
+| noticias          |
+| usuario           |
++-------------------+
+2 rows in set (0.00 sec)
+```
+
+* agora vamos utilizar o configmaps para armazenar as variáveis de ambiente 
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl get pods
+NAME              READY   STATUS    RESTARTS   AGE
+portal-noticias   1/1     Running   0          41m
+db-noticias       1/1     Running   0          24m
+
+$ kubectl delete -f db-noticias-sem-usar-configmap.yaml
+pod "db-noticias" deleted
+
+$ kubectl get pods
+NAME              READY   STATUS    RESTARTS   AGE
+portal-noticias   1/1     Running   0          43m
+
+$ kubectl apply -f db-configmap.yaml
+configmap/db-configmap created
+
+$ kubectl get configmap
+NAME               DATA   AGE
+kube-root-ca.crt   1      110d
+db-configmap       3      64s
+
+$ kubectl describe configmap db-configmap
+Name:         db-configmap
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+Data
+====
+MYSQL_PASSWORD:
+----
+q1w2e3r4
+MYSQL_ROOT_PASSWORD:
+----
+q1w2e3r4
+MYSQL_DATABASE:
+----
+empresa
+Events:  <none>
+
+$ kubectl apply -f db-noticias.yaml
+pod/db-noticias created
+
+$ kubectl exec -it db-noticias -- mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+  :
+mysql> use empresa;
+mysql> SELECT * FROM usuario;
++-----------+-------+-------+
+| idusuario | login | senha |
++-----------+-------+-------+
+|         1 | admin | admin |
++-----------+-------+-------+
+1 row in set (0.00 sec)
+```
+
+#### j.7. Configurar variáveis do sistema-noticias PHP com o MySQL utilizando configmaps para as senhas
+
+* **Objetivo**: configurar as definições do POD do sistema PHP portal-notícias 
+
+* Configurar o sistema-noticias utilizando os configmaps
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat sistema-configmap.yaml
+$ kubectl apply -f sistema-configmap.yaml
+configmap/sistema-configmap created
+$ cat sistema-noticias.yaml
+$ kubectl apply -f sistema-noticias.yaml
+pod/sistema-noticias created
+```
+
+* Configurar o portal-noticias utilizando os configmaps
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat portal-configmap.yaml
+$ kubectl apply -f portal-configmap.yaml
+configmap/portal-configmap created
+$ cat portal-noticias.yaml
+$ kubectl apply -f portal-noticias.yaml
+pod/portal-noticias unchanged
+$ kubectl get pods
+NAME               READY   STATUS    RESTARTS   AGE
+db-noticias        1/1     Running   0          60m
+sistema-noticias   1/1     Running   0          30m
+portal-noticias    1/1     Running   0          72s
+$ kubectl get configmaps
+NAME                DATA   AGE
+kube-root-ca.crt    1      110d
+db-configmap        3      69m
+sistema-configmap   3      38m
+portal-configmap    1      6m37s
+$ kubectl get svc
+NAME                  TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+kubernetes            ClusterIP   10.43.0.1      <none>        443/TCP        117m
+svc-portal-noticias   NodePort    10.43.80.119   <none>        80:30000/TCP   116m
+```
+
+* Entrar no portal de notícias
 
 ```browser
 +---------------------------------------+
