@@ -54,14 +54,14 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-02](./md/README-docker-commands-basic.md)                                     | Docker Commands Basic |
 | [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)                   | Windows Client MongoDB Studio 3T vs Docker Server MongoDB |
 | [LAB-04](./md/README-docker-images-containers.md)                                  | Docker Images vs Containers vs DockerHub |
-| [LAB-05](./md/README-basic-kubernetes-commands.md)                                 | Basic Kubernetes Commands |
+| [LAB-05](./md/README-kubernetes-commands-basic.md)                                 | Basic Kubernetes Commands Basic |
 | [LAB-06](./md/README-kubernetes-python-flask-mongodb.md)                           | Kubernetes, Python, Flask e MongoDB |
 | [LAB-07](./md/README-kubernetes-nodejs-http-echo.md)                               | NodeJS http echo application |
 | [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)                | Kubernetes IDE Lens |
 | [LAB-09](./md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md) | Kubernetes Self Healing, application health check and resources limits probes with NodeJS, Express, Swagger-UI, NodeHog, YamlJS and Ejs |
 | [LAB-10](./md/README-kubernetes-api-lang-response-database-middleware-action.md)   | Kubernetes - API - Response - Database - Middleware - Action |
 | [LAB-11](./md/README-dockerfile-docker-compose-basic.md)                           | Dockerfile e Docker Compose Basic |
-| [LAB-12](./md/README-golang-basic.md)                                              | GoLang Basic Programming |
+| [LAB-12](./md/README-golang-basic.md)                                              | GoLang Programming Basic |
 | [LAB-13](./md/README-install-cloud-docker-kubernetes.md)                           | Install on Cloud Docker & Kubernetes |
 | [LAB-14](./md/README-terraform-basic.md)                                           | Terraform Basic |
 | [LAB-15](./md/README-kafka-basic.md)                                               | Kafka Basic |
