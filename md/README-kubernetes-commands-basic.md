@@ -31,8 +31,9 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Command
       - [j.2. Criar o(s) SERVICE do tipo ClusterIP para acessar o(s) POD's](#j2-criar-clusterip-service-com-2-novos-pod-nginx-acessados-através-pelo-service)
       - [j.3. Criar o SERVICE do tipo NodePort para acessar o(s) POD's](#j3-criar-nodeport-service)
       - [j.4. Criar Load Balancer Service](#j4-criar-load-balancer-service)
-      - [j.5. Criar Node  Port Service ](#j5-criar-node-port-service-para-o-portal-noticias)
+      - [j.5. Criar Node  Port Service](#j5-criar-node-port-service-para-o-portal-noticias)
       - [j.6. Configurar MySQL database para o portal noticias](#j6-configurar-mysql-database-para-o-portal-noticias-utilizando-configmaps-para-as-senhas)
+      - [j.7. Configurar variáveis do sistema de notícias PHP vs MySQL com ConfigMap](#j7-configurar-variáveis-do-sistema-noticias-php-com-o-mysql-utilizando-configmaps-para-as-senhas)
 
 - [I - Referências](#i---referências)
 
@@ -826,8 +827,7 @@ portal-noticias   1/1     Running   0          17m
 db-noticias       1/1     Running   0          37s
 $ kubectl exec -it db-noticias -- bash
 root@db-noticias:/# mysql -u root -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
+Enter password: q1w2e3r4
   :
 mysql> show databases ;
 +--------------------+
@@ -899,8 +899,7 @@ $ kubectl apply -f db-noticias.yaml
 pod/db-noticias created
 
 $ kubectl exec -it db-noticias -- mysql -u root -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
+Enter password: q1w2e3r4
   :
 mysql> use empresa;
 mysql> SELECT * FROM usuario;
@@ -955,11 +954,69 @@ kubernetes            ClusterIP   10.43.0.1      <none>        443/TCP        11
 svc-portal-noticias   NodePort    10.43.80.119   <none>        80:30000/TCP   116m
 ```
 
+#### j.8. Re-iniciar todos o(s) POD, SERVICES, CONFIGMAP e explorar pelo sistema
+
+* **Objetivo**: Colocar o projeto no ar e testá-lo
+
+* Delete (remover) todos os objetos kubernetes para recriá-los. O seguinte erro poderá-ser ignorado: "... Error from server (NotFound): error when deleting ..."
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ 
+$ kubectl delete -f svc-portal-noticias.yaml 
+$ kubectl delete -f svc-sistema-noticias.yaml
+$ kubectl delete -f svc-db-noticias.yaml
+$
+$ kubectl delete -f portal-noticias.yaml
+$ kubectl delete -f sistema-noticias.yaml
+$ kubectl delete -f db-noticias.yaml
+$
+$ kubectl delete -f db-configmap.yaml
+$ kubectl delete -f portal-configmap.yaml
+$ kubectl delete -f sistema-configmap.yaml
+```
+
+* _Apply_ (criar ou atualizar) todos os objetos kubernetes.
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$
+$ # configmap
+$ kubectl apply -f portal-configmap.yaml
+configmap/portal-configmap created
+$ kubectl apply -f sistema-configmap.yaml
+configmap/sistema-configmap created
+$ kubectl apply -f db-configmap.yaml
+configmap/db-configmap created
+$
+$ # pod/service database
+$ kubectl apply -f db-noticias.yaml
+pod/db-noticias created
+$ kubectl apply -f svc-db-noticias.yaml
+service/svc-db-noticias created
+$
+$ # pod
+$ kubectl apply -f portal-noticias.yaml
+pod/portal-noticias created
+$ kubectl apply -f sistema-noticias.yaml
+pod/sistema-noticias created
+$
+$ # services
+$ kubectl apply -f svc-portal-noticias.yaml 
+service/svc-portal-noticias created
+$ kubectl apply -f svc-sistema-noticias.yaml
+service/svc-sistema-noticias created
+
+$ # getting status
+$ kubectl get all -o wide
+$ kubectl get configmaps -o wide
+```
+
 * Entrar no portal de notícias
 
 ```browser
 +---------------------------------------+
-| http://localhost:30000                |
+| http://localhost:30001                |
 +---------------------------------------+
 |+-------------------------------------+|
 ||  Alura Noticias | [Search] | Painel ||
@@ -972,8 +1029,10 @@ svc-portal-noticias   NodePort    10.43.80.119   <none>        80:30000/TCP   11
 
 ## I - Referências
 
-* https://kubebyexample.com/en/learning-paths/kubernetes-fundamentals
-* [INICIATIVA KUBERNETES - Aula 2 - Desvendando o Kubernetes](https://www.youtube.com/watch?v=ncVLiKv1Xxo&list=WL)
+* Kubernets
+  * https://kubebyexample.com/en/learning-paths/kubernetes-fundamentals
+  * https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade/task/80496
+  * [INICIATIVA KUBERNETES - Aula 2 - Desvendando o Kubernetes](https://www.youtube.com/watch?v=ncVLiKv1Xxo&list=WL)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
