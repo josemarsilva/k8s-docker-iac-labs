@@ -34,6 +34,7 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Command
       - [j.5. Criar Node  Port Service](#j5-criar-node-port-service-para-o-portal-noticias)
       - [j.6. Configurar MySQL database para o portal noticias](#j6-configurar-mysql-database-para-o-portal-noticias-utilizando-configmaps-para-as-senhas)
       - [j.7. Configurar variáveis do sistema de notícias PHP vs MySQL com ConfigMap](#j7-configurar-variáveis-do-sistema-noticias-php-com-o-mysql-utilizando-configmaps-para-as-senhas)
+      - [j.8. Reiniciar todos os POD SERVICES CONFIGMAP e explorar pelo sistema](#j8-re-iniciar-todos-os-pod-services-configmap-e-explorar-pelo-sistema)
 
 - [I - Referências](#i---referências)
 
@@ -1025,6 +1026,254 @@ $ kubectl get configmaps -o wide
 +---------------------------------------+
 ```
 
+* Entrar no sistema de notícias
+
+```browser
++---------------------------------------+
+| http://localhost:30001                |
++---------------------------------------+
+|+-------------------------------------+|
+||  Alura Noticias | [Search] | Painel ||
+|+-------------------------------------+|
+|                                       |
++---------------------------------------+
+```
+
+* Caso tenha problemas baixe o [gabarito do projeto](https://github.com/alura-cursos/1846-kubernetes/tree/Aula6)
+
+#### j.9 Criar o REPLICASET parao POD
+
+* **Objetivo**: Implementar ReplicaSet para os POD
+
+* _Apply_ (criar ou atualizar) replicaset de portal-noticias
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat .\portal-noticias-replicaset.yaml
+$ kubectl apply -f portal-noticias-replicaset.yaml
+replicaset.apps/portal-noticias-replicaset created
+
+$ kubectl get replicaset
+NAME                         DESIRED   CURRENT   READY   AGE
+portal-noticias-replicaset   3         3         3       3m44s
+
+$ kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+db-noticias                        1/1     Running   0          15m
+sistema-noticias                   1/1     Running   0          15m
+portal-noticias-replicaset-w4tqn   1/1     Running   0          2m10s
+portal-noticias-replicaset-p278v   1/1     Running   0          2m10s
+portal-noticias-replicaset-7vd9n   1/1     Running   0          2m10s
+```
+
+#### j.10 Criar o DEPLOYMENT para 3 replicas POD com imagem de NGINX
+
+* **Objetivo**: Criar Deployment e ReplicaSet para os POD
+
+* _Apply_ (criar ou atualizar) replicaset de portal-noticias
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat nginx-deployment.yaml
+$ kubectl apply -f nginx-deployment.yaml
+deployment.apps/nginx-deployment created
+
+$ kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+db-noticias                         1/1     Running   0          64m
+sistema-noticias                    1/1     Running   0          64m
+portal-noticias-replicaset-w4tqn    1/1     Running   0          50m
+portal-noticias-replicaset-p278v    1/1     Running   0          50m
+portal-noticias-replicaset-7vd9n    1/1     Running   0          50m
+nginx-deployment-58d6df6b6b-fnglx   1/1     Running   0          81s
+nginx-deployment-58d6df6b6b-pn7td   1/1     Running   0          81s
+nginx-deployment-58d6df6b6b-x62dj   1/1     Running   0          81s
+
+$ kubectl get replicaset
+NAME                          DESIRED   CURRENT   READY   AGE
+portal-noticias-replicaset    3         3         3       51m
+nginx-deployment-58d6df6b6b   3         3         3       102s
+
+$ kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3/3     3            3           116s
+```
+
+* _Rollout_ (Consultar) histórico de instalação dos deployments
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl rollout history deployment nginx-deployment
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+1         <none>
+```
+
+* Editar o yaml do deployment para instalar a versão `latest` e não mais a versão `stable`
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat nginx-deployment.yaml
+```
+
+* _Apply_ (criar ou atualizar) o deployment do arquivo `nginx-deployment.yaml` agora configurado com a versão `latest` e não mais com a versão `stable`
+  * observar o histórico dos deployments
+  * alterar a anotação do histórico do deployment
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl apply -f nginx-deployment.yaml --record
+deployment.apps/nginx-deployment configured
+
+$ kubectl rollout history deployment nginx-deployment
+deployment.apps/nginx-deployment 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         kubectl1.21.8 apply --filename=nginx-deployment.yaml --record=true
+
+$ kubectl annotate deployment nginx-deployment kubernetes.io/change-cause="Definindo a imagem com versao latest"
+deployment.apps/nginx-deployment annotated
+
+kubectl rollout history deployment nginx-deployment
+REVISION  CHANGE-CAUSE
+1         <none>
+2         Definindo a imagem com versao latest
+```
+
+* _Apply_ (criar ou atualizar) o deployment do arquivo `nginx-deployment.yaml` devolta para a versão stable  `stable`
+  * observar o histórico dos deployments
+  * alterar a anotação do histórico do deployment
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl apply -f nginx-stable-deployment.yaml --record
+deployment.apps/nginx-deployment configured
+
+$ kubectl annotate deployment nginx-deployment kubernetes.io/change-cause="Definindo a imagem com versao stable"
+deployment.apps/nginx-deployment annotated
+
+$ kubectl rollout history deployment nginx-deployment
+REVISION  CHANGE-CAUSE
+2         Definindo a imagem com versao latest
+3         Definindo a imagem com versao stable
+```
+
+* _Rollout_ (desfazer deployment) até determinada versão 
+  * observar o histórico dos deployments
+  * alterar a anotação do histórico do deployment
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl rollout undo deployment nginx-deployment --to-revision=2
+deployment.apps/nginx-deployment rolled back
+
+$ kubectl get pods nginx-deployment
+NAME                                READY   STATUS    RESTARTS   AGE
+  :                                 :         :       :          :
+nginx-deployment-6645687878-lw7qx   1/1     Running   0          57s
+nginx-deployment-6645687878-sfllm   1/1     Running   0          56s
+nginx-deployment-6645687878-vszjk   1/1     Running   0          55s
+
+$ kubectl describe pods nginx-deployment-6645687878-lw7qx
+  :
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  3m17s  default-scheduler  Successfully assigned default/nginx-deployment-6645687878-lw7qx to lp1764
+  Normal  Pulled     3m17s  kubelet            Container image "nginx:latest" already present on machine
+  :
+```
+
+* Destruir todos os objetos no Kubernetes referente aos testes de replicaset e deployment
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl delete -f nginx-deployment.yaml
+deployment.apps "nginx-deployment" deleted
+
+$ kubectl delete -f portal-noticias-replicaset.yaml
+replicaset.apps "portal-noticias-replicaset" deleted
+```
+
+#### j.11 Criar o DEPLOYMENT para o portal de noticias, sistema noticias e banco de dados
+
+* **Objetivo**: Implementar Replicaset e Deployments para o portal de noticias
+
+* _Apply_ (criar ou atualizar) replicaset de portal-noticias
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+
+$ cat portal-noticias-deployment.yaml
+$ kubectl apply -f portal-noticias-deployment.yaml
+deployment.apps/portal-noticias-deployment created
+
+$ kubectl rollout history deployment portal-noticias-deployment
+REVISION  CHANGE-CAUSE
+1         <none>
+
+$ kubectl annotate deployment portal-noticias-deployment kubernetes.io/change-cause="Criando portal de noticias na versao 1"
+deployment.apps/portal-noticias-deployment annotated
+
+$ cat sistema-noticias-deployment.yaml
+$ kubectl delete pod sistema-noticias
+$ kubectl apply -f sistema-noticias-deployment.yaml
+deployment.apps/sistema-noticias-deployment created
+
+$ cat db-noticias-deployment.yaml
+$ kubectl delete pod db-noticias
+pod "db-noticias" deleted
+$ kubectl apply -f db-noticias-deployment.yaml
+deployment.apps/db-noticias-deployment created
+
+$ kubectl get pods
+NAME                                           READY   STATUS    RESTARTS   AGE
+portal-noticias-deployment-6b7d66bc9c-kvztz    1/1     Running   0          31m
+portal-noticias-deployment-6b7d66bc9c-qt5w7    1/1     Running   0          31m
+portal-noticias-deployment-6b7d66bc9c-6hm6p    1/1     Running   0          31m
+sistema-noticias-deployment-666dcb977f-mmdm5   1/1     Running   0          6m
+db-noticias-deployment-6b949b4bf7-clhd6        1/1     Running   0          71s
+
+$ kubectl annotate deployment sistema-noticias-deployment kubernetes.io/change-cause="Subindo o sistema noticias pelo deployment na versao 1"
+deployment.apps/sistema-noticias-deployment annotated
+
+$ kubectl annotate deployment sistema-noticias-deployment kubernetes.io/change-cause="Subindo o sistema noticias pelo deployment na versao 1"
+deployment.apps/sistema-noticias-deployment annotated
+
+$ kubectl annotate deployment db-noticias-deployment kubernetes.io/change-cause="Subindo o database pelo deployment na versao 1"
+deployment.apps/db-noticias-deployment annotated
+
+
+$ kubectl rollout history deployment db-noticias-deployment sistema-noticias-deployment
+deployment.apps/db-noticias-deployment 
+REVISION  CHANGE-CAUSE
+1         Subindo o database pelo deployment na versao 1
+
+deployment.apps/sistema-noticias-deployment
+REVISION  CHANGE-CAUSE
+1         Subindo o sistema noticias pelo deployment na versao 1
+```
+
+#### j.12 Criar o VOLUME do tipo hostPath
+
+* **Objetivo**: Criar um volume do tipo hostPath que compartilha e persiste dados locais
+
+* Consutar a documentação oficial em https://kubernetes.io/docs/concepts/storage/volumes/
+
+* _Apply_ (criar ou atualizar) volume e entrar no container dentro do POD para fazer testes
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ kubectl apply -f pod-volume.yaml 
+pod/pod-volume configured
+
+$ kubectl exec -it pod-volume --container nginx-container -- bash
+root@pod-volume:/ ls
+bin   dev                  docker-entrypoint.sh  home  lib64  mnt  proc  run   srv  tmp  var
+boot  docker-entrypoint.d  etc                   lib   media  opt  root  sbin  sys  usr  volume-dentro-do-container
+root@pod-volume:/ echo "Hello file inside container" >  volume-dentro-do-container/file.txt
+root@pod-volume:/ exit
+```
 
 
 ## I - Referências

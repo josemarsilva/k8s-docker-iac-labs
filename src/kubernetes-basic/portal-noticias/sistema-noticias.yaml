@@ -6,10 +6,10 @@ metadata:
     app: sistema-noticias
 spec:
   containers:
-  - name: sistema-noticias-container
-    image: aluracursos/sistema-noticias:1
-    ports:
-      - containerPort: 80
-    envFrom:
-      - configMapRef:
-          name: sistema-configmap
+    - name: sistema-noticias-container
+      image: aluracursos/sistema-noticias:1
+      ports:
+        - containerPort: 80
+      envFrom:
+        - configMapRef:
+            name: sistema-configmap

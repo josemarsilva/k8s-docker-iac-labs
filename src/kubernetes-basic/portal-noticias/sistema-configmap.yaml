@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: sistema-configmap
 data:
-  MYSQL_ROOT_PASSWORD: q1w2e3r4
-  MYSQL_DATABASE: empresa
-  MYSQL_PASSWORD: q1w2e3r4
+  HOST_DB: svc-db-noticias:3306
+  USER_DB: root
+  PASS_DB: q1w2e3r4
+  DATABASE_DB: empresa

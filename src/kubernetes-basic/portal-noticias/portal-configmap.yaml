@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: portal-configmap
 data:
-  IP_SISTEMA: http://localhost:30000
+  IP_SISTEMA: http://localhost:30001
