@@ -1275,6 +1275,46 @@ root@pod-volume:/ echo "Hello file inside container" >  volume-dentro-do-contain
 root@pod-volume:/ exit
 ```
 
+#### j.13 Criar o VOLUME do tipo Storage Class na Google Cloud Platform com um GCE Persistent Disk
+
+* **Objetivo**: Criar um volume do tipo Storage Class na Google Cloud Platform
+
+* _Apply_ (criar ou atualizar) um Storage Class para volume do sistema de notícias utilizando 
+* Na documentação oficial https://kubernetes.io/docs/concepts/storage/storage-classes/ é possível ter uma idéia do arquivo (.yaml) de configuração.
+
+* No Google Cloud Platform :: GKE > CloudShell criar o arquivo `sc.yaml` com a definição do Storage Class para o cluster Kubernetes
+* No Google Cloud Platform :: GKE > CloudShell criar o arquivo `pvc-sc.yaml` com a definição do PVC - Physical Volue Claim para o Storage Class para o cluster Kubernetes
+* Executar a criação do `sc.yaml` e `pvc-sc.yaml`
+
+```sh
+$ kubectl apply -f sc.yaml
+$ kubectl apply -f pvc-sc.yaml
+$ kubectl get pvc # status bound
+$ kubectl get pv  # pv criado em funcao do PVC
+```
+
+* No Google Cloud Platform :: GKE > CloudShell criar o arquivo `pod-sc.yaml` com a definição do POD vinculado ao volume vinculado automaticamente com Storage Class para o cluster Kubernetes
+
+```sh
+$ kubectl apply -f pod-sc.yaml
+$ kubectl get pod --watch
+$ kubectl exec -it pod-sc -- bash
+root@pod-sc:/ ls -la
+```
+
+
+#### j.14 Criar um StatefulSet para o sistema de notícias
+
+* **Objetivo**: Criar um StatefulSet para o sistema de notícias
+
+* _Apply_ (criar ou atualizar) um StateFulSet para o sistema de notícias, usando um Claim Private Volume e um Private Volume a AWS
+
+```sh
+$ pwd # /src/kubernetes-basic/portal-noticias$
+$ cat sistema-noticias-statefulset.yaml
+
+```
+
 
 ## I - Referências
 
