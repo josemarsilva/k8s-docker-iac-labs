@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-python-flask-mongodb.md` - Kubernetes, Docker e Rancher Desktop - LAB-06 - Kubernetes, Python, Flask e MongoDB on RanckerDesktop
+`kubernetes-docker-rancherdesktop-labs/md/README-k8s-python-flask-mongodb.md` - Kubernetes, Docker e Rancher Desktop - LAB-06 - Kubernetes, Python, Flask e MongoDB on RanckerDesktop
 
 ## 1. Introdução
 
@@ -85,29 +85,29 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Configurar/alterar _Tag_ da imagem no Docker Hub container registry: `latest`
 
 ```cmd
-C:\src\kubernetes-python-flask-mongodb> TYPE Dockerfile
-C:\src\kubernetes-python-flask-mongodb> nerdctl image build -t josemarsilva/rotten-potatoes:v1 .
+C:\src\k8s-python-flask-mongodb> TYPE Dockerfile
+C:\src\k8s-python-flask-mongodb> nerdctl image build -t josemarsilva/rotten-potatoes:v1 .
       :
 unpacking docker.io/josemarsilva/rotten-potatoes:v1 (sha256:)...done
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl image ls
+C:\src\k8s-python-flask-mongodb> nerdctl image ls
 REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
     :                                 :             :              :                :
 josemarsilva/rotten-potatoes          v1        ace3e9bb8bc2    7 minutes ago    linux/amd64    217.1 MiB
     :                                 :             :              :                :
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:v1
+C:\src\k8s-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:v1
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl tag josemarsilva/rotten-potatoes:v1 josemarsilva/rotten-potatoes:latest
+C:\src\k8s-python-flask-mongodb> nerdctl tag josemarsilva/rotten-potatoes:v1 josemarsilva/rotten-potatoes:latest
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl image ls
+C:\src\k8s-python-flask-mongodb> nerdctl image ls
 REPOSITORY                            TAG       IMAGE ID        CREATED           PLATFORM       SIZE
     :                                 :             :              :                :
 josemarsilva/rotten-potatoes          latest    ace3e9bb8bc2    16 seconds ago    linux/amd64    217.1 MiB
 josemarsilva/rotten-potatoes          v1        ace3e9bb8bc2    16 minutes ago    linux/amd64    217.1 MiB
     :                                 :             :              :                :
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:latest
+C:\src\k8s-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:latest
 ```
 
 * Criar/Configurar `deployment-service-python-flask-mongodb.yaml`
@@ -161,12 +161,12 @@ replicaset.apps/web-app-py-flask-7478c6f8f7   1         1         1       6m49s
 * Reconfigurar/alterar _Tag_ da imagem no Docker Hub container registry: `latest`
 
 ```cmd
-C:\src\kubernetes-python-flask-mongodb> TYPE Dockerfile.
-C:\src\kubernetes-python-flask-mongodb> nerdctl image build -t josemarsilva/rotten-potatoes:v2 .
+C:\src\k8s-python-flask-mongodb> TYPE Dockerfile.
+C:\src\k8s-python-flask-mongodb> nerdctl image build -t josemarsilva/rotten-potatoes:v2 .
       :
 unpacking docker.io/josemarsilva/rotten-potatoes:v2 (sha256:)...done
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl image ls
+C:\src\k8s-python-flask-mongodb> nerdctl image ls
 REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
     :                                 :             :              :                :
 josemarsilva/rotten-potatoes          latest    ff312c048d95    17 minutes ago        linux/amd64    217.1 MiB
@@ -174,11 +174,11 @@ josemarsilva/rotten-potatoes          v1        ff312c048d95    19 minutes ago  
 josemarsilva/rotten-potatoes          v2        15b11d336179    About a minute ago    linux/amd64    217.1 MiB
     :                                 :             :              :                :
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:v2
+C:\src\k8s-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:v2
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl tag josemarsilva/rotten-potatoes:v2 josemarsilva/rotten-potatoes:latest
+C:\src\k8s-python-flask-mongodb> nerdctl tag josemarsilva/rotten-potatoes:v2 josemarsilva/rotten-potatoes:latest
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl image ls
+C:\src\k8s-python-flask-mongodb> nerdctl image ls
 REPOSITORY                            TAG       IMAGE ID        CREATED           PLATFORM       SIZE
     :                                 :             :              :                :
 josemarsilva/rotten-potatoes          latest    15b11d336179    5 seconds ago     linux/amd64    217.1 MiB
@@ -186,7 +186,7 @@ josemarsilva/rotten-potatoes          v1        ff312c048d95    21 minutes ago  
 josemarsilva/rotten-potatoes          v2        15b11d336179    3 minutes ago     linux/amd64    217.1 MiB
     :                                 :             :              :                :
 
-C:\src\kubernetes-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:latest
+C:\src\k8s-python-flask-mongodb> nerdctl push josemarsilva/rotten-potatoes:latest
 ```
 
 * Criar/Configurar `deployment-service-python-flask-mongodb-version-v2.yaml`
@@ -246,9 +246,9 @@ replicaset.apps/web-app-py-flask-7478c6f8f7   1         1         1       6m49s
   * [Facilita muito se fizer o uso do pip](https://phoenixnap.com/kb/install-pip-windows)
 
 ```cmd
-C:\src\kubernetes-python-flask-mongodb> python -m venv venv
-C:\src\kubernetes-python-flask-mongodb> .\venv\Scripts\activate.bat
-(venv) C:\src\kubernetes-python-flask-mongodb> 
+C:\src\k8s-python-flask-mongodb> python -m venv venv
+C:\src\k8s-python-flask-mongodb> .\venv\Scripts\activate.bat
+(venv) C:\src\k8s-python-flask-mongodb> 
 ```
 
 ## I - Referências

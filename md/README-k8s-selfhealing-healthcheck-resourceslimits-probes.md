@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-09 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
+`kubernetes-docker-rancherdesktop-labs/md/README-k8s-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-09 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
 
 ## 1. Introdução
 

@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-commands-basic.md` - Kubernetes, Docker e Rancher Desktop - LAB-05 - Basic Commands using Kubernetes on RanckerDesktop
+`kubernetes-docker-rancherdesktop-labs/md/README-k8s-commands-basic.md` - Kubernetes, Docker e Rancher Desktop - LAB-05 - Basic Commands using Kubernetes on RanckerDesktop
 
 ## 1. Introdução
 
@@ -119,8 +119,8 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ```cmd
 C:\src> cd kubernetes-basic
-C:\src\kubernetes-basic> TYPE pod-web-page-80-naked.yaml
-C:\src\kubernetes-basic> kubectl create -f pod-web-page-80-naked.yaml
+C:\src\k8s-basic> TYPE pod-web-page-80-naked.yaml
+C:\src\k8s-basic> kubectl create -f pod-web-page-80-naked.yaml
 pod/web-page created
 ```
 
@@ -128,11 +128,11 @@ pod/web-page created
 * No resultado do "get pods", o status = "Ready" informa que esta pronto, o "READY" = "1/1" informa que um container está pronto de um container criado. "AGE" tempo de vida
 
 ```cmd
-C:\src\kubernetes-basic> kubectl get nodes
+C:\src\k8s-basic> kubectl get nodes
 NAME     STATUS   ROLES                          AGE   VERSION
 lp1764   Ready    builder,control-plane,master   8d    v1.21.8+k3s2
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME       READY   STATUS    RESTARTS   AGE
 web-page   1/1     Running   0          4s
 ```
@@ -140,7 +140,7 @@ web-page   1/1     Running   0          4s
 * Descrever as informações detalhadas de um POD
 
 ```cmd
-C:\src\kubernetes-basic> kubectl describe  pod web-page
+C:\src\k8s-basic> kubectl describe  pod web-page
 Name:         web-page
 Namespace:    default
    :             :
@@ -154,7 +154,7 @@ Containers:
 * Redirecionar a porta do cluster kubernetes para a porta local da máquina. Pelo browser acessando a página `http://localhost:8080/` será possível observar uma página de fundo azul, identificada por "Página de teste". O comando do port-fowrad prende o terminal que pode ser encerrado com ^C.
 
 ```cmd
-C:\src\kubernetes-basic> kubectl port-forward pod/web-page 8080:80
+C:\src\k8s-basic> kubectl port-forward pod/web-page 8080:80
 Forwarding from 127.0.0.1:8080 -> 80
 Forwarding from [::1]:8080 -> 80
 ```
@@ -162,10 +162,10 @@ Forwarding from [::1]:8080 -> 80
 * Remover o POD recentemente criado
 
 ```cmd
-C:\src\kubernetes-basic> kubectl delete pod web-page
+C:\src\k8s-basic> kubectl delete pod web-page
 pod "web-page" deleted
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 No resources found in default namespace.
 ```
 
@@ -176,31 +176,31 @@ No resources found in default namespace.
 
 ```cmd
 C:\src> cd kubernetes-basic
-C:\src\kubernetes-basic> TYPE pod-web-page-80-naked.yaml
-C:\src\kubernetes-basic> TYPE pod-web-page-80-naked-label.yaml
-C:\src\kubernetes-basic> kubectl apply -f pod-web-page-80-naked.yaml
+C:\src\k8s-basic> TYPE pod-web-page-80-naked.yaml
+C:\src\k8s-basic> TYPE pod-web-page-80-naked-label.yaml
+C:\src\k8s-basic> kubectl apply -f pod-web-page-80-naked.yaml
 pod/web-page created
 
-C:\src\kubernetes-basic> kubectl apply -f pod-web-page-80-naked-label.yaml
+C:\src\k8s-basic> kubectl apply -f pod-web-page-80-naked-label.yaml
 pod/web-page-label created
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME             READY   STATUS    RESTARTS   AGE
 web-page         1/1     Running   0          2m10s
 web-page-label   1/1     Running   0          107s
 
-C:\src\kubernetes-basic> kubectl describe pods/web-page
+C:\src\k8s-basic> kubectl describe pods/web-page
    :
 Name:         web-page
 Labels:       <none>
    :
-C:\src\kubernetes-basic> kubectl describe pods/web-page-label
+C:\src\k8s-basic> kubectl describe pods/web-page-label
    :
 Name:         web-page-label
 Labels:       app=web
    :
 
-C:\src\kubernetes-basic> kubectl get pods -l app=web
+C:\src\k8s-basic> kubectl get pods -l app=web
 NAME             READY   STATUS    RESTARTS   AGE
 web-page-label   1/1     Running   0          6m57s
 ```
@@ -212,33 +212,33 @@ web-page-label   1/1     Running   0          6m57s
 * Criar/Configurar um Replica Set
 
 ```cmd
-C:\src\kubernetes-basic> kubectl api-resources | findstr "ReplicaSet"
+C:\src\k8s-basic> kubectl api-resources | findstr "ReplicaSet"
 replicasets                       rs           apps                           true         ReplicaSet
 
-C:\src\kubernetes-basic> type replicaset-selector-matchlabels-template-web-page.yaml
+C:\src\k8s-basic> type replicaset-selector-matchlabels-template-web-page.yaml
 ```
 
 * Removas os PODs naked criados manualmente, se eles já tiverem sido removidos o erro poderá ser ignorado. Em seguida aplique o Replica Set criado que ele dará conta de criar o(s) e mantê-lo(s) vivo. O Replica Set nomeia o POD com o prefixo do nome do replica-set + um sufixo aleatório. 
 
 ```cmd
-C:\src\kubernetes-basic> kubectl delete -f pod-web-page-80-naked.yaml
+C:\src\k8s-basic> kubectl delete -f pod-web-page-80-naked.yaml
 pod "web-page" deleted
 
-C:\src\kubernetes-basic> kubectl delete -f pod-web-page-80-naked-label.yaml
+C:\src\k8s-basic> kubectl delete -f pod-web-page-80-naked-label.yaml
 pod "web-page-label" deleted
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME             READY   STATUS    RESTARTS   AGE
 No resources found in default namespace.
 
-C:\src\kubernetes-basic> kubectl apply -f replicaset-selector-matchlabels-template-web-page.yaml
+C:\src\k8s-basic> kubectl apply -f replicaset-selector-matchlabels-template-web-page.yaml
 replicaset.apps/web-page-replicaset created
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME             READY   STATUS    RESTARTS   AGE
 web-page-replicaset-v2srd   1/1     Running   0          114s
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                 DESIRED   CURRENT   READY   AGE
 web-page-replicaset   1         1         1       2m35s
 ```
@@ -246,10 +246,10 @@ web-page-replicaset   1         1         1       2m35s
 * Vamos eliminar o POD criado `web-page-replicaset*` e constatar que o ReplicaSet cuidará de reestabelecer a situação desejada, isto é recriar o POD removido
 
 ```cmd
-C:\src\kubernetes-basic> kubectl delete pod web-page-replicaset-v2srd
+C:\src\k8s-basic> kubectl delete pod web-page-replicaset-v2srd
 pod "web-page-replicaset-v2srd" deleted
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 web-page-replicaset-5qwhp   1/1     Running   0          13s
 ```
@@ -257,19 +257,19 @@ web-page-replicaset-5qwhp   1/1     Running   0          13s
 * Criar/Configurar um Replica Set idêntico ao anterior, porém com 4 réplicas
 
 ```cmd
-C:\src\kubernetes-basic> type replicaset-selector-matchlabels-template-web-page-4-replicas.yaml
+C:\src\k8s-basic> type replicaset-selector-matchlabels-template-web-page-4-replicas.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f replicaset-selector-matchlabels-template-web-page-4-replicas.yaml
+C:\src\k8s-basic> kubectl apply -f replicaset-selector-matchlabels-template-web-page-4-replicas.yaml
 replicaset.apps/web-page-replicaset configured
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 web-page-replicaset-5qwhp   1/1     Running   0          9m52s
 web-page-replicaset-k2zzj   1/1     Running   0          29s
 web-page-replicaset-lp7rh   1/1     Running   0          29s
 web-page-replicaset-qlvcz   1/1     Running   0          29s
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                 DESIRED   CURRENT   READY   AGE
 web-page-replicaset   4         4         4       54m
 ```
@@ -277,11 +277,11 @@ web-page-replicaset   4         4         4       54m
 * Remover dois dos quatro PODS e observar o trabalho do Replica Set em retornar a situação a condição desejada de 4 PODS
 
 ```cmd
-C:\src\kubernetes-basic> kubectl delete pod web-page-replicaset-lp7rh web-page-replicaset-qlvcz
+C:\src\k8s-basic> kubectl delete pod web-page-replicaset-lp7rh web-page-replicaset-qlvcz
 pod "web-page-replicaset-lp7rh" deleted
 pod "web-page-replicaset-qlvcz" deleted
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 web-page-replicaset-5qwhp   1/1     Running   0          14m
 web-page-replicaset-k2zzj   1/1     Running   0          5m10s
@@ -292,14 +292,14 @@ web-page-replicaset-clx6j   1/1     Running   0          23s
 * Alterar por linha de comando a configuração de número de réplicas do ReplicaSet de 4 para 10 réplicas
 
 ```cmd
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                 DESIRED   CURRENT   READY   AGE
 web-page-replicaset   4         4         4       63m
 
-C:\src\kubernetes-basic> kubectl scale replicaset web-page-replicaset --replicas 10
+C:\src\k8s-basic> kubectl scale replicaset web-page-replicaset --replicas 10
 replicaset.apps/web-page-replicaset scaled
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                 DESIRED   CURRENT   READY   AGE
 web-page-replicaset   10        10        10      64m
 ```
@@ -310,12 +310,12 @@ web-page-replicaset   10        10        10      64m
 * Cria/Configurar um Replica Set idêntico ao anterior, porém ao invés de executar a versão blue (FUNDO AZUL) da aplicação vamos executar a versão green (FUNDO VERDE) da aplicação
 
 ```cmd
-C:\src\kubernetes-basic> type replicaset-selector-matchlabels-template-web-page-green-version.yaml
+C:\src\k8s-basic> type replicaset-selector-matchlabels-template-web-page-green-version.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f replicaset-selector-matchlabels-template-web-page-green-version.yaml
+C:\src\k8s-basic> kubectl apply -f replicaset-selector-matchlabels-template-web-page-green-version.yaml
 replicaset.apps/web-page-replicaset configured
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 web-page-replicaset-5qwhp   1/1     Running   0          45m
 web-page-replicaset-k2zzj   1/1     Running   0          35m
@@ -326,38 +326,38 @@ web-page-replicaset-clx6j   1/1     Running   0          31m
 * Fazendo o port-fowarding e olhando a aplicação pelo browser, vamos observar que o código que ainda está executando ainda é o blue (FUNDO AZUL). Isto porque o ReplicaSet não gerencia a troca de versão.
 
 ```cmd
-C:\src\kubernetes-basic> kubectl port-forward pod/web-page-replicaset-5qwhp 8080:80
+C:\src\k8s-basic> kubectl port-forward pod/web-page-replicaset-5qwhp 8080:80
 ```
 
 * O ReplicaSet não controla a versão, porém se deletarmos os PODS criados, ao recriar o ReplicaSet os PODs serão criados com a nova versão (FUNDO VERDE)
 
 ```cmd
-C:\src\kubernetes-basic> kubectl delete pod web-page-replicaset-5qwhp web-page-replicaset-k2zzj web-page-replicaset-6vk55 web-page-replicaset-clx6j
+C:\src\k8s-basic> kubectl delete pod web-page-replicaset-5qwhp web-page-replicaset-k2zzj web-page-replicaset-6vk55 web-page-replicaset-clx6j
 pod "web-page-replicaset-5qwhp" deleted
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
  :                          :       :        :           :
 web-page-replicaset-rh7ks   1/1     Running   0          115s
  :                          :       :        :           :
 
-C:\src\kubernetes-basic> kubectl port-forward pod/web-page-replicaset-rh7ks 8080:80
+C:\src\k8s-basic> kubectl port-forward pod/web-page-replicaset-rh7ks 8080:80
 ```
 
 * Por fim vamos remover todo o Replica Set
 
 ```cmd
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                  DESIRED   CURRENT   READY   AGE
 web-page-replicaset   4         4         4       2m22s
 
-C:\src\kubernetes-basic> kubectl delete replicaset web-page-replicaset
+C:\src\k8s-basic> kubectl delete replicaset web-page-replicaset
 replicaset.apps "web-page-replicaset" deleted
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 No resources found in default namespace.
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 No resources found in default namespace.
 ```
 
@@ -368,20 +368,20 @@ No resources found in default namespace.
 * Criar/Configurar um Deployment que incorpore o cenário do ReplicaSet do passo anterior e que por consequencia passe a gerenciar as versões.
 
 ```cmd
-C:\src\kubernetes-basic> type deployment-selector-web-page-version-blue.yaml
+C:\src\k8s-basic> type deployment-selector-web-page-version-blue.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f deployment-selector-web-page-version-blue.yaml
+C:\src\k8s-basic> kubectl apply -f deployment-selector-web-page-version-blue.yaml
 deployment.apps/web-page-deploy created
 
-C:\src\kubernetes-basic> kubectl get deployments
+C:\src\k8s-basic> kubectl get deployments
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 web-page-deploy   3/3     3            3           30s
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                        DESIRED   CURRENT   READY   AGE
 web-page-deploy-8c44b6d5b   3         3         3       51s
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 web-page-deploy-8c44b6d5b-5ntjz   1/1     Running   0          76s
 web-page-deploy-8c44b6d5b-98vrx   1/1     Running   0          76s
@@ -391,28 +391,28 @@ web-page-deploy-8c44b6d5b-q87kl   1/1     Running   0          76s
 * Fazendo o port-fowarding e olhando a aplicação pelo browser, vamos observar que o código que ainda está executando é o blue (FUNDO AZUL)
 
 ```cmd
-C:\src\kubernetes-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-5ntjz 8080:80
+C:\src\k8s-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-5ntjz 8080:80
 ```
 
 * Criar/Configurar um novo Deployment, muito semelhante ao deployment anterior, porém vamos alterar a versão da aplicação de: blue para: green e a quantidade de PODs de: 3 para 5
 * O Kubernetes vai encerrar os PODs da versao anterior e criar os novos PODS com a versão nova, com a quantidade de replicas novas
 
 ```cmd
-C:\src\kubernetes-basic> type deployment-selector-web-page-version-green-5-replicas.yaml
+C:\src\k8s-basic> type deployment-selector-web-page-version-green-5-replicas.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f deployment-selector-web-page-version-green-5-replicas.yaml
+C:\src\k8s-basic> kubectl apply -f deployment-selector-web-page-version-green-5-replicas.yaml
 deployment.apps/web-page-deploy configured
 
-C:\src\kubernetes-basic> kubectl get deployments
+C:\src\k8s-basic> kubectl get deployments
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 web-page-deploy   5/5     5            5           10m
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                         DESIRED   CURRENT   READY   AGE
 web-page-deploy-8c44b6d5b    0         0         0       10m
 web-page-deploy-86559fbcd7   5         5         5       34s
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                               READY   STATUS    RESTARTS   AGE
 web-page-deploy-86559fbcd7-ft2sf   1/1     Running   0          50s
 web-page-deploy-86559fbcd7-zq6hl   1/1     Running   0          50s
@@ -424,7 +424,7 @@ web-page-deploy-86559fbcd7-8vkss   1/1     Running   0          47s
 * Alterar por linha de comando a configuração de imagem de: green, para: blue. O parametro "web-page" refere-se ao container do template
 
 ```cmd
-C:\src\kubernetes-basic> kubectl set image deployment web-page-deploy web-page=kubedevio/web-page:blue
+C:\src\k8s-basic> kubectl set image deployment web-page-deploy web-page=kubedevio/web-page:blue
 deployment.apps/web-page-deploy image updated
 ```
 
@@ -435,19 +435,19 @@ deployment.apps/web-page-deploy image updated
 * Listar/visualizar o histórico de Deployment 
 
 ```cmd
-C:\src\kubernetes-basic> kubectl rollout history deployment web-page-deploy
+C:\src\k8s-basic> kubectl rollout history deployment web-page-deploy
 deployment.apps/web-page-deploy
 REVISION  CHANGE-CAUSE
 2         <none>
 3         <none>
 
-C:\src\kubernetes-basic> kubectl get replicaset
+C:\src\k8s-basic> kubectl get replicaset
 NAME                         DESIRED   CURRENT   READY   AGE
 web-page-deploy-86559fbcd7   0         0         0       6h37m
 web-page-deploy-8c44b6d5b    5         5         5       6h47m
 
 
-C:\src\kubernetes-basic> kubectl get pods
+C:\src\k8s-basic> kubectl get pods
 NAME                              READY   STATUS    RESTARTS   AGE
 web-page-deploy-8c44b6d5b-422ch   1/1     Running   0          14m
 web-page-deploy-8c44b6d5b-n2s2l   1/1     Running   0          14m
@@ -455,7 +455,7 @@ web-page-deploy-8c44b6d5b-q7x67   1/1     Running   0          14m
 web-page-deploy-8c44b6d5b-2c6rr   1/1     Running   0          14m
 web-page-deploy-8c44b6d5b-gxmkv   1/1     Running   0          14m
 
-C:\src\kubernetes-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-422ch 8080:80
+C:\src\k8s-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-422ch 8080:80
 ```
 
 
@@ -472,32 +472,32 @@ C:\src\kubernetes-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-422c
 * Criar/configurar novamente o deployment `service-nodeport-selector-label-app-web.yaml` com a página de fundo azul em 3 instâncias com o label "app: web"
 
 ```cmd
-C:\src\kubernetes-basic> kubectl get deployments
+C:\src\k8s-basic> kubectl get deployments
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 web-page-deploy   5/5     5            5           17h
 
-C:\src\kubernetes-basic> kubectl delete deployments web-page-deploy
+C:\src\k8s-basic> kubectl delete deployments web-page-deploy
 deployment.apps "web-page-deploy" deleted
 
-C:\src\kubernetes-basic> kubectl get deployments
+C:\src\k8s-basic> kubectl get deployments
 No resources found in default namespace.
 
-C:\src\kubernetes-basic> TYPE service-nodeport-selector-label-app-web.yaml
+C:\src\k8s-basic> TYPE service-nodeport-selector-label-app-web.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f service-nodeport-selector-label-app-web.yaml
+C:\src\k8s-basic> kubectl apply -f service-nodeport-selector-label-app-web.yaml
 deployment.apps/web-page-deploy created
 
-C:\src\kubernetes-basic> kubectl get deployments
+C:\src\k8s-basic> kubectl get deployments
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 web-page-deploy   3/3     3            3           15s
 
-C:\src\kubernetes-basic> TYPE service-selector-label-app-web.yaml
+C:\src\k8s-basic> TYPE service-selector-label-app-web.yaml
 
-C:\src\kubernetes-basic> kubectl apply -f service-selector-label-app-web.yaml
-C:\src\kubernetes-basic> 
+C:\src\k8s-basic> kubectl apply -f service-selector-label-app-web.yaml
+C:\src\k8s-basic> 
 
-C:\src\kubernetes-basic> kubectl get services
-C:\GitHome\ws-github-01\kubernetes-docker-rancherdesktop-labs\src\kubernetes-basic>kubectl get services
+C:\src\k8s-basic> kubectl get services
+C:\GitHome\ws-github-01\kubernetes-docker-rancherdesktop-labs\src\k8s-basic>kubectl get services
 NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes         ClusterIP   10.43.0.1      <none>        443/TCP        9d
 web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s
@@ -514,10 +514,10 @@ web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s
 * Agora vamos fixar a "porta alta" para sempre ser a porta 30000. Estamos cientes da limitação de que poderemos ter apenas 1 (um) serviço nesta porta.
 
 ```cmd
-C:\src\kubernetes-basic> kubectl apply -f service-nodeport-port-30000-selector-label-app-web.yaml
+C:\src\k8s-basic> kubectl apply -f service-nodeport-port-30000-selector-label-app-web.yaml
 deployment.apps/web-page-deploy created
 
-C:\src\kubernetes-basic> kubectl get service web-app-service
+C:\src\k8s-basic> kubectl get service web-app-service
 ```
 
 * Abrir com o browser a url `http:localhost:30000` e observar a WebPage com fundo azul. Se você tentar acessar a url anterior `http:localhost:31725` ela não mais estará disponível porque foi feito _apply_ no servico que foi atualizado.

@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-api-lang-response-database-middleware-action.md` Kubernetes - API - Response - Database - Middleware - Action
+`kubernetes-docker-rancherdesktop-labs/md/README-k8s-api-lang-response-database-middleware-action.md` Kubernetes - API - Response - Database - Middleware - Action
 ## 1. Introdução
 
 Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API - Response - Database - Middleware - Action** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:

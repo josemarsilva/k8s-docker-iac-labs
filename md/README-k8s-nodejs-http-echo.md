@@ -1,4 +1,4 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kubernetes-nodejs-http-echo.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes http echo
+`kubernetes-docker-rancherdesktop-labs/md/README-k8s-nodejs-http-echo.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes http echo
 
 ## 1. Introdução
 
