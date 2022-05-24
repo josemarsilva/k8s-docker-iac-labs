@@ -3,6 +3,7 @@
 # Remarks    :
 #               - https://hub.docker.com/_/microsoft-mssql-server
 #               - https://github.com/twright-msft/mssql-node-docker-demo-app
+#               - https://www.softwaredeveloper.blog/initialize-mssql-in-docker-container
 
 # Base Docker images
 FROM mcr.microsoft.com/mssql/server:2019-CU15-ubuntu-20.04
@@ -12,7 +13,8 @@ USER root
 
 # Install packages
 RUN apt-get -y update  && \
-    apt-get install -y curl
+    apt-get install -y curl  && \
+    apt-get install -y dos2unix
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -22,13 +24,17 @@ WORKDIR /usr/src/app
 
 # Copy initialization scripts
 COPY entrypoint.sh .
-COPY import-data.sh .
+COPY run-initialization.sh .
 COPY *.sql .
-COPY *.csv .
+#COPY *.csv .
 
-# Grant permissions for the import-data script to be executable
-RUN chmod +x /usr/src/app/import-data.sh
+# Grant permissions for the `run-initialization.sh` script to be executable and read-write to `/usr/src/app/`
+RUN chmod -R ugo+rw /usr/src/app/
+RUN chmod +x /usr/src/app/run-initialization.sh
 
 # Switch back to mssql user and run the entrypoint script
 USER mssql
+
+# Entrypoint
 ENTRYPOINT /bin/bash ./entrypoint.sh
+# CMD ["/bin/bash", "/usr/src/app/entrypoint.sh"]

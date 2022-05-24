@@ -1,2 +1,2 @@
-#start SQL Server, start the script to create the DB and import the data
-/opt/mssql/bin/sqlservr & /usr/src/app/import-data.sh
+# Fist start the script to deploy database: create the DB, users, grant, tables, inserts, etc. Second start SQL Server. 
+/usr/src/app/run-initialization.sh & /opt/mssql/bin/sqlservr

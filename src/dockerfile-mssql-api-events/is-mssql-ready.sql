@@ -1,0 +1,1 @@
+SELECT DB_NAME() AS [CurrentDatabase], CURRENT_USER AS [CurrentUser], GETDATE() AS [CurrentDateTime]
