@@ -1,0 +1,9 @@
+- hosts: terraform-ansible-category
+  tasks:
+  - name: Install Python 3 and VENV
+    apt:
+      pkg:
+      - python3
+      - virtualenv
+      update_cache: yes
+    become: yes

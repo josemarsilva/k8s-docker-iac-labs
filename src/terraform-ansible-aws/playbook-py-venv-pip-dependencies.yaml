@@ -1,0 +1,15 @@
+- hosts: terraform-ansible-category
+  tasks:
+  - name: Install Python 3 and VENV
+    apt:
+      pkg:
+      - python3
+      - virtualenv
+      update_cache: yes
+    become: yes
+  - name: Install Pip dependencies (Django e Django REST)
+    pip:
+      virtualenv: /home/ubuntu/prj/venv
+      name:
+        - django
+        - djangorestframework

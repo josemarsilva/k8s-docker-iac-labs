@@ -65,6 +65,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-13](./md/README-install-cloud-docker-kubernetes.md)                           | Install on Cloud Docker & Kubernetes |
 | [LAB-14](./md/README-terraform-basic.md)                                           | Terraform Basic |
 | [LAB-15](./md/README-kafka-basic.md)                                               | Kafka Basic |
+| [LAB-16](./src/terraform-ansible-aws/readme.txt)                                   | Terraform Ansible AWS  |
 
 ## I - Referências
 
