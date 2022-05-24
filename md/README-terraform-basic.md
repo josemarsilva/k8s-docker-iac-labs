@@ -516,6 +516,8 @@ $ terraform plan
 * Terraform
   * [Terraform Turorial - Official HashiCorp](https://learn.hashicorp.com/terraform?utm_source=terraform_io)
   * [Terraform Best Practices](https://www.terraform-best-practices.com/v/ptbr/)
+  * [Terraform em 10 Minutos // Dicionário do Programador](https://www.youtube.com/watch?v=0EAjJe8aPkc)
+  * [O que é Terraform?](https://www.youtube.com/watch?v=t2hTtdCILXI)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
