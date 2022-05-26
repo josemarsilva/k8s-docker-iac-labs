@@ -4,6 +4,7 @@ volume/mysql/
 volume/rabbitmq/
 *.tmp
 *.pem
+*.pub
 
 ### Terraform ###
 **/.terraform/*

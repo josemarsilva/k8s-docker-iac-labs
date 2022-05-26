@@ -65,7 +65,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-13](./md/README-install-cloud-docker-kubernetes.md)                           | Install on Cloud Docker & Kubernetes |
 | [LAB-14](./md/README-terraform-basic.md)                                           | Terraform Basic |
 | [LAB-15](./md/README-kafka-basic.md)                                               | Kafka Basic |
-| [LAB-16](./src/terraform-ansible-aws/readme.txt)                                   | Terraform Ansible AWS  |
+| [LAB-16](./src/terraform-ansible-aws/readme.txt)                                   | Terraform Ansible AWS - Provision AWS EC2 Linux instance, Install Python and Django, Create simple Django Project and make server available  |
+| [LAB-17](./src/terraform-ansible-aws-keypair-multiple-env/readme.txt)              | Terraform Ansible AWS - Create Key Pair, provision two AWS EC2 Linux instances: DEV, PRD  |
 
 ## I - Referências
 

@@ -55,7 +55,25 @@
 
 
 7. Configure your .gitignore file
-    $ cat .gitignore
+    * Edit `.gitignore` file and add some files to be ignored
+        $ cat .gitignore
+        :
+        ### Terraform ###
+        **/.terraform/*
+        *.tfstate
+        *.tfstate.*
+        crash.log
+        crash.*.log
+        *.tfvars
+        *.tfvars.json
+        override.tf
+        override.tf.json
+        *_override.tf
+        *_override.tf.json
+        .terraformrc
+        terraform.rc
+        *.terraform.lock.hcl*
+        :
 
 8. Configure Terraform script to automatically start http server
     * Edit file `main.tf`. Edit session `resources= ...` add lines above
@@ -164,9 +182,11 @@
 
     * Check installation
 
+        $ cd ~
+        $ mkdir prj
+        $ cd prj
+        $ virtualenv venv
         $ ls
-        prj
-        $ ls prj
         venv
         $ source venv/bin/activate
         (venv) ubuntu@ip-172-31-17-76:~/prj$
@@ -179,7 +199,11 @@
         sqlparse==0.4.2
 
 
-13. Criar um projeto Django simples
+14. Criar um projeto Django simples
+
+    * Connect SSH to new instance and check configuration
+
+        $ ssh -i "terraform-ansible-aws.pem" ubuntu@ec2-34-221-61-120.us-west-2.compute.amazonaws.com
 
     * Criar o projeto Django e executa-lo
 
@@ -203,9 +227,15 @@
         +----------------------------------------------------------------+
 
 
-14. Alterar o codigo fonte do projeto Django para permissão ao caminho /
+15. Alterar o codigo fonte do projeto Django para permissão ao caminho /
 
-    * Editar arquivo `vim setup/settings.p` e acrescentar chamve `ALLOWED_HOSTS = ['*']`
+    * Connect SSH to new instance and check configuration
+
+        $ ssh -i "terraform-ansible-aws.pem" ubuntu@ec2-34-221-61-120.us-west-2.compute.amazonaws.com
+
+    * Editar arquivo `prj/setup/settings.py` e acrescentar chamve `ALLOWED_HOSTS = ['*']`
+
+        $ vim prj/setup/settings.py
 
     * Open Browser
 
@@ -216,4 +246,53 @@
         +----------------------------------------------------------------+
 
 
+16. Destruir a instalação feita manualmente para automatiza-la pelo Ansible
 
+    * Destroy/Recreate infraestrutura
+
+        $ terraform destroy
+        $ terraform apply
+
+    * Edit  `hosts.yaml` and configure new instance created by terraform apply
+    
+        ```hosts.yaml
+        [terraform-ansible-category]
+        ec2-35-160-121-218.us-west-2.compute.amazonaws.com
+        ```
+
+    * Edit `playbook-py-venv-pip-dependencies-django-init.yaml` and add new task to activate venv and initialize project
+        ```playbook-py-venv-pip-dependencies-django-init.yaml
+        :
+        - name: Initialize and run Django Project
+            shell: '. /home/ubuntu/prj/venv/bin/activate; django-admin startproject setup /home/ubuntu/prj'
+        :
+        ```
+
+    * Run playbook
+    
+        $ ansible-playbook playbook-py-venv-pip-dependencies-django-init.yaml -u ubuntu --private-key terraform-ansible-aws.pem -i hosts.yaml
+
+    * Connect SSH to new instance and check configuration
+
+        $ ssh -i "terraform-ansible-aws.pem" ubuntu@ec2-35-160-121-218.us-west-2.compute.amazonaws.com
+
+
+17. Configurando o hosting allow do settings do Django pelo Ansible
+
+    * Edit `playbook-py-venv-pip-dependencies-django-init-host-allow-config-runserver.yaml` and replace existing task by complete script 
+        ```playbook-py-venv-pip-dependencies-django-init-host-allow-config-runserver.yaml
+        :
+        :
+        ```
+
+    * Run playbook
+    
+        $ ansible-playbook playbook-py-venv-pip-dependencies-django-init-host-allow-config-runserver.yaml -u ubuntu --private-key terraform-ansible-aws.pem -i hosts.yaml
+
+    * Open Browser
+
+        +----------------------------------------------------------------+
+        | http://ec2-34-214-11-219.us-west-2.compute.amazonaws.com:8000/ |
+        +----------------------------------------------------------------+
+        | Django The install worked successfully! Congratulations!       |
+        +----------------------------------------------------------------+
