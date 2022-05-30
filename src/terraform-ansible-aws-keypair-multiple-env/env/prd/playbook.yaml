@@ -1,0 +1,41 @@
+- hosts: terraform-ansible-category
+  tasks:
+  - name: Install Python 3 and VENV
+    apt:
+      pkg:
+      - python3
+      - virtualenv
+      update_cache: yes
+    become: yes
+  - name: Git Clone
+    ansible.builtin.git:
+      repo: https://github.com/josemarsilva/clientes-leo-api.git
+      dest: /home/ubuntu/prj
+      version: master
+      force: yes
+  - name: Install Pip dependencies Django e Django REST
+    pip:
+      virtualenv: /home/ubuntu/prj/venv
+      requirements: /home/ubuntu/prj/requirements.txt
+      #name:
+      #  - django
+      #  - djangorestframework
+  - name: Verify if Django project settings.py already exists
+    stat:
+      path: /home/ubuntu/prj/setup/settings.py
+    register: file_settings_py
+  - name: Initialize Django Project
+    shell: '. /home/ubuntu/prj/venv/bin/activate; django-admin startproject setup /home/ubuntu/prj'
+    when: not file_settings_py.stat.exists
+  - name: Configure HOST_ALLOW
+    lineinfile:
+      path: /home/ubuntu/prj/setup/settings.py
+      regexp: 'ALLOWED_HOSTS'
+      line: 'ALLOWED_HOSTS = ["*"]'
+      backrefs: yes
+  - name: Configure databases and migrations
+    shell: '. /home/ubuntu/prj/venv/bin/activate; python /home/ubuntu/prj/manage.py migrate'
+  - name: Loading initial data
+    shell: '. /home/ubuntu/prj/venv/bin/activate; python /home/ubuntu/prj/manage.py loaddata clientes.json'
+  - name: Run Django server
+    shell: '. /home/ubuntu/prj/venv/bin/activate; cd /home/ubuntu/prj; nohup python manage.py runserver 0.0.0.0:8000 &'
