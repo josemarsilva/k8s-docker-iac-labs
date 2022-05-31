@@ -68,6 +68,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-16](./src/terraform-ansible-aws/readme.txt)                                   | Terraform Ansible AWS - Provision AWS EC2 Linux instance, Install Python and Django, Create simple Django Project and make server available  |
 | [LAB-17](./src/terraform-ansible-aws-keypair-multiple-env/readme.txt)              | Terraform Ansible AWS - Create Key Pair, provision two AWS EC2 Linux instances: DEV, PRD  |
 | [LAB-18](./src/terraform-aws/readme.txt)                                           | Terraform AWS - Provision, Modify, References, Dependencies, Alias, Variables, Output and working with a team |
+| [LAB-19](./src/terraform-ansible-aws-ec2-k8s/readme.txt)                           | Terraform AWS, Ansible, EC2, Kubernetes - Criando Cluster Kubernetes na AWS com 3 instâncias EC2 (master-1, worker-1, worker-2) |
+| [LAB-20](./src/terraform-aws-eks-gcp-gke-azure-aks/readme.txt)                     | Terraform Kubernetes on multi cloud - AWS/EKS: Elastic Kubernetes Service, GCP/GKE - Gooble Kubernetes Engine, AZURE/AKS - Azure Kuberntes Engine |
 
 ## I - Referências
 

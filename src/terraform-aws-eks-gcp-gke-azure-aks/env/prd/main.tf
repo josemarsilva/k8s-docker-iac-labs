@@ -1,0 +1,3 @@
+module "prd" {
+    source = "../../infra"
+}
