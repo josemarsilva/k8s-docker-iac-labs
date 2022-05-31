@@ -502,3 +502,19 @@
 
             * https://cloud.hashicorp.com/products/terraform
 
+        8.2.3. Setup an Example on Terraform Cloud
+
+            * On `Terraform Cloud :: Getting Started` click `Start from scratch`
+                - https://app.terraform.io/app/getting-started
+            * On `Terraform Cloud :: Organizations >> New`
+                - https://app.terraform.io/app/organizations/new
+                + fill:
+                    - Organization Name: `josemarsilva-lab`
+                    - E-mail: `xxxx@xxxxx.xxx`
+            * On `Terraform Cloud :: Workspace >> New`
+                - https://app.terraform.io/app/josemarsilva-lab/workspaces/new
+                + fill:
+                    - Choose Workflow: Version control Workflow
+                    - Connect to VCP: Github 
+                    - Choose a repository: https://github.com/josemarsilva/terraform-labs
+                    - Configure settings:
