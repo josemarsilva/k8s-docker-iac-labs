@@ -1,0 +1,87 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.27"
+    }
+  }
+
+  required_version = ">= 0.14.9"
+}
+
+provider "aws" {
+  profile = "default"
+  region  = "us-east-1"
+}
+
+resource "aws_instance" "dev" {
+    count = 3
+    ami = "ami-09d56f8956ab235b3"
+    instance_type = "t2.micro"
+    key_name = "terraform-aws"
+    tags = {
+        Name = "dev-${count.index}"
+    }
+    vpc_security_group_ids = [ "${aws_security_group.allow_ssh.id}" ]
+}
+
+resource "aws_security_group" "allow_ssh" {
+  name        = "allow_ssh"
+  description = "Allow SSH inbound traffic"
+  ingress {
+    description      = "SSH from VPC"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["187.74.39.45/32"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    Name = "allow_ssh"
+  }
+}
+
+resource "aws_s3_bucket" "s3b" {
+  bucket = "josemarsilva-terraform-s3b"
+
+  tags = {
+    Name        = "terraform-s3b"
+  }
+}
+
+resource "aws_s3_bucket_acl" "s3bacl" {
+  bucket = aws_s3_bucket.s3b.id
+  acl    = "private"
+}
+
+resource "aws_instance" "dev-3" {
+    ami = "ami-09d56f8956ab235b3"
+    instance_type = "t2.micro"
+    key_name = "terraform-aws"
+    tags = {
+        Name = "dev-3"
+    }
+    vpc_security_group_ids = [ "${aws_security_group.allow_ssh.id}" ]
+    depends_on = [
+      aws_s3_bucket.s3b
+    ]
+}
+
+resource "aws_instance" "dev-4" {
+    ami = "ami-09d56f8956ab235b3"
+    instance_type = "t2.micro"
+    key_name = "terraform-aws"
+    tags = {
+        Name = "dev-4"
+    }
+    vpc_security_group_ids = [ "${aws_security_group.allow_ssh.id}" ]
+}
