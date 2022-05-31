@@ -40,7 +40,7 @@
         $ cd ./src/terraform-aw
         ```
 
-    2.4. Configure your VSCode to base directory for laboratory
+    1.4. Configure your VSCode to base directory for laboratory
 
         * `VSCode :: Extension` find `Terraform`
             - Install `Hashicorp Terraform` highlight sintax highlight and autocomplete
@@ -110,7 +110,7 @@
     :
     ```
 
-    2.2. Devine AWS as provider and provision 3 instances named dev-1, dev-2 and dev-3
+    2.2. Define AWS as provider and provision 3 instances named dev-1, dev-2 and dev-3
 
     ```main.tf
     resource "aws_instance" "dev" {

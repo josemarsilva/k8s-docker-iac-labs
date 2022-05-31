@@ -1,0 +1,30 @@
+- hosts: k8s-worker
+  tasks:
+  - name: Update the apt package index and install packages needed to use the Kubernetes apt repository
+    apt:
+      pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      update_cache: yes
+    become: yes
+  - name: Download the Google Cloud public signing key
+    shell: 'curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+    become: yes
+  - name: Add the Kubernetes apt repository
+    shell: 'echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list'
+    become: yes
+  - name: Update apt package index, install kubelet, kubeadm and kubectl, and pin their version
+    apt:
+      pkg:
+      - kubelet
+      - kubeadm
+      - kubectl
+      update_cache: yes
+    become: yes
+  - name: Update apt package mark hold
+    shell: 'apt-mark hold kubelet kubeadm kubectl'
+    become: yes
+  - name: Install Docker
+    shell: 'curl -fsSL https://get.docker.com | sh'
+    become: yes
