@@ -30,8 +30,6 @@ variable "eks_mng_ng_desired_size" {
 
 variable "aws_ecr_repo_name" {
   type = string
-
-  default = "ecr-prd"
 }
 
 variable "aws_profile" {

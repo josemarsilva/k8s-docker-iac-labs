@@ -107,16 +107,53 @@
         $ terraform apply
         ```
 
-4. Configure provider for GPC using Data Sources
+4. Configure provider Kubernetes Services using Data Sources
 
     4.1. See Provider Documentation
 
         * https://www.terraform.io/language/data-sources
     
-    4.2. Edit `./infra/providers.tf` and configure provider resources GCP using Data
+    4.2. Edit `./infra/providers.tf` and configure provider resources using Data
 
         ```./infra/providers.tf
         :
+        provider "kubernetes" {
+        host                   = data.aws_eks_cluster.default.endpoint
+        cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority[0].data)
+        token                  = data.aws_eks_cluster_auth.default.token
+        }
         :
         ```
+
+    4.3. Edit `./infra/vars.tf` and configure variables used by provider
+
+        ```./infra/vars.tf
+        :
+        variable "cluster_name" {
+        type = string
+
+        default = "prd-cluster"
+        }
+        :
+        ```
+
+5. Configure your Kubernetes application
+
+    5.1. Edit `./infra/kubernetes.tf` and configure your application
+
+        ```./infra/kubernetes.tf
+        :
+        :
+        ```
+
+6. Configure Load Balancer using output of created object
+
+    6.1. Edit `./dev/prd/main.tf` and configure output of address
+
+        ```./infra/main.tf
+        :
+        :
+        ```
+
+
 
