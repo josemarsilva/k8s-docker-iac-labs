@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-install-cloud-docker-kubernetes.md` - LAB-13 - Instalação em infraestrutura _Cloud_ do Docker e Kubernetes
+`k8s-docker-iac-labs/md/README-install-cloud-docker-kubernetes.md` - LAB-13 - Instalação em infraestrutura _Cloud_ do Docker e Kubernetes
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-13 - Instalação em infraestrutura _Cloud_ do Docker e Kubernetes** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-13 - Instalação em infraestrutura _Cloud_ do Docker e Kubernetes** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Obter os binários do Docker e Kubernetes em ambiente Cloud
 * Explorar os recursos e funcionalidades básicas do Docker e Kubernetes em ambiente Cloud
 

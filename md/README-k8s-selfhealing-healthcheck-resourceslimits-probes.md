@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-k8s-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-09 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
+`k8s-docker-iac-labs/md/README-k8s-selfhealing-healthcheck-resourceslimits-probes.md` - Kubernetes, Docker e Rancher Desktop - LAB-09 - Kubernetes Self Healing, application health check, ready to serve and resources limits probes
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-09 - Kubernetes Self Healing, application health check and resources limits probes** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-09 - Kubernetes Self Healing, application health check and resources limits probes** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os conceitos do _Kubernetes_ : Self healing, Liveness probe and Readiness probe
 
 ##### Table of Contents  
@@ -126,7 +126,7 @@ version: 1.0.0
 description: Kubernetes - Node Express Swagger Liveness Readiness Startup Probes application
 entry point: server.js
 test command: 
-git repository: https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs.git
+git repository: https://github.com/josemarsilva/k8s-docker-iac-labs.git
 keywords: node express swagger k8s liveness readiness startup probes
 author: Josemar Furegatti de Abreu Silva
 license: ISC

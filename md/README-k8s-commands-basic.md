@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-k8s-commands-basic.md` - Kubernetes, Docker e Rancher Desktop - LAB-05 - Basic Commands using Kubernetes on RanckerDesktop
+`k8s-docker-iac-labs/md/README-k8s-commands-basic.md` - Kubernetes, Docker e Rancher Desktop - LAB-05 - Basic Commands using Kubernetes on RanckerDesktop
 
 ## 1. Introdução
 
-Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Commands Basic on RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Commands Basic on RanckerDesktop** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Kubernetes_ no Rancher Desktop
 
 ##### Table of Contents  
@@ -497,7 +497,7 @@ C:\src\k8s-basic> kubectl apply -f service-selector-label-app-web.yaml
 C:\src\k8s-basic> 
 
 C:\src\k8s-basic> kubectl get services
-C:\GitHome\ws-github-01\kubernetes-docker-rancherdesktop-labs\src\k8s-basic>kubectl get services
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\k8s-basic>kubectl get services
 NAME               TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes         ClusterIP   10.43.0.1      <none>        443/TCP        9d
 web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s

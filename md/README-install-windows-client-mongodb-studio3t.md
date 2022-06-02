@@ -1,7 +1,7 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-install-windows-client-mongodb-studio3t.md` - Kubernetes, Docker e Rancher Desktop - Windows Client MongoDB Studio 3T connect database
+`k8s-docker-iac-labs/md/README-install-windows-client-mongodb-studio3t.md` - Kubernetes, Docker e Rancher Desktop - Windows Client MongoDB Studio 3T connect database
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-03: Windows Client MongoDB** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-03: Windows Client MongoDB** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Obter os binários e instalar o Studio 3T no Windows
 * Executar um container baseado na imagem do MongoDB
 * Conectar Studio 3T no Windows com MongoDB

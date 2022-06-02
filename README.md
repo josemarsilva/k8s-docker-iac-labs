@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/README.md` - Laboratório Kuberntes, Docker, Rancherdesktop, Infra as Code, Monitoring and Observability
+`k8s-docker-iac-labs/README.md` - Laboratório Kuberntes, Docker, Rancherdesktop, Infra as Code, Monitoring and Observability
 
 ## 1. Introdução
 
-Este repositório contém os artefatos do projeto / laboratório de avaliação  **kubernetes-docker-rancherdesktop-labs** organizado conforme o índice de conteúdo abaixo:
+Este repositório contém os artefatos do projeto / laboratório de avaliação  **k8s-docker-iac-labs** organizado conforme o índice de conteúdo abaixo:
 
 ##### Índice de conteúdo  
 - [1. Introdução](#1-introdução)

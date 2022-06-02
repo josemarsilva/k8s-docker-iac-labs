@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-k8s-python-flask-mongodb.md` - Kubernetes, Docker e Rancher Desktop - LAB-06 - Kubernetes, Python, Flask e MongoDB on RanckerDesktop
+`k8s-docker-iac-labs/md/README-k8s-python-flask-mongodb.md` - Kubernetes, Docker e Rancher Desktop - LAB-06 - Kubernetes, Python, Flask e MongoDB on RanckerDesktop
 
 ## 1. Introdução
 
-Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python, Flask e MongoDB on RanckerDesktop** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python, Flask e MongoDB on RanckerDesktop** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Kubernetes_ no Rancher Desktop
 
 ##### Table of Contents  

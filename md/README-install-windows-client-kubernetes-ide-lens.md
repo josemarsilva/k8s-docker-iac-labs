@@ -1,7 +1,7 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-install-windows-client-kubernetes-ide-lens.md` - LAB-08 - Kubernetes IDE
+`k8s-docker-iac-labs/md/README-install-windows-client-kubernetes-ide-lens.md` - LAB-08 - Kubernetes IDE
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Obter os binários e instalar o Lens Kubernetes IDE
 * Executar/Iniciar o cluster Kubernetes
 * Conectar Lens Kubernetes IDE Windows com seu cluster Kubernetes

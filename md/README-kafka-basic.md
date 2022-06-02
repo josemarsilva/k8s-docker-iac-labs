@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-kafka-basic.md` - Kafka Basic
+`k8s-docker-iac-labs/md/README-kafka-basic.md` - Kafka Basic
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-15: Kafka Basic** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-15: Kafka Basic** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os recursos e funcionalidades básicas 
 
 ##### Table of Contents  

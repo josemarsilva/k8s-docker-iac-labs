@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-k8s-nodejs-http-echo.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes http echo
+`k8s-docker-iac-labs/md/README-k8s-nodejs-http-echo.md` - Kubernetes, Docker e Rancher Desktop - LAB-07 - Kubernetes http echo
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes http echo** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes http echo** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Kubernetes_ no Rancher Desktop
 
 ##### Table of Contents  
@@ -105,7 +105,7 @@ version: (1.0.0)
 description: Kubernetes - Node HTTP echo
 entry point: (index.js) server.js
 test command:
-git repository: https://github.com/josemarsilva/kubernetes-docker-rancherdesktop-labs.git
+git repository: https://github.com/josemarsilva/k8s-docker-iac-labs.git
 keywords: node http nodemon
 author: Josemar Furegatti de Abreu Silva
 license: (ISC)

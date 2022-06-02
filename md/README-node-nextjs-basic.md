@@ -1,8 +1,8 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-node-nextjs-basic.md` - Next JS - React
+`k8s-docker-iac-labs/md/README-node-nextjs-basic.md` - Next JS - React
 
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-11: Node Next.JS Basic** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-11: Node Next.JS Basic** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os recursos e funcionalidades básicas
 
 ##### Table of Contents  

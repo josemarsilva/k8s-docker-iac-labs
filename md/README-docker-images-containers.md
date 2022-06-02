@@ -1,7 +1,7 @@
-`kubernetes-docker-rancherdesktop-labs/md/README-docker-images-containers.md` - Kubernetes, Docker e Rancher Desktop - Imagens and Containers Docker
+`k8s-docker-iac-labs/md/README-docker-images-containers.md` - Kubernetes, Docker e Rancher Desktop - Imagens and Containers Docker
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** abaixo do projeto [kubernetes-docker-rancherdesktop-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Conceituar
 * Explorar os recursos e funcionalidades básicas do Rancher Desktop
 
