@@ -1,7 +1,5 @@
 # User Custom
 tmp/
-volume/mysql/
-volume/rabbitmq/
 *.tmp
 *.pem
 *.pub

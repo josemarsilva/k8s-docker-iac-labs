@@ -1,0 +1,4 @@
+hostpath/
+mysql/
+prometheus/
+rabbitmq/
