@@ -71,7 +71,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-19](./src/terraform-ansible-aws-ec2-k8s/readme.txt)                           | Terraform AWS, Ansible, EC2, Kubernetes - Criando Cluster Kubernetes na AWS com 3 instâncias EC2 (master-1, worker-1, worker-2) |
 | [LAB-20](./src/terraform-aws-eks-gcp-gke-azure-aks/readme.txt)                     | Terraform Kubernetes on multi cloud - AWS/EKS: Elastic Kubernetes Service, GCP/GKE - Gooble Kubernetes Engine, AZURE/AKS - Azure Kuberntes Engine |
 | [LAB-21](./src/prometheus-docker/readme.txt)                                       | Prometheus Docker |
-| [LAB-22](./src/prometheus-k8s/readme.txt)                                       | Prometheus Kubernetes |
+| [LAB-22](./src/prometheus-k8s/readme.txt)                                          | Prometheus Kubernetes |
+| [LAB-23](./src/prometheus-grafana-k8s/readme.txt)                                  | Prometheus and Grafana in Kubernetes |
 
 ## I - Referências
 
