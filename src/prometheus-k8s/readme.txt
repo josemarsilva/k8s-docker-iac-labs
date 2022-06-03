@@ -1,6 +1,6 @@
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-XX: Basic Prometheus** abaixo do projeto [**k8s-docker-iac-labs**](../README.md) e consiste em:
+Este documento contém os artefatos do laboratório **LAB-22: Prometheus Kubernetes** abaixo do projeto [**k8s-docker-iac-labs**](../README.md) e consiste em:
 * Obter os binários e instalar a ferramenta **Prometheus** como um container Docker no Rancher Desktop Local
 * Configurar a ferramenta para o propósito do laboratório
 * Explorar os recursos e funcionalidades básicas da ferramenta
@@ -10,10 +10,8 @@ Este documento contém os artefatos do laboratório **LAB-XX: Basic Prometheus**
 	### 2.1. Documentação oficial e tutoriais de referências
 
 		* https://prometheus.io/docs/introduction/overview/	
-		* https://www.youtube.com/watch?v=tIvHAxs8Fec&list=WL
+		* https://devopscube.com/setup-prometheus-monitoring-on-kubernetes
 		* https://hub.docker.com/r/prom/prometheus
-		* https://hub.docker.com/r/bitnami/prometheus (distribution bitnami)
-		* https://hub.docker.com/r/ubuntu/prometheus (distribution ubuntu)
 
 
 ## 3. Projeto / Laboratório
@@ -30,123 +28,123 @@ Este documento contém os artefatos do laboratório **LAB-XX: Basic Prometheus**
 
 	### 3.3. Guia de Implantação, Configuração e Instalação
 
-		#### 3.3.1. Instalar Prometheus em container Docker no Rancker Desktop
+		#### 3.3.1. Instalar Prometheus em POD do Kubernetes
 
-		#### 3.3.1.1. Download  image(s) from DockerHub registry
+		#### 3.3.1.1. Documentação de referência
 
-			```bash
-			$ nerdctl.exe image pull bitnami/prometheus
-			$ nerdctl.exe image pull ubuntu/prometheus
-			$ nerdctl.exe image pull prom/prometheus
+			* https://devopscube.com/setup-prometheus-monitoring-on-kubernetes
 
-			$ nerdctl.exe image ls
-			REPOSITORY            TAG       IMAGE ID        CREATED          PLATFORM       SIZE         BLOB SIZE
-			:                     :         :               :                :              :            :
-			bitnami/alertmanager  latest    e392081810df    5 weeks ago      linux/amd64    147.9 MiB    58.3 MiB
-			bitnami/prometheus    latest    b9d9be1ee582    5 weeks ago      linux/amd64    490.2 MiB    192.5 MiB
-			prom/prometheus       latest    18dfa7c0caba    4 seconds ago    linux/amd64    203.5 MiB    80.8 MiB
-			:                     :         :               :                :              :            :
+		#### 3.3.1.2. Segregando monitoramento em Namespace distinto
+
+			* Criando definição de namespace `monitoring`
+
+			```sh
+			$ kubectl create namespace monitoring
+			namespace/monitoring created
 			```
 
-		#### 3.3.1.2. Run **Prometheus** distribution prom as service deamon
+			* Configurando regras de acesso ao namespace em `clusterrule-monitoring.yaml`
 
-			```bash
-			$ pwd # /../k8s-docker-iac-labs/src/prometheus-basic
-			$ mkdir ../../volume/prometheus
-			$ nerdctl.exe run -d --name prometheus -p 9090:9090 -v ../../volume/prometheus:/opt/bitnami/prometheus/data prom/prometheus
-			fe7c23a692166bf5acf7500dc76bd666313a397a5edc1c775f8560be481c2c79
+			```sh
+			$ cat clusterrule-monitoring.yaml
+			$ kubectl create -f clusterrule-monitoring.yaml
+			clusterrolebinding.rbac.authorization.k8s.io/prometheus created
 			```
 
-		#### 3.3.1.3. Open Page localhost:9090 and check working
+		#### 3.3.1.3. Create a Config Map To Externalize Prometheus Configurations
 
-			+----------------------------------------------+
-			| https://localhost:9090                       |
-			+----------------------------------------------+
-			| Prometheus | Alerts | Graphs | Status | Help |
-			+----------------------------------------------+
+			* Configuração do ConfigMap do Prometheus. Pode ser convertido dos arquivos `prometheus.yaml` e do alertmanager em `prometheus.rules`
 
-		#### 3.3.1.4. Check and test Prometheus default configuration - Targets
-
-			* On `Prometheus :: (menu) Status >> Targets`
-				- Endpoint http://localhost:9090/metrics | State = Up ...
-
-			* Open default Prometheus metrics page
-
-			+----------------------------------------------+
-			| https://localhost:9090/metrics               |
-			+----------------------------------------------+
-			| # HELP go_gc_duration_seconds A summary ...  |
-			| :                                            |
-			+----------------------------------------------+
-
-			* On `Prometheus :: (menu) Status >> Graph`
-				- Expression: `promhttp_metric_handler_requests_total`
-				- Observe table results
-
-
-		#### 3.3.1.5. Stop Prometheus, configure `../../volume/prometheus/prometheus.yaml` with file `prometheus-initial.yaml` and restart
-
-			* Stop Prometheus
-
-			```bash
-			$ cp prometheus.yaml ../../volume/prometheus/prometheus.yaml
-			$ nerdctl.exe container stop prometheus
-			$ nerdctl.exe container rm   prometheus
-			````
-
-			* Configure Prometheus configuration file `prometheus.yaml`
-
-			```../../volume/prometheus/prometheus.yaml
-			global:
-			scrape_interval: 30s
-
-			scrape_configs:
-			- job_name: prometheus
-				static_configs:
-				- targets: ["localhost:9090"]
-					labels:
-					subsystem: "Prometheus"
+			```sh
+			$ cat configmap-prometheus.yaml
+			$ kubectl create -f configmap-prometheus.yaml
+			configmap/prometheus-server-conf created
 			```
 
-			* Run Prometheus -  start again using configuration file prometheus.yaml
+		#### 3.3.1.4. Create a Prometheus Deployment
 
-			```bash
-			$ nerdctl.exe run -d --name prometheus -p 9090:9090 -v ../../volume/prometheus:/opt/bitnami/prometheus/data -v ../../volume/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml prom/prometheus
-			fe7c23a692166bf5acf7500dc76bd666313a397a5edc1c775f8560be481c2c79
+			* Configuração do Deploymento do Prometheus em
+
+			```sh
+			$ cat deployment-prometheus.yaml
+			$ kubectl create -f deployment-prometheus.yaml
+			deployment.apps/prometheus-deployment created
 			```
 
-		#### 3.3.1.6. Check and test Prometheus after new configurations
+		#### 3.3.1.5. Check Prometheus Deployment
 
-			* On `Prometheus :: (menu) Status >> Graph`
-				+ Query parameters
-					- Expression: `promhttp_metric_handler_requests_total`
-					- Evaluation time: null
-					- Click `Execute`
-				+ Query parameters
-					- Expression: `prometheus_http_requests_total`
-					- Evaluation time: null
-					- Click `Execute`
-				- Observe and analyze results
-				- Observe metric attributes: `subsystem="Prometheus"`
+			* Check status of Prometheus Deployment in Namespace monitoring
+
+			```sh
+			$ kubectl get all --namespace=monitoring
+			NAME                                        READY   STATUS    RESTARTS   AGE
+			pod/prometheus-deployment-87cc8fb88-5jpw6   1/1     Running   0          103s
+			NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE
+			deployment.apps/prometheus-deployment   1/1     1            1           103s
+			NAME                                              DESIRED   CURRENT   READY   AGE
+			replicaset.apps/prometheus-deployment-87cc8fb88   1         1         1       103s
+			```
+
+		#### 3.3.1.6. Configure Port Forwarding and test manually if it is working
+
+		* Get Pod name of Deplyment like above `prometheus-deployment-87cc8fb88-5jpw6`
+
+		```sh
+		$ kubectl get pods --namespace=monitoring
+		NAME                                    READY   STATUS    RESTARTS   AGE
+		prometheus-deployment-87cc8fb88-5jpw6   1/1     Running   0          4m31s
+		```
+
+		* Get Pod name of Deplyment to execute Port Forwarding with correct name of Pod
+
+		```sh
+		$ kubectl port-forward prometheus-deployment-87cc8fb88-5jpw6 8080:9090 -n monitoring
+		Forwarding from 127.0.0.1:8080 -> 9090
+		Forwarding from [::1]:8080 -> 9090
+		```
+
+		* Test if Prometheus Homepage is working. You should see something like this
+
+		+--------------------------------------------+
+		| http://localhost:8080                      |
+		+--------------------------------------------+
+		| Prometheus  Alerts | Graph | Status | Help |
+		+--------------------------------------------+
+
+		*  Abort execution of Port Forwarding with ^C or BREAK
+
+		```sh
+		^C
+		```
+
+		#### 3.3.1.7. Exposing Prometheus as a Service - Nodeport
+
+		```sh
+		$ cat svc-nodeport-prometheus.yaml
+		$ kubectl create -f svc-nodeport-prometheus.yaml --namespace=monitoring
+		service/prometheus-service created
+		```
+
+		#### 3.3.1.8. Access Prometheus using Nodeport and navigate exploring functionalities
+
+		* Dashboard Prometheus
+
+			+--------------------------------------------+
+			| http://localhost:30090                     |
+			+--------------------------------------------+
+			| Prometheus  Alerts | Graph | Status | Help |
+			+--------------------------------------------+
+
+		* On `Prometheus :: (menu) Status >> Targets` 
+		
+			- Ckeck if all target collect data are working fine
+			- `kube-state-metrics` may be down because we are using **Rancher Desktop** instead of **Minikube**
 
 
-	### 3.4. Guia de Demonstração e Teste
+		* On `Prometheus :: (menu) Graph` 
+			- fill Expression: `container_cpu_usage_seconds_total`
+			- click `Execute`
+			- Observe result set in grid table.
+			- Click tab button `Graph`
+			- Observe result in graphic view
 
-			* n/a
-
-
-	### 3.5. Guia de Estudo
-
-		### 3.5.1. Conceitos
-
-			* Time Series Database
-			* Tipos de métricas:
-				- Counter: Incremental values. Ex: http request count, error count
-				- Gauge: Arbitrary numbers. Ex: Numbers of on-line users
-				- Histogram: Frequency distribution and agregation possible. Ex: Sales by age groups - $ 1000 for childreen < 18 in last hour.
-				- Summary: Similar to histogram and allow grouping.
-			* PromQL - Query Language to Prometheus
-				+ Ex: 
-					- http_requests_total
-					- rate(http_requests_total(5m))
-					- http_requests_total("status!=4..")
