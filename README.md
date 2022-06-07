@@ -73,6 +73,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-21](./src/prometheus-docker/readme.txt)                                       | Prometheus Docker |
 | [LAB-22](./src/prometheus-k8s/readme.txt)                                          | Prometheus Kubernetes |
 | [LAB-23](./src/prometheus-grafana-k8s/readme.txt)                                  | Prometheus and Grafana in Kubernetes |
+| [LAB-24](./src/py-http-echo/readme.txt)                                            | Python HTTP echo application - run standalone, docker and kubernetes |
 
 ## I - Referências
 

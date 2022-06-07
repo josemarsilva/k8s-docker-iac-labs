@@ -1,0 +1,40 @@
+# #############################################################################
+# Deployment py-http-echo
+# #############################################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-http-echo
+spec:
+  selector:
+    matchLabels:
+      app: py-http-echo
+  template:
+    metadata:
+      labels:
+        app: py-http-echo
+    spec:
+      containers:
+      - name: py-http-echo
+        image: josemarsilva/py-http-echo:latest
+        ports:
+          - containerPort: 8000
+
+---
+
+# #############################################################################
+# Service py-http-echo
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-http-echo
+spec:
+  selector:
+    app: py-http-echo
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30080
+  type: NodePort
