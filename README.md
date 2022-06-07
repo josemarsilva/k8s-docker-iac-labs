@@ -72,7 +72,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-20](./src/terraform-aws-eks-gcp-gke-azure-aks/readme.txt)                     | Terraform Kubernetes on multi cloud - AWS/EKS: Elastic Kubernetes Service, GCP/GKE - Gooble Kubernetes Engine, AZURE/AKS - Azure Kuberntes Engine |
 | [LAB-21](./src/prometheus-docker/readme.txt)                                       | Prometheus Docker |
 | [LAB-22](./src/prometheus-k8s/readme.txt)                                          | Prometheus Kubernetes |
-| [LAB-23](./src/prometheus-grafana-k8s/readme.txt)                                  | Prometheus and Grafana in Kubernetes |
+| [LAB-23](./src/prometheus-k8s-grafana/readme.txt)                                  | Prometheus and Grafana in Kubernetes |
 | [LAB-24](./src/py-http-echo/readme.txt)                                            | Python HTTP echo application - run standalone, docker and kubernetes |
 
 ## I - Referências
