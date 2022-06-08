@@ -24,8 +24,8 @@ Este documento contém os artefatos do laboratório **LAB-21: Prometheus in Dock
 
 			* Windows OnPrimasse
 			* WSL - Windows Subsystem for Linux
-			* Docker Desktop or Rancher Desktop for Windows or Docker for Linux
-			* Docker or Kubernetes or On-Premisse infrastructure (Deployment Infraestructure)
+			* Rancher Desktop for Windows
+			* Docker On-Premise infrastructure
 
 
 	### 3.3. Guia de Implantação, Configuração e Instalação
@@ -60,7 +60,7 @@ Este documento contém os artefatos do laboratório **LAB-21: Prometheus in Dock
 		#### 3.3.1.3. Open Page localhost:9090 and check working
 
 			+----------------------------------------------+
-			| https://localhost:9090                       |
+			| http://127.0.0.1:9090/                       |
 			+----------------------------------------------+
 			| Prometheus | Alerts | Graphs | Status | Help |
 			+----------------------------------------------+

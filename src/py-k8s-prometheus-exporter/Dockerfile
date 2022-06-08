@@ -30,4 +30,4 @@ COPY *.py /app
 # python application
 
 # Entrypoint 
-CMD ["python", "py-http-echo.py"]
+CMD ["python", "py-k8s-prometheus-exporter.py"]
