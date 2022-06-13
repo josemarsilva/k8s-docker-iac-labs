@@ -14,6 +14,7 @@ Este documento contém os artefatos do laboratório **LAB-21: Prometheus in Dock
 		* https://hub.docker.com/r/prom/prometheus
 		* https://hub.docker.com/r/bitnami/prometheus (distribution bitnami)
 		* https://hub.docker.com/r/ubuntu/prometheus (distribution ubuntu)
+		* https://www.youtube.com/watch?v=NtT5TgptTFk&t=441s
 
 
 ## 3. Projeto / Laboratório
@@ -139,14 +140,104 @@ Este documento contém os artefatos do laboratório **LAB-21: Prometheus in Dock
 
 		### 3.5.1. Conceitos
 
-			* Time Series Database
-			* Tipos de métricas:
-				- Counter: Incremental values. Ex: http request count, error count
-				- Gauge: Arbitrary numbers. Ex: Numbers of on-line users
-				- Histogram: Frequency distribution and agregation possible. Ex: Sales by age groups - $ 1000 for childreen < 18 in last hour.
-				- Summary: Similar to histogram and allow grouping.
-			* PromQL - Query Language to Prometheus
-				+ Ex: 
-					- http_requests_total
-					- rate(http_requests_total(5m))
-					- http_requests_total("status!=4..")
+			### 3.5.1.1. Exemplo de métricas de sistema e negócios
+			
+				+ Métricas de Sistemas
+					- Quantidade de requisições
+					- Quantidade de erros
+					- Consumo de recursos
+					- API mais acessadas
+					- Tempo de acesso de um recurso
+				+ Métricas de Negócios
+					- Usuários acessando aplicação
+					- PIX recebidos
+					- Boletos emitidos
+					- Compras de um produto ou serviço
+
+			### 3.5.1.2. Métricas não são logs
+
+				+ Métricas
+					- dados numéricos
+					- gráficos
+					- agregação
+					- performance
+				+ Logs
+					- dados textuais
+					- mensagens de erro
+					- informação
+					- buscáveis
+				
+
+			### 3.5.1.3. Métricas type in Prometheus
+
+				* Time Series Database
+				* Tipos de métricas:
+					- Counter: Incremental values. Ex: http request count, error count
+					- Gauge: Arbitrary numbers. Ex: Numbers of on-line users
+					- Histogram: Frequency distribution and agregation possible. Ex: Sales by age groups - $ 1000 for childreen < 18 in last hour.
+					- Summary: Similar to histogram and allow grouping.
+
+
+			### 3.5.1.4. How to interact Prometheus
+
+				* PromQL - Query Language to Prometheus
+					+ Ex: 
+						- http_requests_total
+						- rate(http_requests_total(5m))
+						- http_requests_total("status!=4..")
+
+
+			### 3.5.1.5. História do Prometheus
+			
+				* Criado pela SoundCloud
+				* OpenSource
+				* Dados dimensionais TSDB - Time Series Data Base
+				* Múltiplas formas de visualização
+				* Configuração de alertas
+				* Projeto graduado no CNCF - Cloud Native Compute Foundation
+				* Pode ser integrado ao Grafana (interface melhor)
+				* Maduro, automatizada, confiável
+
+			### 3.5.1.6. Prometheus TSDB 
+			
+				* Prometheus database próprio TSDB
+				* Armazenado em storage
+				* Trabalha de forma eficiente, quebrando dados em periodos de horas, blocos de armazenamento
+				* É possível definir o período de tempo de retenção para iniciar a "compactação dos dados coletados"
+				* Compactação diminui a precisão mas não perde dados
+				* É possível integrar com outros databases além do TSDB próprio. Ex: 
+
+			### 3.5.1.7. Prometheus coleta de métricas
+			
+				* Normalmente aplicação envia métricas para a ferramenta de armazenamento
+				* Prometheus é o oposto, a aplicação fornece um end-point onde o prometheus vai buscar os dados
+				* Neste cenário o Prometheus atua de forma ativa e a aplicação de forma passiva
+				* Existe um padrão da formatação das métricas
+				* Bibliotecas para coletas: Open Telemetry, App Metrics, Micro Meters
+
+			### 3.5.1.8. Suporte de ferramentas
+			
+				* Tem suporte
+					- Kubernetes, Grafana, etc
+				* Não tem suporte
+					- MySQL, SQLServer, RabbitMQ, Jenkins
+					- pode ser construidos exporter
+
+			### 3.5.1.9. Push Gateway e processos de curta duração
+			
+				* Situações para processos de curta duração
+				* Aplicações enviam métricas ao Push Gateway e Prometheus busca dos Push Gateway, pois a aplicação pode não estar lá
+
+			### 3.5.1.10. Denfinição dos end-points através de service discovery
+			
+				* Possibilidade de acessr as coletas pelo nome do serviço
+
+			### 3.5.1.11. Conceito básicos PromQL
+			
+				* Trabalha consultando uma métrica definida, filtrável através das labels
+				* A adição da label pode ser feita através da aplicação ou do coletor
+				* Na própria ferramenta Prometheus no menu Graph
+				* Supondo uma métrica parâmetro: `http_requests_total`, neste caso tem as labels: `method` e `path`
+				* Visualização no formato grid com vetor dos dados ou gráfico
+				* Tem metodos de agregação: rate(), sum()
+				* Tem como particionar por dimensão: by (method) 
