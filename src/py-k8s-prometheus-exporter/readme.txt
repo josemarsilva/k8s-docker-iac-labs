@@ -121,10 +121,9 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			```cmd
 			C:\> type deploy-svc-py-k8s-prometheus-exporter.yaml
 			C:\> kubectl apply -f deploy-svc-py-k8s-prometheus-exporter.yaml
-			deployment.apps/py-k8s-prometheus-exporter created
+			deployment.apps/deploy-py-k8s-prometheus-exporter created
 			service/svc-py-k8s-prometheus-exporter created
 			service/svc-nodeport-py-k8s-prometheus-exporter created
-			:
 			```
 
 		* Test - prometheus-exporter - Is running OK?

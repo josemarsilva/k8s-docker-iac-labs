@@ -1,10 +1,10 @@
 # #############################################################################
-# Deployment py-k8s-prometheus-exporter
+# Deployment deploy-py-k8s-prometheus-exporter
 # #############################################################################
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: py-k8s-prometheus-exporter
+  name: deploy-py-k8s-prometheus-exporter
 #  namespace: monitoring
 spec:
   selector:
