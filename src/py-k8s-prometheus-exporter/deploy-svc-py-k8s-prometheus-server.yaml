@@ -51,6 +51,26 @@ spec:
 ---
 
 # #############################################################################
+# Service svc-prometheus-server
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-prometheus-server
+  # namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9090'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9090
+  selector:
+    app: prometheus-server
+
+---
+
+# #############################################################################
 # Service svc-nodeport-prometheus-server
 # #############################################################################
 apiVersion: v1
@@ -58,9 +78,6 @@ kind: Service
 metadata:
   name: svc-nodeport-prometheus-server
   # namespace: monitoring
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port:   '9090'
 spec:
   selector: 
     app: prometheus-server
