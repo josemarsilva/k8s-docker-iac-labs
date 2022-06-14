@@ -148,8 +148,10 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			C:\>
 			C:\> kubectl apply -f configmap-py-k8s-prometheus-exporter.yaml
 			configmap/configmap-prometheus-server-conf-py-k8s-prometheus-exporter created
+			C:\> 
 			C:\> kubectl apply -f deploy-svc-py-k8s-prometheus-server.yaml
 			deployment.apps/deploy-prometheus-server created
+			service/svc-prometheus-server created
 			service/svc-nodeport-prometheus-server created
 			```
 
