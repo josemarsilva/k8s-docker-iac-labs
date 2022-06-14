@@ -22,6 +22,7 @@ class RandomNumberCollector(object):
 
 if __name__ == "__main__":
     start_http_server(9000)
+    print("Listening on port 9000")
     REGISTRY.register(RandomNumberCollector())
     while True: 
         # period between collection

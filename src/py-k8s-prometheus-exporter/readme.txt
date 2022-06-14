@@ -99,7 +99,6 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			```
 
 
-
 		* Registry Dockerhub
 
 			```cmd
@@ -107,24 +106,31 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			C:\> nerdctl.exe push josemarsilva/py-k8s-prometheus-exporter:latest
 			```
 
+		* Force remove after successfully test
 
-	### 3.5.3. Construir, executar e testar - Kubernetes Deployment e Service - App py-k8s-prometheus-exporter
+			```cmd
+			C:\> nerdctl.exe container rm -f py-k8s-prometheus-exporter
+			C:\> nerdctl.exe container ls -a | findstr "prometheus"
+			```
 
-		* Create/apply Kubernetes Deployment and Service - App py-k8s-prometheus-exporter
+
+	### 3.5.3. Construir, executar e testar - Kubernetes Prometheus Exporter - Deployment, Replicaset, Pod, Service ClusterIP e Nodeport
+
+		* Create/apply Kubernetes Deployment, Replicaset, Pod, Service ClusterIP e Nodeport
 
 			```cmd
 			C:\> type deploy-svc-py-k8s-prometheus-exporter.yaml
 			C:\> kubectl apply -f deploy-svc-py-k8s-prometheus-exporter.yaml
-			:
 			deployment.apps/py-k8s-prometheus-exporter created
-			service/py-k8s-prometheus-exporter created
+			service/svc-py-k8s-prometheus-exporter created
+			service/svc-nodeport-py-k8s-prometheus-exporter created
 			:
 			```
 
-		* Test
+		* Test - prometheus-exporter - Is running OK?
 
 			```cmd
-			C:\> curl localhost:30090
+			C:\> curl localhost:30095
 			# HELP python_gc_objects_collected_total Objects collected during gc
 			# TYPE python_gc_objects_collected_total counter
 			python_gc_objects_collected_total{generation="0"} 343.0
@@ -133,33 +139,34 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			:
 			```
 
-	### 3.5.4. Construir, executar e testar - Kubernetes Prometheus Server
+	### 3.5.4. Construir, executar e testar - Kubernetes Prometheus Server - Configmap, Deployment, Replicaset, Pod, Service ClusterIP e Nodeport
 
-		* Create/apply Kubernetes Configmap - Prometheus Server
+		* Create/apply Kubernetes Configmap, Deployment, Replicaset, Pod, Service ClusterIP e Nodeport
 
 			```cmd
 			C:\> type configmap-py-k8s-prometheus-exporter.yaml
+			C:\> type deploy-svc-py-k8s-prometheus-server.yaml
+			C:\>
 			C:\> kubectl apply -f configmap-py-k8s-prometheus-exporter.yaml
-			configmap/py-k8s-prometheus-server-conf configured
+			configmap/configmap-prometheus-server-conf-py-k8s-prometheus-exporter created
+			C:\> kubectl apply -f deploy-svc-py-k8s-prometheus-server.yaml
+			deployment.apps/deploy-prometheus-server created
+			service/svc-nodeport-prometheus-server created
 			```
 
-		* Create/apply Kubernetes Deployment and services - Prometheus Server and Exporter
+		* Test - prometheus-exporter - Is running OK?
 
 			```cmd
-			C:\> type deploy-svc-py-k8s-prometheus-exporter.yaml
-			C:\> kubectl apply -f deploy-svc-py-k8s-prometheus-exporter.yaml
-			deployment.apps/py-k8s-prometheus-exporter created
-			service/py-k8s-prometheus-exporter created
-			service/py-k8s-prometheus-exporter-clusterip created
-			deployment.apps/prometheus-server created
-			service/prometheus-server created
+			C:\> curl localhost:30095
+			:
 			```
 
-		* Test - Prometheus Service running
+
+		* Test - prometheus-server - Is running OK?
 
 			```cmd
 			+--------------------------------------------------------------------------------+
-			| http://localhost:30091                                                         |
+			| http://localhost:30096                                                         |
 			+--------------------------------------------------------------------------------+
 			| Prometheus   Alerts | Graph | Status | Help                                    | 
 			| [Expression]                                                                   |
@@ -169,16 +176,16 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 
 		* Test - Check Prometheus Configuration for Target 
 
-			- On `http://localhost:30091` clicar menu "Prometheus :: Status >> Targets"
+			- On `http://localhost:30096` clicar menu "Prometheus :: Status >> Targets"
 			+ Observar no resultado o target da aplicação py-k8s-http-echo
-				- Endpoint=http://py-k8s-prometheus-exporter-clusterip:9000/metrics 
+				- Endpoint=http://svc-py-k8s-prometheus-exporter:9000/metrics
 				- State=UP
 
 		* Test - Check Prometheus Database
 
 			+ Enter expression on filter and execute query and observe results
-				+ On `http://localhost:30091` clicar menu "Prometheus :: Graph", fill "python_gc_collections_total"           and click "Execute"
-				+ On `http://localhost:30091` clicar menu "Prometheus :: Graph", fill "python_gc_objects_collected_total"     and click "Execute"
-				+ On `http://localhost:30091` clicar menu "Prometheus :: Graph", fill "python_gc_objects_uncollectable_total" and click "Execute"
-				+ On `http://localhost:30091` clicar menu "Prometheus :: Graph", fill "python_info"                           and click "Execute"
+				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_gc_collections_total"           and click "Execute"
+				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_gc_objects_collected_total"     and click "Execute"
+				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_gc_objects_uncollectable_total" and click "Execute"
+				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_info"                           and click "Execute"
 

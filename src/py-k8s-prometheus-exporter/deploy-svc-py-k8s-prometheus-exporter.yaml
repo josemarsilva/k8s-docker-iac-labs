@@ -5,7 +5,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: py-k8s-prometheus-exporter
-  namespace: monitoring
+#  namespace: monitoring
 spec:
   selector:
     matchLabels:
@@ -19,38 +19,18 @@ spec:
       - name: py-k8s-prometheus-exporter
         image: josemarsilva/py-k8s-prometheus-exporter:latest
         ports:
-          - containerPort: 8000
+          - containerPort: 9000
 
 ---
 
 # #############################################################################
-# Service py-k8s-prometheus-exporter
+# Service svc-py-k8s-prometheus-exporter
 # #############################################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: py-k8s-prometheus-exporter
-  namespace: monitoring
-spec:
-  selector:
-    app: py-k8s-prometheus-exporter
-  ports:
-    - protocol: TCP
-      port: 9000
-      targetPort: 9000
-      nodePort: 30090
-  type: NodePort
-
----
-
-# #############################################################################
-# Service py-k8s-prometheus-exporter-clusterip
-# #############################################################################
-apiVersion: v1
-kind: Service
-metadata:
-  name: py-k8s-prometheus-exporter-clusterip
-  namespace: monitoring
+  name: svc-py-k8s-prometheus-exporter
+  # namespace: monitoring
 spec:
   type: ClusterIP
   ports:
@@ -61,73 +41,19 @@ spec:
 ---
 
 # #############################################################################
-# Deployment prometheus-server
-# #############################################################################
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: prometheus-server
-  namespace: monitoring
-  labels:
-    app: prometheus-server
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: prometheus-server
-  template:
-    metadata:
-      labels:
-        app: prometheus-server
-    spec:
-      containers:
-        - name: prometheus
-          image: prom/prometheus
-          args:
-            - "--storage.tsdb.retention.time=12h"
-            - "--config.file=/etc/prometheus/prometheus.yml"
-            - "--storage.tsdb.path=/prometheus/"
-          ports:
-            - containerPort: 9090
-          resources:
-            requests:
-              cpu: 500m
-              memory: 500M
-            limits:
-              cpu: 1
-              memory: 1Gi
-          volumeMounts:
-            - name: prometheus-config-volume
-              mountPath: /etc/prometheus/
-            - name: prometheus-storage-volume
-              mountPath: /prometheus/
-      volumes:
-        - name: prometheus-config-volume
-          configMap:
-            defaultMode: 420
-            name: py-k8s-prometheus-server-conf
-  
-        - name: prometheus-storage-volume
-          emptyDir: {}
-
----
-
-# #############################################################################
-# Service prometheus-server
+# Service svc-nodeport-py-k8s-prometheus-exporter
 # #############################################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-server
-  namespace: monitoring
-  annotations:
-      prometheus.io/scrape: 'true'
-      prometheus.io/port:   '9090'
+  name: svc-nodeport-py-k8s-prometheus-exporter
+#  namespace: monitoring
 spec:
-  selector: 
-    app: prometheus-server
-  type: NodePort  
+  selector:
+    app: py-k8s-prometheus-exporter
   ports:
-    - port: 8080
-      targetPort: 9090 
-      nodePort: 30091
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
+      nodePort: 30095
+  type: NodePort
