@@ -12,6 +12,8 @@ Este documento contém os artefatos do laboratório **LAB-26: Grafana collecting
 		* https://grafana.com/
 		* https://www.youtube.com/watch?v=65-Y7Sjogv8
 		* https://www.youtube.com/watch?v=0C-v3U6S1X0
+		* https://www.youtube.com/watch?v=hvACEDjHQZE
+		* https://www.youtube.com/watch?v=t6jZUR-xYVM
 
 
 ## 3. Projeto / Laboratório
