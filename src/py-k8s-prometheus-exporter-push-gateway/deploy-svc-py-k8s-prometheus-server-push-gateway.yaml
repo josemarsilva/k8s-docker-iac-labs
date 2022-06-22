@@ -1,0 +1,127 @@
+# #############################################################################
+# Deployment deploy-prometheus-server
+# #############################################################################
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-prometheus-server
+  # namespace: monitoring
+  labels:
+    app: prometheus-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-server
+  template:
+    metadata:
+      labels:
+        app: prometheus-server
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus
+          args:
+            - "--storage.tsdb.retention.time=12h"
+            - "--config.file=/etc/prometheus/prometheus.yml"
+            - "--storage.tsdb.path=/prometheus/"
+          ports:
+            - containerPort: 9090
+          resources:
+            requests:
+              cpu: 500m
+              memory: 500M
+            limits:
+              cpu: 1
+              memory: 1Gi
+          volumeMounts:
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/
+            - name: prometheus-storage-volume
+              mountPath: /prometheus/
+      volumes:
+        - name: prometheus-config-volume
+          configMap:
+            defaultMode: 420
+            name: configmap-prometheus-server-conf-py-k8s-prometheus-exporter-push-gateway
+  
+        - name: prometheus-storage-volume
+          emptyDir: {}
+
+---
+
+# #############################################################################
+# Service svc-prometheus-server
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-prometheus-server
+  # namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9090'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9090
+  selector:
+    app: prometheus-server
+
+---
+
+# #############################################################################
+# Service svc-nodeport-prometheus-server
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-nodeport-prometheus-server
+  # namespace: monitoring
+spec:
+  selector: 
+    app: prometheus-server
+  type: NodePort  
+  ports:
+    - port: 9090
+      targetPort: 9090
+      nodePort: 30090
+
+---
+
+# #############################################################################
+# Service svc-prometheus-server-push-gateway
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-prometheus-server-push-gateway
+  # namespace: monitoring
+  annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port:   '9091'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9091
+  selector:
+    app: prometheus-server-push-gateway
+
+---
+
+# #############################################################################
+# Service svc-nodeport-prometheus-server-push-gateway
+# #############################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-nodeport-prometheus-server-push-gateway
+  # namespace: monitoring
+spec:
+  selector: 
+    app: prometheus-server-push-gateway
+  type: NodePort  
+  ports:
+    - port: 9091
+      targetPort: 9091
+      nodePort: 30091
