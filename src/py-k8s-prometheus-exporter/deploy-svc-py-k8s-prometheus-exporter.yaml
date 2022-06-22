@@ -19,7 +19,7 @@ spec:
       - name: py-k8s-prometheus-exporter
         image: josemarsilva/py-k8s-prometheus-exporter:latest
         ports:
-          - containerPort: 9000
+          - containerPort: 9092
 
 ---
 
@@ -34,7 +34,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 9000
+    - port: 9092
   selector:
     app: py-k8s-prometheus-exporter
 
@@ -53,7 +53,7 @@ spec:
     app: py-k8s-prometheus-exporter
   ports:
     - protocol: TCP
-      port: 9000
-      targetPort: 9000
-      nodePort: 30095
+      port: 9092
+      targetPort: 9092
+      nodePort: 30092
   type: NodePort

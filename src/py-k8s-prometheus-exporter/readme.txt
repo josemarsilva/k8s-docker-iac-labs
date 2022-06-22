@@ -11,6 +11,7 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 	### 2.1. Documentação oficial e tutoriais de referências
 	
 		* https://matthewzhaocc.com/building-a-custom-prometheus-exporter-in-python-6491d4cdcef3
+		* https://milvus.io/docs/v1.1.0/setup_prometheus.md
 
 
 ## 3. Projeto / Laboratório
@@ -42,7 +43,7 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 		* Run and test
 
 			```cmd
-			C:\> curl localhost:9000
+			C:\> curl localhost:9092
 			# HELP python_gc_objects_collected_total Objects collected during gc
 			# TYPE python_gc_objects_collected_total counter
 			python_gc_objects_collected_total{generation="0"} 343.0
@@ -71,6 +72,7 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			```cmd
 			C:\> type Dockerfile
 			C:\> type requirements.txt
+			C:\> nerdctl.exe login -u josemarsilva
 			C:\> nerdctl.exe image build -t josemarsilva/py-k8s-prometheus-exporter:v1 .
 			C:\> nerdctl.exe image tag josemarsilva/py-k8s-prometheus-exporter:v1 josemarsilva/py-k8s-prometheus-exporter:latest
 			```
@@ -80,16 +82,16 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 
 			```cmd
 			C:\> nerdctl.exe container rm -f py-k8s-prometheus-exporter
-			C:\> nerdctl.exe container run -d -p 9000:9000 -name py-k8s-prometheus-exporter josemarsilva/py-k8s-prometheus-exporter:latest
+			C:\> nerdctl.exe container run -d -p 9092:9092 -name py-k8s-prometheus-exporter josemarsilva/py-k8s-prometheus-exporter:latest
 			C:\> nerdctl.exe container ls
-			CONTAINER ID    IMAGE                                                       COMMAND                   CREATED 					STATUS    PORTS                     NAMES
-			ca0d0700af29    docker.io/josemarsilva/py-k8s-prometheus-exporter:latest    "python py-k8s-prome…"    7 seconds ago    Up        0.0.0.0:9000->9000/tcp    py-k8s-prometheus-exporter
+			CONTAINER ID    IMAGE                                                       COMMAND                   CREATED          STATUS    PORTS                     NAMES
+			c350e141b6a4    docker.io/josemarsilva/py-k8s-prometheus-exporter:latest    "python py-k8s-prome…"    7 seconds ago    Up        0.0.0.0:9092->9092/tcp    py-k8s-prometheus-exporter
 			```
 
 		* Test
 
 			```cmd
-			C:\> curl localhost:9000
+			C:\> curl localhost:9092
 			# HELP python_gc_objects_collected_total Objects collected during gc
 			# TYPE python_gc_objects_collected_total counter
 			python_gc_objects_collected_total{generation="0"} 343.0
@@ -129,7 +131,7 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 		* Test - prometheus-exporter - Is running OK?
 
 			```cmd
-			C:\> curl localhost:30095
+			C:\> curl localhost:30092
 			# HELP python_gc_objects_collected_total Objects collected during gc
 			# TYPE python_gc_objects_collected_total counter
 			python_gc_objects_collected_total{generation="0"} 343.0
@@ -145,10 +147,8 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 			```cmd
 			C:\> type configmap-py-k8s-prometheus-exporter.yaml
 			C:\> type deploy-svc-py-k8s-prometheus-server.yaml
-			C:\>
 			C:\> kubectl apply -f configmap-py-k8s-prometheus-exporter.yaml
 			configmap/configmap-prometheus-server-conf-py-k8s-prometheus-exporter created
-			C:\> 
 			C:\> kubectl apply -f deploy-svc-py-k8s-prometheus-server.yaml
 			deployment.apps/deploy-prometheus-server created
 			service/svc-prometheus-server created
@@ -158,7 +158,8 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 		* Test - prometheus-exporter - Is running OK?
 
 			```cmd
-			C:\> curl localhost:30095
+			C:\> curl localhost:30092
+			# HELP python_gc_objects_collected_total Objects collected during gc
 			:
 			```
 
@@ -167,7 +168,7 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 
 			```cmd
 			+--------------------------------------------------------------------------------+
-			| http://localhost:30096                                                         |
+			| http://localhost:30090                                                         |
 			+--------------------------------------------------------------------------------+
 			| Prometheus   Alerts | Graph | Status | Help                                    | 
 			| [Expression]                                                                   |
@@ -177,7 +178,7 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 
 		* Test - Check Prometheus Configuration for Target 
 
-			- On `http://localhost:30096` clicar menu "Prometheus :: Status >> Targets"
+			- On `http://localhost:30090` clicar menu "Prometheus :: Status >> Targets"
 			+ Observar no resultado o target da aplicação py-k8s-http-echo
 				- Endpoint=http://svc-py-k8s-prometheus-exporter:9000/metrics
 				- State=UP
@@ -185,8 +186,8 @@ Este documento contém os artefatos do laboratório **LAB-25: Python exporter fo
 		* Test - Check Prometheus Database
 
 			+ Enter expression on filter and execute query and observe results
-				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_gc_collections_total"           and click "Execute"
-				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_gc_objects_collected_total"     and click "Execute"
-				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_gc_objects_uncollectable_total" and click "Execute"
-				+ On `http://localhost:30096` clicar menu "Prometheus :: Graph", fill "python_info"                           and click "Execute"
+				+ On `http://localhost:30090` clicar menu "Prometheus :: Graph", fill "python_gc_collections_total"           and click "Execute"
+				+ On `http://localhost:30090` clicar menu "Prometheus :: Graph", fill "python_gc_objects_collected_total"     and click "Execute"
+				+ On `http://localhost:30090` clicar menu "Prometheus :: Graph", fill "python_gc_objects_uncollectable_total" and click "Execute"
+				+ On `http://localhost:30090` clicar menu "Prometheus :: Graph", fill "python_info"                           and click "Execute"
 

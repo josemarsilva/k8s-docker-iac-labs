@@ -28,3 +28,9 @@ scrape_configs:
 
     static_configs:
     - targets: ['localhost:9090']
+
+# Start the Prometheus monitor in server_config.yaml and set the address and port number of Pushgateway:
+metric:
+  enable: true                 # Set the value to true to enable the Prometheus monitor.
+  address: localhost           # Set the IP address of Pushgateway.
+  port: 9091                   # Set the port number of Pushgateway.
