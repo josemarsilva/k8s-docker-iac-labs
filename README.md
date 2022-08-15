@@ -76,6 +76,9 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-24](./src/py-http-echo/readme.txt)                                            | Python HTTP echo application - run standalone, docker and kubernetes |
 | [LAB-25](./src/py-k8s-prometheus-exporter/readme.txt)                              | Python Exporter for Prometheus in Kubernets |
 | [LAB-26](./src/aws-cli/readme.txt)                                                 | AWS CLI 2.0 - Install Windows and Linux |
+| [LAB-27](./src/py-k8s-prometheus-exporter-push-gateway/readme.txt)                 | Python Exporter Push Gateway for Prometheus in Kubernets |
+| [LAB-28](./src/terraform-aws-iam/readme.txt)                                       | Terraform AWS, IAM |
+
 
 ## I - Referências
 
