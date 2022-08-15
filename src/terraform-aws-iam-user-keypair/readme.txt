@@ -84,15 +84,16 @@ Este documento contém os artefatos do laboratório  consiste em:
 
 				```bash
 				$ pwd # /src/terraform-aws-iam-user-keypair
-				$ ssh-keygen -f terraform-aws-iam-user-keypair -t rsa -P asdfg
-				ssh-keygen -f terraform-aws -t rsa
+				$ ssh-keygen -f terraform-aws-keypair -t rsa -P asdfghjklç
 				Generating public/private rsa key pair.
-				Enter passphrase (empty for no passphrase): 
-				Enter same passphrase again: 
+				Your identification has been saved in terraform-aws-iam-user-keypair.
+				Your public key has been saved in terraform-aws-iam-user-keypair.pub.
+				The key fingerprint is:
+				SHA256:PXEafhET5OLRShqInfdbxyoZn2gpK+Gjia2PBwBBbrQ josemar silva@LP1764
 				:
-				$ ls -la terraform-aws-iam-user-keypair*
-				-rwxrwxrwx 1 ubuntu ubuntu 2655 Aug 15 11:46 terraform-aws-iam-user-keypair
-				-rwxrwxrwx 1 ubuntu ubuntu  573 Aug 15 11:46 terraform-aws-iam-user-keypair.pub
+				$ ls -la terraform-aws-keypair*
+				-rwxrwxrwx 1 ubuntu ubuntu 2655 Aug 15 11:46 terraform-aws-keypair
+				-rwxrwxrwx 1 ubuntu ubuntu  573 Aug 15 11:46 terraform-aws-keypair.pub
 				```
 
 				* Import created key into AWS - Same AWS region for your test laboratory - Ex: us-east-1
@@ -108,9 +109,13 @@ Este documento contém os artefatos do laboratório  consiste em:
 
 				```bash
 				:
-				mv terraform-aws-iam-user-keypair ~/
-				chmod 400 ~/terraform-aws-iam-user-keypair
-				mv terraform-aws-iam-user-keypair.pub ~/
+				$ mv terraform-aws-keypair     ~/aws-config
+				$ mv terraform-aws-keypair.pub ~/aws-config
+				$ chmod 400 ~/aws-config/terraform-aws-keypair
+				$ ln -s ~/aws-config/terraform-aws-keypair     terraform-aws-keypair
+				$ ln -s ~/aws-config/terraform-aws-keypair.pub terraform-aws-keypair.pub
+				$ echo terraform-aws-keypair     >> .gitignore
+				$ echo terraform-aws-keypair.pub >> .gitignore
 				:
 				```
 
@@ -148,10 +153,8 @@ Este documento contém os artefatos do laboratório  consiste em:
 					  - Inbound security group rules: `rdp, TCP, 3389, 0.0.0.0/0`
 					- Clique `Launch instance`
 					
-				* Test connection to instance
-				
-				  + 
-					
+
+-- ----------------------------------------------------------------------------					
 		
 
 
