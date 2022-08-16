@@ -2,3 +2,4 @@ new_user_credentials.csv
 iam-user_terraform-josemar.csv
 terraform-aws-keypair
 terraform-aws-keypair.pub
+terraform-aws-keypair-rsa-pem.pem
