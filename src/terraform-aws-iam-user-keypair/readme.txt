@@ -1,7 +1,11 @@
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório  consiste em:
+Este documento contém os artefatos do laboratório **Terraform - AWS - IAM User e KeyPair **  consiste em:
 * Configurar AWS IAM User para ser utilizado no terraform
+* Configurar AWS EC2 KeyPair ( RSA/PEM para host Windows acessados Terminal Server)
+* Criar manualmente o Host Windows para mapear os passos
+* Criar os scripts Terraform que automatizem os passos manual
+* Testar todo ciclo de IaC - Infrastructure as Code pelo Terraform: Plan, Apply and Destroy
 
 ## 2. Documentação
 
@@ -10,6 +14,10 @@ Este documento contém os artefatos do laboratório  consiste em:
         * https://registry.terraform.io/browse/providers
         * https://learn.hashicorp.com/collections/terraform/aws-get-started
         * https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform
+		* https://docs.aws.amazon.com/pt_br/AWSEC2/latest/WindowsGuide/EC2_GetStarted.html
+		* https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html
+        * https://learn.hashicorp.com/collections/terraform/cloud-get-started
+        * https://www.terraform.io/cdktf/concepts/remote-backends
 
 
 ## 3. Projeto / Laboratório
@@ -19,7 +27,7 @@ Este documento contém os artefatos do laboratório  consiste em:
 		#### 3.1.1. Tecnologias e ferramentas
 
 			* WSL - Windows Subsystem for Linux
-			* Cloud infrastructure: AWS 
+			* Cloud infrastructure: AWS
 			* IaC: Terraform, Ansible
 
 
@@ -31,7 +39,7 @@ Este documento contém os artefatos do laboratório  consiste em:
 			
 				* On `AWS Console` click _combo-box_ para definir a região e escolha `US East(N.Virginia) us-east-1`
 			
-			2. Create AWS IAM user for laboratory
+			2. Create AWS IAM user for Terraform
 
 				2.1. Create a new key-pair for on AWS :: IAM
 
@@ -76,9 +84,29 @@ Este documento contém os artefatos do laboratório  consiste em:
 				default
 				```
 
+
 		### 3.5.2. Criar um Key Pair (privated, public) para o(s) hosts a serem criados
 
-			1. Opção no. 1 - Gerar o key pair localmente usando ssh-keygen e depois importar na AWS :: EC2 >> Network Security > KeyPair
+			1. Opção no. 1 - Gerar o key pair (RSA/PEM para acesso Windows RDP) diretamente pela AWS
+
+				* Created key on AWS :: EC2 >> Network and Security >> Key Pairs
+				
+					- On `AWS Console :: EC2 ` click menu item option `AWS Console :: EC2 >> Network and Security >> Key Pairs` clique `Create Key Pair`
+					  - Type: `[*] RSA`
+					  - Name: `terraform-aws-keypair-rsa-pem`
+					  - Private key format: `[*] .pem for use with OpenSSH`
+					  - Click `Create key pair`
+					  - Download file `terraform-aws-keypair-rsa-pem`
+
+				```bash
+				:
+				ls -la terraform-aws-keypair-rsa-pem*
+				-rwxrwxrwx 1 ubuntu ubuntu 1447 Aug 15 14:21 terraform-aws-keypair-rsa-pem.pem
+				echo terraform-aws-keypair-rsa-pem.pem >> .gitignore
+ 				:
+				```
+
+			2. Opção no. 2 - Gerar o key pair localmente usando ssh-keygen (RSA/PPK acesso Linux OpenSSH`) e depois importar na AWS :: EC2 >> Network Security > KeyPair
 			
 				* Create key pair local using ssh-keygen
 
@@ -119,40 +147,45 @@ Este documento contém os artefatos do laboratório  consiste em:
 				:
 				```
 
-			2. Opção no. 2 - Gerar o key pair diretamente pela AWS
 
-				* Created key on AWS :: EC2 >> Network and Security >> Key Pairs
-				
-					- On `AWS Console :: EC2 ` click menu item option `AWS Console :: EC2 >> Network and Security >> Key Pairs` clique `Create Key Pair`
-					  - Type: `[*] RSA`
-					  - Name: `terraform-aws-keypair-rsa-pem`
-					  - Private key format: `[*] .pem for use with OpenSSH`
-					  - Click `Create key pair`
-					  - Download file `terraform-aws-keypair-rsa-pem`
+		### 3.5.3. Criar AWS/EC2 Host de forma manual para observar os passos da automação
 
-				```bash
-				:
-				ls -la terraform-aws-keypair-rsa-pem.ppk 
-				-rwxrwxrwx 1 ubuntu ubuntu 1447 Aug 15 14:21 terraform-aws-keypair-rsa-pem.ppk
-				echo terraform-aws-keypair-rsa-pem.ppk >> .gitignore .gitignore
- 				:
-				```
-				
-
-
-		### 3.5.3. Criar uma máquina manualmente para observar o passo a passo manual
+			### 3.5.3.1. Criar AWS/EC2 Host Windows Server de forma manual para observar os passos da automação
 		
 				* Created key on `AWS :: EC2 >> Instances >> Instance` clique botão `Criar instância`
 				  + Em formulário `Launch an Instance` on `AWS :: EC2 >> Instances >> Instance` em região `us-east-1`
 				    - Name: `win-server`
 					- Application and OS Image: Microsoft Windows Server 2019 - `ami-0c95d38b24a19de18`
 					- Instance type: `t2.micro`
-					- KeyPair: `terraform-aws-iam-user-keypair`
+					- KeyPair: ``
 					- Network settings / Subnet: `subnet-*`
 					+ Security group name: `launch-wizard-*`
 					  - Inbound security group rules: `rdp, TCP, 3389, 0.0.0.0/0`
 					- Clique `Launch instance`
+				
+				* Obtenha os dados para conectar-se a nova instância AWS/EC2 Host Windows criada
+				  + Em formulário `Launch an Instance` on `AWS :: EC2 >> Instances >> Instance` em região `us-east-1` localizar e selecionar na nova instância criada
+					- Clicar no drop-down-pushbutton `Actions >> Connect`
+					+ Em formulário `Connect your instance`:
+						- Connection method `(x) A standard RDP client`
+						- Clique botão `Download Remote Desktop File`
+						- Obtenha o endreço de `Public DNS`: `ec2-xx-xx-xx-xx.compute-x.amazonaws.com`
+						- Obtenha o nome do usuário `User name`: `Administrator`
+						+ Obtenha a senha clicando no botao `Get Password`, informe o arquivo KeyPair RSA-PEM `terraform-aws-keypair-rsa-pem.pem` e em seguida clique no botão `Decrypt` para obter a senha
+							- Password: `****************************ea@@`
+
+				* Conectar-se a nova instância criada
+
+					1. Opção no. 1 - Conectar-se a instância Windows através do aplicativo Terminal Server `mstsc.exe`
+
+						- (pressione teclas Windows + R) e Execute o terminal server e informe os parâmetros da conexão obtidos no passo anterior
 					
+					2. Opção no. 2 - Conectar-se a instância Windows através do arquivo de conexão (.rdp) baixado
+
+						- (clique duplo) no arquivo `ec2-xx-xx-xx-xx.compute-x.amazonaws.com.rdp`
+
+
+		### 3.5.4. Criar AWS/EC2 Host de forma manual para observar os passos da automação
 
 -- ----------------------------------------------------------------------------					
 		
@@ -552,38 +585,3 @@ Este documento contém os artefatos do laboratório  consiste em:
         dev-5_dns = "ec2-18-118-121-207.us-east-2.compute.amazonaws.com"
         dev-5_ip = "18.118.121.207"
         ```
-
-
-8. Working with Terraform Cloud
-
-    8.1. See Documentation for more about output
-
-        * https://learn.hashicorp.com/collections/terraform/cloud-get-started
-        * https://www.terraform.io/cdktf/concepts/remote-backends
-
-    8.2. Configure remote centralized Terraform Cloud administration
-
-        8.2.1. Create an account in Terraform Cloud
-
-            * https://cloud.hashicorp.com/products/terraform
-
-        8.2.2. Login with your credentials on Terraform Cloud
-
-            * https://cloud.hashicorp.com/products/terraform
-
-        8.2.3. Setup an Example on Terraform Cloud
-
-            * On `Terraform Cloud :: Getting Started` click `Start from scratch`
-                - https://app.terraform.io/app/getting-started
-            * On `Terraform Cloud :: Organizations >> New`
-                - https://app.terraform.io/app/organizations/new
-                + fill:
-                    - Organization Name: `josemarsilva-lab`
-                    - E-mail: `xxxx@xxxxx.xxx`
-            * On `Terraform Cloud :: Workspace >> New`
-                - https://app.terraform.io/app/josemarsilva-lab/workspaces/new
-                + fill:
-                    - Choose Workflow: Version control Workflow
-                    - Connect to VCP: Github 
-                    - Choose a repository: https://github.com/josemarsilva/terraform-labs
-                    - Configure settings:
