@@ -1,6 +1,6 @@
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **Terraform - AWS - IAM User e KeyPair **  consiste em:
+Este documento contém os artefatos do laboratório **Terraform - AWS - IAM User e KeyPair - EC2 Win e Linux**  consiste em:
 * Configurar AWS IAM User para ser utilizado no terraform
 * Configurar AWS EC2 KeyPair ( RSA/PEM para host Windows acessados Terminal Server)
 * Criar manualmente o Host Windows para mapear os passos

@@ -77,7 +77,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-25](./src/py-k8s-prometheus-exporter/readme.txt)                              | Python Exporter for Prometheus in Kubernets |
 | [LAB-26](./src/aws-cli/readme.txt)                                                 | AWS CLI 2.0 - Install Windows and Linux |
 | [LAB-27](./src/py-k8s-prometheus-exporter-push-gateway/readme.txt)                 | Python Exporter Push Gateway for Prometheus in Kubernets |
-| [LAB-28](./src/terraform-aws-iam/readme.txt)                                       | Terraform AWS, IAM |
+| [LAB-28](./src/terraform-aws-iam-user-keypair-ec2-win-linux/readme.txt)       | Terraform - AWS - IAM User and KeyPair - EC2 instance Linux and Windows |
 
 
 ## I - Referências
