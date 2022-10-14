@@ -27,6 +27,6 @@ CREATE TABLE tbl_api_tags (
     updatet_by VARCHAR(100),
     is_removed BIT DEFAULT(0),
     PRIMARY KEY (id),
-    CONSTRAINT AK_api_tags UNIQUE(reference) 
+    CONSTRAINT AK_api_tags UNIQUE(tag) 
 );
 GO
