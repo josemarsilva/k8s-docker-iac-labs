@@ -34,7 +34,7 @@ Este documento contém os artefatos do laboratório **LAB-13 - Instalação em i
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-docker-kubernetes-on-cloud-infrastructure.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-install-docker-kubernetes-on-cloud-infrastructure.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

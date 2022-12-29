@@ -42,7 +42,7 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
 
 * Contexto da ferramenta Lens IDE para Kubernetes
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-install-windows-client-kubernetes-ide-lens.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-install-windows-client-kubernetes-ide-lens.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

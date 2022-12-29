@@ -55,7 +55,7 @@ Este documento contém os artefatos dolaboratório **LAB-05 - Kubernetes Command
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-kubernetes-commands.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-basic-kubernetes-commands.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

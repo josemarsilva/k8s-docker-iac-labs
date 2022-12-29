@@ -68,7 +68,7 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-docker-images-containers.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-docker-images-containers.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

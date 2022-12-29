@@ -40,7 +40,7 @@ Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-kubernetes-python-flask-mongodb.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-kubernetes-python-flask-mongodb.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

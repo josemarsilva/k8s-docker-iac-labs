@@ -48,7 +48,7 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Docker Commands us
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-docker-commands.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-basic-docker-commands.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

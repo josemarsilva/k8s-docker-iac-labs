@@ -75,7 +75,7 @@ Este documento contém os artefatos do laboratório **LAB-09 - Kubernetes Self H
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-kubernetes-docker-rancherdesktop-selfhealing-healthcheck-resourceslimits.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-selfhealing-healthcheck-resourceslimits.png) 
+![MindMapDiagram-kubernetes-docker-selfhealing-healthcheck-resourceslimits.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-selfhealing-healthcheck-resourceslimits.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)

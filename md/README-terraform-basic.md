@@ -42,7 +42,7 @@ Este documento contém os artefatos do laboratório **LAB-14: Terraform Basic** 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-basic-terraform.png) 
+![MindMapDiagram-Context.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-basic-terraform.png) 
 
 
 ### 2.9. Glossário de Termos (Glossary)

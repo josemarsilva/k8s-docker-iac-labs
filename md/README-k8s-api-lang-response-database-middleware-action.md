@@ -64,7 +64,7 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-kubernetes-docker-rancherdesktop-api-lang-response-database-middleware-action.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-api-lang-response-database-middleware-action.png) 
+![MindMapDiagram-kubernetes-docker-api-lang-response-database-middleware-action.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-api-lang-response-database-middleware-action.png) 
 
 
 ### 2.6. Diagrama de Pacotes Classes (Packages and Class Class Diagram)

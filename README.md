@@ -31,9 +31,9 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-Context.png](./doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop.png) 
+![MindMapDiagram-Context.png](./doc/mind-maps/MindMapDiagram-kubernetes-docker.png) 
 
-[`MindMapDiagram-Context-all-expanded.png`](./doc/mind-maps/MindMapDiagram-kubernetes-docker-rancherdesktop-all-expanded.png) 
+[`MindMapDiagram-Context-all-expanded.png`](./doc/mind-maps/MindMapDiagram-kubernetes-docker-all-expanded.png) 
 
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
