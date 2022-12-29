@@ -26,7 +26,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](./doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
+![DeployDiagram-Context.png](./doc/uml-diagrams/DeployDiagram-kubernetes-docker.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

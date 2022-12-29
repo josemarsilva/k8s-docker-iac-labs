@@ -35,7 +35,7 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
 
 * Contexto da ferramenta Lens IDE para Kubernetes 
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-lens-ide.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-lens-ide.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

@@ -29,7 +29,7 @@ Este documento contém os artefatos do laboratório **LAB-11: Node Next.JS Basic
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-golang.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-golang.png) 
 
 
 ### 2.9. Glossário de Termos (Glossary)

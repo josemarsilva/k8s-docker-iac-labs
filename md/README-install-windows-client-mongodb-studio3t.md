@@ -33,7 +33,7 @@ Este documento contém os artefatos do laboratório **LAB-03: Windows Client Mon
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-mongodb-studio3t.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-mongodb-studio3t.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

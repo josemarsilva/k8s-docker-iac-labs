@@ -59,7 +59,7 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-database-middleware.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-nodejs-database-middleware.png) 
+![DeployDiagram-kubernetes-docker-nodejs-database-middleware.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs-database-middleware.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

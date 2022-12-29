@@ -34,7 +34,7 @@ Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-python-flask-mongo.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-python-flask-mongo.png) 
 
 
 

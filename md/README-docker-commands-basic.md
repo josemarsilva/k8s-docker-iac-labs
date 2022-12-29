@@ -42,7 +42,7 @@ Este documento contém os artefatos dolaboratório **LAB-02 - Docker Commands us
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop.png) 
+![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker.png) 
 
 
 
