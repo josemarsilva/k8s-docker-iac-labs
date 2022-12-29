@@ -1,0 +1,63 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net6.0": []
+  },
+  "packageFolders": {
+    "C:\\Users\\Josemar Silva\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\GitHome\\ws-github-01\\k8s-docker-iac-labs\\src\\dotnet-helloworld\\dotnet-helloworld.csproj",
+      "projectName": "dotnet-helloworld",
+      "projectPath": "C:\\GitHome\\ws-github-01\\k8s-docker-iac-labs\\src\\dotnet-helloworld\\dotnet-helloworld.csproj",
+      "packagesPath": "C:\\Users\\Josemar Silva\\.nuget\\packages\\",
+      "outputPath": "C:\\GitHome\\ws-github-01\\k8s-docker-iac-labs\\src\\dotnet-helloworld\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Josemar Silva\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.404\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

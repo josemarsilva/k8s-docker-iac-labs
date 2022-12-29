@@ -79,6 +79,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-27](./src/py-k8s-prometheus-exporter-push-gateway/readme.txt)                 | Python Exporter Push Gateway for Prometheus in Kubernets |
 | [LAB-28](./src/terraform-aws-iam-user-keypair-ec2-linux-windows/readme.txt)        | Terraform - AWS - IAM User and KeyPair - EC2 instance Linux and Windows |
 | [LAB-29](./md/README-install-kubernetes-kind.md)                                   | Install Kind Kubernetes platform on Windows |
+| [LAB-30](./md/README-dotnet-basic.md)                                              | DotNet Basic |
 
 
 

@@ -1,0 +1,15 @@
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\bin\Debug\net6.0\dotnet-helloworld.exe
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\bin\Debug\net6.0\dotnet-helloworld.deps.json
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\bin\Debug\net6.0\dotnet-helloworld.runtimeconfig.json
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\bin\Debug\net6.0\dotnet-helloworld.dll
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\bin\Debug\net6.0\dotnet-helloworld.pdb
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.csproj.AssemblyReference.cache
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.AssemblyInfoInputs.cache
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.AssemblyInfo.cs
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.csproj.CoreCompileInputs.cache
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.dll
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\refint\dotnet-helloworld.dll
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.pdb
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\dotnet-helloworld.genruntimeconfig.cache
+C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\dotnet-helloworld\obj\Debug\net6.0\ref\dotnet-helloworld.dll
