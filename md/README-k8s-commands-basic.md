@@ -1325,6 +1325,7 @@ $ cat sistema-noticias-statefulset.yaml
 * Kubernets
   * https://kubebyexample.com/en/learning-paths/kubernetes-fundamentals
   * [INICIATIVA KUBERNETES - Aula 2 - Desvendando o Kubernetes](https://www.youtube.com/watch?v=ncVLiKv1Xxo&list=WL)
+  * [Alura - Kubernetes: Pods, Services e ConfigMaps](https://cursos.alura.com.br/course/kubernetes-pods-services-configmap/)
   * [Alura - Kubernetes: Deployments, Volumes e Escalabilidade / 01. Conhecendo ReplicaSets e Deployments](https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade/task/80496)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  

@@ -19,7 +19,7 @@ Este documento contém os artefatos do laboratório **LAB-29 - Instalação Kube
   * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
     + [3.3.1. Install and configure Kubernetes using Kind on Windows via Chocolatey](#331-install-and-configure-kubernetes-using-kind-on-windows-via-chocolatey-httpschocolateyorgpackageskind)
     + [3.3.2. Delete and recreate cluster](#332-delete-and-recreate-cluster)
-    + [3.3.3. Multiplas configuracoes de clusters]()
+    + [3.3.3. Multiplas configuracoes de clusters](#333-multiplas-configuracoes-de-clusters)
 - [I - Referências](#i---referências)
 
 
@@ -290,7 +290,7 @@ C:\> kubectl cluster-info dump --context kind-kind-1
 ```
 
 
-### 3.3.3. Multiplas configuracoes de clusters
+### 3.3.3. Múltiplas configurações de clusters
 
 * **Step-01**: Observe os arquivos de configuração de clusters 
 
@@ -302,6 +302,8 @@ C:\k8s-docker-iac-labs\src\k8s-kind> dir
  Pasta de C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\k8s-kind
   :           :                  :    :
 02/01/2023  22:33                49 config-kind-minimal.yaml
+02/01/2023  22:55               424 config-kind-port-mapping.yaml
+02/01/2023  22:58               424 config-kind-port-mapping-nodeport.yaml
   :           :                  :    :
 ```
 

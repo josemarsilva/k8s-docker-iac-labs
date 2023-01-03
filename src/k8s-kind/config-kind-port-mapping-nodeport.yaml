@@ -1,0 +1,21 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  extraPortMappings:
+  - containerPort: 30950
+    hostPort: 30950
+
+# Configure your service like this
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: foo
+# spec:
+#   type: NodePort
+#   ports:
+#   - name: http
+#     nodePort: 30950
+#     port: 80
+#   selector:
+#     app: foo
