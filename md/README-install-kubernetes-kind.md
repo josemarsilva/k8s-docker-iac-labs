@@ -18,6 +18,8 @@ Este documento contém os artefatos do laboratório **LAB-29 - Instalação Kube
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
     + [3.3.1. Install and configure Kubernetes using Kind on Windows via Chocolatey](#331-install-and-configure-kubernetes-using-kind-on-windows-via-chocolatey-httpschocolateyorgpackageskind)
+    + [3.3.2. Delete and recreate cluster](#332-delete-and-recreate-cluster)
+    + [3.3.3. Multiplas configuracoes de clusters]()
 - [I - Referências](#i---referências)
 
 
@@ -287,6 +289,49 @@ C:\> kubectl cluster-info dump --context kind-kind-1
       :
 ```
 
+
+### 3.3.3. Multiplas configuracoes de clusters
+
+* **Step-01**: Observe os arquivos de configuração de clusters 
+
+```cmd
+C:\k8s-docker-iac-labs\src\k8s-kind> dir
+ O volume na unidade C é OS
+ O Número de Série do Volume é 8673-F822
+
+ Pasta de C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\k8s-kind
+  :           :                  :    :
+02/01/2023  22:33                49 config-kind-minimal.yaml
+  :           :                  :    :
+```
+
+* **Step-02**: Crie / em seguida destrua um novo cluster Kubernetes com a configuração mínima
+
+```cmd
+C:\k8s-docker-iac-labs\src\k8s-kind> kind create cluster --name kind-2-minimal --config=config-kind-minimal.yaml
+Creating cluster "kind-2-minimal" ...
+ • Ensuring node image (kindest/node:v1.25.3) 🖼  ...
+ ✓ Ensuring node image (kindest/node:v1.25.3) 🖼
+ • Preparing nodes 📦   ...
+ ✓ Preparing nodes 📦 
+ • Writing configuration 📜  ...
+ ✓ Writing configuration 📜
+ • Starting control-plane 🕹️  ...
+ ✓ Starting control-plane 🕹️
+ • Installing CNI 🔌  ...
+ ✓ Installing CNI 🔌
+ • Installing StorageClass 💾  ...
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-kind-2-minimal"
+:
+
+C:\k8s-docker-iac-labs\src\k8s-kind> kind get clusters
+kind-1
+kind-2-minimal
+
+C:\k8s-docker-iac-labs\src\k8s-kind> kind delete clusters kind-2-minimal
+
+```
 
 
 ## I - Referências

@@ -118,7 +118,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Criar/configurar o arquivo (.yaml) com o manifesto de configuração de um POD de uma aplicação web que deverá responder na porta 8080
 
 ```cmd
-C:\src> cd kubernetes-basic
+C:\src> cdk8s-basic
 C:\src\k8s-basic> TYPE pod-web-page-80-naked.yaml
 C:\src\k8s-basic> kubectl create -f pod-web-page-80-naked.yaml
 pod/web-page created
@@ -175,7 +175,7 @@ No resources found in default namespace.
 * Recriar/aplicar os dois PODs web-page, sendo o primeiro naked e o segundo com label, em seguida liste os pods e descrevendo os detalhes observe as diferenças
 
 ```cmd
-C:\src> cd kubernetes-basic
+C:\src> cd k8s-basic
 C:\src\k8s-basic> TYPE pod-web-page-80-naked.yaml
 C:\src\k8s-basic> TYPE pod-web-page-80-naked-label.yaml
 C:\src\k8s-basic> kubectl apply -f pod-web-page-80-naked.yaml
@@ -463,7 +463,7 @@ C:\src\k8s-basic> kubectl port-forward pod/web-page-deploy-8c44b6d5b-422ch 8080:
 
 * Os [Services](https://kubernetes.io/docs/concepts/services-networking/service/), são responsáveis por expor (IP e PORT) dos serviços prestados pelo POD. O services podem ser dos tipos:
   * **ClusterIP**: usado internamente no cluster Kubernetes. Sempre que é criado um serviço é gerado um IP de acesso e um nome de dns interno
-  * **NodePort**: acessível ao mundo externo do cluster Kubernetes. Sempre que é criado um service deste tipo é criado uma porta no range >= 30000. Muito usado em cenários _OnPremisse_
+  * **NodePort**: acessível ao mundo externo do cluster Kubernetes. Sempre que é criado um service deste tipo é criado uma porta no range >= 30000. Muito usado em cenários _OnPremise_
   * **LoadBalancer**: Sempre que é criado um serviço, também é criado junto um Load Balance que vai dar o IP de acesso a este serviço
 * PS:
   * Não é recomendável utilizar diretamente o IP interno atribuido pelo Kubernetes.
@@ -487,14 +487,16 @@ C:\src\k8s-basic> TYPE service-nodeport-selector-label-app-web.yaml
 C:\src\k8s-basic> kubectl apply -f service-nodeport-selector-label-app-web.yaml
 deployment.apps/web-page-deploy created
 
+C:\src\k8s-basic> kubectl apply -f deployment-selector-web-page-version-blue.yaml
+deployment.apps/web-page-deploy created
+
 C:\src\k8s-basic> kubectl get deployments
 NAME              READY   UP-TO-DATE   AVAILABLE   AGE
 web-page-deploy   3/3     3            3           15s
 
-C:\src\k8s-basic> TYPE service-selector-label-app-web.yaml
+C:\src\k8s-basic> TYPE service-nodeport-selector-label-app-web.yaml
 
-C:\src\k8s-basic> kubectl apply -f service-selector-label-app-web.yaml
-C:\src\k8s-basic> 
+C:\src\k8s-basic> kubectl apply -f service-nodeport-selector-label-app-web.yaml
 
 C:\src\k8s-basic> kubectl get services
 C:\GitHome\ws-github-01\k8s-docker-iac-labs\src\k8s-basic>kubectl get services
@@ -503,7 +505,7 @@ kubernetes         ClusterIP   10.43.0.1      <none>        443/TCP        9d
 web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s
 ```
 
-* Observe que o servico foi criado na porta `31725`. Este número de "porta alta" é aleatório. Lembre-se também de liberar a regra de entrada de firewall para TCP 30000-65535
+* Observe que o servico NodePort foi criado na porta `31725`. Este número de "porta alta" é aleatório. Lembre-se também de liberar a regra de entrada de firewall para TCP 30000-65535
 
 ![screenshot-windows-firewall-INPUT-TCP-30000-65535.png](../doc/screenshots/screenshot-windows-firewall-INPUT-TCP-30000-65535.png)
 
@@ -517,7 +519,9 @@ web-page-service   NodePort    10.43.11.172   <none>        80:31725/TCP   44s
 C:\src\k8s-basic> kubectl apply -f service-nodeport-port-30000-selector-label-app-web.yaml
 deployment.apps/web-page-deploy created
 
-C:\src\k8s-basic> kubectl get service web-app-service
+C:\src\k8s-basic> kubectl get service web-page-service
+NAME               TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+web-page-service   NodePort   10.96.236.114   <none>        80:30000/TCP   15m
 ```
 
 * Abrir com o browser a url `http:localhost:30000` e observar a WebPage com fundo azul. Se você tentar acessar a url anterior `http:localhost:31725` ela não mais estará disponível porque foi feito _apply_ no servico que foi atualizado.
@@ -1320,8 +1324,8 @@ $ cat sistema-noticias-statefulset.yaml
 
 * Kubernets
   * https://kubebyexample.com/en/learning-paths/kubernetes-fundamentals
-  * https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade/task/80496
   * [INICIATIVA KUBERNETES - Aula 2 - Desvendando o Kubernetes](https://www.youtube.com/watch?v=ncVLiKv1Xxo&list=WL)
+  * [Alura - Kubernetes: Deployments, Volumes e Escalabilidade / 01. Conhecendo ReplicaSets e Deployments](https://cursos.alura.com.br/course/kubernetes-deployments-volumes-escalabilidade/task/80496)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
