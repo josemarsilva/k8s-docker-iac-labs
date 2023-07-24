@@ -22,6 +22,7 @@ Este documento contém os artefatos do laboratório **LAB-14: Terraform Basic** 
     + [3.3.3. Instalar Terraform em container Docker](#333-instalar-terraform-em-container-docker)
     + [3.3.4. Configurar .gitignore](#334-configurar-gitignore)
     + [3.3.5. Create/Configure AWS credential access key on AWS CLI](#335-createconfigure-aws-credential-access-key-on-aws-cli)
+    + [3.3.6. Configure Backend AWS S3](#336-configure-backend-aws-s3)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
     + [3.5.1. Provisionar AWS EC2 Instance](#351-provisionar-aws-ec2-instance)
     + [3.5.2. Alterar infraestrutura provisionada AWS EC2 Instance](#352-alterar-infraestrutura-provisionada-aws-ec2-instance)
@@ -158,9 +159,20 @@ terraform.tfstate
 
 * **Passo 1**: Criar AWS Credential Access Key
   * Em `AWS :: Console Home` clique no menu de opção `AWS :: Security, Identity & Compliance >> IAM` para acessar _IAM Dashboard_
-  * Em `AWS :: Security, Identity & Compliance >> IAM` clique na opção de menu lateral esquerdo ``
-  * Em `AWS :: Security, Identity & Compliance >> IAM >> Your Security Credentials (form) >> Access Key` clique `Create New Access Key`
-  * Em `Create Access Key (dialog box)` clique `Show access key` e copie as informações 
+  * Em `AWS :: Security, Identity & Compliance >> IAM` clique na opção de menu lateral esquerdo `Users`
+  * Em `AWS :: >> IAM >> Users` clique `Add users`
+  * Em `AWS :: >> IAM >> Users >> Create users` preencha os campos e clique repetidas vezes em `Next` até o botão `Create`
+	* User name: `terraform-user`
+	* Enable console access: `Não`
+	* Add users to group: `Administrator Access`
+  * Em `AWS :: >> IAM >> Users` clique no link do usuário criado para ter acesso aos detalhes do usuário
+  * Em `AWS :: >> Users >> <usuario-crido>` clique na aba `Security Credentials`
+  * Em `AWS :: >> Users >> <usuario-crido> >> (aba) Security Credentials` clique no botão `create access key`
+  * Em `AWS :: >> Users >> <usuario-crido> >> Create access key` preencha os campos e clique repetidas vezes em `Next` até o botão `Create`
+  * Em `AWS :: >> Users >> <usuario-crido> >> Create access key >> Access Key best prectices & alternatives` preencha os campos e clique repetidas vezes em `Next` até o botão `Create access key`
+	* Alternative: `Command Line Interface (CLI)`
+	* I understand ...: `Sim`
+  * Em `AWS :: >> Users >> <usuario-crido> >> Create access key >> Retrieve access key` obtenha as informações de `Access key` e `Secret access key` para configurar em sua aplicação CLI
 
 * **Passo 2**: Configurar o profile AWS CLI em Linux com a _access key_ obtida no passo anterior
 
@@ -194,6 +206,21 @@ AWS Secret Access Key [None]: ***************************
 Default region name [None]: us-east-1
 Default output format [None]: 
 ```
+
+
+#### 3.3.6. Configure Backend AWS S3
+
+* **Objetivo**: Configurar Backend AWS S3 para armazenar os arquivos de estados da infraestrutura
+
+* **Passo 1**: Criar Bucket S3 
+  * Em `AWS :: Console Home` clique no menu de opção `AWS :: Storage >> S3` para acessar _Amazon S3 > Buckets_
+  * Em `AWS :: Storage >> S3` clique no botão `Create bucket`
+  * Em `AWS :: Storage >> S3 >> Create bucket` preencha os campos do formulário e clique em `Create`
+	* Bucket name: `terraform-s3-backend-josemarsilva`
+	* Object Ownership: `ACLs disabled (recommended)`
+	* Bucket Versioning: `Disable`
+  * Em `Create Access Key (dialog box)` clique `Show access key` e copie as informações 
+
 
 
 ### 3.5. Guia de Estudo

@@ -81,6 +81,8 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-29](./md/README-install-kubernetes-kind.md)                                   | Install Kind Kubernetes platform on Windows |
 | [LAB-30](./md/README-dotnet-basic.md)                                              | DotNet Basic |
 | [LAB-31](./src/k8s-nginx-ingress-controller/readme.txt)                            | NGINX Ingress Controller Reverse Proxy |
+| [LAB-32](https://github.com/josemarsilva/node-tutorial-edureka)                    | Node.js Tutorial Programming language |
+
 
 
 
