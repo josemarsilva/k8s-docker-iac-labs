@@ -1,20 +1,33 @@
-`k8s-docker-iac-labs/md/README-k8s-api-lang-response-database-middleware-action.md` Kubernetes - API - Response - Database - Middleware - Action
+`k8s-docker-iac-labs/md/README-k8s-api-lang-response-database-middleware-action.md` Kubernetes - API - Lang - Response - Database - Middleware - Action
 ## 1. Introdução
 
-Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API - Response - Database - Middleware - Action** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API - Lang - Response - Database - Middleware - Action** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os recursos e funcionalidades na construção de API - Application Proogramming Interface dentro da infraestrutura do Kubernetes:
-  * **Response**: Tipo da resposta (na perspectiva de transação) que podem ser:
-    * `sync`: síncrona, a resposta imediata; `async` assíncrona, o chamado irá invocar um novo processo que executará a ação desejada
   * **lang**: Linguagem de programação:
-    * `Node`; `Python`; `GoLang`;
-  * **Database**: Persistência em banco de dados: 
-    * `MongoDB`; `MySQL`; `PostgreSQL`;  `MSSQL`;
-  * **Middleware**: Message Queue ou Data Streaming:
-    *  `kafka`; `rabbitmq`;
-  * **Action**: Action or distributed transaction:
-    * `get`;  `post`;  `put`;  `patch`;
-    * `relay`; `pool`;  `callback`;
-    * `publish`;  `subscribe`;
+    * `Node`; 
+    * `Python`; 
+    * `GoLang`;
+  * **response**: Tipo da resposta (na perspectiva de transação) que podem ser:
+    * `sync`: síncrona, a resposta imediata; 
+    * `async` assíncrona, o chamado irá invocar um novo processo que executará a ação desejada
+  * **database**: Persistência em banco de dados: 
+    * `MongoDB`; 
+    * `MySQL`; 
+    * `PostgreSQL`;
+    * `MSSQL`;
+    * `CouchDB`;
+  * **middleware**: Message Queue ou Data Streaming:
+    * `Kafka`; 
+    * `RabbitMQ`;
+  * **action**: Action or distributed transaction:
+    * `response`
+    * `relay`; 
+    * `pool`; 
+    * `callback`;
+    * `publish`;
+    * `subscribe`;
+  * **method**: Method of API:
+    * `get`;  `post`;  `put`;  `patch`; `delete`;
 
 ##### Table of Contents  
 - [1. Introdução](#1-introdução)
@@ -79,10 +92,10 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
     * `sync`: Síncrona
     * `async`: Assíncrona
   * ... no que diz respeito a ação: 
-    * `relay`
     * `response/acknowledgement`
-    * `poll`
     * `callback`
+    * `poll`
+    * `relay`
 
 ![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledge.png)
 
