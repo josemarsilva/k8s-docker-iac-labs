@@ -3,6 +3,7 @@ tmp/
 *.tmp
 *.pem
 *.pub
+.vscode
 
 ### Terraform ###
 **/.terraform/*

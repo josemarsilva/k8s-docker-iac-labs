@@ -1,32 +1,20 @@
-CREATE DATABASE ApiEvents
+CREATE DATABASE db_api_events
 GO
 
-USE ApiEvents
+USE db_api_events
 GO
 
 CREATE TABLE tbl_api_events (
-    id INT NOT NULL IDENTITY(1,1),  
-    reference VARCHAR(30) NOT NULL,
-    note VARCHAR(255),
-    created_at DATETIME,
-    created_by VARCHAR(100),
-    updated_at DATETIME,
-    updatet_by VARCHAR(100),
-    is_removed BIT DEFAULT(0),
+    id         INT           NOT NULL IDENTITY(1,1), 
+    key_info   NVARCHAR(30)  NOT NULL,
+    data_info  NVARCHAR(MAX),
+    json_info  NVARCHAR(MAX),
+    created_at DATETIME      NOT NULL DEFAULT GETDATE(),
+    updated_at DATETIME      NOT NULL DEFAULT GETDATE(),
+    created_by NVARCHAR(100) NOT NULL DEFAULT 'unknown',
+    updatet_by NVARCHAR(100) NOT NULL DEFAULT 'unknown',
+    is_removed BIT           NOT NULL DEFAULT(0),
     PRIMARY KEY (id),
-    CONSTRAINT AK_api_events UNIQUE(reference) 
-);
-GO
-
-CREATE TABLE tbl_api_tags (
-    id INT NOT NULL,  
-    tag VARCHAR(30) NOT NULL,
-    created_at DATETIME DEFAULT(GETDATE()),
-    created_by VARCHAR(100),
-    updated_at DATETIME DEFAULT(GETDATE()),
-    updatet_by VARCHAR(100),
-    is_removed BIT DEFAULT(0),
-    PRIMARY KEY (id),
-    CONSTRAINT AK_api_tags UNIQUE(tag) 
+    CONSTRAINT ak_api_events UNIQUE(key_info)
 );
 GO

@@ -11,21 +11,23 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
     * `sync`: síncrona, a resposta imediata; 
     * `async` assíncrona, o chamado irá invocar um novo processo que executará a ação desejada
   * **database**: Persistência em banco de dados: 
-    * `MongoDB`; 
-    * `MySQL`; 
-    * `PostgreSQL`;
-    * `MSSQL`;
-    * `CouchDB`;
+    * `MongoDB`
+    * `MySQL`
+    * `PostgreSQL`
+    * `MSSQL`
+    * `CouchDB`
   * **middleware**: Message Queue ou Data Streaming:
-    * `Kafka`; 
-    * `RabbitMQ`;
+    * `Kafka`
+    * `RabbitMQ`
   * **action**: Action or distributed transaction:
     * `response`
-    * `relay`; 
-    * `pool`; 
-    * `callback`;
-    * `publish`;
-    * `subscribe`;
+    * `relay`
+    * `pool`
+    * `callback`
+    * `publish`
+    * `subscribe`
+  * **options**: Options
+    * `local-workload`
   * **method**: Method of API:
     * `get`;  `post`;  `put`;  `patch`; `delete`;
 
@@ -92,7 +94,7 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
     * `sync`: Síncrona
     * `async`: Assíncrona
   * ... no que diz respeito a ação: 
-    * `response/acknowledgement`
+    * `response` (acknowledgement)
     * `callback`
     * `poll`
     * `relay`
@@ -137,7 +139,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
   * Python 3.x (3.8 recommended) / venv
   * NodeJS (Development, Build and Deploy)
   * GoLang
-* Databases: MongoDB, MySQL, PostgreSQL, MSSQL, Oracle
+* Databases: MongoDB, MySQL, PostgreSQL, MSSQL, Oracle, CoachDB, Redis
 * Middleware: Kafka, RabbitMQ
 * Tools: JMeter, Curl
 
@@ -164,6 +166,8 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * _Passo-#01_: CONFIGURE (Criar/editar/configurar) o `Dockerfile` e demais arquivos de scripts de inicialização: `setup.sql`, `run-initialization.sh` e `setup.sql`
 
 ```cmd
+C:\..\k8s-docker-iac-labs> cd src
+C:\..\k8s-docker-iac-labs\src> cd dockerfile-mssql-api-events
 C:\..\dockerfile-mssql-api-events> TYPE Dockerfile
 C:\..\dockerfile-mssql-api-events> TYPE entrypoint.sh
 C:\..\dockerfile-mssql-api-events> TYPE import-data.sh
