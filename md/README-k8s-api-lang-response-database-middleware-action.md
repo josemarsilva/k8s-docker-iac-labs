@@ -183,11 +183,16 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
     ],
     "route_next_index": 0,
     "route_table": [
-      "[POST]localhost:3000/node-sync-mongodb--response",
-      "[POST]localhost:3000/node-sync-postgresql--response",
-      "[POST]localhost:3000/node-sync-mssql--response",
-      "[POST]localhost:3000/node-sync-coachdb--response",
-      "[POST]localhost:3000/node-sync-redis--response"
+      "[POST]http://localhost:3000/node-sync-mongodb--response",
+      "[POST]http://localhost:3000/node-sync-postgresql--response",
+      "[POST]http://localhost:3000/node-sync-mssql--response",
+      "[POST]http://localhost:3000/node-sync-coachdb--response",
+      "[POST]http://localhost:3000/node-sync-redis--response"
+    ],
+    "options_table": [
+      {
+        "local-workload": []
+      }
     ],
     "info": {
       "key": "12345",
