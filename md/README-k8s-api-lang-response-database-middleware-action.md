@@ -151,15 +151,53 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 ### 3.3. Guia de Implantação, Configuração e Instalação
 
-#### 3.2.1. Development a NodeJS application for Kubernetes
+#### 3.2.1. Development a Node.js application for Kubernetes
 
-#### 3.2.1.1. INIT ambiente NodeJS e INSTALL dependências
+#### 3.2.1.1. INIT ambiente Node.js e INSTALL dependências
 
 #### 3.2.1.2. DEVELOP entry-point, health-check, ready-to-serve para k8s
 
 #### 3.2.1.3. DEVELOP applications features
 
-#### 3.2.1.4. BUILD and REGISTRY docker image
+#### 3.2.1.4. SWAGGER api-doc documentation
+
+* **API's de Exemplos**: endpoint chamado e payload seguindo o formato padrão: `api` + `language` + `response` + `database` + `middleware` + `action`
+  * `/api-node-sync---response`: API em Node.js, resposta síncrona, não persiste informação em banco de dados, não estimula serviços de middleware e ação esperada é responder (acknowledge) o requisição 
+  * `/api-node-sync-mongodb--response`: API em Node.js, resposta síncrona, persiste informação em banco de dados mongoDB, não estimula serviços de middleware e ação esperada é responder (acknowledge) o requisição 
+  * `/api-node-sync-couchdb--response`: API em Node.js, resposta síncrona, persiste informação em banco de dados mongoDB, não estimula serviços de middleware e ação esperada é responder (acknowledge) o requisição 
+
+* **Payload de Exemplos**: conteúdo do corpo da requisição em formato JSON
+
+```json
+{
+  "params": {
+    "lang": "node",
+    "response": "sync",
+    "database": null,
+    "middleware": null,
+    "action": "response",
+    "options": [
+      {
+        "local-workload": []
+      }
+    ],
+    "route_next_index": 0,
+    "route_table": [
+      "[POST]localhost:3000/node-sync-mongodb--response",
+      "[POST]localhost:3000/node-sync-postgresql--response",
+      "[POST]localhost:3000/node-sync-mssql--response",
+      "[POST]localhost:3000/node-sync-coachdb--response",
+      "[POST]localhost:3000/node-sync-redis--response"
+    ],
+    "info": {
+      "key": "12345",
+      "data": "bla ble bli blo blu"
+    }
+  }
+}
+```
+
+#### 3.2.1.5. BUILD and REGISTRY docker image
 
 #### 3.2.1.4.01. BUILD/REGISTRY Docker image MSSQL SQLServer initialized for api events application
 
