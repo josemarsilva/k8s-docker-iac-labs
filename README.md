@@ -59,7 +59,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-07](./md/README-k8s-nodejs-http-echo.md)                                      | NodeJS http echo application |
 | [LAB-08](./md/README-install-windows-client-kubernetes-ide-lens.md)                | Kubernetes IDE Lens |
 | [LAB-09](./md/README-k8s-selfhealing-healthcheck-resourceslimits-probes.md)        | Kubernetes Self Healing, application health check and resources limits probes with NodeJS, Express, Swagger-UI, NodeHog, YamlJS and Ejs |
-| [LAB-10](./md/README-k8s-api-lang-response-database-middleware-action.md)          | Kubernetes - API - Response - Database - Middleware - Action ![star.jpg](./doc/images/star.jpg) |
+| [LAB-10](./md/README-k8s-api-lang-response-database-middleware-action.md)          | Kubernetes - API - Response - Database - Middleware - Action ![star.jpg](./doc/images/star.jpg) ![star.jpg](./doc/images/star.jpg) ![star.jpg](./doc/images/star.jpg) |
 | [LAB-11](./md/README-dockerfile-docker-compose-basic.md)                           | Dockerfile e Docker Compose Basic |
 | [LAB-12](./md/README-golang-basic.md)                                              | GoLang Programming Basic |
 | [LAB-13](./md/README-install-cloud-docker-kubernetes.md)                           | Install on Cloud Docker & Kubernetes |
