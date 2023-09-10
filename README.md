@@ -81,8 +81,9 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-29](./md/README-install-kubernetes-kind.md)                                   | Install Kind Kubernetes platform on Windows |
 | [LAB-30](./md/README-dotnet-basic.md)                                              | DotNet Basic |
 | [LAB-31](./src/k8s-nginx-ingress-controller/readme.txt)                            | NGINX Ingress Controller Reverse Proxy |
-| [LAB-32](https://github.com/josemarsilva/node-tutorial-edureka)                    | Node.js Tutorial Programming language |
-| [LAB-33](https://github.com/josemarsilva/node-tutorial-edureka-express-jade-nano)  | Node.js Express Jade Nano |
+| [LAB-32](https://github.com/josemarsilva/study-node#351-node-js-first-example)     | Node.js Tutorial Programming language |
+| [LAB-33](https://github.com/josemarsilva/study-node#3513-hands-on-laboratory-creating-nodejs-project-with-dependencies-express-jade-nano-body-parser-errorhandler-url-serve-favicon-logger-json-express-session
+                                                                                     | Node.js Express Jade Nano |
 | [LAB-34](./src/docker-compose-postgresql/readme.txt)                               | Docker-Compose PostgreSQL |
 
 
