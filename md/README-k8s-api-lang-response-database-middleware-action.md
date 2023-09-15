@@ -59,17 +59,25 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-* Contexto do desenvolvimento da aplicação NodeJS para Kubernetes
+* Contexto do **Desenvolvimento** da aplicação NodeJS para Kubernetes
 
 ![UseCaseDiagram-kubernetes-dev-node.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node.png) 
 
-* Contexto do desenvolvimento da aplicação NodeJS para Kubernetes
+* Contexto do **Desenvolvimento de Features** da aplicação NodeJS para Kubernetes
+
+![UseCaseDiagram-kubernetes-dev-node-feat.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-feat.png) 
+
+* Contexto do **Desenvolvimento de API** da aplicação NodeJS para Kubernetes
 
 ![UseCaseDiagram-kubernetes-dev-node-api.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-api.png) 
 
-* Contexto do gerenciamento da aplicação NodeJS para Kubernetes
+* Contexto do **Uso** da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-kubernetes-api.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-api.png) 
+![UseCaseDiagram-kubernetes-use.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-use.png) 
+
+* Contexto do **Operação** da aplicação NodeJS para Kubernetes
+
+![UseCaseDiagram-kubernetes-ops.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-ops.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
