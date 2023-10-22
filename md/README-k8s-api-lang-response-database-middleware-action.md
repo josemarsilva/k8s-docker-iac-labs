@@ -46,8 +46,6 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
     + [a. Tecnologias e ferramentas](#a-tecnologias-e-ferramentas)
     + [b. Ferramental de apoio](#b-ferramental-de-apoio)
   * [3.2. Guia do Desenvolvedor e Administrador](#32-guia-do-desenvolvedor-e-administrador)
-  * [3.3. Guia de Implantação, Configuração e Instalação](#33-guia-de-implantação-configuração-e-instalação)
-  * [3.4. Guia de Demonstração e Teste](#34-guia-de-demonstração-e-teste)
   * [3.5. Guia de Estudo](#35-guia-de-estudo)
 - [I - Referências](#i---referências)
 
@@ -157,17 +155,15 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Ferramenta: [FreeMind for Windows](https://freemind.br.uptodown.com/windows)
 
 
-### 3.3. Guia de Implantação, Configuração e Instalação
+### 3.2. Guia do Desenvolvedor e Administrador
 
-#### 3.2.1. Development a Node.js application for Kubernetes
+##### 3.2.1. INIT NodeJS env, INSTALL PACKAGES dependencies
 
-#### 3.2.1.1. INIT ambiente Node.js e INSTALL dependências
+##### 3.2.2. PROBES health-check, ready-to-serve eentry-point
 
-#### 3.2.1.2. DEVELOP entry-point, health-check, ready-to-serve para k8s
+##### 3.2.3. DEVELOP applications FEATURES
 
-#### 3.2.1.3. DEVELOP applications features
-
-#### 3.2.1.4. SWAGGER api-doc documentation
+##### 3.2.4. Documentation README.md and swagger API-DOC
 
 * **API's de Exemplos**: endpoint chamado e payload seguindo o formato padrão: `api` + `language` + `response` + `database` + `middleware` + `action`
   * `/api-node-sync---response`: API em Node.js, resposta síncrona, não persiste informação em banco de dados, não estimula serviços de middleware e ação esperada é responder (acknowledge) o requisição 
@@ -210,9 +206,9 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 }
 ```
 
-#### 3.2.1.5. BUILD and REGISTRY docker image
+##### 3.2.5. BUILD / REGISTRY, DOCKER, Dockerfile, docker-compose, K8S yaml
 
-#### 3.2.1.4.01. BUILD/REGISTRY Docker image MSSQL SQLServer initialized for api events application
+##### 3.2.1.5.01. Dockerfile and composer - MSSQL SQLServer initialized for api events application
 
 * _Passo-#01_: CONFIGURE (Criar/editar/configurar) o `Dockerfile` e demais arquivos de scripts de inicialização: `setup.sql`, `run-initialization.sh` e `setup.sql`
 
@@ -278,12 +274,6 @@ C:\..\docker-mssql-api> nerdctl image ls
 REPOSITORY                                                             TAG       IMAGE ID        CREATED               PLATFORM       SIZE
         :                                                              :            :              :
 ```
-
-
-
-#### 3.2.1.5. SWAGGER api-doc
-
-#### 3.2.1.6. TEST development
 
 
 ## I - Referências
