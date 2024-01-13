@@ -84,6 +84,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | [LAB-32](https://github.com/josemarsilva/study-node#351-node-js-first-example)     | Node.js Tutorial Programming language |
 | [LAB-33](https://github.com/josemarsilva/study-node#3513-hands-on-laboratory-creating-nodejs-project-with-dependencies-express-jade-nano-body-parser-errorhandler-url-serve-favicon-logger-json-express-session) | Node.js Express Jade Nano |
 | [LAB-34](./src/docker-compose-postgresql/readme.txt)                               | Docker-Compose PostgreSQL |
+| [LAB-35](./md/README-install-dockerdesktop-wsl2-kubernetes-on-windows11.md)        | Install Docker Desktop, WSL2 e Kubernetes on Windows 11 |
 
 
 
