@@ -25,12 +25,12 @@ Este documento contém os artefatos do laboratório **LAB-13 - Instalação em i
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-infra.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-infra.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-infrastructure.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-infrastructure.drawio.png) 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
@@ -74,7 +74,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 * **Objetivo**: Criar uma máquina virtual no serviço EC2 com sistema operacional Linux Ubuntu 20.04, 
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-aws-kubernetes.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-aws-kubernetes.drawio.png) 
 
 * Em `AWS :: Console Homepage` escolher a opção de menu `Services >> Compute >> EC2`
 * Em `AWS :: Services >> Compute >> EC2` clicar no link `Instances` para mostrar a lista de instâncias executando

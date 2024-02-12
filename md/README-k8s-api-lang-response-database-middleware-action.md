@@ -1,4 +1,5 @@
 `k8s-docker-iac-labs/md/README-k8s-api-lang-response-database-middleware-action.md` Kubernetes - API - Lang - Response - Database - Middleware - Action
+
 ## 1. Introdução
 
 Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API - Lang - Response - Database - Middleware - Action** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
@@ -53,44 +54,44 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
 
 ## 2. Documentação
 
-![FreeStyleDiagram-api-lang-response-database-middleware-action.png](../doc/uml-diagrams/FreeStyleDiagram-api-lang-response-database-middleware-action.png) 
+![FreeStyleDiagram-api-lang-response-database-middleware-action.drawio.png](../doc/uml-diagrams/FreeStyleDiagram-api-lang-response-database-middleware-action.drawio.png) 
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
 * Contexto do **Desenvolvimento** da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-kubernetes-dev-node.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node.png) 
+![UseCaseDiagram-kubernetes-dev-node.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node.drawio.png) 
 
 * Contexto do **Desenvolvimento de Features** da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-kubernetes-dev-node-feat.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-feat.png) 
+![UseCaseDiagram-kubernetes-dev-node-feat.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-feat.drawio.png) 
 
 * Contexto do **Desenvolvimento de API** da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-kubernetes-dev-node-api.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-api.png) 
+![UseCaseDiagram-kubernetes-dev-node-api.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-dev-node-api.drawio.png) 
 
 * Contexto do **Uso** da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-kubernetes-use.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-use.png) 
+![UseCaseDiagram-kubernetes-use.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-use.drawio.png) 
 
 * Contexto do **Operação** da aplicação NodeJS para Kubernetes
 
-![UseCaseDiagram-kubernetes-ops.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-ops.png) 
+![UseCaseDiagram-kubernetes-ops.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-ops.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-kubernetes-docker-nodejs-database-middleware.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs-database-middleware.png) 
+![DeployDiagram-kubernetes-docker-nodejs-database-middleware.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs-database-middleware.drawio.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 
-![MindMapDiagram-kubernetes-docker-api-lang-response-database-middleware-action.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-api-lang-response-database-middleware-action.png) 
+![MindMapDiagram-kubernetes-docker-api-lang-response-database-middleware-action.drawio.png](../doc/mind-maps/MindMapDiagram-kubernetes-docker-api-lang-response-database-middleware-action.drawio.png) 
 
 
 ### 2.6. Diagrama de Pacotes Classes (Packages and Class Class Diagram)
 
-![ClassDiagram-PhysicalDataModel-api.png](../doc/uml-diagrams/ClassDiagram-PhysicalDataModel-api.png) 
+![ClassDiagram-PhysicalDataModel-api.drawio.png](../doc/uml-diagrams/ClassDiagram-PhysicalDataModel-api.drawio.png) 
 
 
 ### 2.7. Diagrama de Sequencia (Sequence Diagram)
@@ -105,15 +106,15 @@ Este documento contém os artefatos do laboratório **LAB-10: Kubernetes - API -
     * `poll`
     * `relay`
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledge.png)
+![SequenceDiagram-api.drawio.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledge.drawio.png)
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-AsynchronousRequestAcknowledgeCallback.png)
+![SequenceDiagram-api.drawio.png](../doc/uml-diagrams/SequenceDiagram-api-AsynchronousRequestAcknowledgeCallback.drawio.png)
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledgePoll.png)
+![SequenceDiagram-api.drawio.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestAcknowledgePoll.drawio.png)
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-AsynchronousRequestAcknowledgeRelayCallback.png)
+![SequenceDiagram-api.drawio.png](../doc/uml-diagrams/SequenceDiagram-api-AsynchronousRequestAcknowledgeRelayCallback.drawio.png)
 
-![SequenceDiagram-api.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestResponse.png)
+![SequenceDiagram-api.drawio.png](../doc/uml-diagrams/SequenceDiagram-api-SynchronousRequestResponse.drawio.png)
 
 ### 2.8. Notas de atenção e Avisos (Notice and information)
 

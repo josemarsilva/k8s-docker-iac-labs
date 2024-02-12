@@ -29,12 +29,12 @@ Este documento contém os artefatos dolaboratório **LAB-06 - Kubernetes, Python
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-python-flask-mongo.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-python-flask-mongo.drawio.png) 
 
 
 

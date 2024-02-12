@@ -41,29 +41,29 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 
 * Caso de Uso - Infraestrutura Kubernetes/Docker
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.drawio.png) 
 
 * Caso de Uso - Aplicações NodeJs de Conversão de Temperatura e API Cadastro de Produto
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-node-web-api-app.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-node-web-api-app.drawio.png) 
 
 * Caso de Uso - Aplicações GoLang Hello Wold
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-golang-helloworld.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-golang-helloworld.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
 * Implantação container aplicação NodeJS - Conversão Temperatura
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs.png)
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs.drawio.png)
 
 * Implantação container aplicação NodeJS e MongoDB - API Produtos
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs-mongo.png)
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-nodejs-mongo.drawio.png)
 
 * Implantação container aplicação GoLang - Hello World
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-golang.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-golang.drawio.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

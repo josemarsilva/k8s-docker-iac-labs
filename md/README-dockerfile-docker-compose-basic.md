@@ -24,12 +24,12 @@ Este documento contém os artefatos do laboratório **LAB-10: Dockerfile e Docke
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-Context.drawio.png) 
 
 
 ### 2.9. Glossário de Termos (Glossary)

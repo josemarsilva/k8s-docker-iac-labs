@@ -29,13 +29,13 @@ Este documento contém os artefatos do laboratório **LAB-08 - Kubernetes IDE** 
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes.drawio.png) 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
 * Contexto da ferramenta Lens IDE para Kubernetes 
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-lens-ide.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-lens-ide.drawio.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

@@ -28,11 +28,11 @@ Este documento contém os artefatos do laboratório **LAB-12: DotNet Basic Progr
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-dotnet-helloworld.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-dotnet-helloworld.drawio.png) 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-dotnet.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-kubernetes-docker-rancherdesktop-dotnet.drawio.png) 
 
 
 ### 2.9. Glossário de Termos (Glossary)

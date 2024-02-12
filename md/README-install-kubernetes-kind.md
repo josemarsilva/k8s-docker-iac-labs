@@ -27,12 +27,12 @@ Este documento contém os artefatos do laboratório **LAB-29 - Instalação Kube
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-infra.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-infra.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-infrastructure.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-Context-cloud-infrastructure.drawio.png) 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
 

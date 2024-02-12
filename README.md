@@ -21,12 +21,12 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 
 ### 2.1. Diagrama de Caso de Uso (Use Case Diagram)
 
-![UseCaseDiagram-Context.png](./doc/uml-diagrams/UseCaseDiagram-kubernetes.png) 
+![UseCaseDiagram-Context.drawio.png](./doc/uml-diagrams/UseCaseDiagram-kubernetes.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
-![DeployDiagram-Context.png](./doc/uml-diagrams/DeployDiagram-kubernetes-docker.png) 
+![DeployDiagram-Context.drawio.png](./doc/uml-diagrams/DeployDiagram-kubernetes-docker.drawio.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)

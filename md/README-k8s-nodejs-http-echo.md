@@ -35,21 +35,21 @@ Este documento contém os artefatos do laboratório **LAB-07 - Kubernetes http e
 
 * Contexto do gerenciamento da aplicação NodeJS desenvolvida com biblioteca Express e Swagger para testes no Kubernetes
 
-![UseCaseDiagram-Context.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-ops.png) 
+![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-kubernetes-ops.drawio.png) 
 
 
 ### 2.2. Diagrama de Implantação (Deploy Diagram)
 
 * Contexto da aplicação NodeJS desenvolvida com biblioteca Express e Swagger para testes no Kubernetes
 
-![DeployDiagram-Context.png](../doc/uml-diagrams/DeployDiagram-node-express-swagger-k8s.png) 
+![DeployDiagram-Context.drawio.png](../doc/uml-diagrams/DeployDiagram-node-express-swagger-k8s.drawio.png) 
 
 
 ### 2.3. Diagrama de BPMN (Business Process Modeling Notation)
 
 * Contexto da aplicação NodeJS desenvolvida com biblioteca Express e Swagger para testes no Kubernetes
 
-![BpmnDiagram-kubernetes-self-healing.png](../doc/bpmn-diagrams/BpmnDiagram-kubernetes-self-healing.png) 
+![BpmnDiagram-kubernetes-self-healing.drawio.png](../doc/bpmn-diagrams/BpmnDiagram-kubernetes-self-healing.drawio.png) 
 
 
 ### 2.4. Diagrama de Mapa Mental (Mind Map Diagram)
