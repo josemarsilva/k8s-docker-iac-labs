@@ -51,7 +51,7 @@ Este repositório contém os artefatos do projeto / laboratório de avaliação 
 | Laboratório | Descrição                       |
 | :---------- | :------------------------------ |
 | [LAB-01](./md/README-install-wsl-rancherdesktop-windows.md)                        | Install WSL, Rancher Desktop and command line with nerdctl |
-| [LAB-02](./md/README-docker-commands-basic.md) ![star.jpg](./doc/images/star.jpg)                                    | Docker Commands Basic |
+| [LAB-02](./md/README-docker-commands-basic.md)                                     | Docker Commands Basic ![star.jpg](./doc/images/star.jpg) |
 | [LAB-03](./md/README-install-windows-client-mongodb-studio3t.md)                   | Windows Client MongoDB Studio 3T vs Docker Server MongoDB |
 | [LAB-04](./md/README-docker-images-containers.md)                                  | Docker Images vs Containers vs DockerHub |
 | [LAB-05](./md/README-k8s-commands-basic.md)                                        | Basic Kubernetes Commands Basic |
