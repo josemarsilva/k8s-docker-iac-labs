@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-Este documento contém os artefatos dolaboratório **LAB-02 - Docker Commands using Docker on RanckerDesktop** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
+Este documento contém os artefatos dolaboratório **LAB-02 - Docker Commands Basic** using Docker on **RanckerDesktop** ou **DockerDesktop** abaixo do projeto [k8s-docker-iac-labs](../README.md). Este laboratório consiste em:
 * Explorar os comandos básicos do _Docker_ no Rancher Desktop
 
 ##### Table of Contents  
@@ -73,8 +73,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 * Windows OnPrimasse
 * WSL - Windows Subsystem for Linux
-* Rancher Desktop for Windows
-* [LAB-02 Install WSL Rancher Desktop on Windows](README-install-wsl-rancherdesktop-windows.md) instalado, concluído e disponível
+* **Rancher Desktop for Windows**  [LAB-02 Install WSL Rancher Desktop on Windows](README-install-wsl-rancherdesktop-windows.md) instalado, concluído e disponível ou **Docker Desktop for Windows**
 
 #### b. Ferramental de apoio
 
@@ -85,7 +84,24 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 
 #### a. Download do binário de uma imagem
 
-* baixar imagem para o local
+#### a.i. Download do binário de uma imagem (Docker Desktop)
+
+* baixar imagem para o local (Docker Desktop)
+
+```cmd
+C:\> docker image pull nginx
+     :
+C:\> docker image pull alpine
+     :
+C:\> docker image pull httpd
+     :
+C:\> docker image pull hello-world
+     :
+```
+
+#### a.ii. Download do binário de uma imagem Rancher Desktop
+
+* baixar imagem para o local (Rancher Desktop)
 
 ```cmd
 C:\> nerdctl image pull nginx
@@ -98,7 +114,23 @@ C:\> nerdctl image pull hello-world
      :
 ```
 
-* listar imagens
+#### a.iii. Listar imagem Docker Desktop
+
+* listar imagens)
+
+```cmd
+C:\> docker image ls
+REPOSITORY    TAG      IMAGE ID       CREATED         SIZE
+nginx         latest   84f7876d21d1   47 hours ago    241MB
+httpd         latest   32e9403360ab   8 days ago      175MB
+alpine        latest   f59abe656b69   2 weeks ago     12.9MB
+hello-world   latest   1e4c05b897a7   8 months ago    20.4kB
+
+```
+
+#### a.iv. Listar imagem (Rancher Desktop)
+
+* listar imagens 
 
 ```cmd
 C:\> nerdctl image ls
@@ -111,6 +143,8 @@ ubuntu         latest    b5a61709a9a4    17 minutes ago       linux/amd64    77.
 ```
 
 #### b. Executar um container baseado em uma imagem
+
+#### b.i. Executar um container baseado em uma imagem (Rancher DeskTop)
 
 * executar container (baixar se necessário)
 
@@ -125,12 +159,30 @@ For more examples and ideas, visit:
 
 * listar containers em execução: resultado esperado nenhum em execução
 
+##### c.i. Docker Desktop
+
+```cmd
+C:\> docker container ls
+CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
+```
+
+##### c.ii. Rancher Desktop
+
 ```cmd
 C:\> nerdctl container ls
 CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
 ```
 
-* listar containers todos: resultado todos containers que já foram executados
+* listar containers todos (-a): resultado todos containers que já foram executados
+
+##### c.i. Docker Desktop
+
+```cmd
+C:\> docker container ls -a
+CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
+f572180e6ce8    docker.io/library/hello-world:latest    "/hello"       3 minutes ago     Exited (0) 3 minutes ago       
+```
+##### c.ii. Rancher Desktop
 
 ```cmd
 C:\> nerdctl container ls -a
@@ -142,17 +194,22 @@ f572180e6ce8    docker.io/library/hello-world:latest    "/hello"       3 minutes
 
 * Remover um containers executado: resultado esperado ele não deve mais aparecer no list
 
+##### d.i. Docker Desktop 
+
+```cmd
+C:\> docker container rm f572180e6ce8
+```
+
+##### d.ii. Rancher Desktop 
+
 ```cmd
 C:\> nerdctl container rm f572180e6ce8
 ```
 
-* Executar um container, nomeando-lhe com um nome e logo em seguida a sua execução remove-lo automaticamente
+##### d.iii. Executar um container, nomeando-lhe com um nome e logo em seguida a sua execução remove-lo automaticamente
 
 ```cmd
-* executar container atribuindo-lhe um nome
-
-```cmd
-C:\> nerdctl container run --name meucontainer --rm hello-world
+C:\> docker container run --name meucontainer --rm hello-world
         :
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
@@ -166,7 +223,7 @@ CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
 * Baixar (primeira vez) e executar a imagem do Ubuntu, em modo interativo. E ao iniciar, executar o programa Bash para interagir com o Linux do container, executando comandos basicos
 
 ```cmd
-C:\> nerdctl container run -it ubuntu /bin/bash
+C:\> docker container run -it ubuntu /bin/bash
 root@e050dbf808fa:/# ps -ef
 UID        PID  PPID  C STIME TTY          TIME CMD
 root         1     0  0 02:05 pts/0    00:00:00 /bin/bash
@@ -180,7 +237,7 @@ exit
 * Execute o nginx em modo deamon
 
 ```cmd
-C:\> nerdctl container run -d nginx
+C:\> docker container run -d nginx
 ```
 
 * Antes que você possa acessar o nginx será necessário fazer o _port bind_ 
@@ -188,13 +245,13 @@ C:\> nerdctl container run -d nginx
 * Execute o nginx em modo deamon fazendo o _port bind_ entre a porta externa 8080
 
 ```cmd
-C:\> nerdctl container run -d -p 8080:80 nginx
+C:\> docker container run -d -p 8080:80 nginx
 ```
 
 * Removendo os containers (se estiverem rodando precisa ser forçado)
 
 ```cmd
-C:\> nerdctl container ls
+C:\> docker container ls
 CONTAINER ID    IMAGE                             COMMAND                   CREATED               STATUS    PORTS                   NAMES
 38974b71e745    docker.io/library/nginx:latest    "/docker-entrypoint.…"    About a minute ago    Up        0.0.0.0:8080->80/tcp
 5553e4c31a53    docker.io/library/nginx:latest    "/docker-entrypoint.…"    15 minutes ago        Up
@@ -212,12 +269,12 @@ CONTAINER ID    IMAGE                             COMMAND                   CREA
 * Executar um container baseada na imagem do **MongoDB**, fazendo o bind da porta 27017:27017
 
 ```cmd
-C:\> nerdctl container ls
+C:\> docker container ls
 CONTAINER ID    IMAGE    COMMAND    CREATED    STATUS    PORTS    NAMES
 
-C:\> nerdctl container run -d -p "27017:27017" -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd mongo
+C:\> docker container run -d -p "27017:27017" -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopwd mongo
 
-C:\> nerdctl container ls
+C:\> docker container ls
 CONTAINER ID    IMAGE                             COMMAND                   CREATED           STATUS    PORTS                       NAMES
 33014e5f7186    docker.io/library/mongo:latest    "docker-entrypoint.s…"    51 seconds ago    Up        0.0.0.0:27017->27017/tcp
 ```
@@ -227,7 +284,7 @@ CONTAINER ID    IMAGE                             COMMAND                   CREA
 * Ao inspecionar um container podemos ter acesso aos detalhes de configurações tais como imagens base do container `"Image"`, argumentos de criação, elementos de redes, estados, etc
 
 ```cmd
-C:\> nerdctl container inspect 33014e5f7186
+C:\> docker container inspect 33014e5f7186
  directory" id=e65cdcbc3de9c1f9faa98b12bd3196e5ae91e2ba30591a7b40616b8d41cfc3bf
 [
     {
@@ -263,12 +320,13 @@ C:\> nerdctl container inspect 33014e5f7186
 * Executar um conjunto de comandos de forma iterativa
 
 ```cmd
-C:\> nerdctl container exec -it e65cdcbc3de9 /bin/bash
+C:\> docker container exec -it e65cdcbc3de9 /bin/bash
 root@e65cdcbc3de9:/# ps -ef
 UID        PID  PPID  C STIME TTY          TIME CMD
 mongodb      1     0  0 01:07 ?        00:00:26 mongod --auth --bind_ip_all
 root      1160     0  1 01:58 pts/0    00:00:00 /bin/bash
 root      1169  1160  0 01:59 pts/0    00:00:00 ps -ef
+root@e65cdcbc3de9:/# exit
 ```
 
 #### j. Parar, reiniciar e remover a execução de um container
@@ -276,21 +334,21 @@ root      1169  1160  0 01:59 pts/0    00:00:00 ps -ef
 * Para a execução
 
 ```cmd
-C:\> nerdctl container stop e65cdcbc3de9
+C:\> docker container stop e65cdcbc3de9
 ```
 
 * Reiniciar a execução
 
 ```cmd
-C:\> nerdctl container ls -a
+C:\> docker container ls -a
 CONTAINER ID    IMAGE                              COMMAND                   CREATED              STATUS                      PORTS                       NAMES
   :                           :                           :                     :
 e65cdcbc3de9    docker.io/library/mongo:latest     "docker-entrypoint.s…"    About an hour ago    Exited (0) 3 minutes ago    0.0.0.0:27017->27017/tcp
   :                           :                           :                     :
 
-C:\> nerdctl container start e65cdcbc3de9
+C:\> docker container start e65cdcbc3de9
 
-C:\> nerdctl container ls -a
+C:\> docker container ls -a
   :                           :                           :                     :
 e65cdcbc3de9    docker.io/library/mongo:latest     "docker-entrypoint.s…"    About an hour ago    Up         0.0.0.0:27017->27017/tcp
   :                           :                           :                     :
@@ -299,7 +357,9 @@ e65cdcbc3de9    docker.io/library/mongo:latest     "docker-entrypoint.s…"    A
 * Remover um container opcionalmente de forma forçada se ele ainda estiver em execução
 
 ```cmd
-C:\> nerdctl container rm -f e65cdcbc3de9
+C:\> docker container rm -f e65cdcbc3de9
+C:\> docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 #### k. Logs de execução de um container
@@ -307,14 +367,14 @@ C:\> nerdctl container rm -f e65cdcbc3de9
 * Pode-se listar os logs, as últimas n linhas `-n`, maracação por data-e-hora `-t` ou de forma contínua `-f`
 
 ```cmd
-C:\> nerdctl container run -d -p 8080:80 nginx
+C:\> docker container run -d -p 8080:80 nginx
 
-C:\> nerdctl container logs -n 3 6cb3b8b2aa0f 
+C:\> docker container logs -n 3 6cb3b8b2aa0f 
 2022/01/21 02:20:54 [notice] 1#1: start worker process 35
 2022/01/21 02:20:54 [notice] 1#1: start worker process 36
 2022/01/21 02:20:54 [notice] 1#1: start worker process 37
 
-C:\> nerdctl container logs -t -f 6cb3b8b2aa0f 
+C:\> docker container logs -t -f 6cb3b8b2aa0f 
           :                    :         :       :       :             :
 2022-01-21T02:20:54.32637Z 2022/01/21 02:20:54 [notice] 1#1: start worker process 38
 2022-01-21T02:20:54.3267492Z 2022/01/21 02:20:54 [notice] 1#1: start worker process 39
@@ -326,8 +386,11 @@ C:\> nerdctl container logs -t -f 6cb3b8b2aa0f
 
 * Docker
   * [INICIATIVA KUBERNETES - Aula 1 - Containers e Docker Simplificados](https://www.youtube.com/watch?v=lKxuO--0ypM)
+  * [Docker Cheat Sheet](https://docker.how/#:~:text=Free%20Docker%20CLI%20cheat%20sheet%3A%20container%2C%20image%2C%20volume%2C,and%20Dockerfile%20commands%20with%20copy-to-clipboard%20and%20troubleshooting%20guides.)
+  * [Docker Official Documentation - Reference - CLI](https://docs.docker.com/reference/cli/docker/)
 * Github README.md writing sintax
   * [Basic Github Markdown Writing Format](https://docs.github.com/pt/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax)  
   * [Github Markdown Chead Sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
   * [Github Mastering Markdown](https://guides.github.com/features/mastering-markdown/#what)
   * [Table of contents generated with markdown-toc](http://ecotrust-canada.github.io/markdown-toc/)
+
