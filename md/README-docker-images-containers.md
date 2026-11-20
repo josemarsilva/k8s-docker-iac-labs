@@ -48,6 +48,7 @@ Este documento contém os artefatos do laboratório **LAB-04: Imagens Docker** a
 ![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-node-web-api-app.drawio.png) 
 
 * Caso de Uso - Aplicações GoLang Hello Wold
+
 ![UseCaseDiagram-Context.drawio.png](../doc/uml-diagrams/UseCaseDiagram-golang-helloworld.drawio.png) 
 
 
@@ -125,7 +126,7 @@ De uma forma geral, vamos tentar <ins>definir</ins> e <ins>caracterizar</ins> al
 * Para criar uma imagem através do **Docker Commit**, executar um container a partir de uma imagem inicial do Ubuntu, instalar o utilitário `curl` e salvar o container como uma nova imagem
 
 ```cmd
-C:\> nerdctl container run -it ubuntu /bin/bash
+C:\> docker container run -it ubuntu /bin/bash
 root@2ac5701eb05e:/# apt-get update
 Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [114 kB]
  :
@@ -140,14 +141,14 @@ root@2ac5701eb05e:/# curl
 curl: try 'curl --help' or 'curl --manual' for more information
 root@2ac5701eb05e:/# exit
 
-C:\> nerdctl container ls -la
+C:\> docker container ls -la
 CONTAINER ID    IMAGE                              COMMAND        CREATED          STATUS                       PORTS    NAMES
 2ac5701eb05e    docker.io/library/ubuntu:latest    "/bin/bash"    4 minutes ago    Exited (2) 30 seconds ago 
 
-C:\> nerdctl container commit 2ac5701eb05e ubuntu-curl-docker-commit
+C:\> docker container commit 2ac5701eb05e ubuntu-curl-docker-commit
 sha256:4b221c47b1dce3b6c3998330bb02ee26406d1d48ec44e65f14ef2e5fbd5432c5
 
-C:\> nerdctl image ls
+C:\> docker image ls ubuntu*
 nerdctl image ls
 REPOSITORY                   TAG       IMAGE ID        CREATED          PLATFORM       SIZE
     :                         :            :               :                :            :
@@ -159,7 +160,7 @@ ubuntu                       latest    b5a61709a9a4    2 days ago       linux/am
 * A partir da nova imagem criada `ubuntu-curl-docker-commit` pode-se executar um container baseado nesta imagem que virá alem do SO Ubuntu atualizado com o Curl instalado e passando como parâmetro de execução buscar a página do Google
 
 ```cmd
-C:\> nerdctl container run ubuntu-curl-docker-commit curl http://www.google.com 
+C:\> docker container run ubuntu-curl-docker-commit curl http://www.google.com 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="pt-BR"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
@@ -189,7 +190,7 @@ RUN apt-get install curl -y
 * Execute a sua receita
 
 ```cmd
-C:\src\dockerfile-ubuntu-curl> nerdctl image build -t ubuntu-curl-dockerfile . 
+C:\src\dockerfile-ubuntu-curl> docker image build -t ubuntu-curl-dockerfile . 
 [+] Building 43.2s (7/7) FINISHED
       :
 cc2326d9fa)...done
@@ -198,7 +199,7 @@ cc2326d9fa)...done
 * Liste as imagens disponíveis
 
 ```cmd
-C:\src\dockerfile-ubuntu-curl> nerdctl image ls
+C:\src\dockerfile-ubuntu-curl> docker image ls ubuntu*
 REPOSITORY                   TAG       IMAGE ID        CREATED           PLATFORM       SIZE
      :                         :            :               :                :
 ubuntu-curl-docker-commit    latest    fec2e2c8d528    33 minutes ago    linux/amd64    126.8 MiB
@@ -210,7 +211,7 @@ ubuntu                       latest    b5a61709a9a4    2 days ago        linux/a
 * A partir da nova imagem criada `ubuntu-curl-dockerfile` pode-se executar um container baseado nesta imagem que virá alem do SO Ubuntu atualizado com o Curl instalado e passando como parâmetro de execução buscar a página do Google
 
 ```cmd
-C:\src\dockerfile-ubuntu-curl>  nerdctl container run ubuntu-curl-dockerfile curl http://www.google.com 
+C:\src\dockerfile-ubuntu-curl> docker container run ubuntu-curl-dockerfile curl http://www.google.com 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="pt-BR"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
@@ -220,16 +221,26 @@ C:\src\dockerfile-ubuntu-curl>  nerdctl container run ubuntu-curl-dockerfile cur
 
 #### d. Docker Image History
 
-* **NÃO É** possível detalhar o histórico das camadas sobre uma imagem no `nerdctl`. Este comando ainda não foi implementado!
+* **NÃO É** possível detalhar o histórico das camadas sobre uma imagem no `nerdctl`. Este comando ainda não foi implementado no **Rancher Desktop** porém é disponível no **Docker Desktop**!
 
 ```cmd
-C:\src\dockerfile-ubuntu-curl> nerdctl image history ubuntu-curl-dockerfile
+C:\src\dockerfile-ubuntu-curl> docker image history ubuntu-curl-dockerfile
+IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
+00ffcae74ad8   3 minutes ago   RUN /bin/sh -c apt-get install curl -y # bui…   21.8MB    buildkit.dockerfile.v0
+<missing>      3 minutes ago   RUN /bin/sh -c apt-get update # buildkit        44.8MB    buildkit.dockerfile.v0
+<missing>      2 weeks ago     umoci raw add-layer --image /home/buildd/roc…   12.3kB    Add rock control metadata
+<missing>      2 weeks ago     umoci config --image /home/buildd/rockcraft-…   0B        Set annotations
+<missing>      2 weeks ago     umoci config --image /home/buildd/rockcraft-…   0B        Set labels
+<missing>      2 weeks ago     umoci config --image /home/buildd/rockcraft-…   0B        Set default PATH for bare-based rock
+<missing>      2 weeks ago     umoci config --image /home/buildd/rockcraft-…   0B        Set default commands
+<missing>      2 weeks ago     umoci config --image /home/buildd/rockcraft-…   0B        Set entrypoint
+<missing>      2 weeks ago     umoci raw add-layer --image /home/buildd/roc…   117MB
 ```
 
 * Para reconstruir a imagem
 
 ```cmd
-C:\src\dockerfile-ubuntu-curl> nerdctl image build -t ubuntu-curl-dockerfile . 
+C:\src\dockerfile-ubuntu-curl> docker image build -t ubuntu-curl-dockerfile . 
 [+] Building 43.2s (7/7) FINISHED
       :
 cc2326d9fa)...done
@@ -279,11 +290,13 @@ C:\src\node-conversao-temperatura> node server.js
 ```cmd
 C:\src> cd node-conversao-temperatura
 C:\src\node-conversao-temperatura> TYPE Dockerfile
-C:\src\node-conversao-temperatura> nerdctl image build -t josemarsilva/conversao-temperatura:v1 .
+C:\src\node-conversao-temperatura> TYPE server.js
+C:\src\node-conversao-temperatura> TYPE convert.js
+C:\src\node-conversao-temperatura> docker image build -t josemarsilva/conversao-temperatura:v1 .
     :
 unpacking docker.io/josemarsilva/conversao-temperatura:v1 (sha256:)...done
 
-C:\src\node-conversao-temperatura> nerdctl image ls
+C:\src\node-conversao-temperatura> docker image ls conversao*
 REPOSITORY                            TAG       IMAGE ID        CREATED          PLATFORM       SIZE
     :                                  :          :                :               :            :
 josemarsilva/conversao-temperatura    v1        c56df81725c0    50 seconds ago    linux/amd64    1.1 GiB
