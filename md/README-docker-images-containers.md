@@ -149,7 +149,6 @@ C:\> docker container commit 2ac5701eb05e ubuntu-curl-docker-commit
 sha256:4b221c47b1dce3b6c3998330bb02ee26406d1d48ec44e65f14ef2e5fbd5432c5
 
 C:\> docker image ls ubuntu*
-nerdctl image ls
 REPOSITORY                   TAG       IMAGE ID        CREATED          PLATFORM       SIZE
     :                         :            :               :                :            :
 ubuntu-curl-docker-commit    latest    fec2e2c8d528    2 minutes ago    linux/amd64    126.8 MiB
